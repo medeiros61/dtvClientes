@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from tkinter import *
-import main as ma
+
 
 janela = ctk.CTk()
 

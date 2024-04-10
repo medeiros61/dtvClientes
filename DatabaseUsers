@@ -15,13 +15,13 @@ def VerificaçãoLogin(Email,Senha):
             ConsultaSQL = f"SELECT `email` FROM `users` WHERE `email` = '{Email}'"
             cursor.execute(ConsultaSQL)
             result = cursor.fetchone()
-            print(result)
+            #print(result)
             if result is not None: 
                 if Email in result:
                     ConsultaSQL = f"SELECT `email`,`newpassword` FROM `users` WHERE  `email` = '{Email}' AND `newpassword` = '{Senha}'"
                     cursor.execute(ConsultaSQL)
                     result = cursor.fetchone()
-                    print(result) 
+                    #print(result) 
                     if result is not None: 
                         return True
                     else:
@@ -33,5 +33,6 @@ def VerificaçãoLogin(Email,Senha):
 
 
 entradaemail = 'user@datavix.com.br'
-valor = VerificaçãoLogin(entradaemail,'teste2')
+senha = 'teste2'
+valor = VerificaçãoLogin(entradaemail,senha)
 print(valor)
