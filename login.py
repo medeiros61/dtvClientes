@@ -1,6 +1,5 @@
 import customtkinter as ctk
 from tkinter import *
-import main as ma
 
 janela = ctk.CTk()
 
@@ -26,9 +25,9 @@ class Application():
 
     def tela_login(self):
     #janela = lado esquerdo
-#        img = PhotoImage(file="japan.png")
-#        label_img = ctk.CTkLabel(master=janela, image=img).place(x=5, y=65)
-#        label_left = ctk.CTkLabel(master=janela, text="Bem vindo", font=("Roboto", 18), text_color="#9370DB"). place(x=10, y= 10)
+        img = PhotoImage(file="japan.png")
+        label_img = ctk.CTkLabel(master=janela, image=img).place(x=5, y=65)
+        label_left = ctk.CTkLabel(master=janela, text="Bem vindo", font=("Roboto", 18), text_color="#9370DB"). place(x=10, y= 10)
 
     #frame = lado direito
         frame = ctk.CTkFrame(master=janela, width=350, height=396)
