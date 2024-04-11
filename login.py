@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from tkinter import *
-import DatabaseUsers as dbc
+import Database.Users as dbu
 
 janela = ctk.CTk()
 
@@ -35,7 +35,7 @@ class Application():
             senha = password_entry.get()
             if email != '' and senha != '':
 
-                TesteLogin = dbc.VerificaçãoLogin(email,senha)
+                TesteLogin = dbu.VerificaçãoLogin(email,senha)
                 if TesteLogin == True:
                     print('passou')
                 else:
