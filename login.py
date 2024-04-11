@@ -1,6 +1,7 @@
 import customtkinter as ctk
 from tkinter import *
 
+
 janela = ctk.CTk()
 
 class Application():
