@@ -1,13 +1,7 @@
 #inicio
-aqruivo criado apenas para inicio do repositorio
-qq coisa
+#comando para atualizar requirements.txt 
+#pip freeze ->requirements.txt 
 
-
-Anderson
-
-Teste
-
-nicolas 123
 
 
 
