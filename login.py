@@ -1,7 +1,7 @@
 import customtkinter as ctk
 from tkinter import *
 import Database.Users as dbu
-
+import PainelDatavix as PD
 janela = ctk.CTk()
 
 
@@ -35,6 +35,8 @@ def TelaLogin():
                 if TesteLogin == True:
                     print('passou')
                     janela.quit() 
+                    PD.DataVix()
+                    
                 else:
                     #Mostrar SPAM com erro 
                     print('Não Passou')    
