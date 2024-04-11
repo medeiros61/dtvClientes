@@ -30,7 +30,7 @@ class Application():
             
             email = username_entry.get()
             senha = password_entry.get()
-            if email is not '' and senha is not '':
+            if email != '' and senha != '':
 
                 TesteLogin = dbc.VerificaçãoLogin(email,senha)
                 if TesteLogin == True:
