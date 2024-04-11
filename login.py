@@ -6,28 +6,24 @@ janela = ctk.CTk()
 
 
 
-class Application():
+def TelaLogin():
 
-    def __init__(self):
-        self.janela=janela
-        self.tema()
-        self.tela()
-        self.tela_login()
-        janela.mainloop()
+        
+        
 
 
     
-    def tema(self):
+    def tema():
         ctk.set_appearance_mode("dark")
         ctk.set_default_color_theme("dark-blue")
 
-    def tela(self):
+    def tela():
         janela.geometry("700x400")
         janela.title("Sistema de login")
     #janela.iconbitmap("")
         janela.resizable(False,False)
 
-    def tela_login(self):
+    def tela_login():
         #Função de consulta do banco de dados e validação
         def ConsultaLogin():
             
@@ -38,6 +34,7 @@ class Application():
                 TesteLogin = dbu.VerificaçãoLogin(email,senha)
                 if TesteLogin == True:
                     print('passou')
+                    janela.quit() 
                 else:
                     #Mostrar SPAM com erro 
                     print('Não Passou')    
@@ -78,11 +75,14 @@ class Application():
     #span
     #    register_label= ctk.CTkLabel(master=frame, text="Se ainda nao tem\n uma conta.").place(x=25, y=325)
     #    register_button = ctk.CTkButton(master=frame, text="Cadastre-se", width=150, fg_color="green", hover_color="#2D9334").place(x=175, y= 325)
+    tema()
+    tela()
+    tela_login()
+    janela.mainloop()
 
 
 
-Application()
 
 
 
-
+TelaLogin()
