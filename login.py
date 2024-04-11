@@ -73,7 +73,7 @@ class Application():
     #  chekbox = ctk.CTkCheckBox(master=frame, text="lembrar-se de mim sempre").place(x=25, y=235)
         
     #botao
-        botao_login = ctk.CTkButton(master=frame, text="LOGIN", width=300).place(x=25, y= 285)
+        botao_login = ctk.CTkButton(master=frame, text="LOGIN", width=300,command=ConsultaLogin).place(x=25, y= 285)
 
     #span
     #    register_label= ctk.CTkLabel(master=frame, text="Se ainda nao tem\n uma conta.").place(x=25, y=325)
