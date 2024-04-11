@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from tkinter import *
-import DatabaseUsers as dbc
+import Database.Users as dbu
 
 janela = ctk.CTk()
 
@@ -35,7 +35,7 @@ class Application():
             senha = password_entry.get()
             if email != '' and senha != '':
 
-                TesteLogin = dbc.VerificaçãoLogin(email,senha)
+                TesteLogin = dbu.VerificaçãoLogin(email,senha)
                 if TesteLogin == True:
                     print('passou')
                 else:
@@ -73,7 +73,7 @@ class Application():
     #  chekbox = ctk.CTkCheckBox(master=frame, text="lembrar-se de mim sempre").place(x=25, y=235)
         
     #botao
-        botao_login = ctk.CTkButton(master=frame, text="LOGIN", width=300).place(x=25, y= 285)
+        botao_login = ctk.CTkButton(master=frame, text="LOGIN", width=300,command=ConsultaLogin).place(x=25, y= 285)
 
     #span
     #    register_label= ctk.CTkLabel(master=frame, text="Se ainda nao tem\n uma conta.").place(x=25, y=325)
