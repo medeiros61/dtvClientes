@@ -32,7 +32,3 @@ def VerificaçãoLogin(Email,Senha):
         connection.close()
 
 
-entradaemail = 'user@datavix.com.br'
-senha = 'teste'
-valor = VerificaçãoLogin(entradaemail,senha)
-print(valor)
