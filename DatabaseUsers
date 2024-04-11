@@ -33,6 +33,6 @@ def VerificaçãoLogin(Email,Senha):
 
 
 entradaemail = 'user@datavix.com.br'
-senha = 'teste2'
+senha = 'teste'
 valor = VerificaçãoLogin(entradaemail,senha)
 print(valor)
