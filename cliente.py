@@ -61,21 +61,22 @@ def parametrosinicias(frame):
     list_clients_frame = ctk.CTkFrame(master=master_frame, width=900, height=480, fg_color=("#809090"))
     list_clients_frame.pack(side=TOP, fill = X)
 
-    Scrollable = ctk.CTkScrollableFrame(master=list_clients_frame,orientation="horizontal")
+    Scrollable = ctk.CTkScrollableFrame(master=list_clients_frame,width=800, height=300,label_text="hello world")
     Scrollable.pack(pady=40)
-    
-    for x in range(1):
-        item1 = ctk.CTkFrame(Scrollable).pack()
-        ctk.CTkButton(item1,text="clientes item 1!!!").pack(pady=10,side=LEFT)
-        ctk.CTkButton(item1,text="123").pack(pady=10,side=LEFT)
-        ctk.CTkLabel(item1,text="label1").pack(pady=10,side=LEFT)
-        item2 = ctk.CTkFrame(Scrollable).pack()
-        ctk.CTkButton(item2,text="clientes item 2!!!").pack(pady=10,side=LEFT)
-        ctk.CTkButton(item2,text="123").pack(pady=10,side=LEFT)
-        ctk.CTkLabel(item2,text="label2").pack(pady=10,side=LEFT)
-        item3 = ctk.CTkFrame(Scrollable).pack()
-        ctk.CTkButton(item3,text="clientes item 3!!!").pack(pady=10,side=LEFT)
-        ctk.CTkButton(item3,text="123").pack(pady=10,side=LEFT)
-        ctk.CTkLabel(item3,text="label3").pack(pady=10,side=LEFT)
+
+    for x in range(10):
+        x = ctk.CTkFrame(Scrollable)
+        x.pack()
+        ctk.CTkLabel(x,text="label 1").pack(pady=3,side=LEFT)
+        ctk.CTkLabel(x,text="Nome Cliente").pack(pady=3,side=LEFT)
+        ctk.CTkLabel(x,text="UF do Cliente").pack(pady=3,side=LEFT)
+        ctk.CTkLabel(x,text="Municipio o Cliente").pack(pady=3,side=LEFT)
+        ctk.CTkLabel(x,text="Status").pack(pady=3,side=LEFT)
+        y = ctk.CTkFrame(x)
+        y.pack(pady=3,side=LEFT)
+        ctk.CTkButton(y,text='editar').pack(pady=3,side=LEFT)
+        ctk.CTkButton(y,text='excluir').pack(pady=3,side=LEFT)
+        ctk.CTkButton(y,text='comentar').pack(pady=3,side=LEFT)
+
 
 
