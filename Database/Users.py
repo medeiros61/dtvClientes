@@ -12,13 +12,13 @@ def VerificaçãoLogin(Email,Senha):
     
     try:
         with connection.cursor() as cursor:
-            ConsultaSQL = f"SELECT `email` FROM `users` WHERE `email` = '{Email}'"
+            ConsultaSQL = f"SELECT `email` FROM `newusers` WHERE `email` = '{Email}'"
             cursor.execute(ConsultaSQL)
             result = cursor.fetchone()
             #print(result)
             if result is not None: 
                 if Email in result:
-                    ConsultaSQL = f"SELECT `email`,`newpassword` FROM `users` WHERE  `email` = '{Email}' AND BINARY `newpassword` = '{Senha}'"
+                    ConsultaSQL = f"SELECT `email`,`password` FROM `newusers` WHERE  `email` = '{Email}' AND BINARY `newpassword` = '{Senha}'"
                     cursor.execute(ConsultaSQL)
                     result = cursor.fetchone()
                     #print(result) 
