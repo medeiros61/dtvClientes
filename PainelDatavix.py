@@ -9,7 +9,8 @@ def DataVix():
     screen_datavix.resizable(False,False)
     #username_entry = ctk.CTkEntry(master=screen_datavix, placeholder_text="TESTE", width=300, font=("Roboto",14))
     #username_entry.pack(side=RIGHT)
-
+    ctk.set_appearance_mode("dark")
+    ctk.set_default_color_theme("dark-blue")
     #definindo frame cliente
     frame_clientes = ctk.CTkFrame(master=screen_datavix, width=900, height=580, fg_color=("#809090"))
     cl.parametrosinicias(frame_clientes)
