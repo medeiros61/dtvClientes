@@ -31,10 +31,15 @@ def TelaLogin():
                 TesteLogin = dbu.VerificaçãoLogin(email,senha)
                 if TesteLogin == True:
                     print('passou')
-                    janela.quit() 
-                    PD.DataVix()
+                    global podelogar
+                    podelogar = True
+                    janela.destroy() 
+                   
+                  
                     
                 else:
+                
+                    podelogar = False
                     #Mostrar SPAM com erro 
                     print('Não Passou')    
             else:
@@ -78,6 +83,9 @@ def TelaLogin():
     tela()
     tela_login()
     janela.mainloop()
+    
+    if podelogar == True:
+        PD.DataVix()
 
 
 
@@ -85,3 +93,4 @@ def TelaLogin():
 
 
 TelaLogin()
+
