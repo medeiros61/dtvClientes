@@ -18,7 +18,7 @@ def VerificaçãoLogin(Email,Senha):
             #print(result)
             if result is not None: 
                 if Email in result:
-                    ConsultaSQL = f"SELECT `email`,`password` FROM `newusers` WHERE  `email` = '{Email}' AND BINARY `newpassword` = '{Senha}'"
+                    ConsultaSQL = f"SELECT `email`,`password` FROM `newusers` WHERE  `email` = '{Email}' AND BINARY `password` = '{Senha}'"
                     cursor.execute(ConsultaSQL)
                     result = cursor.fetchone()
                     #print(result) 
