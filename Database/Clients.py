@@ -12,17 +12,23 @@ def getclientlist_complete():
     
     try:
         with connection.cursor() as cursor:
-            ConsultaSQL = f"SELECT * FROM `clients`"
+            ConsultaSQL = f"SELECT `id`,`nome_empresa`,`uf`,`municipio`,`ativo` FROM `clients`"
             cursor.execute(ConsultaSQL)
-            result = cursor.fetchone()
-            #print(result)
-          
-            if result is not None: 
-                return result
+            results = cursor.fetchall()
+            #Usando fetchmany para buscar 3 linhas de resultados
+            #results = cursor.fetchmany(size=3)
+            #for result in results:
+            #    id,nome_empresa,uf,municipio,ativo = result
+            #    print(result)
+                
+        
+        
+            if results is not None: 
+                return results
             else:
                 return None
 
     finally:
         connection.close()
 
-
+getclientlist_complete()
