@@ -77,6 +77,6 @@ def parametrosinicias(frame):
         ctk.CTkButton(y,text='editar').pack(pady=3,side=LEFT)
         ctk.CTkButton(y,text='excluir').pack(pady=3,side=LEFT)
         ctk.CTkButton(y,text='comentar').pack(pady=3,side=LEFT)
-
+ 
 
 
