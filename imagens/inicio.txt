@@ -2,6 +2,7 @@
 #comando para atualizar requirements.txt 
 #pip freeze ->requirements.txt 
 
-
+cliente = rosa
+mei = verde	
 
 

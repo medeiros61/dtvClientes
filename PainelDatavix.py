@@ -1,25 +1,30 @@
 import customtkinter as ctk
 from tkinter import *
 import cliente as cl
+import mei as me
 def DataVix():
     screen_datavix = ctk.CTk()
-    #screen_datavix.geometry("1100x580")
+    screen_datavix.geometry("1100x580")
     screen_datavix.title("Master")
-    #screen_datavix.resizable(False,False)
+    screen_datavix.resizable(False,False)
     #username_entry = ctk.CTkEntry(master=screen_datavix, placeholder_text="TESTE", width=300, font=("Roboto",14))
     #username_entry.pack(side=RIGHT)
 
     #definindo frame cliente
     frame_clientes = ctk.CTkFrame(master=screen_datavix, width=900, height=580, fg_color=("#809090"))
     cl.parametrosinicias(frame_clientes)
+
+    #---------------------------------------------------------- frame mei
+
+    frame_mei = ctk.CTkFrame(master=screen_datavix, width=900, height=580, fg_color=("#2F4F4F"))
+    me.parametrosinicias(frame_mei)
     
     def ativarmei():
+        me.criartelamei(frame_mei)
         cl.Removertelaclientes(frame_clientes)
-    
     def ativarclietes():
-        
         cl.criartelaclientes(frame_clientes)
-            
+        me.Removertelamei(frame_mei)    
 
     #aba
     options_frame = ctk.CTkFrame(master=screen_datavix, width=200, height=580, fg_color=("#808080"))
