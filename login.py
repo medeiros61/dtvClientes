@@ -9,9 +9,6 @@ janela = ctk.CTk()
 def TelaLogin():
 
         
-        
-
-
     
     def tema():
         ctk.set_appearance_mode("dark")
