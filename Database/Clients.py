@@ -31,4 +31,3 @@ def getclientlist_complete():
     finally:
         connection.close()
 
-getclientlist_complete()
