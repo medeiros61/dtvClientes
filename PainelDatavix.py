@@ -2,6 +2,7 @@ import customtkinter as ctk
 from tkinter import *
 import cliente as cl
 import mei as me
+
 def DataVix():
     screen_datavix = ctk.CTk()
     screen_datavix.geometry("1100x580")
@@ -23,7 +24,7 @@ def DataVix():
     def ativarmei():
         me.criartelamei(frame_mei)
         cl.Removertelaclientes(frame_clientes)
-    def ativarclietes():
+    def ativarclientes():
         cl.criartelaclientes(frame_clientes)
         me.Removertelamei(frame_mei)    
 
@@ -36,8 +37,9 @@ def DataVix():
     botao_dashboard = ctk.CTkButton(master=options_frame, text="DASHBOARD")
     botao_dashboard.grid(row=1, column=0, padx=20, pady=(20, 10), sticky="nsew")
 
-    botao_clientes = ctk.CTkButton(master=options_frame, text="CLIENTES",command=ativarclietes)
+    botao_clientes = ctk.CTkButton(master=options_frame, text="CLIENTES",command=ativarclientes)
     botao_clientes.grid(row=2, column=0, padx=20, pady=(20, 10), sticky="nsew")
+    botao_clientes.configure(state="normal")
 
     botao_MEI = ctk.CTkButton(master=options_frame, text="CONTROLE MEis", command=ativarmei)
     botao_MEI.grid(row=3, column=0, padx=20, pady=(20, 10), sticky="nsew")
