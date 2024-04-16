@@ -93,7 +93,7 @@ def parametrosinicias(frame):
     master_frame = ctk.CTkFrame(master=frame, width=900, height=480, fg_color=("#808080"))
     master_frame.pack(side=TOP, fill = X)
 
-    #Frame dos itens do filtro
+    #Frame dos itens do filtro 
     filter_frame = ctk.CTkFrame(master=master_frame, width=900, height=100, fg_color=("#808080"))
     filter_frame.pack(side=TOP, fill = X)
     

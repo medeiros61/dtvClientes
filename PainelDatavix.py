@@ -2,6 +2,7 @@ import customtkinter as ctk
 from tkinter import *
 import cliente as cl
 import mei as me
+import usuarios as user
 
 def DataVix():
     screen_datavix = ctk.CTk()
@@ -12,21 +13,36 @@ def DataVix():
     #username_entry.pack(side=RIGHT)
     ctk.set_appearance_mode("dark")
     ctk.set_default_color_theme("dark-blue")
-    #definindo frame cliente
+
+
+    #definindo frame cliente------------------------------
     frame_clientes = ctk.CTkFrame(master=screen_datavix, width=900, height=580, fg_color=("#809090"))
     cl.parametrosinicias(frame_clientes)
-
+    #------------------------------------------------------
+    #frame usuarios
+    frame_user = ctk.CTkFrame(master=screen_datavix, width=900, height=580, fg_color=("#809090"))
+    user.parametrosinicias(frame_user)
     #---------------------------------------------------------- frame mei
-
+    
     frame_mei = ctk.CTkFrame(master=screen_datavix, width=900, height=580, fg_color=("#2F4F4F"))
     me.parametrosinicias(frame_mei)
     
+    #------------------------------------------------------------------------
+
     def ativarmei():
         me.criartelamei(frame_mei)
         cl.Removertelaclientes(frame_clientes)
+        user.Removertelauser(frame_user)
     def ativarclientes():
         cl.criartelaclientes(frame_clientes)
-        me.Removertelamei(frame_mei)    
+        me.Removertelamei(frame_mei)
+        user.Removertelauser(frame_user)
+    def ativaruser():
+        user.criartelauser(frame_user)
+        me.Removertelamei(frame_mei)
+        cl.Removertelaclientes(frame_clientes)
+    def exit():
+        screen_datavix.destroy()    
 
     #aba
     options_frame = ctk.CTkFrame(master=screen_datavix, width=200, height=580, fg_color=("#808080"))
@@ -50,10 +66,10 @@ def DataVix():
     botao_MEI = ctk.CTkButton(master=options_frame, text="CONTROLE MEis", command=ativarmei)
     botao_MEI.grid(row=4, column=0, padx=20, pady=(20, 10), sticky="nsew")
 
-    botao_usuarios = ctk.CTkButton(master=options_frame, text="USUARIOS")
+    botao_usuarios = ctk.CTkButton(master=options_frame, text="USUARIOS", command=ativaruser)
     botao_usuarios.grid(row=5, column=0, padx=20, pady=(20, 10), sticky="nsew")
 
-    botao_sair = ctk.CTkButton(master=options_frame, text="SAIR")
+    botao_sair = ctk.CTkButton(master=options_frame, text="SAIR", command=exit)
     botao_sair.grid(row=6, column=0, padx=20, pady=(20, 10), sticky="nsew")
     screen_datavix.mainloop()
 #---------------------------------------------------------------------------------#
