@@ -2,6 +2,7 @@ import customtkinter as ctk
 from tkinter import *
 from tkinter import ttk 
 import Database.Clients as dbc
+from ttkthemes import ThemedStyle
 
 def criartelaclientes(frame):
     global Scrollable,list_clients_frame,tv
@@ -9,6 +10,7 @@ def criartelaclientes(frame):
     frame.pack(side=RIGHT, fill = BOTH,expand=True)
 
     clientes_data = dbc.getclientlist_complete()
+
     tv.heading("#", text="ID")
     tv.heading("Nome", text="Nome")
     tv.heading("UF", text="UF")
@@ -51,7 +53,7 @@ def Removertelaclientes(frame):
     frame.pack_forget()
 
 def parametrosinicias(frame):
-    global list_clients_frame,Scrollable,Municipio_filter_entry,uf_filter_entry
+    global list_clients_frame,Scrollable,uf_filter_entry
     Scrollable = None
     ##Funções 
     #Filtro por nome 
@@ -87,7 +89,8 @@ def parametrosinicias(frame):
     def ordenar(*args):
         pass
 
-            
+    
+
     #Frame FILTRO E LISTA
     
     master_frame = ctk.CTkFrame(master=frame, width=900, height=480, fg_color=("#808080"))
@@ -132,19 +135,25 @@ def parametrosinicias(frame):
     Status_filter_entry.grid(row=2, column=3, padx=10, pady=(5, 5), sticky="nsew")
                             
     #Ordenar Por..(tipo de ordenação)  Filter
+    ordbytype_lista = [
+        "ALFABETICA","DATA DE CADASTRO"
+    ]
     ordbytype_filter_frame = ctk.CTkFrame(master=filter_frame,height=100, fg_color=("#808080"))
     ordbytype_filter_frame.pack(side=LEFT)
     ordbytype_filter_lb = ctk.CTkLabel(master=ordbytype_filter_frame, text="Ordenar por",width=50)
     ordbytype_filter_lb.grid(row=1, column=4, padx=10, pady=(5, 5), sticky="nsew")
-    ordbytype_filter_entry = ctk.CTkComboBox(master=ordbytype_filter_frame,width=50,command=ordenar)
+    ordbytype_filter_entry = ctk.CTkComboBox(master=ordbytype_filter_frame,width=50,command=ordenar,values=ordbytype_lista)
     ordbytype_filter_entry.grid(row=2, column=4, padx=10, pady=(5, 5), sticky="nsew")
     
+    ordbycresdec_lista = [
+        "CRESCENTE","DECRESCENTE"
+    ]
     #ordenar Por (Crescente e decrescente ) Filter
     ordbycresdec_filter_frame = ctk.CTkFrame(master=filter_frame,height=100, fg_color=("#808080"))
     ordbycresdec_filter_frame.pack(side=LEFT)
     ordbycresdec_filter_lb = ctk.CTkLabel(master=ordbycresdec_filter_frame, text="Ordenar por",width=50)
     ordbycresdec_filter_lb.grid(row=1, column=5, padx=10, pady=(5, 5), sticky="nsew")
-    ordbycresdec_filter_entry = ctk.CTkComboBox(master=ordbycresdec_filter_frame,width=50,command=ordenar)
+    ordbycresdec_filter_entry = ctk.CTkComboBox(master=ordbycresdec_filter_frame,width=50,command=ordenar,values=ordbycresdec_lista)
     ordbycresdec_filter_entry.grid(row=2, column=5, padx=10, pady=(5, 5), sticky="nsew")
   
     #Listagem de clientes
@@ -153,7 +162,8 @@ def parametrosinicias(frame):
     
     global tv
     
-  
+    EstilodeTela = ThemedStyle(list_clients_frame)
+    EstilodeTela.set_theme("scidsand")
     tv = ttk.Treeview(list_clients_frame, columns=("#","Nome","UF","Município","Status"), show='headings')
     tv.grid(row=0, column=0, sticky="nsew")
 
