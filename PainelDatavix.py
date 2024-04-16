@@ -30,25 +30,31 @@ def DataVix():
 
     #aba
     options_frame = ctk.CTkFrame(master=screen_datavix, width=200, height=580, fg_color=("#808080"))
-    options_frame.pack(side=LEFT, fill = Y)
+    options_frame.pack(side=LEFT, fill = Y) 
     #options_frame.grid(row=0, column=0, padx=20, pady=(20, 10), sticky="nsew")
     #options_frame.pack_propagate(False)
+    #logo datavix
+    logo_datavix = PhotoImage(file="dtvClientes\imagens\logodatavix.png")
+    botao_logo = ctk.CTkButton(master=options_frame, image=logo_datavix, text="", fg_color="#808080")
+    botao_logo.grid(row=1, column=0, padx=20, pady=(20, 10), sticky="nsew")
+    botao_logo.configure(state="disabled")
+    
     #buttons
     botao_dashboard = ctk.CTkButton(master=options_frame, text="DASHBOARD")
-    botao_dashboard.grid(row=1, column=0, padx=20, pady=(20, 10), sticky="nsew")
+    botao_dashboard.grid(row=2, column=0, padx=20, pady=(20, 10), sticky="nsew")
 
     botao_clientes = ctk.CTkButton(master=options_frame, text="CLIENTES",command=ativarclientes)
-    botao_clientes.grid(row=2, column=0, padx=20, pady=(20, 10), sticky="nsew")
+    botao_clientes.grid(row=3, column=0, padx=20, pady=(20, 10), sticky="nsew")
     botao_clientes.configure(state="normal")
 
     botao_MEI = ctk.CTkButton(master=options_frame, text="CONTROLE MEis", command=ativarmei)
-    botao_MEI.grid(row=3, column=0, padx=20, pady=(20, 10), sticky="nsew")
+    botao_MEI.grid(row=4, column=0, padx=20, pady=(20, 10), sticky="nsew")
 
     botao_usuarios = ctk.CTkButton(master=options_frame, text="USUARIOS")
-    botao_usuarios.grid(row=4, column=0, padx=20, pady=(20, 10), sticky="nsew")
+    botao_usuarios.grid(row=5, column=0, padx=20, pady=(20, 10), sticky="nsew")
 
     botao_sair = ctk.CTkButton(master=options_frame, text="SAIR")
-    botao_sair.grid(row=5, column=0, padx=20, pady=(20, 10), sticky="nsew")
+    botao_sair.grid(row=6, column=0, padx=20, pady=(20, 10), sticky="nsew")
     screen_datavix.mainloop()
 #---------------------------------------------------------------------------------#
 
