@@ -3,14 +3,14 @@ from tkinter import *
 import cliente as cl
 import mei as me
 import usuarios as user
-
+import imagens.ImagensClientes as Imagens_DataBase
 
 
 def DataVix():
     
 
     screen_datavix = ctk.CTk()
-    screen_datavix.geometry("1100x580")
+    screen_datavix.geometry("1150x615")
     screen_datavix.title("Master")
     screen_datavix.resizable(False,False)
     #username_entry = ctk.CTkEntry(master=screen_datavix, placeholder_text="TESTE", width=300, font=("Roboto",14))
@@ -34,16 +34,16 @@ def DataVix():
     #------------------------------------------------------------------------
 
     def ativarmei():
-        me.criartelamei(frame_mei)
+        me.criartelaMEI(frame_mei)
         cl.Removertelaclientes(frame_clientes)
         user.Removertelauser(frame_user)
     def ativarclientes():
         cl.criartelaclientes(frame_clientes)
-        me.Removertelamei(frame_mei)
+        me.RemovertelaMEI(frame_mei)
         user.Removertelauser(frame_user)
     def ativaruser():
         user.criartelauser(frame_user)
-        me.Removertelamei(frame_mei)
+        me.RemovertelaMEI(frame_mei)
         cl.Removertelaclientes(frame_clientes)
     def exit():
         screen_datavix.destroy()    
@@ -54,7 +54,8 @@ def DataVix():
     #options_frame.grid(row=0, column=0, padx=20, pady=(20, 10), sticky="nsew")
     #options_frame.pack_propagate(False)
     #logo datavix
-    logo_datavix = PhotoImage(file="./imagens/logodatavix.png")
+    caminho = Imagens_DataBase.baixarimagemLogoDTV()
+    logo_datavix = PhotoImage(file=caminho)
     botao_logo = ctk.CTkButton(master=options_frame, image=logo_datavix, text="", fg_color="#808080")
     botao_logo.grid(row=1, column=0, padx=20, pady=(20, 10), sticky="nsew")
     botao_logo.configure(state="disabled")

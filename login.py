@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from tkinter import *
-import Database.Users as dbu
+import Modulos.Database.Users as dbu
 import PainelDatavix as PD
 janela = ctk.CTk()
 

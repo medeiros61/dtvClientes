@@ -53,10 +53,9 @@ def getclientlist_byfilter(nome_empresa_p,nome,uf_p,uf,ativo_p,ativo):
     try:
         with connection.cursor() as cursor:
             ConsultaSQL = f"SELECT `id`, `nome_empresa`, `uf`, `municipio`, `ativo` FROM `clients` WHERE `{nome_empresa_p}` LIKE '%{nome}%'"
-            
             if uf_p and uf:
                 ConsultaSQL += f" AND `{uf_p}` LIKE '%{uf}%'"
-            if ativo_p and ativo:
+            if ativo_p and ativo is not None:
                 ConsultaSQL += f" AND `{ativo_p}` LIKE '%{ativo}%'"
             
             cursor.execute(ConsultaSQL)

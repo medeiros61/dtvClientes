@@ -1,32 +1,22 @@
 import customtkinter as ctk
 from tkinter import *
 from tkinter import ttk 
-import Database.Clients as dbc
+import Modulos.Database.Clients as dbc
+import Modulos.Cliente.Func_cliente as Func_cli
+import imagens.ImagensClientes as Imagens_DataBase
 from ttkthemes import ThemedStyle
 
+
 def criartelaclientes(frame):
-    global Scrollable,list_clients_frame,tv
+    global Scrollable,list_clients_frame,TreeviewClientes
     
     frame.pack(side=RIGHT, fill = BOTH,expand=True)
-
-    clientes_data = dbc.getclientlist_complete()
-
-    tv.heading("#", text="ID")
-    tv.heading("Nome", text="Nome")
-    tv.heading("UF", text="UF")
-    tv.heading("Município", text="Município")
-    tv.heading("Status", text="Status")
-    #tv.heading("Opções", text="Opções")
     
-    # Define o tamanho das colunas em pixels
-    tv.column("#", width=50)  # ID
-    tv.column("Nome", width=450)  # Nome
-    tv.column("UF", width=50)  # UF
-    tv.column("Município", width=100)  # Município
-    tv.column("Status", width=80)  # Status
-    #tv.column("Opções", width=100, stretch=False)  # Opções 
+    filtrar()
+    verificarseleção()
 
-   
+    #clientes_data = dbc.getclientlist_complete()
+
     #Conjunto para armazenar UF 
     #dados_uf_set = set()
     # Extrair UF e adicionar ao conjunto
@@ -39,25 +29,25 @@ def criartelaclientes(frame):
 
 
     # Adicionando botões às linhas do Treeview
-    try:
-        for item in tv.get_children():
-            tv.delete(item)
-    except Exception :
-        pass
+    #try:
+    #    for item in TreeviewClientes.get_children():
+    #        TreeviewClientes.delete(item)
+    #except Exception :
+    #    pass
 
-    for result in clientes_data:
-        tv.insert("", 'end', values=result)
+    #for result in clientes_data:
+    #    TreeviewClientes.insert("", 'end', values=result)
 
 
 def Removertelaclientes(frame): 
     frame.pack_forget()
 
 def parametrosinicias(frame):
-    global list_clients_frame,Scrollable,uf_filter_entry
+    global list_clients_frame,Scrollable,uf_filter_entry,filtrar,verificarseleção
     Scrollable = None
-    ##Funções 
-    #Filtro por nome 
-
+    #####################################  FUNÇÕES   #####################################################
+        
+    #FUNÇÃO PARA FILTRAR
     def filtrar(*args):
         nome = clinte_filter_entry.get() 
 
@@ -66,7 +56,7 @@ def parametrosinicias(frame):
         
         if ativo == "ATIVO" :
             ativo = 1
-        else:
+        if ativo == "INATIVO" :
             ativo = 0 
         
         if uf =="TODOS":
@@ -76,29 +66,52 @@ def parametrosinicias(frame):
             ativo = None
 
     
-            
+        global clientesfiltrados
         clientesfiltrados = dbc.getclientlist_byfilter('nome_empresa',nome,'uf',uf,'ativo',ativo)
+        ordenar()
+   
+    #FUNÇÃO PARA ORDENAR 
+    def ordenar(*args):
+        global clientesfiltrados
+
+        Ordem = ordbytype_filter_entry.get()
+        TipoOrdem = ordbycresdec_filter_entry.get()
+        
+        if Ordem == "ALFABETICA":
+            Ordem_P = 1
+        if Ordem == "DATA DE CADASTRO":
+            Ordem_P = 0    
+        if TipoOrdem == "CRESCENTE":
+            TipoOrdem_P = False
+        else:    
+            TipoOrdem_P = True
+        
+        DadosOrdenados = sorted(clientesfiltrados, key=lambda x: x[Ordem_P], reverse=TipoOrdem_P)
+        
         try:
-            for item in tv.get_children():
-                tv.delete(item)     
+            for item in TreeviewClientes.get_children():
+                TreeviewClientes.delete(item)     
         except Exception :
             pass
-        for result in clientesfiltrados:
-            tv.insert("", 'end', values=result)
-   
-    def ordenar(*args):
-        pass
+        for result in DadosOrdenados:
+            TreeviewClientes.insert("", 'end', values=result)
 
-    
 
-    #Frame FILTRO E LISTA
-    
+
+    ##################################### FIM FUNÇÕES   #####################################################
+
+    #Frame FILTRO E LISTA 
     master_frame = ctk.CTkFrame(master=frame, width=900, height=480, fg_color=("#808080"))
     master_frame.pack(side=TOP, fill = X)
-
-    #Frame dos itens do filtro 
-    filter_frame = ctk.CTkFrame(master=master_frame, width=900, height=100, fg_color=("#808080"))
-    filter_frame.pack(side=TOP, fill = X)
+    
+    #Listagem de clientes
+    list_clients_frame = ctk.CTkFrame(master=master_frame, width=900, height=480, fg_color=("#808080"))
+    list_clients_frame.pack(side=TOP, fill = X)
+    
+    #Frame dos itens do filtro ----------------------------------------------------------------------
+    filter_frame = ctk.CTkFrame(master=list_clients_frame, width=900, height=100, fg_color=("#808080"))
+    filter_frame.grid(row=0, column=0, sticky="nsew")
+    
     
     #cliente Filter
     clinte_filter_frame = ctk.CTkFrame(master=filter_frame,height=100, fg_color=("#808080"))
@@ -136,11 +149,11 @@ def parametrosinicias(frame):
                             
     #Ordenar Por..(tipo de ordenação)  Filter
     ordbytype_lista = [
-        "ALFABETICA","DATA DE CADASTRO"
+        "DATA DE CADASTRO","ALFABETICA"
     ]
     ordbytype_filter_frame = ctk.CTkFrame(master=filter_frame,height=100, fg_color=("#808080"))
     ordbytype_filter_frame.pack(side=LEFT)
-    ordbytype_filter_lb = ctk.CTkLabel(master=ordbytype_filter_frame, text="Ordenar por",width=50)
+    ordbytype_filter_lb = ctk.CTkLabel(master=ordbytype_filter_frame, text="Ordenar por",width=100)
     ordbytype_filter_lb.grid(row=1, column=4, padx=10, pady=(5, 5), sticky="nsew")
     ordbytype_filter_entry = ctk.CTkComboBox(master=ordbytype_filter_frame,width=50,command=ordenar,values=ordbytype_lista)
     ordbytype_filter_entry.grid(row=2, column=4, padx=10, pady=(5, 5), sticky="nsew")
@@ -151,28 +164,87 @@ def parametrosinicias(frame):
     #ordenar Por (Crescente e decrescente ) Filter
     ordbycresdec_filter_frame = ctk.CTkFrame(master=filter_frame,height=100, fg_color=("#808080"))
     ordbycresdec_filter_frame.pack(side=LEFT)
-    ordbycresdec_filter_lb = ctk.CTkLabel(master=ordbycresdec_filter_frame, text="Ordenar por",width=50)
+    ordbycresdec_filter_lb = ctk.CTkLabel(master=ordbycresdec_filter_frame, text="Ordenar por",width=100)
     ordbycresdec_filter_lb.grid(row=1, column=5, padx=10, pady=(5, 5), sticky="nsew")
     ordbycresdec_filter_entry = ctk.CTkComboBox(master=ordbycresdec_filter_frame,width=50,command=ordenar,values=ordbycresdec_lista)
     ordbycresdec_filter_entry.grid(row=2, column=5, padx=10, pady=(5, 5), sticky="nsew")
   
-    #Listagem de clientes
-    list_clients_frame = ctk.CTkFrame(master=master_frame, width=900, height=480, fg_color=("#808080"))
-    list_clients_frame.pack(side=TOP, fill = X)
-    
-    global tv
+  
+    #Listagem de clientes-----------------------------------------------------------------------------
+
+    def verificarseleção(*args):
+        seleção = TreeviewClientes.selection()
+
+        if seleção:
+            valor = bt_Editar_clients.cget("state")  # Obtém o estado atual do botão
+            if valor == "disabled":   
+                bt_Editar_clients.configure(state='normal') 
+                bt_Excluir_clients.configure(state='normal') 
+                bt_Comentar_clients.configure(state='normal') 
+        else:
+            
+            bt_Editar_clients.configure(state='disabled') 
+            bt_Excluir_clients.configure(state='disabled') 
+            bt_Comentar_clients.configure(state='disabled')
+
+    global TreeviewClientes
     
     EstilodeTela = ThemedStyle(list_clients_frame)
     EstilodeTela.set_theme("scidsand")
-    tv = ttk.Treeview(list_clients_frame, columns=("#","Nome","UF","Município","Status"), show='headings')
-    tv.grid(row=0, column=0, sticky="nsew")
-
+    TreeviewClientes = ttk.Treeview(list_clients_frame, columns=("#","Nome","UF","Município","Status"), show='headings')
+    TreeviewClientes.grid(row=1, column=0, sticky="nsew")
+    TreeviewClientes.bind('<<TreeviewSelect>>', verificarseleção)
+    
+    # Define o as colunas
+    TreeviewClientes.heading("#", text="ID")
+    TreeviewClientes.heading("Nome", text="Nome")
+    TreeviewClientes.heading("UF", text="UF")
+    TreeviewClientes.heading("Município", text="Município")
+    TreeviewClientes.heading("Status", text="Status")
+    #TreeviewClientes.heading("Opções", text="Opções")
+    
+    # Define o tamanho das colunas em pixels
+    TreeviewClientes.column("#", width=50)  # ID
+    TreeviewClientes.column("Nome", width=450)  # Nome
+    TreeviewClientes.column("UF", width=50)  # UF
+    TreeviewClientes.column("Município", width=100)  # Município
+    TreeviewClientes.column("Status", width=80)  # Status
+    #TreeviewClientes.column("Opções", width=100, stretch=False)  # Opções 
    
     # Adicionar barra de rolagem vertical ao Treeview
-    scrollbar = ctk.CTkScrollbar(list_clients_frame, command=tv.yview,height=500)
-    scrollbar.grid(row=0, column=1, sticky="nsew")
-    tv.configure(yscrollcommand=scrollbar.set)
-    #frameTreeview.configure(height=480)  # +4 para margem
+    scrollbar = ctk.CTkScrollbar(list_clients_frame, command=TreeviewClientes.yview,height=500)
+    scrollbar.grid(row=1, column=1, sticky="nsew")
+    TreeviewClientes.configure(yscrollcommand=scrollbar.set)
+    
+    #Frame dos botões de ação ----------------------------------------------------------------------
+    bt_action_frame = ctk.CTkFrame(master=list_clients_frame, fg_color=("#808080"))
+    bt_action_frame.grid(row=2, column=0, sticky="ne")
+    
+    
+
+
+    Caminho_Logo_Add,Caminho_Logo_Edit,Caminho_Logo_Rem ,Caminho_Logo_Comt,Caminho_Logo_Excel =Imagens_DataBase.baixarimagemPgclientes()  
+
+    logo_add = PhotoImage(file=Caminho_Logo_Add).subsample(25, 25)
+    bt_add_clients = ctk.CTkButton(master=bt_action_frame,image=logo_add, text="Adicionair Cliente",command= Func_cli.Adicionar_cliente)
+    bt_add_clients.grid(row=0, column=0,  padx=5, pady=5,sticky="nsew")
+
+    logo_editar = PhotoImage(file=Caminho_Logo_Edit).subsample(25, 25)
+    bt_Editar_clients = ctk.CTkButton(master=bt_action_frame,image=logo_editar, text="Editar",command=lambda: Func_cli.editar_cliente(TreeviewClientes))
+    bt_Editar_clients.grid(row=0, column=2,   padx=5, pady=5,sticky="nsew")
+    
+    logo_excluir = PhotoImage(file=Caminho_Logo_Rem).subsample(25, 25)
+    bt_Excluir_clients = ctk.CTkButton(master=bt_action_frame,image=logo_excluir, text="Excluir Cliente",command=lambda: Func_cli.excluir_cliente(TreeviewClientes))
+    bt_Excluir_clients.grid(row=0, column=3,   padx=5, pady=5,sticky="nsew")
+
+    logo_comentar = PhotoImage(file=Caminho_Logo_Comt).subsample(25, 25)
+    bt_Comentar_clients = ctk.CTkButton(master=bt_action_frame,image=logo_comentar, text="Adicionar Comentario",command=lambda: Func_cli.comentar_cliente(TreeviewClientes))
+    bt_Comentar_clients.grid(row=0, column=4,  padx=5, pady=5,sticky="nsew")
+
+    logo_excel = PhotoImage(file=Caminho_Logo_Excel).subsample(30, 30)
+   
+    bt_exportar_clients = ctk.CTkButton(master=bt_action_frame, image=logo_excel,text="Exportar clientes",command=Func_cli.Exportar_clientes)
+    bt_exportar_clients.grid(row=0, column=5,  padx=5, pady=5,sticky="nsew")
 
 
 
