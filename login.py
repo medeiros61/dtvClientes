@@ -2,10 +2,12 @@ import customtkinter as ctk
 from tkinter import *
 import Modulos.Database.Users as dbu
 import PainelDatavix as PD
+import imagens.ImagensClientes as Imagens_DataBase
+
 janela = ctk.CTk()
 
 
-
+podelogar = False
 def TelaLogin():
 
         
@@ -48,7 +50,8 @@ def TelaLogin():
 
 
     #janela = lado esquerdo
-        img = PhotoImage(file="./imagens/japan.png")
+        caminho = Imagens_DataBase.baixarimagemLogin()
+        img = PhotoImage(file=caminho)
         label_img = ctk.CTkLabel(master=janela, image=img).place(x=5, y=65)
         label_left = ctk.CTkLabel(master=janela, text="Bem vindo", font=("Roboto", 18), text_color="#9370DB"). place(x=10, y= 10)
 
