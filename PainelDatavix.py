@@ -20,15 +20,15 @@ def DataVix():
 
 
     #definindo frame cliente------------------------------
-    frame_clientes = ctk.CTkFrame(master=screen_datavix, width=900, height=580, fg_color=("#809090"))
+    frame_clientes = ctk.CTkFrame(master=screen_datavix, width=900, height=580, fg_color=("#808080"))
     cl.parametrosinicias(frame_clientes)
     #------------------------------------------------------
     #frame usuarios
-    frame_user = ctk.CTkFrame(master=screen_datavix, width=900, height=580, fg_color=("#32CD32"))
+    frame_user = ctk.CTkFrame(master=screen_datavix, width=900, height=580, fg_color=("#808080"))
     user.parametrosinicias(frame_user)
     #---------------------------------------------------------- frame mei
     
-    frame_mei = ctk.CTkFrame(master=screen_datavix, width=900, height=580, fg_color=("#2F4F4F"))
+    frame_mei = ctk.CTkFrame(master=screen_datavix, width=900, height=580, fg_color=("#808080"))
     me.parametrosinicias(frame_mei)
     
     #------------------------------------------------------------------------
