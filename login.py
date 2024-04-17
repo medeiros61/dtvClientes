@@ -2,7 +2,7 @@ import customtkinter as ctk
 from tkinter import *
 import Modulos.Database.Users as dbu
 import PainelDatavix as PD
-import imagens.ImagensClientes as Imagens_DataBase
+import Modulos.imagens.ImagensClientes as Imagens_DataBase
 
 janela = ctk.CTk()
 
@@ -29,9 +29,9 @@ def TelaLogin():
             email = username_entry.get()
             senha = password_entry.get()
             if email != '' and senha != '':
-
+                global TesteLogin  
                 TesteLogin = dbu.VerificaçãoLogin(email,senha)
-                if TesteLogin == True:
+                if TesteLogin[0] == True:
                     print('passou')
                     global podelogar
                     podelogar = True
@@ -88,10 +88,11 @@ def TelaLogin():
     janela.mainloop()
     
     if podelogar == True:
-        PD.DataVix()
+        Usuario = TesteLogin[1]
+        PD.DataVix(Usuario)
 
 
-#Usuario : user@teste.com
+#Usuario : @teste
 #Senha : teste
 
 TelaLogin()

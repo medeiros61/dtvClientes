@@ -2,23 +2,31 @@ import customtkinter as ctk
 from tkinter import *
 from tkinter import ttk 
 import Modulos.Database.Meis as dbmei
-import imagens.ImagensClientes as Imagens_DataBase
+import Modulos.imagens.ImagensClientes as Imagens_DataBase
 from ttkthemes import ThemedStyle
 import Modulos.Cliente.Func_mei as Func_Mei
 
-def criartelaMEI(frame):
-    global Scrollable,list_MEI_frame,TreeviewMEI
-    
-    frame.pack(side=RIGHT, fill = BOTH,expand=True)
-    
-    filtrar()
-    verificarseleção()
-
+def criartelaMEI(frame,DadosUsuario):
+    try:
+        global Scrollable,list_MEI_frame,TreeviewMEI,tipo_usuario
+        tipo_usuario= DadosUsuario[2]
+        if tipo_usuario == 'user':
+            bt_Excluir_MEI.grid_remove()
+        
+        filtrar()
+        verificarseleção()
+        frame.pack(side=RIGHT, fill = BOTH,expand=True)
+    finally:
+        pass
 def RemovertelaMEI(frame): 
-    frame.pack_forget()
-
+    try:
+        frame.pack_forget()
+    finally:
+        pass
+    
 def parametrosinicias(frame):
-    global list_MEI_frame,Scrollable,filtrar,verificarseleção
+
+    global list_MEI_frame,Scrollable,filtrar,verificarseleção,TreeviewMEI,bt_Excluir_MEI
     Scrollable = None
     #####################################  FUNÇÕES   #####################################################
         
@@ -170,7 +178,6 @@ def parametrosinicias(frame):
             bt_Excluir_MEI.configure(state='disabled') 
             bt_Comentar_MEI.configure(state='disabled') 
 
-    global TreeviewMEI
     
     EstilodeTela = ThemedStyle(list_MEI_frame)
     EstilodeTela.set_theme("scidsand")
@@ -198,7 +205,7 @@ def parametrosinicias(frame):
     
     #Frame dos botões de ação ----------------------------------------------------------------------
     bt_action_frame = ctk.CTkFrame(master=list_MEI_frame, fg_color=("#808080"))
-    bt_action_frame.grid(row=2, column=0, sticky="ne")
+    bt_action_frame.grid(row=2, column=0, sticky="nsew")
     
     Caminho_Logo_Add,Caminho_Logo_Edit,Caminho_Logo_Rem ,Caminho_Logo_Comt,Caminho_Logo_Excel =Imagens_DataBase.baixarimagemPgclientes()  
 

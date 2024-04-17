@@ -3,50 +3,59 @@ from tkinter import *
 from tkinter import ttk 
 import Modulos.Database.Clients as dbc
 import Modulos.Cliente.Func_cliente as Func_cli
-import imagens.ImagensClientes as Imagens_DataBase
+import Modulos.imagens.ImagensClientes as Imagens_DataBase
 from ttkthemes import ThemedStyle
+import Modulos.Cliente.Cliente_V_E as Tela_Edit_C 
 
 
-def criartelaclientes(frame):
-    global Scrollable,list_clients_frame,TreeviewClientes
-    
-    frame.pack(side=RIGHT, fill = BOTH,expand=True)
-    
-    filtrar()
-    verificarseleção()
+def criartelaclientes(frame,DadosUsuario):
+    try:
+        global Scrollable,list_clients_frame,TreeviewClientes,tipo_usuario
+        tipo_usuario= DadosUsuario[2]
+        if tipo_usuario == 'user':
+            bt_Excluir_clients.grid_remove()
+        
+        
+        
+        filtrar()
+        verificarseleção()
+        frame.pack(side=RIGHT, fill = BOTH,expand=True)
 
-    #clientes_data = dbc.getclientlist_complete()
+        #clientes_data = dbc.getclientlist_complete()
 
-    #Conjunto para armazenar UF 
-    #dados_uf_set = set()
-    # Extrair UF e adicionar ao conjunto
-    #for item in clientes_data:
-    #    dados_uf_set.add((item[2]))
-    # Converter o conjunto de volta para uma lista (se necessário)
-    #dados_uf = list(dados_uf_set)
+        #Conjunto para armazenar UF 
+        #dados_uf_set = set()
+        # Extrair UF e adicionar ao conjunto
+        #for item in clientes_data:
+        #    dados_uf_set.add((item[2]))
+        # Converter o conjunto de volta para uma lista (se necessário)
+        #dados_uf = list(dados_uf_set)
 
-    #uf_filter_entry.configure(values = dados_uf)
+        #uf_filter_entry.configure(values = dados_uf)
 
 
-    # Adicionando botões às linhas do Treeview
-    #try:
-    #    for item in TreeviewClientes.get_children():
-    #        TreeviewClientes.delete(item)
-    #except Exception :
-    #    pass
+        # Adicionando botões às linhas do Treeview
+        #try:
+        #    for item in TreeviewClientes.get_children():
+        #        TreeviewClientes.delete(item)
+        #except Exception :
+        #    pass
 
-    #for result in clientes_data:
-    #    TreeviewClientes.insert("", 'end', values=result)
-
+        #for result in clientes_data:
+        #    TreeviewClientes.insert("", 'end', values=result)
+    finally:
+        pass
 
 def Removertelaclientes(frame): 
-    frame.pack_forget()
-
+    try:
+        frame.pack_forget()
+    finally:
+        pass
 def parametrosinicias(frame):
-    global list_clients_frame,Scrollable,uf_filter_entry,filtrar,verificarseleção
+    global list_clients_frame,Scrollable,uf_filter_entry,filtrar,verificarseleção,TreeviewClientes,frame_edição_dados,bt_Excluir_clients
     Scrollable = None
     #####################################  FUNÇÕES   #####################################################
-        
+   
     #FUNÇÃO PARA FILTRAR
     def filtrar(*args):
         nome = clinte_filter_entry.get() 
@@ -99,11 +108,19 @@ def parametrosinicias(frame):
 
 
     ##################################### FIM FUNÇÕES   #####################################################
-
+     
+    
     #Frame FILTRO E LISTA 
     master_frame = ctk.CTkFrame(master=frame, width=900, height=480, fg_color=("#808080"))
     master_frame.pack(side=TOP, fill = X)
     
+    #FRAME PARA VIZUALIZAR E EDITAR
+    frame_Cliente_E_V = ctk.CTkFrame(master=frame, width=900, height=580, fg_color=("#808080"))
+
+    frame_edição_dados = frame_Cliente_E_V    
+    Dadosparateladeedição = frame_edição_dados,master_frame 
+
+    Tela_Edit_C.parametrosinicias(frame_edição_dados,master_frame)
     #Listagem de clientes
     list_clients_frame = ctk.CTkFrame(master=master_frame, width=900, height=480, fg_color=("#808080"))
     list_clients_frame.pack(side=TOP, fill = X)
@@ -187,7 +204,7 @@ def parametrosinicias(frame):
             bt_Excluir_clients.configure(state='disabled') 
             bt_Comentar_clients.configure(state='disabled')
 
-    global TreeviewClientes
+    
     
     EstilodeTela = ThemedStyle(list_clients_frame)
     EstilodeTela.set_theme("scidsand")
@@ -218,7 +235,7 @@ def parametrosinicias(frame):
     
     #Frame dos botões de ação ----------------------------------------------------------------------
     bt_action_frame = ctk.CTkFrame(master=list_clients_frame, fg_color=("#808080"))
-    bt_action_frame.grid(row=2, column=0, sticky="ne")
+    bt_action_frame.grid(row=2, column=0, sticky="nsew")
     
     
 
@@ -230,7 +247,7 @@ def parametrosinicias(frame):
     bt_add_clients.grid(row=0, column=0,  padx=5, pady=5,sticky="nsew")
 
     logo_editar = PhotoImage(file=Caminho_Logo_Edit).subsample(25, 25)
-    bt_Editar_clients = ctk.CTkButton(master=bt_action_frame,image=logo_editar, text="Editar",command=lambda: Func_cli.editar_cliente(TreeviewClientes))
+    bt_Editar_clients = ctk.CTkButton(master=bt_action_frame,image=logo_editar, text="Editar",command=lambda: Func_cli.editar_cliente(TreeviewClientes,Dadosparateladeedição))
     bt_Editar_clients.grid(row=0, column=2,   padx=5, pady=5,sticky="nsew")
     
     logo_excluir = PhotoImage(file=Caminho_Logo_Rem).subsample(25, 25)

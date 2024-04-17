@@ -1,5 +1,5 @@
+from tkinter import *
 
-     
 #FUNÇÃO PARA ADICIONAR
 def Adicionar_cliente():
 
@@ -25,7 +25,7 @@ def excluir_cliente(TreeView):
             else:
                 print("Nenhum cliente selecionado.")
     #FUNÇÃO PARA EDITAR
-def editar_cliente(TreeView):
+def editar_cliente(TreeView,Dadosparateladeedição):
         # Obtém a seleção da TreeView
         selecao = TreeView.selection()
         # Verifica se há algum item selecionado
@@ -37,6 +37,11 @@ def editar_cliente(TreeView):
                 # Obtém o nome do cliente
                 id = valores[0]
                 nome_cliente = valores[1]
+                frame_edição_dados = Dadosparateladeedição[0]
+                Frame_atual = Dadosparateladeedição[1]
+                Frame_atual.pack_forget()
+                frame_edição_dados.pack(side=RIGHT, fill = BOTH,expand=True)
+                
                 # Agora você tem o nome do cliente selecionado
                 print(f'Editando cliente: [id:{id}] {nome_cliente}')
             else:
