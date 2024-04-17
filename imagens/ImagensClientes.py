@@ -30,16 +30,18 @@ def save_response_content(response, destination):
                 f.write(chunk)
 
 
-
-
-def baixarimagemPgclientes():
-
+def pegarcaminhodaappdata():
     # Obter o diretório de dados do usuário (AppData/Roaming)
     appdata_roaming = os.getenv('APPDATA')
     # Caminho completo para a pasta Datavix
     datavix_path = os.path.join(appdata_roaming, 'Datavix')
     # Caminho para a pasta de imagens dentro de Datavix
-    imagens_path = os.path.join(datavix_path, 'Imagens')
+    imagens_path = os.path.join(datavix_path, 'imagens')
+    return imagens_path
+
+def baixarimagemPgclientes():
+
+    imagens_path = pegarcaminhodaappdata()
 
     imagens_path = os.path.join(imagens_path, 'Clientes')
     # Verificar se a pasta de imagens dentro de Datavix existe, e criar se não existir
@@ -86,13 +88,7 @@ def baixarimagemPgclientes():
 
 def baixarimagemLogoDTV():
 
-    # Obter o diretório de dados do usuário (AppData/Roaming)
-    appdata_roaming = os.getenv('APPDATA')
-    # Caminho completo para a pasta Datavix
-    datavix_path = os.path.join(appdata_roaming, 'Datavix')
-    # Caminho para a pasta de imagens dentro de Datavix
-    imagens_path = os.path.join(datavix_path, 'imagens')
-    # Verificar se a pasta de imagens dentro de Datavix existe, e criar se não existir
+    imagens_path = pegarcaminhodaappdata()
     if not os.path.exists(imagens_path):
         os.makedirs(imagens_path)
 
@@ -106,3 +102,22 @@ def baixarimagemLogoDTV():
             download_file_from_google_drive(file_id, destination_path)
    
     return Logo_DTV                                
+
+
+def baixarimagemLogin():
+
+
+    imagens_path = pegarcaminhodaappdata()
+    if not os.path.exists(imagens_path):
+        os.makedirs(imagens_path)
+
+    i_login = os.path.join(imagens_path,"login.png")
+
+    ##Funções 
+    #Baixar as imagens dos botões caso não exista
+    if not os.path.exists(i_login):
+            file_id = "1vudOlN3YTCfPPIXJMVmuCM4ZHnMvwRaT"
+            destination_path = i_login  
+            download_file_from_google_drive(file_id, destination_path)
+   
+    return i_login                                   
