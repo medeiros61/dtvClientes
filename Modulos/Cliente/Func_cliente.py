@@ -1,5 +1,5 @@
 from tkinter import *
-
+import Modulos.Cliente.Botões_Ediçao as btedit
 #FUNÇÃO PARA ADICIONAR
 def Adicionar_cliente():
 
@@ -41,7 +41,7 @@ def editar_cliente(TreeView,Dadosparateladeedição):
                 Frame_atual = Dadosparateladeedição[1]
                 Frame_atual.pack_forget()
                 frame_edição_dados.pack(side=RIGHT, fill = BOTH,expand=True)
-                
+                btedit.Importardados(id)
                 # Agora você tem o nome do cliente selecionado
                 print(f'Editando cliente: [id:{id}] {nome_cliente}')
             else:

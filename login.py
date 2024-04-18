@@ -66,6 +66,7 @@ def TelaLogin():
 
         username_entry = ctk.CTkEntry(master=frame, placeholder_text="Nome de usuario", width=300, font=("Roboto",14))
         username_entry.place(x=25, y=105)
+       
         username_label = ctk.CTkLabel(master=frame, text="*O campo de usuario e de carater obrigatorio.", text_color="green", font=("Roboto", 8)). place(x=25, y= 135)
 
         password_entry = ctk.CTkEntry(master=frame, placeholder_text="Senha de usuario", width=300, font=("Roboto",14),show="*")

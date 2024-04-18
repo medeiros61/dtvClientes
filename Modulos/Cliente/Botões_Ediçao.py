@@ -1,69 +1,87 @@
 import customtkinter as ctk
 import tkinter
 from tkinter import *
+import Modulos.Database.Clients as dbc
+
 
 def criarbotoes(Viewer):
+    global NumeroID,entry_Nome_empresa,entry_CNPJ,entry_Estado,entry_Municpio,entry_Atividade,entry_Data_abertura_,entry_Ativo,entry_Link_WhatsApp,entry_Formas_de_tributao,entry_Anexo_simples_nacional,entry_Folha_de_pagamento,entry_Responsvel_contabil,entry_Responsvel_fiscal,entry_Responsvel_societrio,entry_Responsvel_DP,entry_Domiclio_eletrnico,entry_Email,entry_Nome_representante,entry_CPF_representante_legal,entry_Data_de_nascimento_,entry_Contabilidade_finalizada_,entry_Certificado_digital,entry_Senha_certificado,entry_Data_de_vencimento_,entry_Cdigo_e_cac,entry_Senha_EAC,entry_Cdigo_Simples,entry_Nmero_de_livros_ECD,entry_Ano_Nmero_de_livros_ECD,entry_Nmero_de_livros_ECF,entry_Ano_Nmero_de_livros_ECF,entry_UF,entry_Inscrio_estadual,entry_Credenciamento_NFE,entry_Nmero_CSC,entry_Site_caixa_postal,entry_Livros_Fiscais_Entrada_Ano_Nmero,entry_Livros_Fiscais_Inventrio_Ano_Nmero,entry_Inscrio_municipal,entry_Site,entry_Login,entry_Senha,entry_Demais_senhas,entry_Senha_Abertura_Processos,entry_Observaes,entry_Alvara_de_funcionamento,entry_Data_vencimento_,entry_Alvara_sanitrio,entry_Licenca_ambiental,entry_Bombeiros,entry_ltima_alterao_contratual_,entry_Nmero_alterao_contratual,entry_Observaes_gerais,entry_Folha_de_pagto,entry_Quantidade_de_funcionrios,entry_Prolabore,entry_Quantidade_de_scios,entry_Esocial_usurio,entry_Esocial_senha,entry_Esocial_cdigo_de_acesso,entry_FAP_usurio,entry_FAP_senha,entry_Empregador_WEB_usurio,entry_Empregador_WEB_senha,entry_Sistema,entry_Site_Bpo,entry_Usurio,entry_Senha_simples,entry_Banco_1,entry_Banco_2,entry_Tipo_de_BPO,entry_Estado_estaduais,entry_Observaes_gerais_Societario,entry_Observaes_gerais_bpo
+
+    formasdetributacao = [
+        "SIMPLES NACIONAL","MEI","PRESUMIDO","LUCRO REAL","IMUNE/ISENTA"
+    ]
 
 #------------------------------cliente
-    label_Nome_empresa = ctk.CTkLabel(Viewer.tab("Cliente"), text="Nome empresa")
-    entry_Nome_empresa = ctk.CTkEntry(Viewer.tab("Cliente"), width=200)
+    siglas_estados = [
+        "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS",
+        "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC",
+        "SP", "SE", "TO"
+    ]
+    yes_or_not = [
+        "SIM","NÃO"
+    ]
+    NumeroID = ctk.CTkLabel(Viewer.tab("Cliente"), text="ID")
+    NumeroID.grid(row=0, column=1,columnspan=1, padx=10, pady=1, sticky="w")
 
-    label_Nome_empresa.grid(row=0, column=0,columnspan=2, padx=10, pady=1, sticky="w")
-    entry_Nome_empresa.grid(row=1, column=0,columnspan=2, padx=10, pady=15, sticky="nsew")
+    label_Nome_empresa = ctk.CTkLabel(Viewer.tab("Cliente"), text="Nome empresa")
+    entry_Nome_empresa = ctk.CTkEntry(Viewer.tab("Cliente"))
+
+    label_Nome_empresa.grid(row=0, column=0,columnspan=1, padx=10, pady=1, sticky="w")
+    entry_Nome_empresa.grid(row=1, column=0,columnspan=3, padx=10, pady=15, sticky="nsew")
 
     
     label_CNPJ = ctk.CTkLabel(Viewer.tab("Cliente"), text="CNPJ")
-    entry_CNPJ = ctk.CTkEntry(Viewer.tab("Cliente"), width=200)
+    entry_CNPJ = ctk.CTkEntry(Viewer.tab("Cliente"))
 
-    label_CNPJ.grid(row=0, column=2, padx=10, pady=1, sticky="w")
-    entry_CNPJ.grid(row=1, column=2, padx=10, pady=15, sticky="nsew")
+    label_CNPJ.grid(row=0, column=3, padx=10, pady=1, sticky="w")
+    entry_CNPJ.grid(row=1, column=3, padx=10, pady=15, sticky="nsew")
 
 
     label_Estado = ctk.CTkLabel(Viewer.tab("Cliente"), text="Estado")
-    entry_Estado = ctk.CTkComboBox(Viewer.tab("Cliente"))
+    entry_Estado = ctk.CTkComboBox(Viewer.tab("Cliente"),values= siglas_estados)
 
-    label_Estado.grid(row=2, column=0, padx=10, pady=1, sticky="w")
-    entry_Estado.grid(row=3, column=0, padx=10, pady=15, sticky="nsew")
+    label_Estado.grid(row=2, column=1, padx=10, pady=1, sticky="w")
+    entry_Estado.grid(row=3, column=1, padx=10, pady=15, sticky="nsew")
     #entry_Estado.grid(row=2, column=1, padx=10, pady=(5, 5), sticky="nsew")
 
     label_Municpio = ctk.CTkLabel(Viewer.tab("Cliente"), text="Município")
     entry_Municpio = ctk.CTkEntry(Viewer.tab("Cliente"))
 
-    label_Municpio.grid(row=2, column=1, padx=10, pady=1, sticky="w")
-    entry_Municpio.grid(row=3, column=1, padx=10, pady=15, sticky="nsew")
+    label_Municpio.grid(row=2, column=2, padx=10, pady=1, sticky="w")
+    entry_Municpio.grid(row=3, column=2, padx=10, pady=15, sticky="nsew")
 
 
     label_Atividade = ctk.CTkLabel(Viewer.tab("Cliente"), text="Atividade")
     entry_Atividade = ctk.CTkEntry(Viewer.tab("Cliente"))
 
-    label_Atividade.grid(row=2, column=2, padx=10, pady=1, sticky="w")
-    entry_Atividade.grid(row=3, column=2, padx=10, pady=15, sticky="nsew")
+    label_Atividade.grid(row=2, column=0, padx=10, pady=1, sticky="w")
+    entry_Atividade.grid(row=3, column=0, padx=10, pady=15, sticky="nsew")
 
 
-    label_Data_abertura_ = ctk.CTkLabel(Viewer.tab("Cliente"), text="Data abertura (dd/mm/aaaa)")
+    label_Data_abertura_ = ctk.CTkLabel(Viewer.tab("Cliente"), text="Data abertura")
     entry_Data_abertura_ = ctk.CTkEntry(Viewer.tab("Cliente"))
 
-    label_Data_abertura_.grid(row=4, column=1, padx=10, pady=1, sticky="w")
-    entry_Data_abertura_.grid(row=5, column=1, padx=10, pady=15, sticky="nsew")
+    label_Data_abertura_.grid(row=2, column=3, padx=10, pady=1, sticky="w")
+    entry_Data_abertura_.grid(row=3, column=3, padx=10, pady=15, sticky="nsew")
 
 
     label_Ativo = ctk.CTkLabel(Viewer.tab("Cliente"), text="Ativo")
-    entry_Ativo = ctk.CTkComboBox(Viewer.tab("Cliente"))
-
-    label_Ativo.grid(row=4, column=2, padx=10, pady=1, sticky="w")
-    entry_Ativo.grid(row=5, column=2, padx=10, pady=15, sticky="nsew")
+    entry_Ativo = ctk.CTkComboBox(Viewer.tab("Cliente"),values=yes_or_not)
+    
+    label_Ativo.grid(row=4, column=3, padx=10, pady=1, sticky="w")
+    entry_Ativo.grid(row=5, column=3, padx=10, pady=15, sticky="nsew")
 
 
     label_Link_WhatsApp = ctk.CTkLabel(Viewer.tab("Cliente"), text="Link WhatsApp")
     entry_Link_WhatsApp = ctk.CTkEntry(Viewer.tab("Cliente"))
 
-    label_Link_WhatsApp.grid(row=4, column=0, padx=10, pady=1, sticky="w")
-    entry_Link_WhatsApp.grid(row=5, column=0, padx=10, pady=15, sticky="nsew")
+    label_Link_WhatsApp.grid(row=4, column=0,columnspan=3, padx=10, pady=1, sticky="w")
+    entry_Link_WhatsApp.grid(row=5, column=0,columnspan=3, padx=10, pady=15, sticky="nsew")
 
 #------------------------------Gerais
 
     label_Formas_de_tributao = ctk.CTkLabel(Viewer.tab("Gerais"), text="Formas de tributação")
-    entry_Formas_de_tributao = ctk.CTkComboBox(Viewer.tab("Gerais"), width=50)
+    entry_Formas_de_tributao = ctk.CTkComboBox(Viewer.tab("Gerais"), width=50,values=formasdetributacao)
 
     label_Formas_de_tributao.grid(row=0, column=0, padx=10, pady=5, sticky="nsew")
     entry_Formas_de_tributao.grid(row=0, column=1, padx=10, pady=5, sticky="nsew")
@@ -75,9 +93,11 @@ def criarbotoes(Viewer):
     label_Anexo_simples_nacional.grid(row=1, column=0, padx=10, pady=5, sticky="nsew")
     entry_Anexo_simples_nacional.grid(row=1, column=1, padx=10, pady=5, sticky="nsew")
 
-
+    yes_or_not = [
+       "NÃO", "SIM"
+    ]
     label_Folha_de_pagamento = ctk.CTkLabel(Viewer.tab("Gerais"), text="Folha de pagamento")
-    entry_Folha_de_pagamento = ctk.CTkComboBox(Viewer.tab("Gerais"), width=50)
+    entry_Folha_de_pagamento = ctk.CTkComboBox(Viewer.tab("Gerais"), width=50,values=yes_or_not)
 
     label_Folha_de_pagamento.grid(row=2, column=0, padx=10, pady=5, sticky="nsew")
     entry_Folha_de_pagamento.grid(row=2, column=1, padx=10, pady=5, sticky="nsew")
@@ -110,9 +130,10 @@ def criarbotoes(Viewer):
     label_Responsvel_DP.grid(row=6, column=0, padx=10, pady=5, sticky="nsew")
     entry_Responsvel_DP.grid(row=6, column=1, padx=10, pady=5, sticky="nsew")
 
+    
 
     label_Domiclio_eletrnico = ctk.CTkLabel(Viewer.tab("Gerais"), text="Domicílio eletrônico")
-    entry_Domiclio_eletrnico = ctk.CTkComboBox(Viewer.tab("Gerais"), width=50)
+    entry_Domiclio_eletrnico = ctk.CTkComboBox(Viewer.tab("Gerais"), width=50,values=yes_or_not)
 
     label_Domiclio_eletrnico.grid(row=7, column=0, padx=10, pady=5, sticky="nsew")
     entry_Domiclio_eletrnico.grid(row=7, column=1, padx=10, pady=5, sticky="nsew")
@@ -154,7 +175,7 @@ def criarbotoes(Viewer):
 
 
     label_Certificado_digital = ctk.CTkLabel(Viewer.tab("Gerais"), text="Certificado digital")
-    entry_Certificado_digital = ctk.CTkComboBox(Viewer.tab("Gerais"), width=50)
+    entry_Certificado_digital = ctk.CTkComboBox(Viewer.tab("Gerais"), width=50,values=yes_or_not)
 
     label_Certificado_digital.grid(row=3, column=2, padx=10, pady=5, sticky="nsew")
     entry_Certificado_digital.grid(row=3, column=3, padx=10, pady=5, sticky="nsew")
@@ -225,18 +246,11 @@ def criarbotoes(Viewer):
 
 #------------------------------Estaduais
 
-    label_Estado = ctk.CTkLabel(Viewer.tab("Estaduais"), text="Estado")
-    entry_Estado = ctk.CTkComboBox(Viewer.tab("Estaduais"), width=200)
+    label_Estado_estaduais = ctk.CTkLabel(Viewer.tab("Estaduais"), text="Estado")
+    entry_Estado_estaduais = ctk.CTkComboBox(Viewer.tab("Estaduais"), width=200,values=siglas_estados)
 
-    label_Estado.grid(row=0, column=0, padx=10, pady=15, sticky="nsew")
-    entry_Estado.grid(row=0, column=1, padx=10, pady=15, sticky="nsew")
-
-
-    label_UF = ctk.CTkLabel(Viewer.tab("Estaduais"), text="UF")
-    entry_UF = ctk.CTkEntry(Viewer.tab("Estaduais"), width=50)
-
-    label_UF.grid(row=1, column=0, padx=10, pady=15, sticky="nsew")
-    entry_UF.grid(row=1, column=1, padx=10, pady=15, sticky="nsew")
+    label_Estado_estaduais.grid(row=0, column=0, padx=10, pady=15, sticky="nsew")
+    entry_Estado_estaduais.grid(row=0, column=1, padx=10, pady=15, sticky="nsew")
 
 
     label_Inscrio_estadual = ctk.CTkLabel(Viewer.tab("Estaduais"), text="Inscrição estadual")
@@ -247,7 +261,7 @@ def criarbotoes(Viewer):
 
 
     label_Credenciamento_NFE = ctk.CTkLabel(Viewer.tab("Estaduais"), text="Credenciamento NFE")
-    entry_Credenciamento_NFE = ctk.CTkComboBox(Viewer.tab("Estaduais"), width=50)
+    entry_Credenciamento_NFE = ctk.CTkComboBox(Viewer.tab("Estaduais"), width=50,values=yes_or_not)
 
     label_Credenciamento_NFE.grid(row=3, column=0, padx=10, pady=15, sticky="nsew")
     entry_Credenciamento_NFE.grid(row=3, column=1, padx=10, pady=15, sticky="nsew")
@@ -333,7 +347,7 @@ def criarbotoes(Viewer):
 #------------------------------Societario
 
     label_Alvara_de_funcionamento = ctk.CTkLabel(Viewer.tab("Societário"), text="Alvara de funcionamento")
-    entry_Alvara_de_funcionamento = ctk.CTkComboBox(Viewer.tab("Societário"), width=50)
+    entry_Alvara_de_funcionamento = ctk.CTkComboBox(Viewer.tab("Societário"), width=50,values=yes_or_not)
 
     label_Alvara_de_funcionamento.grid(row=0, column=0, padx=10, pady=5, sticky="nsew")
     entry_Alvara_de_funcionamento.grid(row=0, column=1, padx=10, pady=5, sticky="nsew")
@@ -347,7 +361,7 @@ def criarbotoes(Viewer):
 
 
     label_Alvara_sanitrio = ctk.CTkLabel(Viewer.tab("Societário"), text="Alvara sanitário")
-    entry_Alvara_sanitrio = ctk.CTkComboBox(Viewer.tab("Societário"), width=50)
+    entry_Alvara_sanitrio = ctk.CTkComboBox(Viewer.tab("Societário"), width=50,values=yes_or_not)
 
     label_Alvara_sanitrio.grid(row=2, column=0, padx=10, pady=5, sticky="nsew")
     entry_Alvara_sanitrio.grid(row=2, column=1, padx=10, pady=5, sticky="nsew")
@@ -361,7 +375,7 @@ def criarbotoes(Viewer):
 
 
     label_Licenca_ambiental = ctk.CTkLabel(Viewer.tab("Societário"), text="Licença ambiental")
-    entry_Licenca_ambiental = ctk.CTkComboBox(Viewer.tab("Societário"), width=50)
+    entry_Licenca_ambiental = ctk.CTkComboBox(Viewer.tab("Societário"), width=50,values=yes_or_not)
 
     label_Licenca_ambiental.grid(row=4, column=0, padx=10, pady=5, sticky="nsew")
     entry_Licenca_ambiental.grid(row=4, column=1, padx=10, pady=5, sticky="nsew")
@@ -375,7 +389,7 @@ def criarbotoes(Viewer):
 
 
     label_Bombeiros = ctk.CTkLabel(Viewer.tab("Societário"), text="Bombeiros")
-    entry_Bombeiros = ctk.CTkComboBox(Viewer.tab("Societário"), width=50)
+    entry_Bombeiros = ctk.CTkComboBox(Viewer.tab("Societário"), width=50,values=yes_or_not)
 
     label_Bombeiros.grid(row=6, column=0, padx=10, pady=5, sticky="nsew")
     entry_Bombeiros.grid(row=6, column=1, padx=10, pady=5, sticky="nsew")
@@ -402,16 +416,16 @@ def criarbotoes(Viewer):
     entry_Nmero_alterao_contratual.grid(row=9, column=1, padx=10, pady=5, sticky="nsew")
 
 
-    label_Observaes_gerais = ctk.CTkLabel(Viewer.tab("Societário"), text="Observações gerais")
-    entry_Observaes_gerais = ctk.CTkEntry(Viewer.tab("Societário"), width=50)
+    label_Observaes_gerais_Societario = ctk.CTkLabel(Viewer.tab("Societário"), text="Observações gerais")
+    entry_Observaes_gerais_Societario = ctk.CTkEntry(Viewer.tab("Societário"), width=50)
 
-    label_Observaes_gerais.grid(row=0, column=2, padx=10, pady=5, sticky="nsew")
-    entry_Observaes_gerais.grid(row=0, column=3, padx=10, pady=5, sticky="nsew")
+    label_Observaes_gerais_Societario.grid(row=0, column=2, padx=10, pady=5, sticky="nsew")
+    entry_Observaes_gerais_Societario.grid(row=0, column=3, padx=10, pady=5, sticky="nsew")
 
 #------------------------------DP Pessoal
 
     label_Folha_de_pagto = ctk.CTkLabel(Viewer.tab("Departamento pessoal"), text="Folha de pagto")
-    entry_Folha_de_pagto = ctk.CTkComboBox(Viewer.tab("Departamento pessoal"), width=50)
+    entry_Folha_de_pagto = ctk.CTkComboBox(Viewer.tab("Departamento pessoal"), width=50,values=yes_or_not)
 
     label_Folha_de_pagto.grid(row=0, column=0, padx=10, pady=5, sticky="nsew")
     entry_Folha_de_pagto.grid(row=0, column=1, padx=10, pady=5, sticky="nsew")
@@ -425,7 +439,7 @@ def criarbotoes(Viewer):
 
 
     label_Prolabore = ctk.CTkLabel(Viewer.tab("Departamento pessoal"), text="Prolabore")
-    entry_Prolabore = ctk.CTkComboBox(Viewer.tab("Departamento pessoal"), width=50)
+    entry_Prolabore = ctk.CTkComboBox(Viewer.tab("Departamento pessoal"), width=50,values=yes_or_not)
 
     label_Prolabore.grid(row=2, column=0, padx=10, pady=5, sticky="nsew")
     entry_Prolabore.grid(row=2, column=1, padx=10, pady=5, sticky="nsew")
@@ -495,11 +509,11 @@ def criarbotoes(Viewer):
     entry_Sistema.grid(row=0, column=1, padx=10, pady=15, sticky="nsew")
 
 
-    label_Site = ctk.CTkLabel(Viewer.tab("BPO"), text="Site")
-    entry_Site = ctk.CTkEntry(Viewer.tab("BPO"), width=50)
+    label_Site_Bpo = ctk.CTkLabel(Viewer.tab("BPO"), text="Site")
+    entry_Site_Bpo = ctk.CTkEntry(Viewer.tab("BPO"), width=50)
 
-    label_Site.grid(row=1, column=0, padx=10, pady=15, sticky="nsew")
-    entry_Site.grid(row=1, column=1, padx=10, pady=15, sticky="nsew")
+    label_Site_Bpo.grid(row=1, column=0, padx=10, pady=15, sticky="nsew")
+    entry_Site_Bpo.grid(row=1, column=1, padx=10, pady=15, sticky="nsew")
 
 
     label_Usuario = ctk.CTkLabel(Viewer.tab("BPO"), text="Usuário")
@@ -537,9 +551,103 @@ def criarbotoes(Viewer):
     entry_Tipo_de_BPO.grid(row=6, column=1, padx=10, pady=15, sticky="nsew")
 
 
-    label_Observaes_gerais = ctk.CTkLabel(Viewer.tab("BPO"), text="Observações gerais")
-    entry_Observaes_gerais = ctk.CTkEntry(Viewer.tab("BPO"), width=50)
+    label_Observaes_gerais_bpo = ctk.CTkLabel(Viewer.tab("BPO"), text="Observações gerais")
+    entry_Observaes_gerais_bpo = ctk.CTkEntry(Viewer.tab("BPO"), width=50)
 
-    label_Observaes_gerais.grid(row=7, column=0, padx=10, pady=15, sticky="nsew")
-    entry_Observaes_gerais.grid(row=7, column=1, padx=10, pady=15, sticky="nsew")
+    label_Observaes_gerais_bpo.grid(row=7, column=0, padx=10, pady=15, sticky="nsew")
+    entry_Observaes_gerais_bpo.grid(row=7, column=1, padx=10, pady=15, sticky="nsew")
 
+
+
+def Importardados(idcliente):
+    Listadedados, identificadores,qr = dbc.getclientdata_toEdit(idcliente)
+    
+    ### Cliente
+    NumeroID.configure(text=Listadedados[0]) # Campo id do banco de dados
+    entry_Nome_empresa.insert(0,Listadedados[1]) # Campo nome_empresa do banco de dados
+    entry_CNPJ.insert(0,Listadedados[2]) # Campo cnpj do banco de dados
+    entry_Estado.set(Listadedados[3]) # Campo uf do banco de dados
+    entry_Municpio.insert(0,Listadedados[4]) # Campo municipio do banco de dados
+    entry_Atividade.insert(0,Listadedados[5]) # Campo atividade do banco de dados
+    entry_Data_abertura_.insert(0,Listadedados[6]) # Campo data_abertura do banco de dados
+    entry_Ativo.set(Listadedados[7]) # Campo ativo do banco de dados
+    entry_Link_WhatsApp.insert(0,Listadedados[68])
+
+    ### Gerais
+    entry_Formas_de_tributao.set(Listadedados[8].upper()) # Campo formas_tributacao do banco de dados
+    entry_Anexo_simples_nacional.insert(0,Listadedados[9]) # Campo anexo_simples_nacional do banco de dados
+    entry_Folha_de_pagamento.set(Listadedados[10]) # Campo folha_pagamento do banco de dados
+    entry_Responsvel_contabil.insert(0,Listadedados[11]) # Campo responsavel_contabil do banco de dados
+    entry_Responsvel_fiscal.insert(0,Listadedados[12]) # Campo responsavel_fiscal do banco de dados
+    entry_Responsvel_societrio.insert(0,Listadedados[13]) # Campo responsavel_societario do banco de dados
+    entry_Responsvel_DP.insert(0,Listadedados[14]) # Campo responsavel_dp do banco de dados
+    entry_Domiclio_eletrnico.set(Listadedados[15]) # Campo domicilio_eletronico do banco de dados
+    entry_Email.insert(0,Listadedados[16]) # Campo email do banco de dados
+    entry_Nome_representante.insert(0,Listadedados[17]) # Campo nome_representante do banco de dados
+    entry_CPF_representante_legal.insert(0,Listadedados[18]) # Campo cpf_representante_legal do banco de dados
+    entry_Data_de_nascimento_.insert(0,Listadedados[19]) # Campo data_nascimento do banco de dados
+    entry_Contabilidade_finalizada_.insert(0,Listadedados[20]) # Campo contabilidade_finalizada do banco de dados
+    entry_Certificado_digital.set(Listadedados[21]) # Campo certificado_digital do banco de dados
+    entry_Senha_certificado.insert(0,Listadedados[22]) # Campo senha_certificado do banco de dados
+    entry_Data_de_vencimento_.insert(0,Listadedados[23]) # Campo data_vencimento_certificado do banco de dados
+    
+    ###Federais
+    entry_Cdigo_e_cac.insert(0,Listadedados[24]) # Campo codigo_ecac do banco de dados
+    entry_Senha_EAC.insert(0,Listadedados[25]) # Campo senha_ecac do banco de dados
+    entry_Cdigo_Simples.insert(0,Listadedados[26]) # Campo codigo_simples do banco de dados
+    entry_Nmero_de_livros_ECD.insert(0,"")
+    entry_Ano_Nmero_de_livros_ECD.insert(0,"")
+    entry_Nmero_de_livros_ECF.insert(0,"")
+    entry_Ano_Nmero_de_livros_ECF.insert(0,"")
+    
+    ##Estaduais
+    entry_Estado_estaduais.set(Listadedados[3])
+    #entry_UF.insert(0,Listadedados[25]) # Campo senha_ecac do banco de dados
+    entry_Inscrio_estadual.insert(0,Listadedados[28]) # Campo inscricao_estadual do banco de dados
+    entry_Credenciamento_NFE.set(Listadedados[29]) # Campo estado do banco de dados
+    entry_Nmero_CSC.insert(0,Listadedados[30]) # Campo inscricao_estadual do banco de dados
+    entry_Site_caixa_postal.insert(0,Listadedados[31]) # Campo credenciamento_nfe do banco de dados
+    #entry_Livros_Fiscais_Entrada_Ano_Nmero.insert(0,Listadedados[30]) # Campo numero_csc do banco de dados
+    #entry_Livros_Fiscais_Inventrio_Ano_Nmero.insert(0,Listadedados[31]) # Campo site_caixa_postal do banco de dados
+    
+    ## Municipais
+    entry_Inscrio_municipal.insert(0,Listadedados[32]) # Campo inscricao_municipal do banco de dados
+    entry_Site.insert(0,Listadedados[33]) # Campo site do banco de dados
+    entry_Login.insert(0,Listadedados[34]) # Campo login do banco de dados
+    entry_Senha.insert(0,Listadedados[35]) # Campo senha do banco de dados
+    entry_Demais_senhas.insert(0,Listadedados[36]) # Campo alvara_funcionamento do banco de dados
+    entry_Senha_Abertura_Processos.insert(0,Listadedados[37]) # Campo data_vencimento_alvara_funcionamento do banco de dados
+    entry_Observaes.insert(0,Listadedados[38]) # Campo alvara_sanitario do banco de dados
+    
+    ## Societario
+    entry_Alvara_de_funcionamento.set(Listadedados[39]) # Campo data_vencimento_alvara_sanitario do banco de dados
+    entry_Data_vencimento_.insert(0,Listadedados[40]) # Campo licenca_ambiental do banco de dados
+    entry_Alvara_sanitrio.set(Listadedados[41]) # Campo data_vencimento_licenca_ambiental do banco de dados
+    entry_Licenca_ambiental.set(Listadedados[42]) # Campo bombeiros do banco de dados
+    entry_Bombeiros.set(Listadedados[43]) # Campo data_vencimento_bombeiros do banco de dados
+    entry_ltima_alterao_contratual_.insert(0,Listadedados[44]) # Campo ultima_alteracao_contratual do banco de dados
+    entry_Nmero_alterao_contratual.insert(0,Listadedados[45]) # Campo numero_alteracao_contratual do banco de dados
+    entry_Observaes_gerais_Societario.insert(0,Listadedados[46]) # Campo observacoes_gerais_societario do banco de dados
+    
+    ## Deparamento Pessoal 
+    entry_Folha_de_pagto.set(Listadedados[47]) # Campo folha_pagto do banco de dados
+    entry_Quantidade_de_funcionrios.insert(0,Listadedados[48]) # Campo quantidade_funcionarios do banco de dados
+    entry_Prolabore.set(Listadedados[49]) # Campo prolabore do banco de dados
+    entry_Quantidade_de_scios.insert(0,Listadedados[50]) # Campo quantidade_socios do banco de dados
+    entry_Esocial_usurio.insert(0,Listadedados[51]) # Campo esocial_usuario do banco de dados
+    entry_Esocial_senha.insert(0,Listadedados[52]) # Campo esocial_senha do banco de dados
+    entry_Esocial_cdigo_de_acesso.insert(0,Listadedados[53]) # Campo esocial_codigo_acesso do banco de dados
+    entry_FAP_usurio.insert(0,Listadedados[54]) # Campo fap_usuario do banco de dados
+    entry_FAP_senha.insert(0,Listadedados[55]) # Campo fap_senha do banco de dados
+    entry_Empregador_WEB_usurio.insert(0,Listadedados[56]) # Campo empregador_web_usuario do banco de dados
+    entry_Empregador_WEB_senha.insert(0,Listadedados[57]) # Campo empregador_web_senha do banco de dados
+    
+    ## Sistema
+    entry_Sistema.insert(0,Listadedados[58]) # Campo sistema_bpo do banco de dados
+    entry_Site_Bpo.insert(0,Listadedados[59]) # Campo site_bpo do banco de dados
+    entry_Usurio.insert(0,Listadedados[60]) # Campo usuario_bpo do banco de dados
+    entry_Senha_simples.insert(0,Listadedados[61]) # Campo senha_simples_bpo do banco de dados
+    entry_Banco_1.insert(0,Listadedados[62]) # Campo banco1 do banco de dados
+    entry_Banco_2.insert(0,Listadedados[63]) # Campo banco2 do banco de dados
+    entry_Tipo_de_BPO.insert(0,Listadedados[64]) # Campo tipo_bpo do banco de dados
+    entry_Observaes_gerais_bpo.insert(0,Listadedados[65])
