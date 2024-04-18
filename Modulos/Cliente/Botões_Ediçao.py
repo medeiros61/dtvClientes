@@ -562,6 +562,70 @@ def criarbotoes(Viewer):
 def Importardados(idcliente):
     Listadedados, identificadores,qr = dbc.getclientdata_toEdit(idcliente)
     
+    entry_Nome_empresa.delete(0, 'end')
+    entry_CNPJ.delete(0, 'end')
+    entry_Municpio.delete(0, 'end')
+    entry_Atividade.delete(0, 'end')
+    entry_Data_abertura_.delete(0, 'end')
+    entry_Link_WhatsApp.delete(0, 'end')
+
+    entry_Anexo_simples_nacional.delete(0, 'end')
+    entry_Responsvel_contabil.delete(0, 'end')
+    entry_Responsvel_fiscal.delete(0, 'end')
+    entry_Responsvel_societrio.delete(0, 'end')
+    entry_Responsvel_DP.delete(0, 'end')
+    entry_Email.delete(0, 'end')
+    entry_Nome_representante.delete(0, 'end')
+    entry_CPF_representante_legal.delete(0, 'end')
+    entry_Data_de_nascimento_.delete(0, 'end')
+    entry_Contabilidade_finalizada_.delete(0, 'end')
+    entry_Senha_certificado.delete(0, 'end')
+    entry_Data_de_vencimento_.delete(0, 'end')
+
+    entry_Cdigo_e_cac.delete(0, 'end')
+    entry_Senha_EAC.delete(0, 'end')
+    entry_Cdigo_Simples.delete(0, 'end')
+    entry_Nmero_de_livros_ECD.delete(0, 'end')
+    entry_Ano_Nmero_de_livros_ECD.delete(0, 'end')
+    entry_Nmero_de_livros_ECF.delete(0, 'end')
+    entry_Ano_Nmero_de_livros_ECF.delete(0, 'end')
+
+    entry_Inscrio_estadual.delete(0, 'end')
+    entry_Nmero_CSC.delete(0, 'end')
+    entry_Site_caixa_postal.delete(0, 'end')
+
+    entry_Inscrio_municipal.delete(0, 'end')
+    entry_Site.delete(0, 'end')
+    entry_Login.delete(0, 'end')
+    entry_Senha.delete(0, 'end')
+    entry_Demais_senhas.delete(0, 'end')
+    entry_Senha_Abertura_Processos.delete(0, 'end')
+    entry_Observaes.delete(0, 'end')
+
+    entry_Data_vencimento_.delete(0, 'end')
+    entry_ltima_alterao_contratual_.delete(0, 'end')
+    entry_Nmero_alterao_contratual.delete(0, 'end')
+    entry_Observaes_gerais_Societario.delete(0, 'end')
+
+    entry_Quantidade_de_funcionrios.delete(0, 'end')
+    entry_Quantidade_de_scios.delete(0, 'end')
+    entry_Esocial_usurio.delete(0, 'end')
+    entry_Esocial_senha.delete(0, 'end')
+    entry_Esocial_cdigo_de_acesso.delete(0, 'end')
+    entry_FAP_usurio.delete(0, 'end')
+    entry_FAP_senha.delete(0, 'end')
+    entry_Empregador_WEB_usurio.delete(0, 'end')
+    entry_Empregador_WEB_senha.delete(0, 'end')
+
+    entry_Sistema.delete(0, 'end')
+    entry_Site_Bpo.delete(0, 'end')
+    entry_Usurio.delete(0, 'end')
+    entry_Senha_simples.delete(0, 'end')
+    entry_Banco_1.delete(0, 'end')
+    entry_Banco_2.delete(0, 'end')
+    entry_Tipo_de_BPO.delete(0, 'end')
+    entry_Observaes_gerais_bpo.delete(0, 'end')
+
     ### Cliente
     NumeroID.configure(text=Listadedados[0]) # Campo id do banco de dados
     entry_Nome_empresa.insert(0,Listadedados[1]) # Campo nome_empresa do banco de dados
