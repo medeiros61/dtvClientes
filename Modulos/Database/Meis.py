@@ -81,6 +81,30 @@ def getMEIlist_byfilter(nome_empresa_p,nome,identificacao_p,identificacao,ativo_
     finally:
         connection.close()
 
+
+
+def GetnameMEI(IDdomei):
+    # Conecta ao banco de dados
+    
+    connect_to_da()
+    
+    try:
+        with connection.cursor() as cursor:
+            ConsultaSQL = f"SELECT `nome` FROM `meis` WHERE `id` = '{IDdomei}'"
+ 
+            
+            cursor.execute(ConsultaSQL)
+            results = cursor.fetchone()
+
+        
+            if results is not None: 
+                return results
+            else:
+                return None
+
+    finally:
+        connection.close()
+
 def getmeidata_toEdit(IDempresa):
     # Conecta ao banco de dados
     
@@ -188,8 +212,112 @@ def getmeidata_toEdit(IDempresa):
     finally:
         connection.close() 
 
+def getmeidata_all(IDempresa):
+    # Conecta ao banco de dados
+    
+    connect_to_da()
+    data_quary = [
+    "id",
+    "mei_id",
+    "situacao",
+    "nome",
+    "identificacao",
+    "cnpj",
+    "tributacao",
+    "data_abertura",
+    "prefeitura",
+    "login",
+    "senha",
+    "pendencia_recolhimentos",
+    "entrega_das_mensal",
+    "pendencias",
+    "email",
+    "pendencia",
+    "observacoes",
+    "cpf",
+    "codigo_acesso",
+    "senha_gov",
+    "nivel_gov",
+    "endereco",
+    "inscricao_estadual",
+    "inscricao_municipal",
+    "certificado_digital",
+    "modelo_datavix",
+    "homologado_sindicato",
+    "vencimento",
+    "created_at",
+    "updated_at"
+    ]
+  
+    try:
+        with connection.cursor() as cursor:
+            ConsultaSQL = f"SELECT "
+            for index,item in enumerate(data_quary):
+                ConsultaSQL += f'`{item}`'
 
+                if index < len(data_quary) - 1:
+                    ConsultaSQL += ","
 
+            ConsultaSQL += f"FROM `meis` WHERE `id` = '{IDempresa}'"
+            cursor.execute(ConsultaSQL)
+            results = cursor.fetchone()
+            #Usando fetchmany para buscar 3 linhas de resultados
+            #results = cursor.fetchmany(size=3)
+            #for result in results:
+            #    id,nome_empresa,uf,municipio,ativo = result
+            #    print(result)
+
+          
+            # Convertendo a tupla em lista para poder modificar valores
+            results_list = list(results)
+
+            # results_list[7] representa a coluna "ativo" na consulta SQL
+            botões_yesornot = [2,24]
+            for item in botões_yesornot:
+                if results_list[item] == 1:
+                    results_list[item] = "SIM"
+                else:
+                    results_list[item] = "NÃO"
+
+      
+            
+            
+            # Convertendo de volta para tupla, se necessário
+            results = tuple(results_list)
+
+            nova_lista = []  # Lista para armazenar os itens convertidos
+            n=0
+            Listadeidentificação=[]
+            for item in results_list:
+                
+                identificador = f"""{n}:{item} - {data_quary[n]}"""
+                #print(identificador)
+                n += 1
+                Listadeidentificação.append(identificador)
+                if item == None:
+                    item="N/A"
+                if item == '':
+                    item="N/A"    
+                #try:
+                if isinstance(item, date):    
+                        # Formatando a data para "DD/MM/AAAA"
+                        data_formatada = item.strftime("%d/%m/%Y") # Convertendo para datetime
+
+                        #print(data_formatada)  # Saída
+                        item = data_formatada
+                #except Exception:
+                #    pass
+
+                novoitemlistagem = (item)
+                nova_lista.append(novoitemlistagem)
+        
+            if nova_lista is not None: 
+                return nova_lista,Listadeidentificação,data_quary
+            else:
+                return None,None
+
+    finally:
+        connection.close() 
 
 def gerartexto():
     Listadedados, identificadores, qr = getmeidata_toEdit(20)
@@ -256,4 +384,3 @@ def gerartexto():
 
         #print(f"""{item}.configure = {Listadedados[i]} #{identificadores[i]}""")
 
-#gerartexto()

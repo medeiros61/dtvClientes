@@ -95,6 +95,7 @@ def TelaLogin():
 #User
 #Usuario : @teste
 #Senha : teste
+#pip install openpyxl,pandas,requests 
 
 #master@datavix.com.br , 1234
 #admin@datavix.com.br , 1234
