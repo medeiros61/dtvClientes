@@ -1,7 +1,7 @@
 import customtkinter as ctk
 from tkinter import *
 import Modulos.Cliente.cliente as cl
-import mei as me
+import Modulos.Mei.mei as me
 import usuarios as user
 import Modulos.imagens.ImagensClientes as Imagens_DataBase
 

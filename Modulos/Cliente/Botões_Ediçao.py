@@ -562,13 +562,33 @@ def criarbotoes(Viewer):
 def Importardados(idcliente):
     Listadedados, identificadores,qr = dbc.getclientdata_toEdit(idcliente)
     
-    entry_Nome_empresa.delete(0, 'end')
-    entry_CNPJ.delete(0, 'end')
-    entry_Municpio.delete(0, 'end')
-    entry_Atividade.delete(0, 'end')
-    entry_Data_abertura_.delete(0, 'end')
-    entry_Link_WhatsApp.delete(0, 'end')
 
+    ### Cliente
+    NumeroID.configure(text=f"ID Cliente: {Listadedados[0]}" ) # Campo id do banco de dados
+    
+    entry_Nome_empresa.delete(0, 'end')
+    entry_Nome_empresa.insert(0,Listadedados[1]) # Campo nome_empresa do banco de dados
+    
+    entry_CNPJ.delete(0, 'end')
+    entry_CNPJ.insert(0,Listadedados[2]) # Campo cnpj do banco de dados
+    
+    entry_Estado.set(Listadedados[3]) # Campo uf do banco de dados
+    
+    entry_Municpio.delete(0, 'end')
+    entry_Municpio.insert(0,Listadedados[4]) # Campo municipio do banco de dados
+    
+    entry_Atividade.delete(0, 'end')
+    entry_Atividade.insert(0,Listadedados[5]) # Campo atividade do banco de dados
+   
+    entry_Data_abertura_.delete(0, 'end')
+    entry_Data_abertura_.insert(0,Listadedados[6]) # Campo data_abertura do banco de dados
+    
+    entry_Ativo.set(Listadedados[7]) # Campo ativo do banco de dados
+    
+    entry_Link_WhatsApp.delete(0, 'end')
+    entry_Link_WhatsApp.insert(0,Listadedados[68])# Campo link_whatsapp do banco de dados
+
+    ### Gerais
     entry_Anexo_simples_nacional.delete(0, 'end')
     entry_Responsvel_contabil.delete(0, 'end')
     entry_Responsvel_fiscal.delete(0, 'end')
@@ -582,62 +602,6 @@ def Importardados(idcliente):
     entry_Senha_certificado.delete(0, 'end')
     entry_Data_de_vencimento_.delete(0, 'end')
 
-    entry_Cdigo_e_cac.delete(0, 'end')
-    entry_Senha_EAC.delete(0, 'end')
-    entry_Cdigo_Simples.delete(0, 'end')
-    entry_Nmero_de_livros_ECD.delete(0, 'end')
-    entry_Ano_Nmero_de_livros_ECD.delete(0, 'end')
-    entry_Nmero_de_livros_ECF.delete(0, 'end')
-    entry_Ano_Nmero_de_livros_ECF.delete(0, 'end')
-
-    entry_Inscrio_estadual.delete(0, 'end')
-    entry_Nmero_CSC.delete(0, 'end')
-    entry_Site_caixa_postal.delete(0, 'end')
-
-    entry_Inscrio_municipal.delete(0, 'end')
-    entry_Site.delete(0, 'end')
-    entry_Login.delete(0, 'end')
-    entry_Senha.delete(0, 'end')
-    entry_Demais_senhas.delete(0, 'end')
-    entry_Senha_Abertura_Processos.delete(0, 'end')
-    entry_Observaes.delete(0, 'end')
-
-    entry_Data_vencimento_.delete(0, 'end')
-    entry_ltima_alterao_contratual_.delete(0, 'end')
-    entry_Nmero_alterao_contratual.delete(0, 'end')
-    entry_Observaes_gerais_Societario.delete(0, 'end')
-
-    entry_Quantidade_de_funcionrios.delete(0, 'end')
-    entry_Quantidade_de_scios.delete(0, 'end')
-    entry_Esocial_usurio.delete(0, 'end')
-    entry_Esocial_senha.delete(0, 'end')
-    entry_Esocial_cdigo_de_acesso.delete(0, 'end')
-    entry_FAP_usurio.delete(0, 'end')
-    entry_FAP_senha.delete(0, 'end')
-    entry_Empregador_WEB_usurio.delete(0, 'end')
-    entry_Empregador_WEB_senha.delete(0, 'end')
-
-    entry_Sistema.delete(0, 'end')
-    entry_Site_Bpo.delete(0, 'end')
-    entry_Usurio.delete(0, 'end')
-    entry_Senha_simples.delete(0, 'end')
-    entry_Banco_1.delete(0, 'end')
-    entry_Banco_2.delete(0, 'end')
-    entry_Tipo_de_BPO.delete(0, 'end')
-    entry_Observaes_gerais_bpo.delete(0, 'end')
-
-    ### Cliente
-    NumeroID.configure(text=Listadedados[0]) # Campo id do banco de dados
-    entry_Nome_empresa.insert(0,Listadedados[1]) # Campo nome_empresa do banco de dados
-    entry_CNPJ.insert(0,Listadedados[2]) # Campo cnpj do banco de dados
-    entry_Estado.set(Listadedados[3]) # Campo uf do banco de dados
-    entry_Municpio.insert(0,Listadedados[4]) # Campo municipio do banco de dados
-    entry_Atividade.insert(0,Listadedados[5]) # Campo atividade do banco de dados
-    entry_Data_abertura_.insert(0,Listadedados[6]) # Campo data_abertura do banco de dados
-    entry_Ativo.set(Listadedados[7]) # Campo ativo do banco de dados
-    entry_Link_WhatsApp.insert(0,Listadedados[68])
-
-    ### Gerais
     entry_Formas_de_tributao.set(Listadedados[8].upper()) # Campo formas_tributacao do banco de dados
     entry_Anexo_simples_nacional.insert(0,Listadedados[9]) # Campo anexo_simples_nacional do banco de dados
     entry_Folha_de_pagamento.set(Listadedados[10]) # Campo folha_pagamento do banco de dados
@@ -656,6 +620,15 @@ def Importardados(idcliente):
     entry_Data_de_vencimento_.insert(0,Listadedados[23]) # Campo data_vencimento_certificado do banco de dados
     
     ###Federais
+    
+    entry_Cdigo_e_cac.delete(0, 'end')
+    entry_Senha_EAC.delete(0, 'end')
+    entry_Cdigo_Simples.delete(0, 'end')
+    entry_Nmero_de_livros_ECD.delete(0, 'end')
+    entry_Ano_Nmero_de_livros_ECD.delete(0, 'end')
+    entry_Nmero_de_livros_ECF.delete(0, 'end')
+    entry_Ano_Nmero_de_livros_ECF.delete(0, 'end')
+
     entry_Cdigo_e_cac.insert(0,Listadedados[24]) # Campo codigo_ecac do banco de dados
     entry_Senha_EAC.insert(0,Listadedados[25]) # Campo senha_ecac do banco de dados
     entry_Cdigo_Simples.insert(0,Listadedados[26]) # Campo codigo_simples do banco de dados
@@ -665,6 +638,10 @@ def Importardados(idcliente):
     entry_Ano_Nmero_de_livros_ECF.insert(0,"")
     
     ##Estaduais
+    entry_Inscrio_estadual.delete(0, 'end')
+    entry_Nmero_CSC.delete(0, 'end')
+    entry_Site_caixa_postal.delete(0, 'end')
+
     entry_Estado_estaduais.set(Listadedados[3])
     #entry_UF.insert(0,Listadedados[25]) # Campo senha_ecac do banco de dados
     entry_Inscrio_estadual.insert(0,Listadedados[28]) # Campo inscricao_estadual do banco de dados
@@ -675,6 +652,14 @@ def Importardados(idcliente):
     #entry_Livros_Fiscais_Inventrio_Ano_Nmero.insert(0,Listadedados[31]) # Campo site_caixa_postal do banco de dados
     
     ## Municipais
+    entry_Inscrio_municipal.delete(0, 'end')
+    entry_Site.delete(0, 'end')
+    entry_Login.delete(0, 'end')
+    entry_Senha.delete(0, 'end')
+    entry_Demais_senhas.delete(0, 'end')
+    entry_Senha_Abertura_Processos.delete(0, 'end')
+    entry_Observaes.delete(0, 'end')
+
     entry_Inscrio_municipal.insert(0,Listadedados[32]) # Campo inscricao_municipal do banco de dados
     entry_Site.insert(0,Listadedados[33]) # Campo site do banco de dados
     entry_Login.insert(0,Listadedados[34]) # Campo login do banco de dados
@@ -684,6 +669,11 @@ def Importardados(idcliente):
     entry_Observaes.insert(0,Listadedados[38]) # Campo alvara_sanitario do banco de dados
     
     ## Societario
+    entry_Data_vencimento_.delete(0, 'end')
+    entry_ltima_alterao_contratual_.delete(0, 'end')
+    entry_Nmero_alterao_contratual.delete(0, 'end')
+    entry_Observaes_gerais_Societario.delete(0, 'end')
+
     entry_Alvara_de_funcionamento.set(Listadedados[39]) # Campo data_vencimento_alvara_sanitario do banco de dados
     entry_Data_vencimento_.insert(0,Listadedados[40]) # Campo licenca_ambiental do banco de dados
     entry_Alvara_sanitrio.set(Listadedados[41]) # Campo data_vencimento_licenca_ambiental do banco de dados
@@ -694,6 +684,17 @@ def Importardados(idcliente):
     entry_Observaes_gerais_Societario.insert(0,Listadedados[46]) # Campo observacoes_gerais_societario do banco de dados
     
     ## Deparamento Pessoal 
+    
+    entry_Quantidade_de_funcionrios.delete(0, 'end')
+    entry_Quantidade_de_scios.delete(0, 'end')
+    entry_Esocial_usurio.delete(0, 'end')
+    entry_Esocial_senha.delete(0, 'end')
+    entry_Esocial_cdigo_de_acesso.delete(0, 'end')
+    entry_FAP_usurio.delete(0, 'end')
+    entry_FAP_senha.delete(0, 'end')
+    entry_Empregador_WEB_usurio.delete(0, 'end')
+    entry_Empregador_WEB_senha.delete(0, 'end')
+
     entry_Folha_de_pagto.set(Listadedados[47]) # Campo folha_pagto do banco de dados
     entry_Quantidade_de_funcionrios.insert(0,Listadedados[48]) # Campo quantidade_funcionarios do banco de dados
     entry_Prolabore.set(Listadedados[49]) # Campo prolabore do banco de dados
@@ -707,6 +708,15 @@ def Importardados(idcliente):
     entry_Empregador_WEB_senha.insert(0,Listadedados[57]) # Campo empregador_web_senha do banco de dados
     
     ## Sistema
+    entry_Sistema.delete(0, 'end')
+    entry_Site_Bpo.delete(0, 'end')
+    entry_Usurio.delete(0, 'end')
+    entry_Senha_simples.delete(0, 'end')
+    entry_Banco_1.delete(0, 'end')
+    entry_Banco_2.delete(0, 'end')
+    entry_Tipo_de_BPO.delete(0, 'end')
+    entry_Observaes_gerais_bpo.delete(0, 'end')
+
     entry_Sistema.insert(0,Listadedados[58]) # Campo sistema_bpo do banco de dados
     entry_Site_Bpo.insert(0,Listadedados[59]) # Campo site_bpo do banco de dados
     entry_Usurio.insert(0,Listadedados[60]) # Campo usuario_bpo do banco de dados

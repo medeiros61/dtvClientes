@@ -4,7 +4,7 @@ from tkinter import ttk
 import Modulos.Database.Meis as dbmei
 import Modulos.imagens.ImagensClientes as Imagens_DataBase
 from ttkthemes import ThemedStyle
-import Modulos.Cliente.Func_mei as Func_Mei
+import Modulos.Mei.Func_mei as Func_Mei
 
 def criartelaMEI(frame,DadosUsuario):
     try:
