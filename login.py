@@ -92,9 +92,12 @@ def TelaLogin():
         Usuario = TesteLogin[1]
         PD.DataVix(Usuario)
 
-
+#User
 #Usuario : @teste
 #Senha : teste
+
+#master@datavix.com.br , 1234
+#admin@datavix.com.br , 1234
 
 TelaLogin()
 
