@@ -381,3 +381,4 @@ def gerartexto():
         
 
         #print(f"""{item}.configure = {Listadedados[i]} #{identificadores[i]}""")
+

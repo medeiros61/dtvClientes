@@ -1,7 +1,8 @@
 import customtkinter as ctk
+import Modulos.Database.Meis as dbm
 
 def criarbotoes(Viewer):
-
+    global entry_Nome,entry_Situao,entry_Identificao,entry_CNPJ,entry_Tributao,entry_Data_abertura_,entry_Prefeitura,entry_Login,entry_Senha,entry_Pendncia_de_Recolhimentos,entry_Entrega_de_DAS_Mensal,entry_E_mail,entry_Pendncias,entry_Observaes,entry_CPF,entry_Cdigo_de_Acesso,entry_Senha_GOV,entry_Nvel_GOV,entry_Endereo,entry_Inscrio_Estadual,entry_Inscrio_Municipal,entry_Certificado_Digital,entry_Modelo_Datavix,entry_Homologado___Sindicato,entry_Vencimento_,entry_Ano,entry_Faturamento
 
     label_Nome = ctk.CTkLabel(Viewer.tab("Empresa"), text="Nome")
     entry_Nome = ctk.CTkEntry(Viewer.tab("Empresa"))
@@ -197,4 +198,36 @@ def criarbotoes(Viewer):
 
     label_Observaes.grid(row=2, column=0, padx=10, pady=5, sticky="nsew")
     entry_Observaes.grid(row=2, column=1, padx=10, pady=5, sticky="nsew")
+
+
+def Importardados(idcliente):
+    Listadedados, identificadores,qr = dbm.getmeidata_toEdit(idcliente)
+        
+    entry_Nome.insert(0,Listadedados[0]) # Campo id do banco de dados
+    entry_Situao.insert(0,Listadedados[1]) # Campo mei_id do banco de dados
+    entry_Identificao.insert(0,Listadedados[2]) # Campo situacao do banco de dados
+    entry_CNPJ.insert(0,Listadedados[3]) # Campo nome do banco de dados
+    entry_Tributao.insert(0,Listadedados[4]) # Campo identificacao do banco de dados
+    entry_Data_abertura_.insert(0,Listadedados[5]) # Campo cnpj do banco de dados
+    entry_Prefeitura.insert(0,Listadedados[6]) # Campo tributacao do banco de dados
+    entry_Login.insert(0,Listadedados[7]) # Campo data_abertura do banco de dados
+    entry_Senha.insert(0,"")
+    entry_Pendncia_de_Recolhimentos.insert(0,Listadedados[8]) # Campo prefeitura do banco de dados
+    entry_Entrega_de_DAS_Mensal.insert(0,Listadedados[9]) # Campo login do banco de dados
+    entry_E_mail.insert(0,Listadedados[10]) # Campo senha do banco de dados
+    entry_Pendncias.insert(0,Listadedados[11]) # Campo pendencia_recolhimentos do banco de dados
+    entry_Observaes.insert(0,Listadedados[12]) # Campo entrega_das_mensal do banco de dados
+    entry_CPF.insert(0,Listadedados[13]) # Campo pendencias do banco de dados
+    entry_Cdigo_de_Acesso.insert(0,Listadedados[14]) # Campo email do banco de dados
+    entry_Senha_GOV.insert(0,Listadedados[15]) # Campo pendencia do banco de dados
+    entry_Nvel_GOV.insert(0,Listadedados[16]) # Campo observacoes do banco de dados
+    entry_Endereo.insert(0,Listadedados[17]) # Campo cpf do banco de dados
+    entry_Inscrio_Estadual.insert(0,Listadedados[18]) # Campo codigo_acesso do banco de dados
+    entry_Inscrio_Municipal.insert(0,Listadedados[19]) # Campo senha_gov do banco de dados
+    entry_Certificado_Digital.insert(0,Listadedados[20]) # Campo nivel_gov do banco de dados
+    entry_Modelo_Datavix.insert(0,Listadedados[21]) # Campo endereco do banco de dados
+    entry_Homologado___Sindicato.insert(0,Listadedados[22]) # Campo inscricao_estadual do banco de dados
+    entry_Vencimento_.insert(0,Listadedados[23]) # Campo inscricao_municipal do banco de dados
+    entry_Ano.insert(0,Listadedados[24]) # Campo certificado_digital do banco de dados
+    entry_Faturamento.insert(0,Listadedados[25]) # Campo modelo_datavix do banco de dados
 
