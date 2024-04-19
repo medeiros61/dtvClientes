@@ -141,17 +141,15 @@ def getmeidata_toEdit(IDempresa):
             results_list = list(results)
 
             # results_list[7] representa a coluna "ativo" na consulta SQL
-            botões_yesornot = [25]
+            botões_yesornot = [2,24]
             for item in botões_yesornot:
                 if results_list[item] == 1:
                     results_list[item] = "SIM"
                 else:
                     results_list[item] = "NÃO"
 
-            if results_list[9]:
-                    valor = results_list[9]
-                    valor = valor.replace("[","").replace("]","")
-                    results_list[9] = valor
+      
+            
             
             # Convertendo de volta para tupla, se necessário
             results = tuple(results_list)
@@ -225,18 +223,35 @@ def gerartexto():
         ]
     for i, item in enumerate(Variaveis):
         num=i
-        if i >8:
-            num -=1
-        if i >26:
-            num -=6    
-        if i==8 or (i>26 and i<32):
+        if i >= 0 and i < 14: 
+            num +=2
+        if i == 0:
+            num =3  
+
+        if i == 1:
+            num =2
+          
+
+        if i == 11:
+            num =14   
+        if i == 12:
+            num =13   
+        if i == 13:
+            num =16   
+        if i >= 14:
+            num +=3 
+
+        print(f"""\n{item}.delete(0, 'end')""")
+        if i==99 or (i>999 and i<9999):
             print(f"""{item}.insert(0,"")""")
             #print(f"""{item}=""")
         else:    
             print(f"""{item}.insert(0,Listadedados[{num}]) # Campo {qr[num]} do banco de dados""")#
+            
             
             #print(f"""{item}={identificadores[num]}""")#
         
 
         #print(f"""{item}.configure = {Listadedados[i]} #{identificadores[i]}""")
 
+#gerartexto()

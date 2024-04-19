@@ -4,6 +4,10 @@ import Modulos.Database.Meis as dbm
 def criarbotoes(Viewer):
     global entry_Nome,entry_Situao,entry_Identificao,entry_CNPJ,entry_Tributao,entry_Data_abertura_,entry_Prefeitura,entry_Login,entry_Senha,entry_Pendncia_de_Recolhimentos,entry_Entrega_de_DAS_Mensal,entry_E_mail,entry_Pendncias,entry_Observaes,entry_CPF,entry_Cdigo_de_Acesso,entry_Senha_GOV,entry_Nvel_GOV,entry_Endereo,entry_Inscrio_Estadual,entry_Inscrio_Municipal,entry_Certificado_Digital,entry_Modelo_Datavix,entry_Homologado___Sindicato,entry_Vencimento_,entry_Ano,entry_Faturamento
 
+    yes_or_not = [
+        "SIM","NÃO"
+    ]
+
     label_Nome = ctk.CTkLabel(Viewer.tab("Empresa"), text="Nome")
     entry_Nome = ctk.CTkEntry(Viewer.tab("Empresa"))
 
@@ -11,8 +15,8 @@ def criarbotoes(Viewer):
     entry_Nome.grid(row=0, column=1, padx=10, pady=5, sticky="nsew")
 
 
-    label_Situao = ctk.CTkLabel(Viewer.tab("Empresa"), text="Situação")
-    entry_Situao = ctk.CTkEntry(Viewer.tab("Empresa"))
+    label_Situao = ctk.CTkLabel(Viewer.tab("Empresa"), text="Ativo")
+    entry_Situao = ctk.CTkComboBox(Viewer.tab("Empresa"),values=yes_or_not)
 
     label_Situao.grid(row=1, column=0, padx=10, pady=5, sticky="nsew")
     entry_Situao.grid(row=1, column=1, padx=10, pady=5, sticky="nsew")
@@ -152,7 +156,7 @@ def criarbotoes(Viewer):
 
 
     label_Certificado_Digital = ctk.CTkLabel(Viewer.tab("Empresa"), text="Certificado Digital")
-    entry_Certificado_Digital = ctk.CTkEntry(Viewer.tab("Empresa"))
+    entry_Certificado_Digital = ctk.CTkComboBox(Viewer.tab("Empresa"),values=yes_or_not)
 
     label_Certificado_Digital.grid(row=11, column=2, padx=10, pady=5, sticky="nsew")
     entry_Certificado_Digital.grid(row=11, column=3, padx=10, pady=5, sticky="nsew")
@@ -179,11 +183,11 @@ def criarbotoes(Viewer):
     entry_Vencimento_.grid(row=2, column=1, padx=10, pady=5, sticky="nsew")
 
 
-    label_Ano = ctk.CTkLabel(Viewer.tab("DASN"), text="Ano")
-    entry_Ano = ctk.CTkEntry(Viewer.tab("DASN"))
+    label_Ano_dasn = ctk.CTkLabel(Viewer.tab("DASN"), text="Ano")
+    entry_Ano_dasn= ctk.CTkEntry(Viewer.tab("DASN"))
 
-    label_Ano.grid(row=0, column=0, padx=10, pady=5, sticky="nsew")
-    entry_Ano.grid(row=0, column=1, padx=10, pady=5, sticky="nsew")
+    label_Ano_dasn.grid(row=0, column=0, padx=10, pady=5, sticky="nsew")
+    entry_Ano_dasn.grid(row=0, column=1, padx=10, pady=5, sticky="nsew")
 
 
     label_Faturamento = ctk.CTkLabel(Viewer.tab("DASN"), text="Faturamento")
@@ -193,41 +197,97 @@ def criarbotoes(Viewer):
     entry_Faturamento.grid(row=1, column=1, padx=10, pady=5, sticky="nsew")
 
 
-    label_Observaes = ctk.CTkLabel(Viewer.tab("DASN"), text="Observações")
-    entry_Observaes = ctk.CTkEntry(Viewer.tab("DASN"))
+    label_Observaes_dasn = ctk.CTkLabel(Viewer.tab("DASN"), text="Observações")
+    entry_Observaes_dasn = ctk.CTkEntry(Viewer.tab("DASN"))
 
-    label_Observaes.grid(row=2, column=0, padx=10, pady=5, sticky="nsew")
-    entry_Observaes.grid(row=2, column=1, padx=10, pady=5, sticky="nsew")
+    label_Observaes_dasn.grid(row=2, column=0, padx=10, pady=5, sticky="nsew")
+    entry_Observaes_dasn.grid(row=2, column=1, padx=10, pady=5, sticky="nsew")
 
 
 def Importardados(idcliente):
     Listadedados, identificadores,qr = dbm.getmeidata_toEdit(idcliente)
-        
-    entry_Nome.insert(0,Listadedados[0]) # Campo id do banco de dados
-    entry_Situao.insert(0,Listadedados[1]) # Campo mei_id do banco de dados
-    entry_Identificao.insert(0,Listadedados[2]) # Campo situacao do banco de dados
-    entry_CNPJ.insert(0,Listadedados[3]) # Campo nome do banco de dados
-    entry_Tributao.insert(0,Listadedados[4]) # Campo identificacao do banco de dados
-    entry_Data_abertura_.insert(0,Listadedados[5]) # Campo cnpj do banco de dados
-    entry_Prefeitura.insert(0,Listadedados[6]) # Campo tributacao do banco de dados
-    entry_Login.insert(0,Listadedados[7]) # Campo data_abertura do banco de dados
-    entry_Senha.insert(0,"")
-    entry_Pendncia_de_Recolhimentos.insert(0,Listadedados[8]) # Campo prefeitura do banco de dados
-    entry_Entrega_de_DAS_Mensal.insert(0,Listadedados[9]) # Campo login do banco de dados
-    entry_E_mail.insert(0,Listadedados[10]) # Campo senha do banco de dados
-    entry_Pendncias.insert(0,Listadedados[11]) # Campo pendencia_recolhimentos do banco de dados
-    entry_Observaes.insert(0,Listadedados[12]) # Campo entrega_das_mensal do banco de dados
-    entry_CPF.insert(0,Listadedados[13]) # Campo pendencias do banco de dados
-    entry_Cdigo_de_Acesso.insert(0,Listadedados[14]) # Campo email do banco de dados
-    entry_Senha_GOV.insert(0,Listadedados[15]) # Campo pendencia do banco de dados
-    entry_Nvel_GOV.insert(0,Listadedados[16]) # Campo observacoes do banco de dados
-    entry_Endereo.insert(0,Listadedados[17]) # Campo cpf do banco de dados
-    entry_Inscrio_Estadual.insert(0,Listadedados[18]) # Campo codigo_acesso do banco de dados
-    entry_Inscrio_Municipal.insert(0,Listadedados[19]) # Campo senha_gov do banco de dados
-    entry_Certificado_Digital.insert(0,Listadedados[20]) # Campo nivel_gov do banco de dados
-    entry_Modelo_Datavix.insert(0,Listadedados[21]) # Campo endereco do banco de dados
-    entry_Homologado___Sindicato.insert(0,Listadedados[22]) # Campo inscricao_estadual do banco de dados
-    entry_Vencimento_.insert(0,Listadedados[23]) # Campo inscricao_municipal do banco de dados
-    entry_Ano.insert(0,Listadedados[24]) # Campo certificado_digital do banco de dados
-    entry_Faturamento.insert(0,Listadedados[25]) # Campo modelo_datavix do banco de dados
+    
 
+    entry_Nome.delete(0, 'end')
+    entry_Nome.insert(0,Listadedados[3]) # Campo nome do banco de dados
+
+    entry_Situao.delete(0, 'end')
+    entry_Situao.insert(0,Listadedados[2]) # Campo situacao do banco de dados
+
+    entry_Identificao.delete(0, 'end')
+    entry_Identificao.insert(0,Listadedados[4]) # Campo identificacao do banco de dados
+
+    entry_CNPJ.delete(0, 'end')
+    entry_CNPJ.insert(0,Listadedados[5]) # Campo cnpj do banco de dados
+
+    entry_Tributao.delete(0, 'end')
+    entry_Tributao.insert(0,Listadedados[6]) # Campo tributacao do banco de dados
+
+    entry_Data_abertura_.delete(0, 'end')
+    entry_Data_abertura_.insert(0,Listadedados[7]) # Campo data_abertura do banco de dados
+
+    entry_Prefeitura.delete(0, 'end')
+    entry_Prefeitura.insert(0,Listadedados[8]) # Campo prefeitura do banco de dados
+
+    entry_Login.delete(0, 'end')
+    entry_Login.insert(0,Listadedados[9]) # Campo login do banco de dados
+
+    entry_Senha.delete(0, 'end')
+    entry_Senha.insert(0,Listadedados[10]) # Campo senha do banco de dados
+
+    entry_Pendncia_de_Recolhimentos.delete(0, 'end')
+    entry_Pendncia_de_Recolhimentos.insert(0,Listadedados[11]) # Campo pendencia_recolhimentos do banco de dados
+
+    entry_Entrega_de_DAS_Mensal.delete(0, 'end')
+    entry_Entrega_de_DAS_Mensal.insert(0,Listadedados[12]) # Campo entrega_das_mensal do banco de dados
+
+    entry_E_mail.delete(0, 'end')
+    entry_E_mail.insert(0,Listadedados[14]) # Campo email do banco de dados
+
+    entry_Pendncias.delete(0, 'end')
+    entry_Pendncias.insert(0,Listadedados[13]) # Campo pendencias do banco de dados
+
+    entry_Observaes.delete(0, 'end')
+    entry_Observaes.insert(0,Listadedados[16]) # Campo observacoes do banco de dados
+
+    entry_CPF.delete(0, 'end')
+    entry_CPF.insert(0,Listadedados[17]) # Campo cpf do banco de dados
+
+    entry_Cdigo_de_Acesso.delete(0, 'end')
+    entry_Cdigo_de_Acesso.insert(0,Listadedados[18]) # Campo codigo_acesso do banco de dados
+
+    entry_Senha_GOV.delete(0, 'end')
+    entry_Senha_GOV.insert(0,Listadedados[19]) # Campo senha_gov do banco de dados
+
+    entry_Nvel_GOV.delete(0, 'end')
+    entry_Nvel_GOV.insert(0,Listadedados[20]) # Campo nivel_gov do banco de dados
+
+    entry_Endereo.delete(0, 'end')
+    entry_Endereo.insert(0,Listadedados[21]) # Campo endereco do banco de dados
+
+    entry_Inscrio_Estadual.delete(0, 'end')
+    entry_Inscrio_Estadual.insert(0,Listadedados[22]) # Campo inscricao_estadual do banco de dados
+
+    entry_Inscrio_Municipal.delete(0, 'end')
+    entry_Inscrio_Municipal.insert(0,Listadedados[23]) # Campo inscricao_municipal do banco de dados
+
+    entry_Certificado_Digital.delete(0, 'end')
+    entry_Certificado_Digital.insert(0,Listadedados[24]) # Campo certificado_digital do banco de dados
+
+    entry_Modelo_Datavix.delete(0, 'end')
+    entry_Modelo_Datavix.insert(0,Listadedados[25]) # Campo modelo_datavix do banco de dados
+
+    entry_Homologado___Sindicato.delete(0, 'end')
+    entry_Homologado___Sindicato.insert(0,Listadedados[26]) # Campo homologado_sindicato do banco de dados
+
+    entry_Vencimento_.delete(0, 'end')
+    entry_Vencimento_.insert(0,Listadedados[27]) # Campo vencimento do banco de dados
+
+    #entry_Ano_dasn.delete(0, 'end')
+    #entry_Ano_dasn.insert(0,Listadedados[28]) # Campo created_at do banco de dados
+
+    #entry_Faturamento.delete(0, 'end')
+    #entry_Faturamento.insert(0,Listadedados[29]) # Campo updated_at do banco de dados
+
+    #entry_Observaes_dasn.delete(0, 'end')
+    #entry_Observaes_dasn.insert(0,Listadedados[29]) # Campo updated_at do banco de dados
