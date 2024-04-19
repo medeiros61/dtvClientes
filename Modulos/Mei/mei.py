@@ -5,6 +5,7 @@ import Modulos.Database.Meis as dbmei
 import Modulos.imagens.ImagensClientes as Imagens_DataBase
 from ttkthemes import ThemedStyle
 import Modulos.Mei.Func_mei as Func_Mei
+import Modulos.Mei.Mei_V_E as Tela_Edit_C 
 
 def criartelaMEI(frame,DadosUsuario):
     try:
@@ -86,6 +87,14 @@ def parametrosinicias(frame):
     #Frame FILTRO E LISTA 
     master_frame = ctk.CTkFrame(master=frame, width=900, height=480, fg_color=("#808080"))
     master_frame.pack(side=TOP, fill = X)
+
+    #FRAME PARA VIZUALIZAR E EDITAR
+    frame_MEI_E_V = ctk.CTkFrame(master=frame, width=900, height=580, fg_color=("#808080"))
+
+    frame_edição_dados = frame_MEI_E_V    
+    Dadosparateladeedição = frame_edição_dados,master_frame 
+
+    Tela_Edit_C.parametrosinicias(frame_edição_dados,master_frame)
 
     #Listagem de MEI
     list_MEI_frame = ctk.CTkFrame(master=master_frame, width=900, height=480, fg_color=("#808080"))
@@ -217,7 +226,7 @@ def parametrosinicias(frame):
     bt_add_MEI_Parceira.grid(row=1, column=0,  padx=5, pady=1,sticky="nsew")
 
     logo_editar = PhotoImage(file=Caminho_Logo_Edit).subsample(25, 25)
-    bt_Editar_MEI = ctk.CTkButton(master=bt_action_frame,image=logo_editar, text="Editar",command=lambda: Func_Mei.editar_MEI(TreeviewMEI))
+    bt_Editar_MEI = ctk.CTkButton(master=bt_action_frame,image=logo_editar, text="Editar",command=lambda: Func_Mei.editar_MEI(TreeviewMEI,Dadosparateladeedição))
     bt_Editar_MEI.grid(row=0, column=2,   padx=5, pady=5,sticky="nsew", rowspan = 2)
     
     logo_excluir = PhotoImage(file=Caminho_Logo_Rem).subsample(25, 25)

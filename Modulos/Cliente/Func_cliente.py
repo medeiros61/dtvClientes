@@ -1,5 +1,5 @@
 from tkinter import *
-import Modulos.Cliente.Botões_Ediçao as btedit
+import Modulos.Cliente.Botoes_Edicao as btedit
 #FUNÇÃO PARA ADICIONAR
 def Adicionar_cliente():
 
@@ -24,7 +24,9 @@ def excluir_cliente(TreeView):
                 print(f'Excluindo cliente: [id:{id}] {nome_cliente}')
             else:
                 print("Nenhum cliente selecionado.")
-    #FUNÇÃO PARA EDITAR
+
+
+#FUNÇÃO PARA EDITAR
 def editar_cliente(TreeView,Dadosparateladeedição):
         # Obtém a seleção da TreeView
         selecao = TreeView.selection()
@@ -46,7 +48,9 @@ def editar_cliente(TreeView,Dadosparateladeedição):
                 print(f'Editando cliente: [id:{id}] {nome_cliente}')
             else:
                 print("Nenhum cliente selecionado.")
-    #FUNÇÃO PARA COMENTAR
+
+
+#FUNÇÃO PARA COMENTAR
 def comentar_cliente(TreeView):
         # Obtém a seleção da TreeView
         selecao = TreeView.selection()
