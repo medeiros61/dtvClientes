@@ -2,17 +2,21 @@ import customtkinter as ctk
 import Modulos.Database.Meis as dbm
 
 def criarbotoes(Viewer):
-    global entry_Nome,entry_Situao,entry_Identificao,entry_CNPJ,entry_Tributao,entry_Data_abertura_,entry_Prefeitura,entry_Login,entry_Senha,entry_Pendncia_de_Recolhimentos,entry_Entrega_de_DAS_Mensal,entry_E_mail,entry_Pendncias,entry_Observaes,entry_CPF,entry_Cdigo_de_Acesso,entry_Senha_GOV,entry_Nvel_GOV,entry_Endereo,entry_Inscrio_Estadual,entry_Inscrio_Municipal,entry_Certificado_Digital,entry_Modelo_Datavix,entry_Homologado___Sindicato,entry_Vencimento_,entry_Ano,entry_Faturamento
+    global Contratante,id,entry_Nome,entry_Situao,entry_Identificao,entry_CNPJ,entry_Tributao,entry_Data_abertura_,entry_Prefeitura,entry_Login,entry_Senha,entry_Pendncia_de_Recolhimentos,entry_Entrega_de_DAS_Mensal,entry_E_mail,entry_Pendncias,entry_Observaes,entry_CPF,entry_Cdigo_de_Acesso,entry_Senha_GOV,entry_Nvel_GOV,entry_Endereo,entry_Inscrio_Estadual,entry_Inscrio_Municipal,entry_Certificado_Digital,entry_Modelo_Datavix,entry_Homologado___Sindicato,entry_Vencimento_,entry_Ano,entry_Faturamento
 
     yes_or_not = [
         "SIM","NÃO"
     ]
 
+    Contratante = ctk.CTkLabel(Viewer.tab("Empresa"), text="")
+    id = ctk.CTkLabel(Viewer.tab("Empresa"), text="ID MEI : ")
+    id.grid(row=0, column=1, padx=10, pady=5, sticky="nsew")
+
     label_Nome = ctk.CTkLabel(Viewer.tab("Empresa"), text="Nome")
     entry_Nome = ctk.CTkEntry(Viewer.tab("Empresa"))
 
-    label_Nome.grid(row=0, column=0, padx=10, pady=5, sticky="nsew")
-    entry_Nome.grid(row=0, column=1, padx=10, pady=5, sticky="nsew")
+    label_Nome.grid(row=2, column=0, padx=10, pady=5, sticky="nsew")
+    entry_Nome.grid(row=2, column=1, padx=10, pady=5, sticky="nsew")
 
 
     label_Situao = ctk.CTkLabel(Viewer.tab("Empresa"), text="Ativo")
@@ -207,7 +211,9 @@ def criarbotoes(Viewer):
 def Importardados(idcliente):
     Listadedados, identificadores,qr = dbm.getmeidata_toEdit(idcliente)
     
-
+    if Listadedados[1]:
+        Contratante.grid(row=0, column=0, padx=10, pady=5, sticky="nsew")
+        Contratante.configure(text=f"Contratante({Listadedados[1]})")
     entry_Nome.delete(0, 'end')
     entry_Nome.insert(0,Listadedados[3]) # Campo nome do banco de dados
 
