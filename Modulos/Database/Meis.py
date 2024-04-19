@@ -165,6 +165,8 @@ def getmeidata_toEdit(IDempresa):
                 Listadeidentificação.append(identificador)
                 if item == None:
                     item="N/A"
+                if item == '':
+                    item="N/A"    
                 #try:
                 if isinstance(item, date):    
                         # Formatando a data para "DD/MM/AAAA"

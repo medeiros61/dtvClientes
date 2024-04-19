@@ -211,8 +211,8 @@ def Importardados(idcliente):
     entry_Nome.delete(0, 'end')
     entry_Nome.insert(0,Listadedados[3]) # Campo nome do banco de dados
 
-    entry_Situao.delete(0, 'end')
-    entry_Situao.insert(0,Listadedados[2]) # Campo situacao do banco de dados
+
+    entry_Situao.set(Listadedados[2]) # Campo situacao do banco de dados
 
     entry_Identificao.delete(0, 'end')
     entry_Identificao.insert(0,Listadedados[4]) # Campo identificacao do banco de dados
@@ -271,8 +271,8 @@ def Importardados(idcliente):
     entry_Inscrio_Municipal.delete(0, 'end')
     entry_Inscrio_Municipal.insert(0,Listadedados[23]) # Campo inscricao_municipal do banco de dados
 
-    entry_Certificado_Digital.delete(0, 'end')
-    entry_Certificado_Digital.insert(0,Listadedados[24]) # Campo certificado_digital do banco de dados
+
+    entry_Certificado_Digital.set(Listadedados[24]) # Campo certificado_digital do banco de dados
 
     entry_Modelo_Datavix.delete(0, 'end')
     entry_Modelo_Datavix.insert(0,Listadedados[25]) # Campo modelo_datavix do banco de dados
