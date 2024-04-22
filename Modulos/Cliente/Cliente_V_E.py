@@ -40,28 +40,30 @@ def parametrosinicias(frame,Frame_atual):
     tabview.grid(row=1, column=0,columnspan=6, padx=5, pady=5, sticky="nsew")
     
     tabview.add("Cliente")
-    tabview.tab("Cliente").grid_columnconfigure(0, weight=1) 
+    #tabview.tab("Cliente").grid_columnconfigure(0, weight=1) 
     
     tabview.add("Gerais")
-    tabview.tab("Gerais").grid_columnconfigure(0, weight=1)  
+    #tabview.tab("Gerais").grid_columnconfigure(0, weight=1)  
 
     tabview.add("Federais")
-    tabview.tab("Federais").grid_columnconfigure(0, weight=1)   
+    #tabview.tab("Federais").grid_columnconfigure(0, weight=1)   
 
     tabview.add("Estaduais")
-    tabview.tab("Estaduais").grid_columnconfigure(0, weight=1)   
+    #tabview.tab("Estaduais").grid_columnconfigure(0, weight=1)   
     
     tabview.add("Municipais")
-    tabview.tab("Municipais").grid_columnconfigure(0, weight=1)   
+    #tabview.tab("Municipais").grid_columnconfigure(0, weight=1)   
 
     tabview.add("Societário")
-    tabview.tab("Societário").grid_columnconfigure(0, weight=1)   
+    #tabview.tab("Societário").grid_columnconfigure(0, weight=1)   
 
     tabview.add("Departamento pessoal")
-    tabview.tab("Departamento pessoal").grid_columnconfigure(0, weight=1)   
+    #tabview.tab("Departamento pessoal").grid_columnconfigure(0, weight=1)   
 
     tabview.add("BPO")
-    tabview.tab("BPO").grid_columnconfigure(0, weight=1)   
+    #tabview.tab("BPO").grid_columnconfigure(0, weight=1)   
     
-    bts.criarbotoes(tabview)
+    Caminho_Logo_Add,Caminho_Logo_Edit,Caminho_Logo_Rem ,Caminho_Logo_Comt,Caminho_Logo_Excel =Imagens_DataBase.baixarimagemPgclientes()  
+
+    bts.criarbotoes(tabview,Caminho_Logo_Add,Caminho_Logo_Rem)
     

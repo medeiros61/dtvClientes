@@ -93,7 +93,7 @@ def TelaLogin():
         PD.DataVix(Usuario)
 
 #User
-#Usuario : @teste
+#Usuario : t@teste
 #Senha : teste
 #pip install openpyxl,pandas,requests 
 
