@@ -1,0 +1,13 @@
+__pycache__/
+Database/__pycache__/
+Modulos/Database/__pycache__/
+Modulos/Cliente/__pycache__/
+imagens/__pycache__/
+Modulos/Cliente/CriarCodigoBotões.py
+.gitignore
+Modulos/Cliente/TESTE.PY
+Modulos/Cliente/Navegador.PY
+Modulos/Cliente/text.py
+Modulos/Mei/CriarBotões.py
+build/
+login.spec
