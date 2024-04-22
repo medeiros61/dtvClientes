@@ -309,57 +309,57 @@ def criarbotoes(Viewer):
 #------------------------------Municipais
 
     label_Inscrio_municipal = ctk.CTkLabel(Viewer.tab("Municipais"), text="Inscrição municipal")
-    entry_Inscrio_municipal = ctk.CTkEntry(Viewer.tab("Municipais"), width=200)
+    entry_Inscrio_municipal = ctk.CTkEntry(Viewer.tab("Municipais"), width=100)
 
-    label_Inscrio_municipal.grid(row=0, column=0, padx=10, pady=15, sticky="nsew")
-    entry_Inscrio_municipal.grid(row=0, column=1, padx=10, pady=15, sticky="nsew")
+    label_Inscrio_municipal.grid(row=0, column=0, padx=10, pady=15, sticky="w")
+    entry_Inscrio_municipal.grid(row=1, column=0, padx=10, pady=15, sticky="nsew")
 
 
     label_Site = ctk.CTkLabel(Viewer.tab("Municipais"), text="Site")
     entry_Site = ctk.CTkEntry(Viewer.tab("Municipais"), width=50)
 
-    label_Site.grid(row=1, column=0, padx=10, pady=15, sticky="nsew")
-    entry_Site.grid(row=1, column=1, padx=10, pady=15, sticky="nsew")
+    label_Site.grid(row=2, column=0, padx=10, pady=1, sticky="w")
+    entry_Site.grid(row=3, column=0, padx=10, pady=15, sticky="nsew")
 
 
     label_Login = ctk.CTkLabel(Viewer.tab("Municipais"), text="Login")
     entry_Login = ctk.CTkEntry(Viewer.tab("Municipais"), width=50)
 
-    label_Login.grid(row=2, column=0, padx=10, pady=15, sticky="nsew")
-    entry_Login.grid(row=2, column=1, padx=10, pady=15, sticky="nsew")
+    label_Login.grid(row=4, column=0, padx=10, pady=1, sticky="w")
+    entry_Login.grid(row=5, column=0, padx=10, pady=15, sticky="nsew")
 
 
     label_Senha = ctk.CTkLabel(Viewer.tab("Municipais"), text="Senha")
     entry_Senha = ctk.CTkEntry(Viewer.tab("Municipais"), width=50)
 
-    label_Senha.grid(row=3, column=0, padx=10, pady=15, sticky="nsew")
-    entry_Senha.grid(row=3, column=1, padx=10, pady=15, sticky="nsew")
+    label_Senha.grid(row=6, column=0, padx=10, pady=1, sticky="w")
+    entry_Senha.grid(row=7, column=0, padx=10, pady=15, sticky="nsew")
 
 
     label_Demais_senhas = ctk.CTkLabel(Viewer.tab("Municipais"), text="Demais senhas")
-    entry_Demais_senhas = ctk.CTkEntry(Viewer.tab("Municipais"), width=50)
+    entry_Demais_senhas = ctk.CTkEntry(Viewer.tab("Municipais"), width=300)
 
-    label_Demais_senhas.grid(row=4, column=0, padx=10, pady=15, sticky="nsew")
-    entry_Demais_senhas.grid(row=4, column=1, padx=10, pady=15, sticky="nsew")
+    label_Demais_senhas.grid(row=0, column=1, padx=10, pady=1, sticky="w")
+    entry_Demais_senhas.grid(row=1, column=1, padx=10, pady=15, sticky="nsew")
 
 
     label_Senha_Abertura_Processos = ctk.CTkLabel(Viewer.tab("Municipais"), text="Senha Abertura Processos")
     entry_Senha_Abertura_Processos = ctk.CTkEntry(Viewer.tab("Municipais"), width=50)
 
-    label_Senha_Abertura_Processos.grid(row=5, column=0, padx=10, pady=15, sticky="nsew")
-    entry_Senha_Abertura_Processos.grid(row=5, column=1, padx=10, pady=15, sticky="nsew")
+    label_Senha_Abertura_Processos.grid(row=2, column=1, padx=10, pady=1, sticky="w")
+    entry_Senha_Abertura_Processos.grid(row=3, column=1, padx=10, pady=15, sticky="nsew")
 
 
     label_Observaes = ctk.CTkLabel(Viewer.tab("Municipais"), text="Observações")
     entry_Observaes = ctk.CTkEntry(Viewer.tab("Municipais"), width=50)
 
-    label_Observaes.grid(row=6, column=0, padx=10, pady=15, sticky="nsew")
-    entry_Observaes.grid(row=6, column=1, padx=10, pady=15, sticky="nsew")
+    label_Observaes.grid(row=4, column=1, padx=10, pady=1, sticky="w")
+    entry_Observaes.grid(row=5, column=1, padx=10, pady=15, sticky="nsew")
 
 #------------------------------Societario
 
     label_Alvara_de_funcionamento = ctk.CTkLabel(Viewer.tab("Societário"), text="Alvara de funcionamento")
-    entry_Alvara_de_funcionamento = ctk.CTkComboBox(Viewer.tab("Societário"), width=50,values=yes_or_not)
+    entry_Alvara_de_funcionamento = ctk.CTkComboBox(Viewer.tab("Societário"), width=300,values=yes_or_not)
 
     label_Alvara_de_funcionamento.grid(row=0, column=0, padx=10, pady=5, sticky="nsew")
     entry_Alvara_de_funcionamento.grid(row=0, column=1, padx=10, pady=5, sticky="nsew")
@@ -431,86 +431,86 @@ def criarbotoes(Viewer):
     label_Observaes_gerais_Societario = ctk.CTkLabel(Viewer.tab("Societário"), text="Observações gerais")
     entry_Observaes_gerais_Societario = ctk.CTkEntry(Viewer.tab("Societário"), width=50)
 
-    label_Observaes_gerais_Societario.grid(row=0, column=2, padx=10, pady=5, sticky="nsew")
-    entry_Observaes_gerais_Societario.grid(row=0, column=3, padx=10, pady=5, sticky="nsew")
+    label_Observaes_gerais_Societario.grid(row=10, column=0, padx=10, pady=5, sticky="nsew")
+    entry_Observaes_gerais_Societario.grid(row=10, column=1, padx=10, pady=5, sticky="nsew")
 
 #------------------------------DP Pessoal
 
     label_Folha_de_pagto = ctk.CTkLabel(Viewer.tab("Departamento pessoal"), text="Folha de pagto")
     entry_Folha_de_pagto = ctk.CTkComboBox(Viewer.tab("Departamento pessoal"), width=50,values=yes_or_not)
 
-    label_Folha_de_pagto.grid(row=0, column=0, padx=10, pady=5, sticky="nsew")
-    entry_Folha_de_pagto.grid(row=0, column=1, padx=10, pady=5, sticky="nsew")
+    label_Folha_de_pagto.grid(row=0, column=0, padx=10, pady=5, sticky="w")
+    entry_Folha_de_pagto.grid(row=1, column=0, padx=10, pady=5, sticky="nsew")
 
 
     label_Quantidade_de_funcionrios = ctk.CTkLabel(Viewer.tab("Departamento pessoal"), text="Quantidade de funcionários")
     entry_Quantidade_de_funcionrios = ctk.CTkEntry(Viewer.tab("Departamento pessoal"), width=50)
 
-    label_Quantidade_de_funcionrios.grid(row=1, column=0, padx=10, pady=5, sticky="nsew")
-    entry_Quantidade_de_funcionrios.grid(row=1, column=1, padx=10, pady=5, sticky="nsew")
+    label_Quantidade_de_funcionrios.grid(row=2, column=0, padx=10, pady=5, sticky="w")
+    entry_Quantidade_de_funcionrios.grid(row=3, column=0, padx=10, pady=5, sticky="nsew")
 
 
     label_Prolabore = ctk.CTkLabel(Viewer.tab("Departamento pessoal"), text="Prolabore")
     entry_Prolabore = ctk.CTkComboBox(Viewer.tab("Departamento pessoal"), width=50,values=yes_or_not)
 
-    label_Prolabore.grid(row=2, column=0, padx=10, pady=5, sticky="nsew")
-    entry_Prolabore.grid(row=2, column=1, padx=10, pady=5, sticky="nsew")
+    label_Prolabore.grid(row=4, column=0, padx=10, pady=5, sticky="w")
+    entry_Prolabore.grid(row=5, column=0, padx=10, pady=5, sticky="nsew")
 
 
     label_Quantidade_de_scios = ctk.CTkLabel(Viewer.tab("Departamento pessoal"), text="Quantidade de sócios")
     entry_Quantidade_de_scios = ctk.CTkEntry(Viewer.tab("Departamento pessoal"), width=50)
 
-    label_Quantidade_de_scios.grid(row=3, column=0, padx=10, pady=5, sticky="nsew")
-    entry_Quantidade_de_scios.grid(row=3, column=1, padx=10, pady=5, sticky="nsew")
+    label_Quantidade_de_scios.grid(row=6, column=0, padx=10, pady=5, sticky="w")
+    entry_Quantidade_de_scios.grid(row=7, column=0, padx=10, pady=5, sticky="nsew")
 
 
     label_Esocial_usurio = ctk.CTkLabel(Viewer.tab("Departamento pessoal"), text="Esocial usuário")
     entry_Esocial_usurio = ctk.CTkEntry(Viewer.tab("Departamento pessoal"), width=50)
 
-    label_Esocial_usurio.grid(row=4, column=0, padx=10, pady=5, sticky="nsew")
-    entry_Esocial_usurio.grid(row=4, column=1, padx=10, pady=5, sticky="nsew")
+    label_Esocial_usurio.grid(row=8, column=0, padx=10, pady=5, sticky="w")
+    entry_Esocial_usurio.grid(row=9, column=0, padx=10, pady=5, sticky="nsew")
 
 
     label_Esocial_senha = ctk.CTkLabel(Viewer.tab("Departamento pessoal"), text="Esocial senha")
     entry_Esocial_senha = ctk.CTkEntry(Viewer.tab("Departamento pessoal"), width=50)
 
-    label_Esocial_senha.grid(row=5, column=0, padx=10, pady=5, sticky="nsew")
-    entry_Esocial_senha.grid(row=5, column=1, padx=10, pady=5, sticky="nsew")
+    label_Esocial_senha.grid(row=10, column=0, padx=10, pady=5, sticky="w")
+    entry_Esocial_senha.grid(row=11, column=0, padx=10, pady=5, sticky="nsew")
 
 
     label_Esocial_cdigo_de_acesso = ctk.CTkLabel(Viewer.tab("Departamento pessoal"), text="Esocial código de acesso")
-    entry_Esocial_cdigo_de_acesso = ctk.CTkEntry(Viewer.tab("Departamento pessoal"), width=50)
+    entry_Esocial_cdigo_de_acesso = ctk.CTkEntry(Viewer.tab("Departamento pessoal"), width=350)
 
-    label_Esocial_cdigo_de_acesso.grid(row=6, column=0, padx=10, pady=5, sticky="nsew")
-    entry_Esocial_cdigo_de_acesso.grid(row=6, column=1, padx=10, pady=5, sticky="nsew")
+    label_Esocial_cdigo_de_acesso.grid(row=0, column=1, padx=10, pady=5, sticky="w")
+    entry_Esocial_cdigo_de_acesso.grid(row=1, column=1, padx=10, pady=5, sticky="nsew")
 
 
     label_FAP_usurio = ctk.CTkLabel(Viewer.tab("Departamento pessoal"), text="FAP usuário")
     entry_FAP_usurio = ctk.CTkEntry(Viewer.tab("Departamento pessoal"), width=50)
 
-    label_FAP_usurio.grid(row=7, column=0, padx=10, pady=5, sticky="nsew")
-    entry_FAP_usurio.grid(row=7, column=1, padx=10, pady=5, sticky="nsew")
+    label_FAP_usurio.grid(row=2, column=1, padx=10, pady=5, sticky="w")
+    entry_FAP_usurio.grid(row=3, column=1, padx=10, pady=5, sticky="nsew")
 
 
     label_FAP_senha = ctk.CTkLabel(Viewer.tab("Departamento pessoal"), text="FAP senha")
     entry_FAP_senha = ctk.CTkEntry(Viewer.tab("Departamento pessoal"), width=50)
 
-    label_FAP_senha.grid(row=8, column=0, padx=10, pady=5, sticky="nsew")
-    entry_FAP_senha.grid(row=8, column=1, padx=10, pady=5, sticky="nsew")
+    label_FAP_senha.grid(row=4, column=1, padx=10, pady=5, sticky="w")
+    entry_FAP_senha.grid(row=5, column=1, padx=10, pady=5, sticky="nsew")
 
 
     label_Empregador_WEB_usurio = ctk.CTkLabel(Viewer.tab("Departamento pessoal"), text="Empregador WEB usuário")
     entry_Empregador_WEB_usurio = ctk.CTkEntry(Viewer.tab("Departamento pessoal"), width=50)
 
-    label_Empregador_WEB_usurio.grid(row=9, column=0, padx=10, pady=5, sticky="nsew")
-    entry_Empregador_WEB_usurio.grid(row=9, column=1, padx=10, pady=5, sticky="nsew")
+    label_Empregador_WEB_usurio.grid(row=6, column=1, padx=10, pady=5, sticky="w")
+    entry_Empregador_WEB_usurio.grid(row=7, column=1, padx=10, pady=5, sticky="nsew")
 
 
     label_Empregador_WEB_senha = ctk.CTkLabel(Viewer.tab("Departamento pessoal"), text="Empregador WEB senha")
     entry_Empregador_WEB_senha = ctk.CTkEntry(Viewer.tab("Departamento pessoal"), width=50)
 
-    label_Empregador_WEB_senha.grid(row=0, column=2, padx=10, pady=5, sticky="nsew")
-    entry_Empregador_WEB_senha.grid(row=0, column=3, padx=10, pady=5, sticky="nsew")
+    label_Empregador_WEB_senha.grid(row=8, column=1, padx=10, pady=5, sticky="w")
+    entry_Empregador_WEB_senha.grid(row=9, column=1, padx=10, pady=5, sticky="nsew")
 
 #------------------------------BPO
 
@@ -518,55 +518,55 @@ def criarbotoes(Viewer):
     entry_Sistema = ctk.CTkEntry(Viewer.tab("BPO"), width=200)
 
     label_Sistema.grid(row=0, column=0, padx=10, pady=15, sticky="nsew")
-    entry_Sistema.grid(row=0, column=1, padx=10, pady=15, sticky="nsew")
+    entry_Sistema.grid(row=1, column=0, padx=10, pady=15, sticky="nsew")
 
 
     label_Site_Bpo = ctk.CTkLabel(Viewer.tab("BPO"), text="Site")
     entry_Site_Bpo = ctk.CTkEntry(Viewer.tab("BPO"), width=50)
 
-    label_Site_Bpo.grid(row=1, column=0, padx=10, pady=15, sticky="nsew")
-    entry_Site_Bpo.grid(row=1, column=1, padx=10, pady=15, sticky="nsew")
+    label_Site_Bpo.grid(row=2, column=0, padx=10, pady=15, sticky="nsew")
+    entry_Site_Bpo.grid(row=3, column=0, padx=10, pady=15, sticky="nsew")
 
 
     label_Usuario = ctk.CTkLabel(Viewer.tab("BPO"), text="Usuário")
     entry_Usurio = ctk.CTkEntry(Viewer.tab("BPO"), width=50)
 
-    label_Usuario.grid(row=2, column=0, padx=10, pady=15, sticky="nsew")
-    entry_Usurio.grid(row=2, column=1, padx=10, pady=15, sticky="nsew")
+    label_Usuario.grid(row=4, column=0, padx=10, pady=15, sticky="nsew")
+    entry_Usurio.grid(row=5, column=0, padx=10, pady=15, sticky="nsew")
 
 
     label_Senha_simples = ctk.CTkLabel(Viewer.tab("BPO"), text="Senha simples")
     entry_Senha_simples = ctk.CTkEntry(Viewer.tab("BPO"), width=50)
 
-    label_Senha_simples.grid(row=3, column=0, padx=10, pady=15, sticky="nsew")
-    entry_Senha_simples.grid(row=3, column=1, padx=10, pady=15, sticky="nsew")
+    label_Senha_simples.grid(row=6, column=0, padx=10, pady=15, sticky="nsew")
+    entry_Senha_simples.grid(row=7, column=0, padx=10, pady=15, sticky="nsew")
 
 
     label_Banco_1 = ctk.CTkLabel(Viewer.tab("BPO"), text="Banco 1")
     entry_Banco_1 = ctk.CTkEntry(Viewer.tab("BPO"), width=50)
 
-    label_Banco_1.grid(row=4, column=0, padx=10, pady=15, sticky="nsew")
-    entry_Banco_1.grid(row=4, column=1, padx=10, pady=15, sticky="nsew")
+    label_Banco_1.grid(row=0, column=1, padx=10, pady=15, sticky="nsew")
+    entry_Banco_1.grid(row=1, column=1, padx=10, pady=15, sticky="nsew")
 
 
     label_Banco_2 = ctk.CTkLabel(Viewer.tab("BPO"), text="Banco 2")
     entry_Banco_2 = ctk.CTkEntry(Viewer.tab("BPO"), width=50)
 
-    label_Banco_2.grid(row=5, column=0, padx=10, pady=15, sticky="nsew")
-    entry_Banco_2.grid(row=5, column=1, padx=10, pady=15, sticky="nsew")
+    label_Banco_2.grid(row=2, column=1, padx=10, pady=15, sticky="nsew")
+    entry_Banco_2.grid(row=3, column=1, padx=10, pady=15, sticky="nsew")
 
 
     label_Tipo_de_BPO = ctk.CTkLabel(Viewer.tab("BPO"), text="Tipo de BPO")
     entry_Tipo_de_BPO = ctk.CTkEntry(Viewer.tab("BPO"), width=50)
 
-    label_Tipo_de_BPO.grid(row=6, column=0, padx=10, pady=15, sticky="nsew")
-    entry_Tipo_de_BPO.grid(row=6, column=1, padx=10, pady=15, sticky="nsew")
+    label_Tipo_de_BPO.grid(row=4, column=1, padx=10, pady=15, sticky="nsew")
+    entry_Tipo_de_BPO.grid(row=5, column=1, padx=10, pady=15, sticky="nsew")
 
 
     label_Observaes_gerais_bpo = ctk.CTkLabel(Viewer.tab("BPO"), text="Observações gerais")
     entry_Observaes_gerais_bpo = ctk.CTkEntry(Viewer.tab("BPO"), width=50)
 
-    label_Observaes_gerais_bpo.grid(row=7, column=0, padx=10, pady=15, sticky="nsew")
+    label_Observaes_gerais_bpo.grid(row=6, column=1, padx=10, pady=15, sticky="nsew")
     entry_Observaes_gerais_bpo.grid(row=7, column=1, padx=10, pady=15, sticky="nsew")
 
 
