@@ -81,168 +81,180 @@ def criarbotoes(Viewer):
 #------------------------------Gerais
 
     label_Formas_de_tributao = ctk.CTkLabel(Viewer.tab("Gerais"), text="Formas de tributação")
-    entry_Formas_de_tributao = ctk.CTkComboBox(Viewer.tab("Gerais"), width=50,values=formasdetributacao)
+    entry_Formas_de_tributao = ctk.CTkComboBox(Viewer.tab("Gerais"), width=165,values=formasdetributacao)
 
-    label_Formas_de_tributao.grid(row=0, column=0, padx=10, pady=5, sticky="nsew")
-    entry_Formas_de_tributao.grid(row=0, column=1, padx=10, pady=5, sticky="nsew")
+    label_Formas_de_tributao.grid(row=0, column=0, padx=10, pady=3, sticky="w")
+    entry_Formas_de_tributao.grid(row=0, column=1, padx=10, pady=3, sticky="nsew")
 
 
     label_Anexo_simples_nacional = ctk.CTkLabel(Viewer.tab("Gerais"), text="Anexo simples nacional")
-    entry_Anexo_simples_nacional = ctk.CTkEntry(Viewer.tab("Gerais"), width=50)
+    entry_Anexo_simples_nacional = ctk.CTkEntry(Viewer.tab("Gerais"), width=165)
 
-    label_Anexo_simples_nacional.grid(row=1, column=0, padx=10, pady=5, sticky="nsew")
-    entry_Anexo_simples_nacional.grid(row=1, column=1, padx=10, pady=5, sticky="nsew")
+    label_Anexo_simples_nacional.grid(row=1, column=0, padx=10, pady=3, sticky="w")
+    entry_Anexo_simples_nacional.grid(row=1, column=1, padx=10, pady=3, sticky="nsew")
 
     yes_or_not = [
        "NÃO", "SIM"
     ]
     label_Folha_de_pagamento = ctk.CTkLabel(Viewer.tab("Gerais"), text="Folha de pagamento")
-    entry_Folha_de_pagamento = ctk.CTkComboBox(Viewer.tab("Gerais"), width=50,values=yes_or_not)
+    entry_Folha_de_pagamento = ctk.CTkComboBox(Viewer.tab("Gerais"), width=165,values=yes_or_not)
 
-    label_Folha_de_pagamento.grid(row=2, column=0, padx=10, pady=5, sticky="nsew")
-    entry_Folha_de_pagamento.grid(row=2, column=1, padx=10, pady=5, sticky="nsew")
+    label_Folha_de_pagamento.grid(row=2, column=0, padx=10, pady=3, sticky="w")
+    entry_Folha_de_pagamento.grid(row=2, column=1, padx=10, pady=3, sticky="nsew")
 
 
     label_Responsvel_contabil = ctk.CTkLabel(Viewer.tab("Gerais"), text="Responsável contabil")
-    entry_Responsvel_contabil = ctk.CTkEntry(Viewer.tab("Gerais"), width=50)
+    entry_Responsvel_contabil = ctk.CTkEntry(Viewer.tab("Gerais"), width=165)
 
-    label_Responsvel_contabil.grid(row=3, column=0, padx=10, pady=5, sticky="nsew")
-    entry_Responsvel_contabil.grid(row=3, column=1, padx=10, pady=5, sticky="nsew")
+    label_Responsvel_contabil.grid(row=3, column=0, padx=10, pady=3, sticky="w")
+    entry_Responsvel_contabil.grid(row=3, column=1, padx=10, pady=3, sticky="nsew")
 
 
     label_Responsvel_fiscal = ctk.CTkLabel(Viewer.tab("Gerais"), text="Responsável fiscal")
-    entry_Responsvel_fiscal = ctk.CTkEntry(Viewer.tab("Gerais"), width=50)
+    entry_Responsvel_fiscal = ctk.CTkEntry(Viewer.tab("Gerais"), width=165)
 
-    label_Responsvel_fiscal.grid(row=4, column=0, padx=10, pady=5, sticky="nsew")
-    entry_Responsvel_fiscal.grid(row=4, column=1, padx=10, pady=5, sticky="nsew")
+    label_Responsvel_fiscal.grid(row=4, column=0, padx=10, pady=3, sticky="w")
+    entry_Responsvel_fiscal.grid(row=4, column=1, padx=10, pady=3, sticky="nsew")
 
 
     label_Responsvel_societrio = ctk.CTkLabel(Viewer.tab("Gerais"), text="Responsável societário")
-    entry_Responsvel_societrio = ctk.CTkEntry(Viewer.tab("Gerais"), width=50)
+    entry_Responsvel_societrio = ctk.CTkEntry(Viewer.tab("Gerais"), width=165)
 
-    label_Responsvel_societrio.grid(row=5, column=0, padx=10, pady=5, sticky="nsew")
-    entry_Responsvel_societrio.grid(row=5, column=1, padx=10, pady=5, sticky="nsew")
+    label_Responsvel_societrio.grid(row=5, column=0, padx=10, pady=3, sticky="w")
+    entry_Responsvel_societrio.grid(row=5, column=1, padx=10, pady=3, sticky="nsew")
 
 
     label_Responsvel_DP = ctk.CTkLabel(Viewer.tab("Gerais"), text="Responsável DP")
-    entry_Responsvel_DP = ctk.CTkEntry(Viewer.tab("Gerais"), width=50)
+    entry_Responsvel_DP = ctk.CTkEntry(Viewer.tab("Gerais"), width=165)
 
-    label_Responsvel_DP.grid(row=6, column=0, padx=10, pady=5, sticky="nsew")
-    entry_Responsvel_DP.grid(row=6, column=1, padx=10, pady=5, sticky="nsew")
+    label_Responsvel_DP.grid(row=6, column=0, padx=10, pady=3, sticky="w")
+    entry_Responsvel_DP.grid(row=6, column=1, padx=10, pady=3, sticky="nsew")
 
     
 
     label_Domiclio_eletrnico = ctk.CTkLabel(Viewer.tab("Gerais"), text="Domicílio eletrônico")
-    entry_Domiclio_eletrnico = ctk.CTkComboBox(Viewer.tab("Gerais"), width=50,values=yes_or_not)
+    entry_Domiclio_eletrnico = ctk.CTkComboBox(Viewer.tab("Gerais"), width=165,values=yes_or_not)
 
-    label_Domiclio_eletrnico.grid(row=7, column=0, padx=10, pady=5, sticky="nsew")
-    entry_Domiclio_eletrnico.grid(row=7, column=1, padx=10, pady=5, sticky="nsew")
+    label_Domiclio_eletrnico.grid(row=7, column=0, padx=10, pady=3, sticky="w")
+    entry_Domiclio_eletrnico.grid(row=7, column=1, padx=10, pady=3, sticky="nsew")
 
 
     label_Email = ctk.CTkLabel(Viewer.tab("Gerais"), text="Email")
-    entry_Email = ctk.CTkEntry(Viewer.tab("Gerais"), width=50)
+    entry_Email = ctk.CTkEntry(Viewer.tab("Gerais"), width=250)
 
-    label_Email.grid(row=8, column=0, padx=10, pady=5, sticky="nsew")
-    entry_Email.grid(row=8, column=1, padx=10, pady=5, sticky="nsew")
+    label_Email.grid(row=8, column=0, padx=10, pady=3, sticky="w")
+    entry_Email.grid(row=8, column=1,columnspan=2, padx=10, pady=3, sticky="nsew")
 
 
     label_Nome_representante = ctk.CTkLabel(Viewer.tab("Gerais"), text="Nome representante")
-    entry_Nome_representante = ctk.CTkEntry(Viewer.tab("Gerais"), width=50)
+    entry_Nome_representante = ctk.CTkEntry(Viewer.tab("Gerais"), width=250)
 
-    label_Nome_representante.grid(row=9, column=0, padx=10, pady=5, sticky="nsew")
-    entry_Nome_representante.grid(row=9, column=1, padx=10, pady=5, sticky="nsew")
+    label_Nome_representante.grid(row=9, column=0, padx=10, pady=3, sticky="w")
+    entry_Nome_representante.grid(row=9, column=1,columnspan=2, padx=10, pady=3, sticky="nsew")
 
 
     label_CPF_representante_legal = ctk.CTkLabel(Viewer.tab("Gerais"), text="CPF representante legal")
-    entry_CPF_representante_legal = ctk.CTkEntry(Viewer.tab("Gerais"), width=50)
+    entry_CPF_representante_legal = ctk.CTkEntry(Viewer.tab("Gerais"), width=165)
 
-    label_CPF_representante_legal.grid(row=0, column=2, padx=10, pady=5, sticky="nsew")
-    entry_CPF_representante_legal.grid(row=0, column=3, padx=10, pady=5, sticky="nsew")
+    label_CPF_representante_legal.grid(row=0, column=2, padx=10, pady=3, sticky="w")
+    entry_CPF_representante_legal.grid(row=0, column=3, padx=10, pady=3, sticky="nsew")
 
 
     label_Data_de_nascimento_ = ctk.CTkLabel(Viewer.tab("Gerais"), text="Data de nascimento (dd/mm/aaaa)")
-    entry_Data_de_nascimento_ = ctk.CTkEntry(Viewer.tab("Gerais"), width=50)
+    entry_Data_de_nascimento_ = ctk.CTkEntry(Viewer.tab("Gerais"), width=165)
 
-    label_Data_de_nascimento_.grid(row=1, column=2, padx=10, pady=5, sticky="nsew")
-    entry_Data_de_nascimento_.grid(row=1, column=3, padx=10, pady=5, sticky="nsew")
+    label_Data_de_nascimento_.grid(row=1, column=2, padx=10, pady=3, sticky="w")
+    entry_Data_de_nascimento_.grid(row=1, column=3, padx=10, pady=3, sticky="nsew")
 
 
     label_Contabilidade_finalizada_ = ctk.CTkLabel(Viewer.tab("Gerais"), text="Contabilidade finalizada (dd/mm/aaaa)")
-    entry_Contabilidade_finalizada_ = ctk.CTkEntry(Viewer.tab("Gerais"), width=50)
+    entry_Contabilidade_finalizada_ = ctk.CTkEntry(Viewer.tab("Gerais"), width=165)
 
-    label_Contabilidade_finalizada_.grid(row=2, column=2, padx=10, pady=5, sticky="nsew")
-    entry_Contabilidade_finalizada_.grid(row=2, column=3, padx=10, pady=5, sticky="nsew")
+    label_Contabilidade_finalizada_.grid(row=2, column=2, padx=10, pady=3, sticky="w")
+    entry_Contabilidade_finalizada_.grid(row=2, column=3, padx=10, pady=3, sticky="nsew")
 
 
     label_Certificado_digital = ctk.CTkLabel(Viewer.tab("Gerais"), text="Certificado digital")
-    entry_Certificado_digital = ctk.CTkComboBox(Viewer.tab("Gerais"), width=50,values=yes_or_not)
+    entry_Certificado_digital = ctk.CTkComboBox(Viewer.tab("Gerais"), width=165,values=yes_or_not)
 
-    label_Certificado_digital.grid(row=3, column=2, padx=10, pady=5, sticky="nsew")
-    entry_Certificado_digital.grid(row=3, column=3, padx=10, pady=5, sticky="nsew")
+    label_Certificado_digital.grid(row=3, column=2, padx=10, pady=3, sticky="w")
+    entry_Certificado_digital.grid(row=3, column=3, padx=10, pady=3, sticky="nsew")
 
 
     label_Senha_certificado = ctk.CTkLabel(Viewer.tab("Gerais"), text="Senha certificado")
-    entry_Senha_certificado = ctk.CTkEntry(Viewer.tab("Gerais"), width=50)
+    entry_Senha_certificado = ctk.CTkEntry(Viewer.tab("Gerais"), width=165)
 
-    label_Senha_certificado.grid(row=4, column=2, padx=10, pady=5, sticky="nsew")
-    entry_Senha_certificado.grid(row=4, column=3, padx=10, pady=5, sticky="nsew")
+    label_Senha_certificado.grid(row=4, column=2, padx=10, pady=3, sticky="w")
+    entry_Senha_certificado.grid(row=4, column=3, padx=10, pady=3, sticky="nsew")
 
 
     label_Data_de_vencimento_ = ctk.CTkLabel(Viewer.tab("Gerais"), text="Data de vencimento (dd/mm/aaaa)")
-    entry_Data_de_vencimento_ = ctk.CTkEntry(Viewer.tab("Gerais"), width=50)
+    entry_Data_de_vencimento_ = ctk.CTkEntry(Viewer.tab("Gerais"), width=165)
 
-    label_Data_de_vencimento_.grid(row=5, column=2, padx=10, pady=5, sticky="nsew")
-    entry_Data_de_vencimento_.grid(row=5, column=3, padx=10, pady=5, sticky="nsew")
+    label_Data_de_vencimento_.grid(row=5, column=2, padx=10, pady=3, sticky="w")
+    entry_Data_de_vencimento_.grid(row=5, column=3, padx=10, pady=3, sticky="nsew")
 
 #------------------------------Federais
 
-    label_Cdigo_e_cac = ctk.CTkLabel(Viewer.tab("Federais"), text="Código e-cac")
-    entry_Cdigo_e_cac = ctk.CTkEntry(Viewer.tab("Federais"), width=200)
+    frame_federais=ctk.CTkFrame(Viewer.tab("Federais"),fg_color="RED")
+    frame_federais.grid(row=0, column=0, padx=5, pady=1, sticky="nsew")
 
-    label_Cdigo_e_cac.grid(row=0, column=0, padx=10, pady=15, sticky="nsew")
-    entry_Cdigo_e_cac.grid(row=0, column=1, padx=10, pady=15, sticky="nsew")
-
-
-    label_Senha_EAC = ctk.CTkLabel(Viewer.tab("Federais"), text="Senha EAC")
-    entry_Senha_EAC = ctk.CTkEntry(Viewer.tab("Federais"), width=50)
-
-    label_Senha_EAC.grid(row=1, column=0, padx=10, pady=15, sticky="nsew")
-    entry_Senha_EAC.grid(row=1, column=1, padx=10, pady=15, sticky="nsew")
+    
 
 
-    label_Cdigo_Simples = ctk.CTkLabel(Viewer.tab("Federais"), text="Código Simples")
-    entry_Cdigo_Simples = ctk.CTkEntry(Viewer.tab("Federais"), width=50)
+    label_Cdigo_e_cac = ctk.CTkLabel(frame_federais, text="Código e-cac")
+    entry_Cdigo_e_cac = ctk.CTkEntry(frame_federais, width=200)
 
-    label_Cdigo_Simples.grid(row=2, column=0, padx=10, pady=15, sticky="nsew")
-    entry_Cdigo_Simples.grid(row=2, column=1, padx=10, pady=15, sticky="nsew")
-
-
-    label_Nmero_de_livros_ECD = ctk.CTkLabel(Viewer.tab("Federais"), text="Número de livros ECD")
-    entry_Nmero_de_livros_ECD = ctk.CTkEntry(Viewer.tab("Federais"), width=50)
-
-    label_Nmero_de_livros_ECD.grid(row=3, column=0, padx=10, pady=15, sticky="nsew")
-    entry_Nmero_de_livros_ECD.grid(row=3, column=1, padx=10, pady=15, sticky="nsew")
+    label_Cdigo_e_cac.grid(row=0, column=0, padx=5, pady=1, sticky="nsew")
+    entry_Cdigo_e_cac.grid(row=1, column=0, padx=5, pady=1, sticky="w")
 
 
-    label_Ano_Nmero_de_livros_ECD = ctk.CTkLabel(Viewer.tab("Federais"), text="Ano Número de livros ECD")
-    entry_Ano_Nmero_de_livros_ECD = ctk.CTkEntry(Viewer.tab("Federais"), width=50)
+    label_Senha_EAC = ctk.CTkLabel(frame_federais, text="Senha EAC")
+    entry_Senha_EAC = ctk.CTkEntry(frame_federais, width=200)
 
-    label_Ano_Nmero_de_livros_ECD.grid(row=4, column=0, padx=10, pady=15, sticky="nsew")
-    entry_Ano_Nmero_de_livros_ECD.grid(row=4, column=1, padx=10, pady=15, sticky="nsew")
-
-
-    label_Nmero_de_livros_ECF = ctk.CTkLabel(Viewer.tab("Federais"), text="Número de livros ECF")
-    entry_Nmero_de_livros_ECF = ctk.CTkEntry(Viewer.tab("Federais"), width=50)
-
-    label_Nmero_de_livros_ECF.grid(row=5, column=0, padx=10, pady=15, sticky="nsew")
-    entry_Nmero_de_livros_ECF.grid(row=5, column=1, padx=10, pady=15, sticky="nsew")
+    label_Senha_EAC.grid(row=0, column=1, padx=5, pady=1, sticky="nsew")
+    entry_Senha_EAC.grid(row=1, column=1, padx=5, pady=1, sticky="w")
 
 
-    label_Ano_Nmero_de_livros_ECF = ctk.CTkLabel(Viewer.tab("Federais"), text="Ano Número de livros ECF")
-    entry_Ano_Nmero_de_livros_ECF = ctk.CTkEntry(Viewer.tab("Federais"), width=50)
+    label_Cdigo_Simples = ctk.CTkLabel(frame_federais, text="Código Simples")
+    entry_Cdigo_Simples = ctk.CTkEntry(frame_federais, width=200)
 
-    label_Ano_Nmero_de_livros_ECF.grid(row=6, column=0, padx=10, pady=15, sticky="nsew")
-    entry_Ano_Nmero_de_livros_ECF.grid(row=6, column=1, padx=10, pady=15, sticky="nsew")
+    label_Cdigo_Simples.grid(row=0, column=2, padx=5, pady=1, sticky="nsew")
+    entry_Cdigo_Simples.grid(row=1, column=2, padx=5, pady=1, sticky="w")
+
+    tab_livros=ctk.CTkTabview(frame_federais)
+    tab_livros.grid(row=3, column=0,columnspan=3, padx=5, pady=1, sticky="nsew")
+    tab_livros.add("livros ECD")
+    tab_livros.tab("livros ECD").grid_columnconfigure(0,weight=1)
+    tab_livros.add("livros ECF")
+    tab_livros.tab("livros ECF").grid_columnconfigure(0,weight=1)
+
+    label_Nmero_de_livros_ECD = ctk.CTkLabel(tab_livros.tab("livros ECD"), text="Numero")
+    entry_Nmero_de_livros_ECD = ctk.CTkEntry(tab_livros.tab("livros ECD"), width=200)
+
+    label_Nmero_de_livros_ECD.grid(row=0, column=0, padx=5, pady=1, sticky="nsew")
+    entry_Nmero_de_livros_ECD.grid(row=1, column=0, padx=5, pady=1, sticky="w")
+
+
+    label_Ano_Nmero_de_livros_ECD = ctk.CTkLabel(tab_livros.tab("livros ECD"), text="Ano")
+    entry_Ano_Nmero_de_livros_ECD = ctk.CTkEntry(tab_livros.tab("livros ECD"), width=200)
+
+    label_Ano_Nmero_de_livros_ECD.grid(row=0, column=1, padx=5, pady=1, sticky="nsew")
+    entry_Ano_Nmero_de_livros_ECD.grid(row=1, column=1, padx=5, pady=1, sticky="w")
+
+
+    label_Nmero_de_livros_ECF = ctk.CTkLabel(tab_livros.tab("livros ECF"), text="Numero")
+    entry_Nmero_de_livros_ECF = ctk.CTkEntry(tab_livros.tab("livros ECF"), width=200)
+
+    label_Nmero_de_livros_ECF.grid(row=2, column=1, padx=5, pady=1, sticky="nsew")
+    entry_Nmero_de_livros_ECF.grid(row=3, column=1, padx=5, pady=1, sticky="w")
+
+
+    label_Ano_Nmero_de_livros_ECF = ctk.CTkLabel(tab_livros.tab("livros ECF"), text="Ano")
+    entry_Ano_Nmero_de_livros_ECF = ctk.CTkEntry(tab_livros.tab("livros ECF"), width=200)
+
+    label_Ano_Nmero_de_livros_ECF.grid(row=4, column=1, padx=5, pady=1, sticky="nsew")
+    entry_Ano_Nmero_de_livros_ECF.grid(row=5, column=1, padx=5, pady=1, sticky="w")
 
 #------------------------------Estaduais
 
