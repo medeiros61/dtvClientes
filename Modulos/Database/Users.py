@@ -15,13 +15,13 @@ def VerificaçãoLogin(Email,Senha):
     connect_to_da()
     try:
         with connection.cursor() as cursor:
-            ConsultaSQL = f"SELECT `email` FROM `newusers` WHERE `email` = '{Email}'"
+            ConsultaSQL = f"SELECT `email` FROM `pyusers` WHERE `email` = '{Email}'"
             cursor.execute(ConsultaSQL)
             result = cursor.fetchone()
             #print(result)
             if result is not None: 
                 if Email in result:
-                    ConsultaSQL = f"SELECT `email`,`password`,`role`,`name` FROM `newusers` WHERE  `email` = '{Email}' AND BINARY `password` = '{Senha}'"
+                    ConsultaSQL = f"SELECT `email`,`password`,`role`,`name` FROM `pyusers` WHERE  `email` = '{Email}' AND BINARY `password` = '{Senha}'"
                     cursor.execute(ConsultaSQL)
                     result = cursor.fetchone()
                     #print(result) 
@@ -39,7 +39,7 @@ def listarusuarios(nome,tipo):
     connect_to_da()
     try:
         with connection.cursor() as cursor:
-            ConsultaSQL = f"SELECT `id`, `name`, `email`,`created_at`,`role` FROM `newusers` WHERE `name` LIKE '%{nome}%'"
+            ConsultaSQL = f"SELECT `id`, `name`, `email`,`created_at`,`role` FROM `pyusers` WHERE `name` LIKE '%{nome}%'"
             if tipo is not None:
                 ConsultaSQL += f"AND `role` LIKE '%{tipo}%'"
 
@@ -59,7 +59,7 @@ def listarusuariosporemail(nome,tipo,email):
     email = email.lower()
     try:
         with connection.cursor() as cursor:
-            ConsultaSQL = f"SELECT `id`, `name`, `email`,`created_at`,`role` FROM `newusers` WHERE `name` LIKE '%{nome}%'"
+            ConsultaSQL = f"SELECT `id`, `name`, `email`,`created_at`,`role` FROM `pyusers` WHERE `name` LIKE '%{nome}%'"
             if tipo is not None:
                 ConsultaSQL += f"AND `role` LIKE '%{tipo}%'"
             
