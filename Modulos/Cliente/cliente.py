@@ -260,7 +260,9 @@ def parametrosinicias(frame):
 
     logo_excel = PhotoImage(file=Caminho_Logo_Excel).subsample(30, 30)
    
-    bt_exportar_clients = ctk.CTkButton(master=bt_action_frame, image=logo_excel,text="Exportar clientes",command=Func_cli.Exportar_clientes)
+    def exportar(*args):
+        Func_cli.Exportar_clientes(clinte_filter_entry.get(),uf_filter_entry.get(),Status_filter_entry.get())
+    bt_exportar_clients = ctk.CTkButton(master=bt_action_frame, image=logo_excel,text="Exportar clientes",command=exportar)
     bt_exportar_clients.grid(row=0, column=5,  padx=5, pady=5,sticky="nsew")
 
 

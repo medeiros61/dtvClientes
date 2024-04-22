@@ -3,7 +3,7 @@ from tkinter import *
 from tkinter import ttk 
 import Modulos.Database.Users as dbu
 
-import Modulos.Cliente.Func_cliente as Func_cli
+import Modulos.Usuarios.Func_users as Func_users
 import Modulos.imagens.ImagensClientes as Imagens_DataBase
 from ttkthemes import ThemedStyle
 
@@ -203,15 +203,15 @@ def parametrosinicias(frame):
     Caminho_Logo_Add,Caminho_Logo_Edit,Caminho_Logo_Rem ,Caminho_Logo_Comt,Caminho_Logo_Excel =Imagens_DataBase.baixarimagemPgclientes()  
 
     logo_add = PhotoImage(file=Caminho_Logo_Add).subsample(25, 25)
-    bt_add_user = ctk.CTkButton(master=bt_action_frame,image=logo_add, text="Adicionair Cliente",command= Func_cli.Adicionar_cliente)
+    bt_add_user = ctk.CTkButton(master=bt_action_frame,image=logo_add, text="Adicionair Cliente",command= Func_users.Adicionar_cliente)
     bt_add_user.grid(row=0, column=0,  padx=5, pady=5,sticky="nsew")
 
     logo_editar = PhotoImage(file=Caminho_Logo_Edit).subsample(25, 25)
-    bt_Editar_user = ctk.CTkButton(master=bt_action_frame,image=logo_editar, text="Editar",command=lambda: Func_cli.editar_cliente(TreeviewUsuarios))
+    bt_Editar_user = ctk.CTkButton(master=bt_action_frame,image=logo_editar, text="Editar",command=lambda: Func_users.editar_cliente(TreeviewUsuarios))
     bt_Editar_user.grid(row=0, column=2,   padx=5, pady=5,sticky="nsew")
     
     logo_excluir = PhotoImage(file=Caminho_Logo_Rem).subsample(25, 25)
-    bt_Excluir_user = ctk.CTkButton(master=bt_action_frame,image=logo_excluir, text="Excluir Cliente",command=lambda: Func_cli.excluir_cliente(TreeviewUsuarios))
+    bt_Excluir_user = ctk.CTkButton(master=bt_action_frame,image=logo_excluir, text="Excluir Cliente",command=lambda: Func_users.excluir_cliente(TreeviewUsuarios))
     bt_Excluir_user.grid(row=0, column=3,   padx=5, pady=5,sticky="nsew")
 
     logo_excel = PhotoImage(file=Caminho_Logo_Excel).subsample(30, 30)

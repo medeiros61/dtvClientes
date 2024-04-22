@@ -126,10 +126,7 @@ def getmunicipioslist_complete():
 
     finally:
         connection.close()
-
-
-
-        
+   
 
 def getclientdata_toEdit(IDempresa):
     # Conecta ao banco de dados
@@ -262,6 +259,9 @@ def getclientdata_toEdit(IDempresa):
                 Listadeidentificação.append(identificador)
                 if item == None:
                     item="N/A"
+                    
+                if item == '':
+                    item="N/A"       
                 #try:
                 if isinstance(item, date):    
                         # Formatando a data para "DD/MM/AAAA"
@@ -283,8 +283,162 @@ def getclientdata_toEdit(IDempresa):
     finally:
         connection.close() 
 
+def getclientdata_all(nome_empresa_p,nome,uf_p,uf,ativo_p,ativo):
+    # Conecta ao banco de dados
+    
+    connect_to_da()
+    data_quary = [
+        "id",
+        "nome_empresa",
+        "cnpj",
+        "uf",
+        "municipio",
+        "atividade",
+        "data_abertura",
+        "ativo",
+        "formas_tributacao",
+        "anexo_simples_nacional",
+        "folha_pagamento",
+        "responsavel_contabil",
+        "responsavel_fiscal",
+        "responsavel_societario",
+        "responsavel_dp",
+        "domicilio_eletronico",
+        "email",
+        "nome_representante",
+        "cpf_representante_legal",
+        "data_nascimento",
+        "contabilidade_finalizada",
+        "certificado_digital",
+        "senha_certificado",
+        "data_vencimento_certificado",
+        "codigo_ecac",
+        "senha_ecac",
+        "codigo_simples",
+        "estado",
+        "inscricao_estadual",
+        "credenciamento_nfe",
+        "numero_csc",
+        "site_caixa_postal",
+        "inscricao_municipal",
+        "site",
+        "login",
+        "senha",
+        "alvara_funcionamento",
+        "data_vencimento_alvara_funcionamento",
+        "alvara_sanitario",
+        "data_vencimento_alvara_sanitario",
+        "licenca_ambiental",
+        "data_vencimento_licenca_ambiental",
+        "bombeiros",
+        "data_vencimento_bombeiros",
+        "ultima_alteracao_contratual",
+        "numero_alteracao_contratual",
+        "observacoes_gerais_societario",
+        "folha_pagto",
+        "quantidade_funcionarios",
+        "prolabore",
+        "quantidade_socios",
+        "esocial_usuario",
+        "esocial_senha",
+        "esocial_codigo_acesso",
+        "fap_usuario",
+        "fap_senha",
+        "empregador_web_usuario",
+        "empregador_web_senha",
+        "sistema_bpo",
+        "site_bpo",
+        "usuario_bpo",
+        "senha_simples_bpo",
+        "banco1",
+        "banco2",
+        "tipo_bpo",
+        "observacoes_gerais_bpo",
+        "created_at",
+        "updated_at",
+        "link_whatsapp",
+        "municipal_observacoes",
+        "municipal_demais_senhas",
+        "municipal_senha_abertura_processos",
+        "dpto_pessoal_sindicalizada",
+        "dpto_pessoal_login",
+        "dpto_pessoal_senha"
+    ]
+  
+    try:
+        with connection.cursor() as cursor:
+            ConsultaSQL = f"SELECT "
+            for index,item in enumerate(data_quary):
+                ConsultaSQL += f'`{item}`'
+
+                if index < len(data_quary) - 1:
+                    ConsultaSQL += ","
+                
+            ConsultaSQL += f"FROM `clients`"
+
+            ConsultaSQL += f" WHERE `{nome_empresa_p}` LIKE '%{nome}%'"
+            if uf_p and uf:
+                ConsultaSQL += f" AND `{uf_p}` LIKE '%{uf}%'"
+            if ativo_p and ativo is not None:
+                ConsultaSQL += f" AND `{ativo_p}` LIKE '%{ativo}%'"
 
 
+            cursor.execute(ConsultaSQL)
+            results = cursor.fetchall()
+            #Usando fetchmany para buscar 3 linhas de resultados
+            #results = cursor.fetchmany(size=3)
+            #for result in results:
+            #    id,nome_empresa,uf,municipio,ativo = result
+            #    print(result)
+            nova_listacompleta = []
+            for cliente in results:
+            # Convertendo a tupla em lista para poder modificar valores
+                cliente = list(cliente)
+
+                # results_list[7] representa a coluna "ativo" na consulta SQL
+                botões_yesornot = [7,10,15,21,27,29,39,41,42,43,47,49]
+                for item in botões_yesornot:
+                    if cliente[item] == 1:
+                        cliente[item] = "SIM"
+                    else:
+                        cliente[item] = "NÃO"
+
+               
+                
+                # Convertendo de volta para tupla, se necessário
+                resultscliente = tuple(cliente)
+
+                nova_lista = []  # Lista para armazenar os itens convertidos
+                for item in resultscliente:
+                    
+                    
+                    if item == None:
+                        item="N/A"
+                        
+                    if item == '':
+                        item="N/A"       
+                    #try:
+                    if isinstance(item, date):    
+                            # Formatando a data para "DD/MM/AAAA"
+                            data_formatada = item.strftime("%d/%m/%Y") # Convertendo para datetime
+
+                            #print(data_formatada)  # Saída
+                            item = data_formatada
+                    #except Exception:
+                    #    pass
+
+                    novoitemlistagem = (item)
+                    nova_lista.append(novoitemlistagem)
+                nova_listacompleta.append(nova_lista)
+
+
+            if nova_listacompleta is not None: 
+                return nova_listacompleta
+            else:
+                return None,None
+
+    finally:
+        connection.close() 
 
 def gerartexto():
     Listadedados, identificadores, qr = getclientdata_toEdit(14)
@@ -381,3 +535,4 @@ def gerartexto():
         
 
         #print(f"""{item}.configure = {Listadedados[i]} #{identificadores[i]}""")
+
