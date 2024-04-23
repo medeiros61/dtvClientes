@@ -7,8 +7,9 @@ from tkinter import ttk
 
 
 def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
-   
-    global NumeroID,Frame_dados_cliente_titulo,entry_Nome_empresa,entry_CNPJ,entry_Estado,entry_Municpio,entry_Atividade,entry_Data_abertura_,entry_Ativo,entry_Link_WhatsApp,entry_Formas_de_tributao,entry_Anexo_simples_nacional,entry_Folha_de_pagamento,entry_Responsvel_contabil,entry_Responsvel_fiscal,entry_Responsvel_societrio,entry_Responsvel_DP,entry_Domiclio_eletrnico,entry_Email,entry_Nome_representante,entry_CPF_representante_legal,entry_Data_de_nascimento_,entry_Contabilidade_finalizada_,entry_Certificado_digital,entry_Senha_certificado,entry_Data_de_vencimento_,entry_Cdigo_e_cac,entry_Senha_EAC,entry_Cdigo_Simples,entry_Nmero_de_livros_ECD,entry_Ano_Nmero_de_livros_ECD,entry_Nmero_de_livros_ECF,entry_Ano_Nmero_de_livros_ECF,entry_UF,entry_Inscrio_estadual,entry_Credenciamento_NFE,entry_Nmero_CSC,entry_Site_caixa_postal,entry_Livros_Fiscais_Entrada_Ano_Nmero,entry_Livros_Fiscais_Inventrio_Ano_Nmero,entry_Inscrio_municipal,entry_Site,entry_Login,entry_Senha,entry_Demais_senhas,entry_Senha_Abertura_Processos,entry_Observaes,entry_Alvara_de_funcionamento,entry_Data_vencimento_,entry_Alvara_sanitrio,entry_Licenca_ambiental,entry_Bombeiros,entry_ltima_alterao_contratual_,entry_Nmero_alterao_contratual,entry_Observaes_gerais,entry_Folha_de_pagto,entry_Quantidade_de_funcionrios,entry_Prolabore,entry_Quantidade_de_scios,entry_Esocial_usurio,entry_Esocial_senha,entry_Esocial_cdigo_de_acesso,entry_FAP_usurio,entry_FAP_senha,entry_Empregador_WEB_usurio,entry_Empregador_WEB_senha,entry_Sistema,entry_Site_Bpo,entry_Usurio,entry_Senha_simples,entry_Banco_1,entry_Banco_2,entry_Tipo_de_BPO,entry_Estado_estaduais,entry_Observaes_gerais_Societario,entry_Observaes_gerais_bpo
+
+    global NumeroID,Frame_dados_cliente_titulo,entry_Alvara_de_funcionamento,entry_Licenca_ambiental,entry_Data_vencimento_Ambiental,entry_Bombeiros,entry_Data_vencimento_Bombeiros,entry_Data_vencimento_Func,entry_Alvara_sanitrio,entry_Data_vencimento_Sanitario,entry_Nome_empresa,entry_CNPJ,entry_Estado,entry_Municpio,entry_Atividade,entry_Data_abertura_,entry_Ativo,entry_Link_WhatsApp,entry_Formas_de_tributao,entry_Anexo_simples_nacional,entry_Folha_de_pagamento,entry_Responsvel_contabil,entry_Responsvel_fiscal,entry_Responsvel_societrio,entry_Responsvel_DP,entry_Domiclio_eletrnico,entry_Email,entry_Nome_representante,entry_CPF_representante_legal,entry_Data_de_nascimento_,entry_Contabilidade_finalizada_,entry_Certificado_digital,entry_Senha_certificado,entry_Data_de_vencimento_,entry_Cdigo_e_cac,entry_Senha_EAC,entry_Cdigo_Simples,entry_Nmero_de_livros_ECD,entry_Ano_Nmero_de_livros_ECD,entry_Nmero_de_livros_ECF,entry_Ano_Nmero_de_livros_ECF,entry_UF,entry_Inscrio_estadual,entry_Credenciamento_NFE,entry_Nmero_CSC,entry_Site_caixa_postal,entry_Livros_Fiscais_Entrada_Ano_Nmero,entry_Livros_Fiscais_Inventrio_Ano_Nmero,entry_Inscrio_municipal,entry_Site,entry_Login,entry_Senha,entry_Demais_senhas,entry_Senha_Abertura_Processos,entry_Observaes,entry_Alvara_de_funcionamento,entry_Data_vencimento_,entry_Alvara_sanitrio,entry_Licenca_ambiental,entry_Bombeiros,entry_ltima_alterao_contratual_,entry_Nmero_alterao_contratual,entry_Observaes_gerais,entry_Folha_de_pagto,entry_Quantidade_de_funcionrios,entry_Prolabore,entry_Quantidade_de_scios,entry_Esocial_usurio,entry_Esocial_senha,entry_Esocial_cdigo_de_acesso,entry_FAP_usurio,entry_FAP_senha,entry_Empregador_WEB_usurio,entry_Empregador_WEB_senha,entry_Sistema,entry_Site_Bpo,entry_Usurio,entry_Senha_simples,entry_Banco_1,entry_Banco_2,entry_Tipo_de_BPO,entry_Estado_estaduais,entry_Observaes_gerais_Societario,entry_Observaes_gerais_bpo
+
     #Configurações de borda
     cor_de_borda = "gray50"
     largura_borda = 2
@@ -537,6 +538,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     entry_Observaes.grid(row=7, column=0, columnspan=3, padx=10, pady=3, sticky="new")
 
 #------------------------------Societario
+  
     frameSocietario = ctk.CTkFrame(Viewer.tab("Societário"), border_width=largura_borda, border_color=cor_de_borda)
     frameSocietario.grid(row=0, column=0, padx=10, pady=5, sticky="new")
 
@@ -575,7 +577,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     label_Data_vencimento_Sanitario.grid(row=3, column=0, padx=10, pady=5, sticky="new")
     entry_Data_vencimento_Sanitario.grid(row=3, column=1, padx=10, pady=5, sticky="nsew")
 
-
+   
     #ambiental
     Framealvara_ambiental = ctk.CTkFrame(frameSocietario, border_width=largura_borda, border_color=cor_de_borda)
     Framealvara_ambiental.grid(row=0, column=1, padx=10, pady=5, sticky="new")
@@ -896,21 +898,28 @@ def Importardados(idcliente):
     entry_Site.insert(0,Listadedados[33]) # Campo site do banco de dados
     entry_Login.insert(0,Listadedados[34]) # Campo login do banco de dados
     entry_Senha.insert(0,Listadedados[35]) # Campo senha do banco de dados
-    entry_Demais_senhas.insert(0,Listadedados[36]) # Campo alvara_funcionamento do banco de dados
-    entry_Senha_Abertura_Processos.insert(0,Listadedados[37]) # Campo data_vencimento_alvara_funcionamento do banco de dados
-    entry_Observaes.insert('1.0',Listadedados[38]) # Campo alvara_sanitario do banco de dados
+    entry_Demais_senhas.insert(0,Listadedados[70]) # Campo 'municipal_demais_senhas' do banco de dados
+    entry_Senha_Abertura_Processos.insert(0,Listadedados[71]) # Campo municipal_senha_abertura_processos do banco de dados
+    entry_Observaes.insert('1.0',Listadedados[69]) # Campo 'municipal_observacoes' do banco de dados
     
+
+
+
     ## Societario
     #entry_Data_vencimento_.delete(0, 'end')
     entry_ltima_alterao_contratual_.delete(0, 'end')
     entry_Nmero_alterao_contratual.delete(0, 'end')
     entry_Observaes_gerais_Societario.delete('1.0', 'end')
     
-    entry_Alvara_de_funcionamento.set(Listadedados[39]) # Campo data_vencimento_alvara_sanitario do banco de dados
-    #entry_Data_vencimento_.insert(0,Listadedados[40]) # Campo licenca_ambiental do banco de dados
-    entry_Alvara_sanitrio.set(Listadedados[41]) # Campo data_vencimento_licenca_ambiental do banco de dados
-    entry_Licenca_ambiental.set(Listadedados[42]) # Campo bombeiros do banco de dados
-    entry_Bombeiros.set(Listadedados[43]) # Campo data_vencimento_bombeiros do banco de dados
+    entry_Alvara_de_funcionamento.set(Listadedados[36]) # Campo alvara_funcionamento do banco de dados
+    entry_Data_vencimento_Func.insert(0,Listadedados[37]) # Campo data_vencimento_alvara_funcionamento do banco de dados
+    entry_Alvara_sanitrio.set(Listadedados[38]) # Campo alvara_sanitario do banco de dados
+    entry_Data_vencimento_Sanitario.insert(0,Listadedados[39]) #Campo  data_vencimento_alvara_sanitario'do banco de dados
+    entry_Licenca_ambiental.set(Listadedados[40]) # Campo licenca_ambiental do banco de dados
+    entry_Data_vencimento_Ambiental.insert(0,Listadedados[41]) #Campo  data_vencimento_licenca_ambiental'do banco de dados
+
+    entry_Bombeiros.set(Listadedados[42]) # Campo dbombeiros do banco de dados
+    entry_Data_vencimento_Bombeiros.insert(0,Listadedados[43]) #Campo  data_vencimento_bombeiros'do banco de dados
     entry_ltima_alterao_contratual_.insert(0,Listadedados[44]) # Campo ultima_alteracao_contratual do banco de dados
     entry_Nmero_alterao_contratual.insert(0,Listadedados[45]) # Campo numero_alteracao_contratual do banco de dados
     entry_Observaes_gerais_Societario.insert('1.0',Listadedados[46]) # Campo observacoes_gerais_societario do banco de dados
