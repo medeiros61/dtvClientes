@@ -4,6 +4,9 @@ import Modulos.Database.Users as dbu
 import PainelDatavix as PD
 import Modulos.imagens.ImagensClientes as Imagens_DataBase
 import threading
+import tkinter as tk
+from tkinter import ttk
+
 janela = ctk.CTk()
 
 
@@ -32,17 +35,45 @@ def TelaLogin():
             if email != '' and senha != '':
                 global TesteLogin  
                 TesteLogin = dbu.VerificaçãoLogin(email,senha)
-                tamanho =[TesteLogin]
-                if len(tamanho) == 1:
-                    TesteLogin = TesteLogin, TesteLogin
+                
+                try: 
+                    if TesteLogin[0] == True:
+                        print('\n')
+                except Exception:    
+                    tamanho =[TesteLogin]
+                    if len(tamanho) == 1:
+                        TesteLogin = TesteLogin, TesteLogin
+                
                 if TesteLogin[0] == True:
                     print('passou')
                     global podelogar
-                    podelogar = True
-                    janela.destroy() 
-                   
-                  
-                    
+                    podelogar = True                   
+                    if podelogar == True:
+                        Usuario = TesteLogin[1]
+                        label_img.place_forget()
+                        frame.pack_forget()
+
+
+                        ### tela de carregamento 
+                        telacarregamento = tk.Tk()
+                        framecarregamento = ttk.Frame(telacarregamento)
+                        framecarregamento.pack(side=LEFT,fill=BOTH,expand=True)
+                        barradeprogresso = ttk.Progressbar(framecarregamento)
+                        barradeprogresso.pack(side=TOP,fill=BOTH,expand=True)
+                        barradeprogresso.configure(mode="indeterminate")
+                        barradeprogresso.start()
+
+                        #destroi a instancia atual do ctk(Não pode ter 2 abertas)
+                        janela.destroy()  
+                        
+                        def carregar():
+                            PD.DataVix(Usuario,telacarregamento)
+                            
+                        tread_painel = threading.Thread(target=carregar)
+                        #inicia o carregamento da tela do painel datavix
+                        tread_painel.start()
+                       
+                        telacarregamento.mainloop()
                 else:
                     erro_senha.place(x=25, y=250)
                     erro_senha_vazio.place_forget()
@@ -57,9 +88,10 @@ def TelaLogin():
 
 
     #janela = lado esquerdo
-        caminho = ".\imagens\logodatavix.png"
+        caminho = Imagens_DataBase.baixarimagemLogoDTV()
         img = PhotoImage(file=caminho)
-        label_img = ctk.CTkLabel(master=janela, image=img, text=" ").place(x=35, y=110)
+        label_img = ctk.CTkLabel(master=janela, image=img, text=" ")
+        label_img.place(x=35, y=110)
         #label_left = ctk.CTkLabel(master=janela, text="Bem vindo", font=("Roboto", 18), text_color="#9370DB"). place(x=10, y= 10)
 
     #frame = lado direito
@@ -107,9 +139,7 @@ def TelaLogin():
     tela_login()
     janela.mainloop()
     
-    if podelogar == True:
-        Usuario = TesteLogin[1]
-        PD.DataVix(Usuario)
+
 
 #User
 #Usuario : t@teste

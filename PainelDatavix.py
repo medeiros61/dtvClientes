@@ -4,13 +4,19 @@ import Modulos.Cliente.Cliente as cl
 import Modulos.Mei.Mei as me
 import Modulos.Usuarios.usuarios as user
 import Modulos.imagens.ImagensClientes as Imagens_DataBase
+import threading
+import time
 
-
-def DataVix(DadosUsuario):
+def DataVix(DadosUsuario,janela):
     
     Username = DadosUsuario[3]
     UserRole = DadosUsuario
+    caminho = Imagens_DataBase.baixarimagemLogoDTV()
+
+
+
     screen_datavix = ctk.CTk()
+
     screen_datavix.geometry("1150x615")
     screen_datavix.title("Master")
     screen_datavix.resizable(False,False)
@@ -61,7 +67,7 @@ def DataVix(DadosUsuario):
     #options_frame.grid(row=0, column=0, padx=20, pady=(20, 10), sticky="nsew")
     #options_frame.pack_propagate(False)
     #logo datavix
-    caminho = Imagens_DataBase.baixarimagemLogoDTV()
+    
     logo_datavix = PhotoImage(file=caminho)
     botao_logo = ctk.CTkButton(master=options_frame, image=logo_datavix, text="", fg_color="#808080")
     botao_logo.grid(row=1, column=0, padx=20, pady=(20, 10), sticky="nsew")
@@ -82,9 +88,22 @@ def DataVix(DadosUsuario):
 
     botao_usuarios = ctk.CTkButton(master=options_frame, text="USUARIOS", command=ativaruser)
     botao_usuarios.grid(row=7, column=0, padx=20, pady=(20, 10), sticky="nsew")
+    
+  
 
     botao_sair = ctk.CTkButton(master=options_frame, text="SAIR", command=exit)
     botao_sair.grid(row=8, column=0, padx=20, pady=(20, 10), sticky="nsew")
+    
+    def fecharjanela_anterior():
+        janela.wm_iconify()
+        time.sleep(2)
+        janela.destroy() 
+    
+    Treadfecharjanela = threading.Thread(target=fecharjanela_anterior)
+    #inicia a contagem para fechar tela de carregamento
+    Treadfecharjanela.start()
+    
     screen_datavix.mainloop()
+
 #---------------------------------------------------------------------------------#
 
