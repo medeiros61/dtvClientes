@@ -2,8 +2,8 @@ import customtkinter as ctk
 import Modulos.Database.Meis as dbm
 
 def criarbotoes(Viewer,frameprincipal):
-    global Tipo,frame_edição_dados,Contratante,id,entry_Nome,entry_Situao,entry_Identificao,entry_CNPJ,entry_Tributao,entry_Data_abertura_,entry_Prefeitura,entry_Login,entry_Senha,entry_Pendncia_de_Recolhimentos,entry_Entrega_de_DAS_Mensal,entry_E_mail,entry_Pendncias,entry_Observaes,entry_CPF,entry_Cdigo_de_Acesso,entry_Senha_GOV,entry_Nvel_GOV,entry_Endereo,entry_Inscrio_Estadual,entry_Inscrio_Municipal,entry_Certificado_Digital,entry_Modelo_Datavix,entry_Homologado___Sindicato,entry_Vencimento_,entry_Ano,entry_Faturamento
-    frame_edição_dados=frameprincipal
+    global Tipo,frame_dados_mei,Contratante,id,entry_Nome,entry_Situao,entry_Identificao,entry_CNPJ,entry_Tributao,entry_Data_abertura_,entry_Prefeitura,entry_Login,entry_Senha,entry_Pendncia_de_Recolhimentos,entry_Entrega_de_DAS_Mensal,entry_E_mail,entry_Pendncias,entry_Observaes,entry_CPF,entry_Cdigo_de_Acesso,entry_Senha_GOV,entry_Nvel_GOV,entry_Endereo,entry_Inscrio_Estadual,entry_Inscrio_Municipal,entry_Certificado_Digital,entry_Modelo_Datavix,entry_Homologado___Sindicato,entry_Vencimento_,entry_Ano,entry_Faturamento
+    frame_dados_mei=frameprincipal
     yes_or_not = [
         "SIM","NÃO"
     ]
@@ -215,15 +215,15 @@ def Importardados(idcliente):
 
 
     if Listadedados[0]:
-        frame_edição_dados[1].configure(text=f"EMPRESA: {Listadedados[3]} (ID:{Listadedados[0]})")
-        frame_edição_dados[2].configure(text=f"TIPO: {Listadedados[4]}")
+        frame_dados_mei[1].configure(text=f"EMPRESA: {Listadedados[3]} (ID:{Listadedados[0]})")
+        frame_dados_mei[2].configure(text=f"TIPO: {Listadedados[4]}")
 
     if Listadedados[1] != "N/A":
         nomemei=  dbm.GetnameMEI(Listadedados[1])
         
-        frame_edição_dados[0].configure(text=f"CONTRATANTE: {nomemei[0]}")
+        frame_dados_mei[0].configure(text=f"CONTRATANTE: {nomemei[0]}")
     else:
-        frame_edição_dados[0].configure(text=f"")
+        frame_dados_mei[0].configure(text=f"")
 
     entry_Nome.delete(0, 'end')
     entry_Nome.insert(0,Listadedados[3]) # Campo nome do banco de dados
