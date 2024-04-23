@@ -243,7 +243,7 @@ def parametrosinicias(frame):
     Caminho_Logo_Add,Caminho_Logo_Edit,Caminho_Logo_Rem ,Caminho_Logo_Comt,Caminho_Logo_Excel =Imagens_DataBase.baixarimagemPgclientes()  
 
     logo_add = PhotoImage(file=Caminho_Logo_Add).subsample(25, 25)
-    bt_add_clients = ctk.CTkButton(master=bt_action_frame,image=logo_add, text="Adicionair Cliente",command= Func_cli.Adicionar_cliente)
+    bt_add_clients = ctk.CTkButton(master=bt_action_frame,image=logo_add, text="Adicionar Cliente",command=lambda: Func_cli.Adicionar_cliente(Dadosparateladeedição))
     bt_add_clients.grid(row=0, column=0,  padx=5, pady=5,sticky="nsew")
 
     logo_editar = PhotoImage(file=Caminho_Logo_Edit).subsample(25, 25)
