@@ -216,6 +216,32 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     label_socios = ctk.CTkLabel(frameGerais, text="Socios")
     label_socios.grid(row=11, column=0,columnspan=4, padx=10, pady=3, sticky="w")
 
+    label_nome_sindicalizada = ctk.CTkLabel(frameGerais, text="Nome")
+    entry_nome_sindicalizada = ctk.CTkEntry(frameGerais, width=150)
+    
+    label_nome_sindicalizada.grid(row=12, column=0, padx=15, pady=3, sticky="w")
+    entry_nome_sindicalizada.grid(row=13,column=0)
+
+    label_cpf_sindicalizada = ctk.CTkLabel(frameGerais, text="cpf")
+    entry_cpf_sindicalizada = ctk.CTkEntry(frameGerais, width=150)
+    
+    label_cpf_sindicalizada.grid(row=12, column=1, padx=15, pady=3, sticky="w")
+    entry_cpf_sindicalizada.grid(row=13,column=1)
+
+    label_porcentagem_sindicalizada = ctk.CTkLabel(frameGerais, text="Porcentagem")
+    entry_porcentagem_sindicalizada = ctk.CTkEntry(frameGerais, width=150)
+    
+    label_porcentagem_sindicalizada.grid(row=12, column=2, padx=15, pady=3, sticky="w")
+    entry_porcentagem_sindicalizada.grid(row=13,column=2)
+
+    logo_add = PhotoImage(file=Caminho_Logo_Add).subsample(25, 25)
+    bt_add = ctk.CTkButton(master=frameGerais,image=logo_add, text="Adicionar",command="")
+    bt_add.grid(row=12, column=3, padx=5, pady=5, sticky="new")
+
+    logo_excluir = PhotoImage(file=Caminho_Logo_Rem).subsample(25, 25)
+    bt_Excluir = ctk.CTkButton(master=frameGerais,image=logo_excluir, text="Excluir",command=lambda: "")
+    bt_Excluir.grid(row=13, column=3, padx=5, pady=5, sticky="new")
+
     entry_Cad_NomeSocio = ctk.CTkEntry(frameGerais)
     entry_Cad_NomeSocio.grid(row=5, column=3, padx=10, pady=3, sticky="new")
 
