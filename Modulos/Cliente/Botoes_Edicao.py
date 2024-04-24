@@ -99,14 +99,14 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     frameGerais.grid(row=0, column=0, padx=10, pady=5, sticky="new")
 
     label_Formas_de_tributao = ctk.CTkLabel(frameGerais, text="Formas de tributação")
-    entry_Formas_de_tributao = ctk.CTkComboBox(frameGerais, width=155,values=formasdetributacao)
+    entry_Formas_de_tributao = ctk.CTkComboBox(frameGerais, width=150,values=formasdetributacao)
 
     label_Formas_de_tributao.grid(row=0, column=0, padx=10, pady=3, sticky="w")
     entry_Formas_de_tributao.grid(row=0, column=1, padx=10, pady=3, sticky="new")
 
 
     label_Anexo_simples_nacional = ctk.CTkLabel(frameGerais, text="Anexo simples nacional")
-    entry_Anexo_simples_nacional = ctk.CTkEntry(frameGerais, width=155)
+    entry_Anexo_simples_nacional = ctk.CTkEntry(frameGerais, width=150)
 
     label_Anexo_simples_nacional.grid(row=1, column=0, padx=10, pady=3, sticky="w")
     entry_Anexo_simples_nacional.grid(row=1, column=1, padx=10, pady=3, sticky="new")
@@ -116,35 +116,35 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
        "NÃO", "SIM"
     ]
     label_Folha_de_pagamento = ctk.CTkLabel(frameGerais, text="Folha de pagamento")
-    entry_Folha_de_pagamento = ctk.CTkComboBox(frameGerais, width=155,values=not_or_yes)
+    entry_Folha_de_pagamento = ctk.CTkComboBox(frameGerais, width=150,values=not_or_yes)
 
     label_Folha_de_pagamento.grid(row=2, column=0, padx=10, pady=3, sticky="w")
     entry_Folha_de_pagamento.grid(row=2, column=1, padx=10, pady=3, sticky="new")
 
 
     label_Responsvel_contabil = ctk.CTkLabel(frameGerais, text="Responsável contabil")
-    entry_Responsvel_contabil = ctk.CTkEntry(frameGerais, width=155)
+    entry_Responsvel_contabil = ctk.CTkEntry(frameGerais, width=150)
 
     label_Responsvel_contabil.grid(row=3, column=0, padx=10, pady=3, sticky="w")
     entry_Responsvel_contabil.grid(row=3, column=1, padx=10, pady=3, sticky="new")
 
 
     label_Responsvel_fiscal = ctk.CTkLabel(frameGerais, text="Responsável fiscal")
-    entry_Responsvel_fiscal = ctk.CTkEntry(frameGerais, width=155)
+    entry_Responsvel_fiscal = ctk.CTkEntry(frameGerais, width=150)
 
     label_Responsvel_fiscal.grid(row=4, column=0, padx=10, pady=3, sticky="w")
     entry_Responsvel_fiscal.grid(row=4, column=1, padx=10, pady=3, sticky="new")
 
 
     label_Responsvel_societrio = ctk.CTkLabel(frameGerais, text="Responsável societário")
-    entry_Responsvel_societrio = ctk.CTkEntry(frameGerais, width=155)
+    entry_Responsvel_societrio = ctk.CTkEntry(frameGerais, width=150)
 
     label_Responsvel_societrio.grid(row=5, column=0, padx=10, pady=3, sticky="w")
     entry_Responsvel_societrio.grid(row=5, column=1, padx=10, pady=3, sticky="new")
 
 
     label_Responsvel_DP = ctk.CTkLabel(frameGerais, text="Responsável DP")
-    entry_Responsvel_DP = ctk.CTkEntry(frameGerais, width=155)
+    entry_Responsvel_DP = ctk.CTkEntry(frameGerais, width=150)
 
     label_Responsvel_DP.grid(row=6, column=0, padx=10, pady=3, sticky="w")
     entry_Responsvel_DP.grid(row=6, column=1, padx=10, pady=3, sticky="new")
@@ -152,7 +152,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     
 
     label_Domiclio_eletrnico = ctk.CTkLabel(frameGerais, text="Domicílio eletrônico")
-    entry_Domiclio_eletrnico = ctk.CTkComboBox(frameGerais, width=155,values=not_or_yes)
+    entry_Domiclio_eletrnico = ctk.CTkComboBox(frameGerais, width=150,values=not_or_yes)
 
     label_Domiclio_eletrnico.grid(row=6, column=2, padx=10, pady=3, sticky="w")
     entry_Domiclio_eletrnico.grid(row=6, column=3, padx=10, pady=3, sticky="new")
@@ -173,42 +173,42 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
 
     label_CPF_representante_legal = ctk.CTkLabel(frameGerais, text="CPF representante legal")
-    entry_CPF_representante_legal = ctk.CTkEntry(frameGerais, width=155)
+    entry_CPF_representante_legal = ctk.CTkEntry(frameGerais, width=150)
 
     label_CPF_representante_legal.grid(row=0, column=2, padx=10, pady=3, sticky="w")
     entry_CPF_representante_legal.grid(row=0, column=3, padx=10, pady=3, sticky="new")
 
 
     label_Data_de_nascimento_ = ctk.CTkLabel(frameGerais, text="Data de nascimento (dd/mm/aaaa)")
-    entry_Data_de_nascimento_ = ctk.CTkEntry(frameGerais, width=155)
+    entry_Data_de_nascimento_ = ctk.CTkEntry(frameGerais, width=150)
 
     label_Data_de_nascimento_.grid(row=1, column=2, padx=10, pady=3, sticky="w")
     entry_Data_de_nascimento_.grid(row=1, column=3, padx=10, pady=3, sticky="new")
 
 
     label_Contabilidade_finalizada_ = ctk.CTkLabel(frameGerais, text="Contabilidade finalizada (dd/mm/aaaa)")
-    entry_Contabilidade_finalizada_ = ctk.CTkEntry(frameGerais, width=155)
+    entry_Contabilidade_finalizada_ = ctk.CTkEntry(frameGerais, width=150)
 
     label_Contabilidade_finalizada_.grid(row=2, column=2, padx=10, pady=3, sticky="w")
     entry_Contabilidade_finalizada_.grid(row=2, column=3, padx=10, pady=3, sticky="new")
 
 
     label_Certificado_digital = ctk.CTkLabel(frameGerais, text="Certificado digital")
-    entry_Certificado_digital = ctk.CTkComboBox(frameGerais, width=155,values=not_or_yes)
+    entry_Certificado_digital = ctk.CTkComboBox(frameGerais, width=150,values=not_or_yes)
 
     label_Certificado_digital.grid(row=3, column=2, padx=10, pady=3, sticky="w")
     entry_Certificado_digital.grid(row=3, column=3, padx=10, pady=3, sticky="new")
 
 
     label_Senha_certificado = ctk.CTkLabel(frameGerais, text="Senha certificado")
-    entry_Senha_certificado = ctk.CTkEntry(frameGerais, width=155)
+    entry_Senha_certificado = ctk.CTkEntry(frameGerais, width=150)
 
     label_Senha_certificado.grid(row=4, column=2, padx=10, pady=3, sticky="w")
     entry_Senha_certificado.grid(row=4, column=3, padx=10, pady=3, sticky="new")
 
 
     label_Data_de_vencimento_ = ctk.CTkLabel(frameGerais, text="Data de vencimento (dd/mm/aaaa)")
-    entry_Data_de_vencimento_ = ctk.CTkEntry(frameGerais, width=155)
+    entry_Data_de_vencimento_ = ctk.CTkEntry(frameGerais, width=150)
 
     label_Data_de_vencimento_.grid(row=5, column=2, padx=10, pady=3, sticky="w")
     entry_Data_de_vencimento_.grid(row=5, column=3, padx=10, pady=3, sticky="new")

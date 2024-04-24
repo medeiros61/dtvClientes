@@ -25,12 +25,13 @@ def DataVix(DadosUsuario,janela):
         user.criartelaUsarios(frame_user,UserRole)
         
     def exit():
+        screen_datavix.quit()
         screen_datavix.destroy()    
     
     def fecharjanela_anterior():
         janela.wm_iconify()
-        time.sleep(2)
-        janela.destroy() 
+ 
+
 
     Username = DadosUsuario[3]
     UserRole = DadosUsuario

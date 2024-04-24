@@ -52,28 +52,33 @@ def TelaLogin():
                         Usuario = TesteLogin[1]
                         label_img.place_forget()
                         frame.pack_forget()
-
-
-                        ### tela de carregamento 
-                        telacarregamento = tk.Tk()
-                        framecarregamento = ttk.Frame(telacarregamento)
-                        framecarregamento.pack(side=LEFT,fill=BOTH,expand=True)
-                        barradeprogresso = ttk.Progressbar(framecarregamento)
-                        barradeprogresso.pack(side=TOP,fill=BOTH,expand=True)
-                        barradeprogresso.configure(mode="indeterminate")
-                        barradeprogresso.start()
-
-                        #destroi a instancia atual do ctk(Não pode ter 2 abertas)
-                        janela.destroy()  
+                       
                         
                         def carregar():
-                            PD.DataVix(Usuario,telacarregamento)
+                            global telacarregamento
+                            ### tela de carregamento 
+                            telacarregamento = tk.Tk()
+                            framecarregamento = ttk.Frame(telacarregamento)
+                            framecarregamento.pack(side=LEFT,fill=BOTH,expand=True)
+                            barradeprogresso = ttk.Progressbar(framecarregamento)
+                            barradeprogresso.pack(side=TOP,fill=BOTH,expand=True)
+                            barradeprogresso.configure(mode="indeterminate")
+                            barradeprogresso.start()
+
                             
+                            telacarregamento.mainloop() 
+
                         tread_painel = threading.Thread(target=carregar)
                         #inicia o carregamento da tela do painel datavix
                         tread_painel.start()
-                       
-                        telacarregamento.mainloop()
+
+                        #destroi a instancia atual do ctk(Não pode ter 2 abertas)
+                        janela.destroy() 
+
+                        PD.DataVix(Usuario,telacarregamento)
+
+                        
+                        
                 else:
                     erro_senha.place(x=25, y=250)
                     erro_senha_vazio.place_forget()
