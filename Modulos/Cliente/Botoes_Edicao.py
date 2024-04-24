@@ -219,23 +219,23 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     label_socios = ctk.CTkLabel(frameGerais, text="Socios")
     label_socios.grid(row=11, column=0,columnspan=4, padx=10, pady=3, sticky="w")
 
-    label_nome_sindicalizada = ctk.CTkLabel(frameGerais, text="Nome")
-    entry_nome_sindicalizada = ctk.CTkEntry(frameGerais, width=150)
+    label_nome_Socios = ctk.CTkLabel(frameGerais, text="Nome")
+    entry_nome_Socios = ctk.CTkEntry(frameGerais, width=150)
     
-    label_nome_sindicalizada.grid(row=12, column=0, padx=15, pady=3, sticky="w")
-    entry_nome_sindicalizada.grid(row=13,column=0)
+    label_nome_Socios.grid(row=12, column=0, padx=15, pady=3, sticky="w")
+    entry_nome_Socios.grid(row=13,column=0)
 
-    label_cpf_sindicalizada = ctk.CTkLabel(frameGerais, text="cpf")
-    entry_cpf_sindicalizada = ctk.CTkEntry(frameGerais, width=150)
+    label_cpf_Socios = ctk.CTkLabel(frameGerais, text="cpf")
+    entry_cpf_Socios = ctk.CTkEntry(frameGerais, width=150)
     
-    label_cpf_sindicalizada.grid(row=12, column=1, padx=15, pady=3, sticky="w")
-    entry_cpf_sindicalizada.grid(row=13,column=1)
+    label_cpf_Socios.grid(row=12, column=1, padx=15, pady=3, sticky="w")
+    entry_cpf_Socios.grid(row=13,column=1)
 
-    label_porcentagem_sindicalizada = ctk.CTkLabel(frameGerais, text="Porcentagem")
-    entry_porcentagem_sindicalizada = ctk.CTkEntry(frameGerais, width=150)
+    label_porcentagem_Socios = ctk.CTkLabel(frameGerais, text="Porcentagem")
+    entry_porcentagem_Socios = ctk.CTkEntry(frameGerais, width=150)
     
-    label_porcentagem_sindicalizada.grid(row=12, column=2, padx=15, pady=3, sticky="w")
-    entry_porcentagem_sindicalizada.grid(row=13,column=2)
+    label_porcentagem_Socios.grid(row=12, column=2, padx=15, pady=3, sticky="w")
+    entry_porcentagem_Socios.grid(row=13,column=2)
 
     logo_add = PhotoImage(file=Caminho_Logo_Add).subsample(25, 25)
     bt_add = ctk.CTkButton(master=frameGerais,image=logo_add, text="Adicionar",command="")
