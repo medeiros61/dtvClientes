@@ -1,5 +1,5 @@
 import customtkinter as ctk
-import tkinter
+import tkinter as tk
 from tkinter import *
 import Modulos.Database.Clients as dbc
 from ttkthemes import ThemedStyle
@@ -8,7 +8,7 @@ from tkinter import ttk
 
 def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
-    global NumeroID,Frame_dados_cliente_titulo,entry_Alvara_de_funcionamento,entry_Licenca_ambiental,entry_Data_vencimento_Ambiental,entry_Bombeiros,entry_Data_vencimento_Bombeiros,entry_Data_vencimento_Func,entry_Alvara_sanitrio,entry_Data_vencimento_Sanitario,entry_Nome_empresa,entry_CNPJ,entry_Estado,entry_Municpio,entry_Atividade,entry_Data_abertura_,entry_Ativo,entry_Link_WhatsApp,entry_Formas_de_tributao,entry_Anexo_simples_nacional,entry_Folha_de_pagamento,entry_Responsvel_contabil,entry_Responsvel_fiscal,entry_Responsvel_societrio,entry_Responsvel_DP,entry_Domiclio_eletrnico,entry_Email,entry_Nome_representante,entry_CPF_representante_legal,entry_Data_de_nascimento_,entry_Contabilidade_finalizada_,entry_Certificado_digital,entry_Senha_certificado,entry_Data_de_vencimento_,entry_Cdigo_e_cac,entry_Senha_EAC,entry_Cdigo_Simples,entry_Nmero_de_livros_ECD,entry_Ano_Nmero_de_livros_ECD,entry_Nmero_de_livros_ECF,entry_Ano_Nmero_de_livros_ECF,entry_UF,entry_Inscrio_estadual,entry_Credenciamento_NFE,entry_Nmero_CSC,entry_Site_caixa_postal,entry_Livros_Fiscais_Entrada_Ano_Nmero,entry_Livros_Fiscais_Inventrio_Ano_Nmero,entry_Inscrio_municipal,entry_Site,entry_Login,entry_Senha,entry_Demais_senhas,entry_Senha_Abertura_Processos,entry_Observaes,entry_Alvara_de_funcionamento,entry_Data_vencimento_,entry_Alvara_sanitrio,entry_Licenca_ambiental,entry_Bombeiros,entry_ltima_alterao_contratual_,entry_Nmero_alterao_contratual,entry_Observaes_gerais,entry_Folha_de_pagto,entry_Quantidade_de_funcionrios,entry_Prolabore,entry_Quantidade_de_scios,entry_Esocial_usurio,entry_Esocial_senha,entry_Esocial_cdigo_de_acesso,entry_FAP_usurio,entry_FAP_senha,entry_Empregador_WEB_usurio,entry_Empregador_WEB_senha,entry_Sistema,entry_Site_Bpo,entry_Usurio,entry_Senha_simples,entry_Banco_1,entry_Banco_2,entry_Tipo_de_BPO,entry_Estado_estaduais,entry_Observaes_gerais_Societario,entry_Observaes_gerais_bpo
+    global NumeroID,Frame_dados_cliente_titulo,entry_Alvara_de_funcionamento,entry_Licenca_ambiental,entry_Data_vencimento_Ambiental,entry_Bombeiros,entry_Data_vencimento_Bombeiros,entry_Data_vencimento_Func,entry_Alvara_sanitrio,entry_Data_vencimento_Sanitario,entry_Nome_empresa,entry_CNPJ,entry_Estado,entry_Municpio,entry_Atividade,entry_Data_abertura_,entry_Ativo,entry_Link_WhatsApp,entry_Formas_de_tributao,entry_Anexo_simples_nacional,entry_Folha_de_pagamento,entry_Responsvel_contabil,entry_Responsvel_fiscal,entry_Responsvel_societrio,entry_Responsvel_DP,entry_Domiclio_eletrnico,entry_Email,entry_Nome_representante,entry_CPF_representante_legal,entry_Data_de_nascimento_,entry_Contabilidade_finalizada_,entry_Certificado_digital,entry_Senha_certificado,entry_Data_de_vencimento_,entry_Cdigo_e_cac,entry_Senha_EAC,entry_Cdigo_Simples,entry_Nmero_de_livros_ECD,entry_Ano_Nmero_de_livros_ECD,entry_Nmero_de_livros_ECF,entry_Ano_Nmero_de_livros_ECF,entry_Inscrio_estadual,entry_Credenciamento_NFE,entry_Nmero_CSC,entry_Site_caixa_postal,entry_Inscrio_municipal,entry_Site,entry_Login,entry_Senha,entry_Demais_senhas,entry_Senha_Abertura_Processos,entry_Observaes,entry_Alvara_de_funcionamento,entry_Alvara_sanitrio,entry_Licenca_ambiental,entry_Bombeiros,entry_ltima_alterao_contratual_,entry_Nmero_alterao_contratual,entry_Folha_de_pagto,entry_Quantidade_de_funcionrios,entry_Prolabore,entry_Quantidade_de_scios,entry_Esocial_usurio,entry_Esocial_senha,entry_Esocial_cdigo_de_acesso,entry_FAP_usurio,entry_FAP_senha,entry_Empregador_WEB_usurio,entry_Empregador_WEB_senha,entry_Sistema,entry_Site_Bpo,entry_Usurio,entry_Senha_simples,entry_Banco_1,entry_Banco_2,entry_Tipo_de_BPO,entry_Estado_estaduais,entry_Observaes_gerais_Societario,entry_Observaes_gerais_bpo,siglas_estados,not_or_yes,yes_or_not,formasdetributacao
 
     #Configurações de borda
     cor_de_borda = "gray50"
@@ -87,59 +87,64 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     entry_Link_WhatsApp.grid(row=5, column=0,columnspan=3, padx=10, pady=15, sticky="new")
 
 #------------------------------Gerais
-    frameGerais = ctk.CTkFrame(Viewer.tab("Gerais"), border_width=largura_borda, border_color=cor_de_borda)
-    frameGerais.grid(row=0, column=0, padx=10, pady=5, sticky="new")
+    
     formasdetributacao = [
         "SIMPLES NACIONAL","MEI","PRESUMIDO","LUCRO REAL","IMUNE/ISENTA"
     ]
 
+    scrollframegerais = ctk.CTkScrollableFrame(Viewer.tab("Gerais"), border_width=largura_borda, border_color=cor_de_borda,width=780, height=450)
+    scrollframegerais.grid(row=0, column=0, padx=1, pady=1, sticky="new")
+    
+    frameGerais = ctk.CTkFrame(scrollframegerais)
+    frameGerais.grid(row=0, column=0, padx=10, pady=5, sticky="new")
 
     label_Formas_de_tributao = ctk.CTkLabel(frameGerais, text="Formas de tributação")
-    entry_Formas_de_tributao = ctk.CTkComboBox(frameGerais, width=165,values=formasdetributacao)
+    entry_Formas_de_tributao = ctk.CTkComboBox(frameGerais, width=155,values=formasdetributacao)
 
     label_Formas_de_tributao.grid(row=0, column=0, padx=10, pady=3, sticky="w")
     entry_Formas_de_tributao.grid(row=0, column=1, padx=10, pady=3, sticky="new")
 
 
     label_Anexo_simples_nacional = ctk.CTkLabel(frameGerais, text="Anexo simples nacional")
-    entry_Anexo_simples_nacional = ctk.CTkEntry(frameGerais, width=165)
+    entry_Anexo_simples_nacional = ctk.CTkEntry(frameGerais, width=155)
 
     label_Anexo_simples_nacional.grid(row=1, column=0, padx=10, pady=3, sticky="w")
     entry_Anexo_simples_nacional.grid(row=1, column=1, padx=10, pady=3, sticky="new")
+    
 
-    yes_or_not = [
+    not_or_yes = [
        "NÃO", "SIM"
     ]
     label_Folha_de_pagamento = ctk.CTkLabel(frameGerais, text="Folha de pagamento")
-    entry_Folha_de_pagamento = ctk.CTkComboBox(frameGerais, width=165,values=yes_or_not)
+    entry_Folha_de_pagamento = ctk.CTkComboBox(frameGerais, width=155,values=not_or_yes)
 
     label_Folha_de_pagamento.grid(row=2, column=0, padx=10, pady=3, sticky="w")
     entry_Folha_de_pagamento.grid(row=2, column=1, padx=10, pady=3, sticky="new")
 
 
     label_Responsvel_contabil = ctk.CTkLabel(frameGerais, text="Responsável contabil")
-    entry_Responsvel_contabil = ctk.CTkEntry(frameGerais, width=165)
+    entry_Responsvel_contabil = ctk.CTkEntry(frameGerais, width=155)
 
     label_Responsvel_contabil.grid(row=3, column=0, padx=10, pady=3, sticky="w")
     entry_Responsvel_contabil.grid(row=3, column=1, padx=10, pady=3, sticky="new")
 
 
     label_Responsvel_fiscal = ctk.CTkLabel(frameGerais, text="Responsável fiscal")
-    entry_Responsvel_fiscal = ctk.CTkEntry(frameGerais, width=165)
+    entry_Responsvel_fiscal = ctk.CTkEntry(frameGerais, width=155)
 
     label_Responsvel_fiscal.grid(row=4, column=0, padx=10, pady=3, sticky="w")
     entry_Responsvel_fiscal.grid(row=4, column=1, padx=10, pady=3, sticky="new")
 
 
     label_Responsvel_societrio = ctk.CTkLabel(frameGerais, text="Responsável societário")
-    entry_Responsvel_societrio = ctk.CTkEntry(frameGerais, width=165)
+    entry_Responsvel_societrio = ctk.CTkEntry(frameGerais, width=155)
 
     label_Responsvel_societrio.grid(row=5, column=0, padx=10, pady=3, sticky="w")
     entry_Responsvel_societrio.grid(row=5, column=1, padx=10, pady=3, sticky="new")
 
 
     label_Responsvel_DP = ctk.CTkLabel(frameGerais, text="Responsável DP")
-    entry_Responsvel_DP = ctk.CTkEntry(frameGerais, width=165)
+    entry_Responsvel_DP = ctk.CTkEntry(frameGerais, width=155)
 
     label_Responsvel_DP.grid(row=6, column=0, padx=10, pady=3, sticky="w")
     entry_Responsvel_DP.grid(row=6, column=1, padx=10, pady=3, sticky="new")
@@ -147,66 +152,91 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     
 
     label_Domiclio_eletrnico = ctk.CTkLabel(frameGerais, text="Domicílio eletrônico")
-    entry_Domiclio_eletrnico = ctk.CTkComboBox(frameGerais, width=165,values=yes_or_not)
+    entry_Domiclio_eletrnico = ctk.CTkComboBox(frameGerais, width=155,values=not_or_yes)
 
     label_Domiclio_eletrnico.grid(row=6, column=2, padx=10, pady=3, sticky="w")
     entry_Domiclio_eletrnico.grid(row=6, column=3, padx=10, pady=3, sticky="new")
 
 
     label_Email = ctk.CTkLabel(frameGerais, text="Email")
-    entry_Email = ctk.CTkEntry(frameGerais, width=250)
+    entry_Email = ctk.CTkEntry(frameGerais, width=240)
 
     label_Email.grid(row=8, column=0, padx=10, pady=3, sticky="w")
     entry_Email.grid(row=8, column=1,columnspan=2, padx=10, pady=3, sticky="new")
 
 
     label_Nome_representante = ctk.CTkLabel(frameGerais, text="Nome representante")
-    entry_Nome_representante = ctk.CTkEntry(frameGerais, width=250)
+    entry_Nome_representante = ctk.CTkEntry(frameGerais, width=240)
 
     label_Nome_representante.grid(row=9, column=0, padx=10, pady=3, sticky="w")
     entry_Nome_representante.grid(row=9, column=1,columnspan=2, padx=10, pady=3, sticky="new")
 
 
     label_CPF_representante_legal = ctk.CTkLabel(frameGerais, text="CPF representante legal")
-    entry_CPF_representante_legal = ctk.CTkEntry(frameGerais, width=165)
+    entry_CPF_representante_legal = ctk.CTkEntry(frameGerais, width=155)
 
     label_CPF_representante_legal.grid(row=0, column=2, padx=10, pady=3, sticky="w")
     entry_CPF_representante_legal.grid(row=0, column=3, padx=10, pady=3, sticky="new")
 
 
     label_Data_de_nascimento_ = ctk.CTkLabel(frameGerais, text="Data de nascimento (dd/mm/aaaa)")
-    entry_Data_de_nascimento_ = ctk.CTkEntry(frameGerais, width=165)
+    entry_Data_de_nascimento_ = ctk.CTkEntry(frameGerais, width=155)
 
     label_Data_de_nascimento_.grid(row=1, column=2, padx=10, pady=3, sticky="w")
     entry_Data_de_nascimento_.grid(row=1, column=3, padx=10, pady=3, sticky="new")
 
 
     label_Contabilidade_finalizada_ = ctk.CTkLabel(frameGerais, text="Contabilidade finalizada (dd/mm/aaaa)")
-    entry_Contabilidade_finalizada_ = ctk.CTkEntry(frameGerais, width=165)
+    entry_Contabilidade_finalizada_ = ctk.CTkEntry(frameGerais, width=155)
 
     label_Contabilidade_finalizada_.grid(row=2, column=2, padx=10, pady=3, sticky="w")
     entry_Contabilidade_finalizada_.grid(row=2, column=3, padx=10, pady=3, sticky="new")
 
 
     label_Certificado_digital = ctk.CTkLabel(frameGerais, text="Certificado digital")
-    entry_Certificado_digital = ctk.CTkComboBox(frameGerais, width=165,values=yes_or_not)
+    entry_Certificado_digital = ctk.CTkComboBox(frameGerais, width=155,values=not_or_yes)
 
     label_Certificado_digital.grid(row=3, column=2, padx=10, pady=3, sticky="w")
     entry_Certificado_digital.grid(row=3, column=3, padx=10, pady=3, sticky="new")
 
 
     label_Senha_certificado = ctk.CTkLabel(frameGerais, text="Senha certificado")
-    entry_Senha_certificado = ctk.CTkEntry(frameGerais, width=165)
+    entry_Senha_certificado = ctk.CTkEntry(frameGerais, width=155)
 
     label_Senha_certificado.grid(row=4, column=2, padx=10, pady=3, sticky="w")
     entry_Senha_certificado.grid(row=4, column=3, padx=10, pady=3, sticky="new")
 
 
     label_Data_de_vencimento_ = ctk.CTkLabel(frameGerais, text="Data de vencimento (dd/mm/aaaa)")
-    entry_Data_de_vencimento_ = ctk.CTkEntry(frameGerais, width=165)
+    entry_Data_de_vencimento_ = ctk.CTkEntry(frameGerais, width=155)
 
     label_Data_de_vencimento_.grid(row=5, column=2, padx=10, pady=3, sticky="w")
     entry_Data_de_vencimento_.grid(row=5, column=3, padx=10, pady=3, sticky="new")
+
+
+    TreeviewSocios = ttk.Treeview(frameGerais, columns=("Nome","CPF","Porcentagem"), show='headings')
+    TreeviewSocios.grid(row=10, column=0,columnspan=4, sticky="nsew", padx=(1,0), pady=(5,10))
+    TreeviewSocios.bind('<<TreeviewSelect>>')
+    
+    EstilodeTela = ThemedStyle(TreeviewSocios)
+    EstilodeTela.set_theme("scidsand")
+
+    # Define o as colunas
+    TreeviewSocios.heading("Nome", text="Nome")
+    TreeviewSocios.heading("CPF", text="CPF")
+    TreeviewSocios.heading("Porcentagem", text="Porcentagem")
+    
+    
+    # Define o tamanho das colunas em pixels
+    TreeviewSocios.column("Nome", width=200)  # 
+    TreeviewSocios.column("CPF", width=200)  # 
+    TreeviewSocios.column("Porcentagem", width=200)  # 
+
+   
+    # Adicionar barra de rolagem vertical ao Treeview
+    scrollbar = ctk.CTkScrollbar(frameGerais, command=TreeviewSocios.yview,height=100)
+    scrollbar.grid(row=10, column=4, padx=(0,10), pady=(5,10), sticky="nsew")
+    TreeviewSocios.configure(yscrollcommand=scrollbar.set)
 
 #------------------------------Federais
     frame_federais = ctk.CTkFrame(Viewer.tab("Federais"), border_width=largura_borda, border_color=cor_de_borda)
@@ -354,7 +384,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
 
     label_Credenciamento_NFE = ctk.CTkLabel(frameestaduais, text="Credenciamento NFE")
-    entry_Credenciamento_NFE = ctk.CTkComboBox(frameestaduais,values=yes_or_not)
+    entry_Credenciamento_NFE = ctk.CTkComboBox(frameestaduais,values=not_or_yes)
 
     label_Credenciamento_NFE.grid(row=0, column=2, padx=10, pady=3, sticky="new")
     entry_Credenciamento_NFE.grid(row=1, column=2, padx=10, pady=0, sticky="new")
@@ -547,7 +577,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     Framealvara_func.grid(row=0, column=0, padx=10, pady=5, sticky="new")
     
     label_Alvara_de_funcionamento = ctk.CTkLabel(Framealvara_func, text="Alvara de funcionamento")
-    entry_Alvara_de_funcionamento = ctk.CTkComboBox(Framealvara_func,values=yes_or_not, width=121)
+    entry_Alvara_de_funcionamento = ctk.CTkComboBox(Framealvara_func,values=not_or_yes, width=121)
 
     label_Alvara_de_funcionamento.grid(row=0, column=0, padx=10, pady=5, sticky="new")
     entry_Alvara_de_funcionamento.grid(row=0, column=1, padx=10, pady=5, sticky="new")
@@ -565,7 +595,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     Framealvara_sani.grid(row=1, column=0, padx=10, pady=5, sticky="new")
 
     label_Alvara_sanitrio = ctk.CTkLabel(Framealvara_sani, text="Alvara sanitário")
-    entry_Alvara_sanitrio = ctk.CTkComboBox(Framealvara_sani, width=121,values=yes_or_not)
+    entry_Alvara_sanitrio = ctk.CTkComboBox(Framealvara_sani, width=121,values=not_or_yes)
 
     label_Alvara_sanitrio.grid(row=2, column=0, padx=10, pady=5, sticky="new")
     entry_Alvara_sanitrio.grid(row=2, column=1, padx=10, pady=5, sticky="nsew")
@@ -583,7 +613,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     Framealvara_ambiental.grid(row=0, column=1, padx=10, pady=5, sticky="new")
    
     label_Licenca_ambiental = ctk.CTkLabel(Framealvara_ambiental, text="Licença ambiental")
-    entry_Licenca_ambiental = ctk.CTkComboBox(Framealvara_ambiental, width=121,values=yes_or_not)
+    entry_Licenca_ambiental = ctk.CTkComboBox(Framealvara_ambiental, width=121,values=not_or_yes)
 
     label_Licenca_ambiental.grid(row=4, column=0, padx=10, pady=5, sticky="new")
     entry_Licenca_ambiental.grid(row=4, column=1, padx=10, pady=5, sticky="nsew")
@@ -600,7 +630,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     Framealvara_Bombeiro.grid(row=1, column=1, padx=10, pady=5, sticky="new")
 
     label_Bombeiros = ctk.CTkLabel(Framealvara_Bombeiro, text="Bombeiros")
-    entry_Bombeiros = ctk.CTkComboBox(Framealvara_Bombeiro, width=121,values=yes_or_not)
+    entry_Bombeiros = ctk.CTkComboBox(Framealvara_Bombeiro, width=121,values=not_or_yes)
 
     label_Bombeiros.grid(row=6, column=0, padx=10, pady=5, sticky="new")
     entry_Bombeiros.grid(row=6, column=1, padx=10, pady=5, sticky="nsew")
@@ -631,7 +661,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
 
     label_Observaes_gerais_Societario = ctk.CTkLabel(frameSocietario, text="Observações gerais")
-    entry_Observaes_gerais_Societario = ctk.CTkTextbox(frameSocietario, width=750, height=200)
+    entry_Observaes_gerais_Societario = ctk.CTkTextbox(frameSocietario, width=750, height=150)
 
     label_Observaes_gerais_Societario.grid(row=3, column=0, padx=10, pady=5, sticky="w")
     entry_Observaes_gerais_Societario.grid(row=4, column=0,columnspan=2, padx=10, pady=5, sticky="new")
@@ -644,7 +674,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     framedp.grid(row=0, column=0, padx=10, pady=5, sticky="w")
 
     label_Folha_de_pagto = ctk.CTkLabel(framedp, text="Folha de pagto", width=20)
-    entry_Folha_de_pagto = ctk.CTkComboBox(framedp,values=yes_or_not, width=80)
+    entry_Folha_de_pagto = ctk.CTkComboBox(framedp,values=not_or_yes, width=80)
 
     label_Folha_de_pagto.grid(row=0, column=0, padx=10, pady=5, sticky="w")
     entry_Folha_de_pagto.grid(row=0, column=1, padx=10, pady=5, sticky="new")
@@ -658,7 +688,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
 
     label_Prolabore = ctk.CTkLabel(framedp, text="Pro labore", width=20)
-    entry_Prolabore = ctk.CTkComboBox(framedp,values=yes_or_not, width=20)
+    entry_Prolabore = ctk.CTkComboBox(framedp,values=not_or_yes, width=20)
 
     label_Prolabore.grid(row=1, column=0, padx=10, pady=5, sticky="w")
     entry_Prolabore.grid(row=1, column=1, padx=10, pady=5, sticky="new")
@@ -789,40 +819,15 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     entry_Observaes_gerais_bpo.grid(row=6, column=0,columnspan=3, padx=10, pady=3, sticky="new")
 
 
-
-def Importardados(idcliente):
-    Listadedados, identificadores,qr = dbc.getclientdata_toEdit(idcliente)
-    
-    if Listadedados[1]!= "N/A" and Listadedados[0] is not None:
-        Frame_dados_cliente_titulo.configure(text=f"EMPRESA: {Listadedados[1]} (ID:{Listadedados[0]})")
-    else:
-        Frame_dados_cliente_titulo.configure(text=f"")
-    ### Cliente
-    NumeroID.configure(text=f"ID Cliente: {Listadedados[0]}" ) # Campo id do banco de dados
-    
+def limparcampos():
+    NumeroID.configure(text=f"" )
+    Frame_dados_cliente_titulo.configure(text=f"")
     entry_Nome_empresa.delete(0, 'end')
-    entry_Nome_empresa.insert(0,Listadedados[1]) # Campo nome_empresa do banco de dados
-    
     entry_CNPJ.delete(0, 'end')
-    entry_CNPJ.insert(0,Listadedados[2]) # Campo cnpj do banco de dados
-    
-    entry_Estado.set(Listadedados[3]) # Campo uf do banco de dados
-    
     entry_Municpio.delete(0, 'end')
-    entry_Municpio.insert(0,Listadedados[4]) # Campo municipio do banco de dados
-    
     entry_Atividade.delete(0, 'end')
-    entry_Atividade.insert(0,Listadedados[5]) # Campo atividade do banco de dados
-   
     entry_Data_abertura_.delete(0, 'end')
-    entry_Data_abertura_.insert(0,Listadedados[6]) # Campo data_abertura do banco de dados
-    
-    entry_Ativo.set(Listadedados[7]) # Campo ativo do banco de dados
-    
     entry_Link_WhatsApp.delete(0, 'end')
-    entry_Link_WhatsApp.insert(0,Listadedados[68])# Campo link_whatsapp do banco de dados
-
-    ### Gerais
     entry_Anexo_simples_nacional.delete(0, 'end')
     entry_Responsvel_contabil.delete(0, 'end')
     entry_Responsvel_fiscal.delete(0, 'end')
@@ -835,6 +840,95 @@ def Importardados(idcliente):
     entry_Contabilidade_finalizada_.delete(0, 'end')
     entry_Senha_certificado.delete(0, 'end')
     entry_Data_de_vencimento_.delete(0, 'end')
+    entry_Cdigo_e_cac.delete(0, 'end')
+    entry_Senha_EAC.delete(0, 'end')
+    entry_Cdigo_Simples.delete(0, 'end')
+    entry_Nmero_de_livros_ECD.delete(0, 'end')
+    entry_Ano_Nmero_de_livros_ECD.delete(0, 'end')
+    entry_Nmero_de_livros_ECF.delete(0, 'end')
+    entry_Ano_Nmero_de_livros_ECF.delete(0, 'end')
+    entry_Inscrio_estadual.delete(0, 'end')
+    entry_Nmero_CSC.delete(0, 'end')
+    entry_Site_caixa_postal.delete(0, 'end')
+    entry_Inscrio_municipal.delete(0, 'end')
+    entry_Site.delete(0, 'end')
+    entry_Login.delete(0, 'end')
+    entry_Senha.delete(0, 'end')
+    entry_Demais_senhas.delete(0, 'end')
+    entry_Senha_Abertura_Processos.delete(0, 'end')
+    entry_Observaes.delete('1.0', 'end')
+    entry_ltima_alterao_contratual_.delete(0, 'end')
+    entry_Nmero_alterao_contratual.delete(0, 'end')
+    entry_Observaes_gerais_Societario.delete('1.0', 'end')
+    entry_Data_vencimento_Func.delete(0, 'end')
+    entry_Data_vencimento_Sanitario.delete(0, 'end')
+    entry_Data_vencimento_Ambiental.delete(0, 'end')
+    entry_Data_vencimento_Bombeiros.delete(0, 'end')
+    entry_Quantidade_de_funcionrios.delete(0, 'end')
+    entry_Quantidade_de_scios.delete(0, 'end')
+    entry_Esocial_usurio.delete(0, 'end')
+    entry_Esocial_senha.delete(0, 'end')
+    entry_Esocial_cdigo_de_acesso.delete(0, 'end')
+    entry_FAP_usurio.delete(0, 'end')
+    entry_FAP_senha.delete(0, 'end')
+    entry_Empregador_WEB_usurio.delete(0, 'end')
+    entry_Empregador_WEB_senha.delete(0, 'end')
+    entry_Sistema.delete(0, 'end')
+    entry_Site_Bpo.delete(0, 'end')
+    entry_Usurio.delete(0, 'end')
+    entry_Senha_simples.delete(0, 'end')
+    entry_Banco_1.delete(0, 'end')
+    entry_Banco_2.delete(0, 'end')
+    entry_Tipo_de_BPO.delete(0, 'end')
+    entry_Observaes_gerais_bpo.delete('1.0', 'end')
+
+
+
+    entry_Estado.set(siglas_estados[0]) 
+    entry_Ativo.set(yes_or_not[0]) 
+    entry_Formas_de_tributao.set(formasdetributacao[0]) 
+    entry_Folha_de_pagamento.set(not_or_yes[0]) 
+    entry_Domiclio_eletrnico.set(not_or_yes[0]) 
+    entry_Certificado_digital.set(not_or_yes[0]) 
+    entry_Estado_estaduais.set(siglas_estados[0])
+    entry_Credenciamento_NFE.set(not_or_yes[0]) 
+    entry_Alvara_de_funcionamento.set(not_or_yes[0]) 
+    entry_Alvara_sanitrio.set(not_or_yes[0]) 
+    entry_Licenca_ambiental.set(not_or_yes[0]) 
+    entry_Bombeiros.set(not_or_yes[0]) 
+    entry_Folha_de_pagto.set(not_or_yes[0]) 
+    entry_Prolabore.set(not_or_yes[0])
+
+
+def Importardados(idcliente):
+    Listadedados, identificadores,qr = dbc.getclientdata_toEdit(idcliente)
+    
+    limparcampos()
+
+    if Listadedados[1]!= "N/A" and Listadedados[0] is not None:
+        Frame_dados_cliente_titulo.configure(text=f"EMPRESA: {Listadedados[1]} (ID:{Listadedados[0]})")
+    else:
+        Frame_dados_cliente_titulo.configure(text=f"")
+    ### Cliente
+    NumeroID.configure(text=f"ID Cliente: {Listadedados[0]}" ) # Campo id do banco de dados
+    
+    entry_Nome_empresa.insert(0,Listadedados[1]) # Campo nome_empresa do banco de dados
+    
+    entry_CNPJ.insert(0,Listadedados[2]) # Campo cnpj do banco de dados
+    
+    entry_Estado.set(Listadedados[3]) # Campo uf do banco de dados
+    
+    entry_Municpio.insert(0,Listadedados[4]) # Campo municipio do banco de dados
+    
+    entry_Atividade.insert(0,Listadedados[5]) # Campo atividade do banco de dados
+   
+    entry_Data_abertura_.insert(0,Listadedados[6]) # Campo data_abertura do banco de dados
+    
+    entry_Ativo.set(Listadedados[7]) # Campo ativo do banco de dados
+    
+    entry_Link_WhatsApp.insert(0,Listadedados[68])# Campo link_whatsapp do banco de dados
+
+    ### Gerais
 
     entry_Formas_de_tributao.set(Listadedados[8].upper()) # Campo formas_tributacao do banco de dados
     entry_Anexo_simples_nacional.insert(0,Listadedados[9]) # Campo anexo_simples_nacional do banco de dados
@@ -855,13 +949,6 @@ def Importardados(idcliente):
     
     ###Federais
     
-    entry_Cdigo_e_cac.delete(0, 'end')
-    entry_Senha_EAC.delete(0, 'end')
-    entry_Cdigo_Simples.delete(0, 'end')
-    entry_Nmero_de_livros_ECD.delete(0, 'end')
-    entry_Ano_Nmero_de_livros_ECD.delete(0, 'end')
-    entry_Nmero_de_livros_ECF.delete(0, 'end')
-    entry_Ano_Nmero_de_livros_ECF.delete(0, 'end')
 
     entry_Cdigo_e_cac.insert(0,Listadedados[24]) # Campo codigo_ecac do banco de dados
     entry_Senha_EAC.insert(0,Listadedados[25]) # Campo senha_ecac do banco de dados
@@ -872,9 +959,6 @@ def Importardados(idcliente):
     entry_Ano_Nmero_de_livros_ECF.insert(0,"")
     
     ##Estaduais
-    entry_Inscrio_estadual.delete(0, 'end')
-    entry_Nmero_CSC.delete(0, 'end')
-    entry_Site_caixa_postal.delete(0, 'end')
 
     entry_Estado_estaduais.set(Listadedados[3])
     #entry_UF.insert(0,Listadedados[25]) # Campo senha_ecac do banco de dados
@@ -886,13 +970,6 @@ def Importardados(idcliente):
     #entry_Livros_Fiscais_Inventrio_Ano_Nmero.insert(0,Listadedados[31]) # Campo site_caixa_postal do banco de dados
     
     ## Municipais
-    entry_Inscrio_municipal.delete(0, 'end')
-    entry_Site.delete(0, 'end')
-    entry_Login.delete(0, 'end')
-    entry_Senha.delete(0, 'end')
-    entry_Demais_senhas.delete(0, 'end')
-    entry_Senha_Abertura_Processos.delete(0, 'end')
-    entry_Observaes.delete('1.0', 'end')
 
     entry_Inscrio_municipal.insert(0,Listadedados[32]) # Campo inscricao_municipal do banco de dados
     entry_Site.insert(0,Listadedados[33]) # Campo site do banco de dados
@@ -906,11 +983,7 @@ def Importardados(idcliente):
 
 
     ## Societario
-    #entry_Data_vencimento_.delete(0, 'end')
-    entry_ltima_alterao_contratual_.delete(0, 'end')
-    entry_Nmero_alterao_contratual.delete(0, 'end')
-    entry_Observaes_gerais_Societario.delete('1.0', 'end')
-    
+
     entry_Alvara_de_funcionamento.set(Listadedados[36]) # Campo alvara_funcionamento do banco de dados
     entry_Data_vencimento_Func.insert(0,Listadedados[37]) # Campo data_vencimento_alvara_funcionamento do banco de dados
     entry_Alvara_sanitrio.set(Listadedados[38]) # Campo alvara_sanitario do banco de dados
@@ -926,15 +999,6 @@ def Importardados(idcliente):
     
     ## Deparamento Pessoal 
     
-    entry_Quantidade_de_funcionrios.delete(0, 'end')
-    entry_Quantidade_de_scios.delete(0, 'end')
-    entry_Esocial_usurio.delete(0, 'end')
-    entry_Esocial_senha.delete(0, 'end')
-    entry_Esocial_cdigo_de_acesso.delete(0, 'end')
-    entry_FAP_usurio.delete(0, 'end')
-    entry_FAP_senha.delete(0, 'end')
-    entry_Empregador_WEB_usurio.delete(0, 'end')
-    entry_Empregador_WEB_senha.delete(0, 'end')
 
     entry_Folha_de_pagto.set(Listadedados[47]) # Campo folha_pagto do banco de dados
     entry_Quantidade_de_funcionrios.insert(0,Listadedados[48]) # Campo quantidade_funcionarios do banco de dados
@@ -949,14 +1013,6 @@ def Importardados(idcliente):
     entry_Empregador_WEB_senha.insert(0,Listadedados[57]) # Campo empregador_web_senha do banco de dados
     
     ## Sistema
-    entry_Sistema.delete(0, 'end')
-    entry_Site_Bpo.delete(0, 'end')
-    entry_Usurio.delete(0, 'end')
-    entry_Senha_simples.delete(0, 'end')
-    entry_Banco_1.delete(0, 'end')
-    entry_Banco_2.delete(0, 'end')
-    entry_Tipo_de_BPO.delete(0, 'end')
-    entry_Observaes_gerais_bpo.delete('1.0', 'end')
 
     entry_Sistema.insert(0,Listadedados[58]) # Campo sistema_bpo do banco de dados
     entry_Site_Bpo.insert(0,Listadedados[59]) # Campo site_bpo do banco de dados

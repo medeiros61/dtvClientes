@@ -5,9 +5,13 @@ import Modulos.Database.Clients as dbc
 import pandas as pd
 
 #FUNÇÃO PARA ADICIONAR
-def Adicionar_cliente():
+def Adicionar_cliente(Dadosparateladeedição):
+    frame_edição_dados = Dadosparateladeedição[0]
+    Frame_atual = Dadosparateladeedição[1]
+    btedit.limparcampos()
+    Frame_atual.pack_forget()
+    frame_edição_dados.pack(side=RIGHT, fill = BOTH,expand=True) 
 
-    print(f'Adicionando cliente')
 
 
 
@@ -45,9 +49,9 @@ def editar_cliente(TreeView,Dadosparateladeedição):
                 nome_cliente = valores[1]
                 frame_edição_dados = Dadosparateladeedição[0]
                 Frame_atual = Dadosparateladeedição[1]
-                Frame_atual.pack_forget()
-                frame_edição_dados.pack(side=RIGHT, fill = BOTH,expand=True)
                 btedit.Importardados(id)
+                Frame_atual.pack_forget()
+                frame_edição_dados.pack(side=RIGHT, fill = BOTH,expand=True) 
                 # Agora você tem o nome do cliente selecionado
                 print(f'Editando cliente: [id:{id}] {nome_cliente}')
             else:
