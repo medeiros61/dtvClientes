@@ -223,19 +223,19 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     entry_nome_Socios = ctk.CTkEntry(frameGerais, width=150)
     
     label_nome_Socios.grid(row=12, column=0, padx=15, pady=3, sticky="w")
-    entry_nome_Socios.grid(row=13,column=0)
+    entry_nome_Socios.grid(row=13,column=0, padx=15, pady=3, sticky="new")
 
     label_cpf_Socios = ctk.CTkLabel(frameGerais, text="cpf")
     entry_cpf_Socios = ctk.CTkEntry(frameGerais, width=150)
     
     label_cpf_Socios.grid(row=12, column=1, padx=15, pady=3, sticky="w")
-    entry_cpf_Socios.grid(row=13,column=1)
+    entry_cpf_Socios.grid(row=13,column=1, padx=15, pady=3, sticky="new")
 
     label_porcentagem_Socios = ctk.CTkLabel(frameGerais, text="Porcentagem")
     entry_porcentagem_Socios = ctk.CTkEntry(frameGerais, width=150)
     
     label_porcentagem_Socios.grid(row=12, column=2, padx=15, pady=3, sticky="w")
-    entry_porcentagem_Socios.grid(row=13,column=2)
+    entry_porcentagem_Socios.grid(row=13,column=2, padx=15, pady=3, sticky="new")
 
     logo_add = PhotoImage(file=Caminho_Logo_Add).subsample(25, 25)
     bt_add = ctk.CTkButton(master=frameGerais,image=logo_add, text="Adicionar",command="")
@@ -311,7 +311,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
     ### ECD 
     frameECD = ctk.CTkFrame(tab_livros.tab("livros ECD"), border_width=largura_borda, border_color=cor_de_borda)
-    frameECD.grid(row=0, column=0, padx=(10,0), pady=5, sticky="n")
+    frameECD.grid(row=0, column=0, padx=(10,0), pady=5, sticky="nsew")
 
     label_Nmero_de_livros_ECD = ctk.CTkLabel(frameECD, text="Numero")
     entry_Nmero_de_livros_ECD = ctk.CTkEntry(frameECD, width=200)
