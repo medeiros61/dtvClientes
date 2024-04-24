@@ -36,8 +36,6 @@ def DataVix(DadosUsuario,janela):
     UserRole = DadosUsuario
     caminho = Imagens_DataBase.baixarimagemLogoDTV()
 
-
-
     screen_datavix = ctk.CTk()
 
     screen_datavix.geometry("1150x615")
@@ -47,7 +45,7 @@ def DataVix(DadosUsuario,janela):
     #username_entry.pack(side=RIGHT)
     ctk.set_appearance_mode("dark")
     ctk.set_default_color_theme("dark-blue")
-    
+
     #definindo frame cliente------------------------------
     frame_clientes = ctk.CTkFrame(master=screen_datavix, width=900, height=580, fg_color=("#808080"))
     
