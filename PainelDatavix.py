@@ -9,40 +9,6 @@ import time
 
 def DataVix(DadosUsuario,janela):
     
-    Username = DadosUsuario[3]
-    UserRole = DadosUsuario
-    caminho = Imagens_DataBase.baixarimagemLogoDTV()
-
-
-
-    screen_datavix = ctk.CTk()
-
-    screen_datavix.geometry("1150x615")
-    screen_datavix.title("Master")
-    screen_datavix.resizable(False,False)
-    #username_entry = ctk.CTkEntry(master=screen_datavix, placeholder_text="TESTE", width=300, font=("Roboto",14))
-    #username_entry.pack(side=RIGHT)
-    ctk.set_appearance_mode("dark")
-    ctk.set_default_color_theme("dark-blue")
-
-
-    #definindo frame cliente------------------------------
-    frame_clientes = ctk.CTkFrame(master=screen_datavix, width=900, height=580, fg_color=("#808080"))
-    
-    
-   
-    
-    cl.parametrosinicias(frame_clientes)
-    #------------------------------------------------------
-    #frame usuarios
-    frame_user = ctk.CTkFrame(master=screen_datavix, width=900, height=580, fg_color=("#808080"))
-    user.parametrosinicias(frame_user)
-    
-    #---------------------------------------------------------- frame mei
-    frame_mei = ctk.CTkFrame(master=screen_datavix, width=900, height=580, fg_color=("#808080"))
-    me.parametrosinicias(frame_mei)  
-    #------------------------------------------------------------------------
-
     def ativarmei():
         cl.Removertelaclientes(frame_clientes)
         user.RemovertelaUsarios(frame_user)
@@ -60,6 +26,40 @@ def DataVix(DadosUsuario,janela):
         
     def exit():
         screen_datavix.destroy()    
+    
+    def fecharjanela_anterior():
+        janela.wm_iconify()
+        time.sleep(2)
+        janela.destroy() 
+
+    Username = DadosUsuario[3]
+    UserRole = DadosUsuario
+    caminho = Imagens_DataBase.baixarimagemLogoDTV()
+
+
+
+    screen_datavix = ctk.CTk()
+
+    screen_datavix.geometry("1150x615")
+    screen_datavix.title("Master")
+    screen_datavix.resizable(False,False)
+    #username_entry = ctk.CTkEntry(master=screen_datavix, placeholder_text="TESTE", width=300, font=("Roboto",14))
+    #username_entry.pack(side=RIGHT)
+    ctk.set_appearance_mode("dark")
+    ctk.set_default_color_theme("dark-blue")
+    
+    #definindo frame cliente------------------------------
+    frame_clientes = ctk.CTkFrame(master=screen_datavix, width=900, height=580, fg_color=("#808080"))
+    
+    cl.parametrosinicias(frame_clientes)
+    #------------------------------------------------------
+    #frame usuarios
+    frame_user = ctk.CTkFrame(master=screen_datavix, width=900, height=580, fg_color=("#808080"))
+    user.parametrosinicias(frame_user) 
+    #---------------------------------------------------------- frame mei
+    frame_mei = ctk.CTkFrame(master=screen_datavix, width=900, height=580, fg_color=("#808080"))
+    me.parametrosinicias(frame_mei)  
+    #------------------------------------------------------------------------
 
     #aba
     options_frame = ctk.CTkFrame(master=screen_datavix, width=200, height=580, fg_color=("#808080"))
@@ -94,10 +94,7 @@ def DataVix(DadosUsuario,janela):
     botao_sair = ctk.CTkButton(master=options_frame, text="SAIR", command=exit)
     botao_sair.grid(row=8, column=0, padx=20, pady=(20, 10), sticky="nsew")
     
-    def fecharjanela_anterior():
-        janela.wm_iconify()
-        time.sleep(2)
-        janela.destroy() 
+   
     
     Treadfecharjanela = threading.Thread(target=fecharjanela_anterior)
     #inicia a contagem para fechar tela de carregamento
