@@ -9,6 +9,7 @@ def connect_to_da():
             password='R4QePW2ze9Hpa6F',
             database='datavixsolucao'
         )
+    
 def getclientlist_complete():
     # Conecta ao banco de dados
     
@@ -127,7 +128,26 @@ def getmunicipioslist_complete():
     finally:
         connection.close()
    
+def getassocietes_toEdit(IDempresa):
+    
 
+        with connection.cursor() as cursor:
+            ConsultaSQL = f"SELECT `nome`,`cpf`,`porcentagem` FROM `associates` WHERE `client_id` = '{IDempresa}'"
+            cursor.execute(ConsultaSQL)
+            results = cursor.fetchall()
+            return results
+
+
+def getsyndicates_toEdit(IDempresa):
+        with connection.cursor() as cursor:
+            ConsultaSQL = f"SELECT `nome`,`data_base`,`periodo_vigencia_ultima_cct`,`site_cct` FROM `syndicates` WHERE `client_id` = '{IDempresa}'"
+            cursor.execute(ConsultaSQL)
+            results = cursor.fetchall()
+            return results
+
+
+    
+    
 def getclientdata_toEdit(IDempresa):
     # Conecta ao banco de dados
     
@@ -276,9 +296,11 @@ def getclientdata_toEdit(IDempresa):
                 nova_lista.append(novoitemlistagem)
         
             if nova_lista is not None: 
-                return nova_lista,Listadeidentificação,data_quary
+                socios = getassocietes_toEdit(IDempresa)
+                sindicatos = getsyndicates_toEdit(IDempresa)
+                return nova_lista,Listadeidentificação,data_quary,socios,sindicatos
             else:
-                return None,None
+                return None,None,None,None,None
 
     finally:
         connection.close() 

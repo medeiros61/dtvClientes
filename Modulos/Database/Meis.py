@@ -81,8 +81,6 @@ def getMEIlist_byfilter(nome_empresa_p,nome,identificacao_p,identificacao,ativo_
     finally:
         connection.close()
 
-
-
 def GetnameMEI(IDdomei):
     # Conecta ao banco de dados
     
@@ -104,6 +102,14 @@ def GetnameMEI(IDdomei):
 
     finally:
         connection.close()
+
+def getParceiras_toEdit(IDempresaContratante):
+        with connection.cursor() as cursor:
+            ConsultaSQL = f"SELECT `nome`,`pendencias`,`situacao` FROM `meis` WHERE `mei_id` = '{IDempresaContratante}'"
+            cursor.execute(ConsultaSQL)
+            results = cursor.fetchall()
+            return results
+
 
 def getmeidata_toEdit(IDempresa):
     # Conecta ao banco de dados
@@ -204,8 +210,9 @@ def getmeidata_toEdit(IDempresa):
                 novoitemlistagem = (item)
                 nova_lista.append(novoitemlistagem)
         
-            if nova_lista is not None: 
-                return nova_lista,Listadeidentificação,data_quary
+            if nova_lista is not None:
+                meis = getParceiras_toEdit(nova_lista[1]) 
+                return nova_lista,Listadeidentificação,data_quary,meis
             else:
                 return None,None
 

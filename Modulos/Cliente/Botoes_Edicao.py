@@ -8,7 +8,7 @@ from tkinter import ttk
 
 def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
-    global NumeroID,Frame_dados_cliente_titulo,entry_Alvara_de_funcionamento,entry_Licenca_ambiental,entry_Data_vencimento_Ambiental,entry_Bombeiros,entry_Data_vencimento_Bombeiros,entry_Data_vencimento_Func,entry_Alvara_sanitrio,entry_Data_vencimento_Sanitario,entry_Nome_empresa,entry_CNPJ,entry_Estado,entry_Municpio,entry_Atividade,entry_Data_abertura_,entry_Ativo,entry_Link_WhatsApp,entry_Formas_de_tributao,entry_Anexo_simples_nacional,entry_Folha_de_pagamento,entry_Responsvel_contabil,entry_Responsvel_fiscal,entry_Responsvel_societrio,entry_Responsvel_DP,entry_Domiclio_eletrnico,entry_Email,entry_Nome_representante,entry_CPF_representante_legal,entry_Data_de_nascimento_,entry_Contabilidade_finalizada_,entry_Certificado_digital,entry_Senha_certificado,entry_Data_de_vencimento_,entry_Cdigo_e_cac,entry_Senha_EAC,entry_Cdigo_Simples,entry_Nmero_de_livros_ECD,entry_Ano_Nmero_de_livros_ECD,entry_Nmero_de_livros_ECF,entry_Ano_Nmero_de_livros_ECF,entry_Inscrio_estadual,entry_Credenciamento_NFE,entry_Nmero_CSC,entry_Site_caixa_postal,entry_Inscrio_municipal,entry_Site,entry_Login,entry_Senha,entry_Demais_senhas,entry_Senha_Abertura_Processos,entry_Observaes,entry_Alvara_de_funcionamento,entry_Alvara_sanitrio,entry_Licenca_ambiental,entry_Bombeiros,entry_ltima_alterao_contratual_,entry_Nmero_alterao_contratual,entry_Folha_de_pagto,entry_Quantidade_de_funcionrios,entry_Prolabore,entry_Quantidade_de_scios,entry_Esocial_usurio,entry_Esocial_senha,entry_Esocial_cdigo_de_acesso,entry_FAP_usurio,entry_FAP_senha,entry_Empregador_WEB_usurio,entry_Empregador_WEB_senha,entry_Sistema,entry_Site_Bpo,entry_Usurio,entry_Senha_simples,entry_Banco_1,entry_Banco_2,entry_Tipo_de_BPO,entry_Estado_estaduais,entry_Observaes_gerais_Societario,entry_Observaes_gerais_bpo,siglas_estados,not_or_yes,yes_or_not,formasdetributacao
+    global NumeroID,Frame_dados_cliente_titulo,entry_Alvara_de_funcionamento,entry_Licenca_ambiental,entry_Data_vencimento_Ambiental,entry_Bombeiros,entry_Data_vencimento_Bombeiros,entry_Data_vencimento_Func,entry_Alvara_sanitrio,entry_Data_vencimento_Sanitario,entry_Nome_empresa,entry_CNPJ,entry_Estado,entry_Municpio,entry_Atividade,entry_Data_abertura_,entry_Ativo,entry_Link_WhatsApp,entry_Formas_de_tributao,entry_Anexo_simples_nacional,entry_Folha_de_pagamento,entry_Responsvel_contabil,entry_Responsvel_fiscal,entry_Responsvel_societrio,entry_Responsvel_DP,entry_Domiclio_eletrnico,entry_Email,entry_Nome_representante,entry_CPF_representante_legal,entry_Data_de_nascimento_,entry_Contabilidade_finalizada_,entry_Certificado_digital,entry_Senha_certificado,entry_Data_de_vencimento_,entry_Cdigo_e_cac,entry_Senha_EAC,entry_Cdigo_Simples,entry_Nmero_de_livros_ECD,entry_Ano_Nmero_de_livros_ECD,entry_Nmero_de_livros_ECF,entry_Ano_Nmero_de_livros_ECF,entry_Inscrio_estadual,entry_Credenciamento_NFE,entry_Nmero_CSC,entry_Site_caixa_postal,entry_Inscrio_municipal,entry_Site,entry_Login,entry_Senha,entry_Demais_senhas,entry_Senha_Abertura_Processos,entry_Observaes,entry_Alvara_de_funcionamento,entry_Alvara_sanitrio,entry_Licenca_ambiental,entry_Bombeiros,entry_ltima_alterao_contratual_,entry_Nmero_alterao_contratual,entry_Folha_de_pagto,entry_Quantidade_de_funcionrios,entry_Prolabore,entry_Quantidade_de_scios,entry_Esocial_usurio,entry_Esocial_senha,entry_Esocial_cdigo_de_acesso,entry_FAP_usurio,entry_FAP_senha,entry_Empregador_WEB_usurio,entry_Empregador_WEB_senha,entry_Sistema,entry_Site_Bpo,entry_Usurio,entry_Senha_simples,entry_Banco_1,entry_Banco_2,entry_Tipo_de_BPO,entry_Estado_estaduais,entry_Observaes_gerais_Societario,entry_Observaes_gerais_bpo,siglas_estados,not_or_yes,yes_or_not,formasdetributacao,TreeviewSocios
 
     #Configurações de borda
     cor_de_borda = "gray50"
@@ -23,6 +23,13 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     ]
     yes_or_not = [
         "SIM","NÃO"
+    ]
+    formasdetributacao = [
+        "SIMPLES NACIONAL","MEI","PRESUMIDO","LUCRO REAL","IMUNE/ISENTA"
+    ]
+
+    not_or_yes = [
+       "NÃO", "SIM"
     ]
 
     framecliente = ctk.CTkFrame(Viewer.tab("Cliente"), border_width=largura_borda, border_color=cor_de_borda)
@@ -88,9 +95,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
 #------------------------------Gerais
     
-    formasdetributacao = [
-        "SIMPLES NACIONAL","MEI","PRESUMIDO","LUCRO REAL","IMUNE/ISENTA"
-    ]
+ 
 
     scrollframegerais = ctk.CTkScrollableFrame(Viewer.tab("Gerais"), border_width=largura_borda, border_color=cor_de_borda,width=780, height=450)
     scrollframegerais.grid(row=0, column=0, padx=1, pady=1, sticky="new")
@@ -112,9 +117,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     entry_Anexo_simples_nacional.grid(row=1, column=1, padx=10, pady=3, sticky="new")
     
 
-    not_or_yes = [
-       "NÃO", "SIM"
-    ]
+  
     label_Folha_de_pagamento = ctk.CTkLabel(frameGerais, text="Folha de pagamento")
     entry_Folha_de_pagamento = ctk.CTkComboBox(frameGerais, width=150,values=not_or_yes)
 
@@ -911,10 +914,20 @@ def limparcampos():
     entry_Bombeiros.set(not_or_yes[0]) 
     entry_Folha_de_pagto.set(not_or_yes[0]) 
     entry_Prolabore.set(not_or_yes[0])
-
-
+    
+    try:
+        for item in TreeviewSocios.get_children():
+                TreeviewSocios.delete(item)     
+    except Exception :
+            pass
+    #try:
+    #    for item in TreeviewSindicatos.get_children():
+    #            TreeviewSindicatos.delete(item)     
+    #except Exception :
+    #        pass         
+    
 def Importardados(idcliente):
-    Listadedados, identificadores,qr = dbc.getclientdata_toEdit(idcliente)
+    Listadedados, identificadores,qr,socios,sindicatos = dbc.getclientdata_toEdit(idcliente)
     
     limparcampos()
 
@@ -922,6 +935,7 @@ def Importardados(idcliente):
         Frame_dados_cliente_titulo.configure(text=f"EMPRESA: {Listadedados[1]} (ID:{Listadedados[0]})")
     else:
         Frame_dados_cliente_titulo.configure(text=f"")
+
     ### Cliente
     NumeroID.configure(text=f"ID Cliente: {Listadedados[0]}" ) # Campo id do banco de dados
     
@@ -960,6 +974,12 @@ def Importardados(idcliente):
     entry_Senha_certificado.insert(0,Listadedados[22]) # Campo senha_certificado do banco de dados
     entry_Data_de_vencimento_.insert(0,Listadedados[23]) # Campo data_vencimento_certificado do banco de dados
     
+
+    for result in socios:
+            TreeviewSocios.insert("", 'end', values=result)
+
+
+
     ###Federais
     
 
@@ -974,13 +994,11 @@ def Importardados(idcliente):
     ##Estaduais
 
     entry_Estado_estaduais.set(Listadedados[3])
-    #entry_UF.insert(0,Listadedados[25]) # Campo senha_ecac do banco de dados
     entry_Inscrio_estadual.insert(0,Listadedados[28]) # Campo inscricao_estadual do banco de dados
     entry_Credenciamento_NFE.set(Listadedados[29]) # Campo estado do banco de dados
     entry_Nmero_CSC.insert(0,Listadedados[30]) # Campo inscricao_estadual do banco de dados
     entry_Site_caixa_postal.insert(0,Listadedados[31]) # Campo credenciamento_nfe do banco de dados
-    #entry_Livros_Fiscais_Entrada_Ano_Nmero.insert(0,Listadedados[30]) # Campo numero_csc do banco de dados
-    #entry_Livros_Fiscais_Inventrio_Ano_Nmero.insert(0,Listadedados[31]) # Campo site_caixa_postal do banco de dados
+
     
     ## Municipais
 
@@ -1025,6 +1043,9 @@ def Importardados(idcliente):
     entry_Empregador_WEB_usurio.insert(0,Listadedados[56]) # Campo empregador_web_usuario do banco de dados
     entry_Empregador_WEB_senha.insert(0,Listadedados[57]) # Campo empregador_web_senha do banco de dados
     
+    #for result in sindicatos:
+    #    TreeviewSindicatos.insert("", 'end', values=result)
+            
     ## Sistema
 
     entry_Sistema.insert(0,Listadedados[58]) # Campo sistema_bpo do banco de dados
