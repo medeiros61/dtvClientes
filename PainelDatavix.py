@@ -29,10 +29,18 @@ def DataVix(DadosUsuario,janela):
         screen_datavix.destroy()    
     
     def fecharjanela_anterior():
-        janela.wm_iconify()
+        #janela.wm_iconify()
         janela.quit()
  
-
+    def center_window(window, width, height):
+        # Obter as dimensões da tela
+        screen_width = window.winfo_screenwidth()
+        screen_height = window.winfo_screenheight()
+        # Calcular as coordenadas para posicionar a janela no centro
+        x = (screen_width - width) // 2
+        y = (screen_height - height) // 2
+        # Definir as coordenadas da janela
+        window.geometry(f"{width}x{height}+{x}+{y}") 
 
     Username = DadosUsuario[3]
     UserRole = DadosUsuario
@@ -40,7 +48,10 @@ def DataVix(DadosUsuario,janela):
 
     screen_datavix = ctk.CTk()
 
-    screen_datavix.geometry("1150x615")
+    screen_datavix.geometry(f"{1150}x{615}+{0}+{0}") 
+    #center_window(screen_datavix,1150,615) caso queria que aparece no centro
+
+    
     screen_datavix.title("Master")
     screen_datavix.resizable(False,False)
     #username_entry = ctk.CTkEntry(master=screen_datavix, placeholder_text="TESTE", width=300, font=("Roboto",14))
@@ -68,7 +79,7 @@ def DataVix(DadosUsuario,janela):
     #options_frame.pack_propagate(False)
     #logo datavix
     
-    logo_datavix = PhotoImage(file=caminho)
+    logo_datavix = PhotoImage(file=caminho).subsample(3, 3)
     botao_logo = ctk.CTkButton(master=options_frame, image=logo_datavix, text="", fg_color="#808080")
     botao_logo.grid(row=1, column=0, padx=20, pady=(20, 10), sticky="nsew")
     botao_logo.configure(state="disabled")

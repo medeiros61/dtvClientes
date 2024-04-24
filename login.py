@@ -6,6 +6,7 @@ import Modulos.imagens.ImagensClientes as Imagens_DataBase
 import threading
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 
 janela = ctk.CTk()
 
@@ -14,20 +15,31 @@ podelogar = False
 def TelaLogin():
 
         
-    
+    def center_window(window, width, height):
+        # Obter as dimensões da tela
+        screen_width = window.winfo_screenwidth()
+        screen_height = window.winfo_screenheight()
+        # Calcular as coordenadas para posicionar a janela no centro
+        x = (screen_width - width) // 2
+        y = (screen_height - height)  // 2  
+        # Definir as coordenadas da janela
+        window.geometry(f"{width}x{height}+{x}+{y}") 
+
     def tema():
         ctk.set_appearance_mode("dark")
         ctk.set_default_color_theme("dark-blue")
 
     def tela():
-        janela.geometry("700x400")
+        janela.geometry(f"{700}x{400}+{0}+{0}") 
+        #center_window(janela, 700, 400) caso queria que aparece no centro
+
         janela.title("Sistema de Datavix")
     #janela.iconbitmap("")
         janela.resizable(False,False)
 
     def tela_login():
         #Função de consulta do banco de dados e validação
-        def ConsultaLogin():
+        def ConsultaLogin(*args):
             
             email = username_entry.get()
             senha = password_entry.get()
@@ -49,23 +61,33 @@ def TelaLogin():
                     global podelogar
                     podelogar = True                   
                     if podelogar == True:
-                        Usuario = TesteLogin[1]
-                        label_img.place_forget()
-                        frame.pack_forget()
                        
-                        
+                       
+                  
                         def carregar():
                             global telacarregamento
                             ### tela de carregamento 
                             telacarregamento = tk.Tk()
                             framecarregamento = ttk.Frame(telacarregamento)
-                            framecarregamento.pack(side=LEFT,fill=BOTH,expand=True)
+                            framecarregamento.pack(side=LEFT,fill=X,expand=True)
+
+                            telacarregamento.overrideredirect(True)
+
+                            center_window(telacarregamento, 100, 100)
+               
+                            CarregandoLB = ttk.Label(framecarregamento, text="Por favor aguarde\n\nCarregando...\n")
+
+                            CarregandoLB.pack(side=TOP,fill=BOTH,expand=True)
                             barradeprogresso = ttk.Progressbar(framecarregamento)
-                            barradeprogresso.pack(side=TOP,fill=BOTH,expand=True)
+                            barradeprogresso.pack(side=BOTTOM,fill=BOTH,expand=True)
                             barradeprogresso.configure(mode="indeterminate")
                             barradeprogresso.start()  
+                          
                             telacarregamento.mainloop() 
                            
+                        Usuario = TesteLogin[1]
+                        label_img.place_forget()
+                        frame.pack_forget()
 
                         tread_painel = threading.Thread(target=carregar)
                         #inicia o carregamento da tela do painel datavix
@@ -79,14 +101,16 @@ def TelaLogin():
                         
                         
                 else:
-                    erro_senha.place(x=25, y=250)
-                    erro_senha_vazio.place_forget()
+                    messagebox.showinfo("Erro", "Login ou senha inválidos")    
+                    #erro_senha.place(x=25, y=250)
+                    #erro_senha_vazio.place_forget()
                     podelogar = False
                     #Mostrar SPAM com erro 
                     print('Não Passou')    
             else:
-                erro_senha_vazio.place(x=25, y=250)
-                erro_senha.place_forget()
+                messagebox.showinfo("Erro", "Favor preencher o campo de usuário e senha")    
+                #erro_senha_vazio.place(x=25, y=250)
+                #erro_senha.place_forget()
                 #Mostrar SPAM informando que é obrigatorio preenchimento senha e email
                 print('não preencheu tudo')
 
@@ -109,11 +133,13 @@ def TelaLogin():
 
         username_entry = ctk.CTkEntry(master=frame, placeholder_text="Nome de usuario", width=300, font=("Roboto",14))
         username_entry.place(x=25, y=105)
+        username_entry.bind('<Return>',ConsultaLogin)
        
         #username_label = ctk.CTkLabel(master=frame, text="*O campo de usuario e de carater obrigatorio.", text_color="red", font=("Roboto", 10)). place(x=25, y= 135)
 
         password_entry = ctk.CTkEntry(master=frame, placeholder_text="Senha de usuario", width=300, font=("Roboto",14),show="*")
         password_entry.place(x=25, y=175)
+        password_entry.bind('<Return>',ConsultaLogin)
         #password_label = ctk.CTkLabel(master=frame, text="*O campo de senha e de carater obrigatorio.", text_color="red", font=("Roboto", 10)). place(x=25, y= 205)
        
         erro_senha = ctk.CTkLabel(master=frame, text="login ou senha inválidos", width=300, text_color="red", font=("Roboto",14))
