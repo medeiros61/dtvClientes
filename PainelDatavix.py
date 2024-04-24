@@ -30,6 +30,7 @@ def DataVix(DadosUsuario,janela):
     
     def fecharjanela_anterior():
         janela.wm_iconify()
+        janela.quit()
  
 
 

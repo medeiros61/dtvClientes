@@ -63,10 +63,9 @@ def TelaLogin():
                             barradeprogresso = ttk.Progressbar(framecarregamento)
                             barradeprogresso.pack(side=TOP,fill=BOTH,expand=True)
                             barradeprogresso.configure(mode="indeterminate")
-                            barradeprogresso.start()
-
-                            
+                            barradeprogresso.start()  
                             telacarregamento.mainloop() 
+                           
 
                         tread_painel = threading.Thread(target=carregar)
                         #inicia o carregamento da tela do painel datavix
