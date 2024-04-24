@@ -73,8 +73,8 @@ def DataVix(DadosUsuario,janela):
     botao_logo.grid(row=1, column=0, padx=20, pady=(20, 10), sticky="nsew")
     botao_logo.configure(state="disabled")
     
-    Lebel_bemvindo = ctk.CTkLabel(master=options_frame, text=f'Bem vindo {Username} !')
-    Lebel_bemvindo.grid(row=3, column=0, pady=5, sticky="nsew")
+    Lebel_bemvindo = ctk.CTkLabel(master=options_frame, text=f'Bem vindo {Username} !', font=("Roboto",15))
+    Lebel_bemvindo.grid(row=3, column=0, pady=5, padx=10, sticky="nsew")
     #buttons
     botao_dashboard = ctk.CTkButton(master=options_frame, text="DASHBOARD")
     botao_dashboard.grid(row=4, column=0, padx=20, pady=(20, 10), sticky="nsew")
