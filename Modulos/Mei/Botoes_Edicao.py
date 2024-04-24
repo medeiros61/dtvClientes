@@ -207,12 +207,44 @@ def criarbotoes(Viewer,frameprincipal):
     label_Observaes_dasn.grid(row=0, column=2, padx=10, pady=5, sticky="w")
     entry_Observaes_dasn.grid(row=1, column=2, padx=10, pady=5, sticky="nsew")
 
+def limparbotões():
+    
+    entry_Nome.delete(0, 'end')
+    entry_Identificao.delete(0, 'end')
+    entry_CNPJ.delete(0, 'end')
+    entry_Tributao.delete(0, 'end')
+    entry_Data_abertura_.delete(0, 'end')
+    entry_Prefeitura.delete(0, 'end')
+    entry_Login.delete(0, 'end')
+    entry_Senha.delete(0, 'end')
+    entry_Pendncia_de_Recolhimentos.delete(0, 'end')
+    entry_Entrega_de_DAS_Mensal.delete(0, 'end')
+    entry_E_mail.delete(0, 'end')
+    entry_Pendncias.delete(0, 'end')
+    entry_Observaes.delete(0, 'end')
+    entry_CPF.delete(0, 'end')
+    entry_Cdigo_de_Acesso.delete(0, 'end')
+    entry_Senha_GOV.delete(0, 'end')
+    entry_Nvel_GOV.delete(0, 'end')
+    entry_Endereo.delete(0, 'end')
+    entry_Inscrio_Estadual.delete(0, 'end')
+    entry_Inscrio_Municipal.delete(0, 'end')
+    entry_Modelo_Datavix.delete(0, 'end')
+    entry_Homologado___Sindicato.delete(0, 'end')
+    entry_Vencimento_.delete(0, 'end')
+    #entry_Ano_dasn.delete(0, 'end')
+    #entry_Faturamento.delete(0, 'end')
+    #entry_Observaes_dasn.delete(0, 'end')
+
+    #try:
+    #    for item in TreeviewSindicatos.get_children():
+    #            TreeviewSindicatos.delete(item)     
+    #except Exception :
+    #        pass 
 
 def Importardados(idcliente):
-    Listadedados, identificadores,qr = dbm.getmeidata_toEdit(idcliente)
-    
-    
-
+    Listadedados, identificadores,qr,meis = dbm.getmeidata_toEdit(idcliente)
+    limparbotões()
 
     if Listadedados[0]:
         frame_dados_mei[1].configure(text=f"EMPRESA: {Listadedados[3]} (ID:{Listadedados[0]})")
@@ -225,86 +257,64 @@ def Importardados(idcliente):
     else:
         frame_dados_mei[0].configure(text=f"")
 
-    entry_Nome.delete(0, 'end')
     entry_Nome.insert(0,Listadedados[3]) # Campo nome do banco de dados
 
 
     entry_Situao.set(Listadedados[2]) # Campo situacao do banco de dados
 
-    entry_Identificao.delete(0, 'end')
     entry_Identificao.insert(0,Listadedados[4]) # Campo identificacao do banco de dados
 
-    entry_CNPJ.delete(0, 'end')
     entry_CNPJ.insert(0,Listadedados[5]) # Campo cnpj do banco de dados
 
-    entry_Tributao.delete(0, 'end')
     entry_Tributao.insert(0,Listadedados[6]) # Campo tributacao do banco de dados
 
-    entry_Data_abertura_.delete(0, 'end')
     entry_Data_abertura_.insert(0,Listadedados[7]) # Campo data_abertura do banco de dados
 
-    entry_Prefeitura.delete(0, 'end')
     entry_Prefeitura.insert(0,Listadedados[8]) # Campo prefeitura do banco de dados
 
-    entry_Login.delete(0, 'end')
     entry_Login.insert(0,Listadedados[9]) # Campo login do banco de dados
 
-    entry_Senha.delete(0, 'end')
     entry_Senha.insert(0,Listadedados[10]) # Campo senha do banco de dados
 
-    entry_Pendncia_de_Recolhimentos.delete(0, 'end')
     entry_Pendncia_de_Recolhimentos.insert(0,Listadedados[11]) # Campo pendencia_recolhimentos do banco de dados
 
-    entry_Entrega_de_DAS_Mensal.delete(0, 'end')
     entry_Entrega_de_DAS_Mensal.insert(0,Listadedados[12]) # Campo entrega_das_mensal do banco de dados
 
-    entry_E_mail.delete(0, 'end')
     entry_E_mail.insert(0,Listadedados[14]) # Campo email do banco de dados
 
-    entry_Pendncias.delete(0, 'end')
     entry_Pendncias.insert(0,Listadedados[13]) # Campo pendencias do banco de dados
 
-    entry_Observaes.delete(0, 'end')
     entry_Observaes.insert(0,Listadedados[16]) # Campo observacoes do banco de dados
 
-    entry_CPF.delete(0, 'end')
     entry_CPF.insert(0,Listadedados[17]) # Campo cpf do banco de dados
 
-    entry_Cdigo_de_Acesso.delete(0, 'end')
     entry_Cdigo_de_Acesso.insert(0,Listadedados[18]) # Campo codigo_acesso do banco de dados
 
-    entry_Senha_GOV.delete(0, 'end')
     entry_Senha_GOV.insert(0,Listadedados[19]) # Campo senha_gov do banco de dados
 
-    entry_Nvel_GOV.delete(0, 'end')
     entry_Nvel_GOV.insert(0,Listadedados[20]) # Campo nivel_gov do banco de dados
 
-    entry_Endereo.delete(0, 'end')
     entry_Endereo.insert(0,Listadedados[21]) # Campo endereco do banco de dados
 
-    entry_Inscrio_Estadual.delete(0, 'end')
     entry_Inscrio_Estadual.insert(0,Listadedados[22]) # Campo inscricao_estadual do banco de dados
 
-    entry_Inscrio_Municipal.delete(0, 'end')
     entry_Inscrio_Municipal.insert(0,Listadedados[23]) # Campo inscricao_municipal do banco de dados
 
 
     entry_Certificado_Digital.set(Listadedados[24]) # Campo certificado_digital do banco de dados
 
-    entry_Modelo_Datavix.delete(0, 'end')
     entry_Modelo_Datavix.insert(0,Listadedados[25]) # Campo modelo_datavix do banco de dados
 
-    entry_Homologado___Sindicato.delete(0, 'end')
     entry_Homologado___Sindicato.insert(0,Listadedados[26]) # Campo homologado_sindicato do banco de dados
 
-    entry_Vencimento_.delete(0, 'end')
     entry_Vencimento_.insert(0,Listadedados[27]) # Campo vencimento do banco de dados
 
-    #entry_Ano_dasn.delete(0, 'end')
     #entry_Ano_dasn.insert(0,Listadedados[28]) # Campo created_at do banco de dados
 
-    #entry_Faturamento.delete(0, 'end')
     #entry_Faturamento.insert(0,Listadedados[29]) # Campo updated_at do banco de dados
 
-    #entry_Observaes_dasn.delete(0, 'end')
     #entry_Observaes_dasn.insert(0,Listadedados[29]) # Campo updated_at do banco de dados
+
+    
+    #for result in meis:
+    #    TreeviewMeis.insert("", 'end', values=result)
