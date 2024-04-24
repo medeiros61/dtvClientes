@@ -219,13 +219,13 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     entry_Cad_NomeSocio = ctk.CTkEntry(frameGerais)
     entry_Cad_NomeSocio.grid(row=5, column=3, padx=10, pady=3, sticky="new")
 
-    logo_add = PhotoImage(file=Caminho_Logo_Add).subsample(25, 25)
-    bt_add = ctk.CTkButton(master=frameECD,image=logo_add, text="Adicionar",command="")
-    bt_add.grid(row=0, column=3, padx=5, pady=5, sticky="new")
+    #logo_add = PhotoImage(file=Caminho_Logo_Add).subsample(25, 25)
+    #bt_add = ctk.CTkButton(master=frameECD,image=logo_add, text="Adicionar",command="")
+    #bt_add.grid(row=0, column=3, padx=5, pady=5, sticky="new")
 
-    logo_excluir = PhotoImage(file=Caminho_Logo_Rem).subsample(25, 25)
-    bt_Excluir = ctk.CTkButton(master=frameECD,image=logo_excluir, text="Excluir",command=lambda: "")
-    bt_Excluir.grid(row=1, column=3, padx=5, pady=5, sticky="new")
+    #logo_excluir = PhotoImage(file=Caminho_Logo_Rem).subsample(25, 25)
+    #bt_Excluir = ctk.CTkButton(master=frameECD,image=logo_excluir, text="Excluir",command=lambda: "")
+    #bt_Excluir.grid(row=1, column=3, padx=5, pady=5, sticky="new")
 
     TreeviewSocios = ttk.Treeview(frameGerais, columns=("Nome","CPF","Porcentagem"), show='headings')
     TreeviewSocios.grid(row=15, column=0,columnspan=4, sticky="nsew", padx=(1,0), pady=(5,10))
