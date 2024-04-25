@@ -709,7 +709,11 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     entry_Observaes_gerais_Societario.grid(row=4, column=0,columnspan=2, padx=10, pady=5, sticky="new")
 
 #------------------------------DP Pessoal
-    framedpMaster = ctk.CTkFrame(Viewer.tab("Departamento pessoal"), border_width=largura_borda, border_color=cor_de_borda)
+
+    scrolldppessoal = ctk.CTkScrollableFrame(Viewer.tab("Departamento pessoal"), border_width=largura_borda, border_color=cor_de_borda,width=900, height=450)
+    scrolldppessoal.grid(row=0, column=0, padx=1, pady=1, sticky="nw")
+    
+    framedpMaster = ctk.CTkFrame(scrolldppessoal, border_width=largura_borda, border_color=cor_de_borda)
     framedpMaster.grid(row=0, column=0, padx=10, pady=5, sticky="w")
 
     framedp = ctk.CTkFrame(framedpMaster, border_width=largura_borda, border_color=cor_de_borda)
@@ -798,6 +802,98 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     label_Empregador_WEB_senha.grid(row=4, column=1, padx=10, pady=5, sticky="w")
     entry_Empregador_WEB_senha.grid(row=5, column=1, padx=10, pady=5, sticky="new")
 
+    #sindicatos
+
+
+
+    frame_sindicatos = ctk.CTkFrame(framedpMaster, border_width=largura_borda, border_color=cor_de_borda)
+    frame_sindicatos.grid(row=10, column=0,columnspan=7, padx=10, pady=5, sticky="nsew")
+
+    label_sindicatos = ctk.CTkLabel(frame_sindicatos, text="Sindicatos", width=750)
+    label_sindicatos.grid(row=0, column=0,columnspan=3, padx=10, pady=5, sticky="w")
+
+    label_sindicalizada = ctk.CTkLabel(frame_sindicatos, text="Sindicalizada:", width=20)
+    label_sindicalizada.grid(row=1, column=0, padx=10, pady=5, sticky="w")
+
+    box_sindicalizada = ctk.CTkComboBox(frame_sindicatos, values=not_or_yes, width=20)
+    box_sindicalizada.grid(row=2, column=0, padx=10, pady=5, sticky="nsew")
+
+    label_login_sindicalizada = ctk.CTkLabel(frame_sindicatos, text="Login:", width=20)
+    entry_login_sindicalizada = ctk.CTkEntry(frame_sindicatos, width=80)
+
+    label_login_sindicalizada.grid(row=1, column=1, padx=10, pady=5, sticky="w")
+    entry_login_sindicalizada.grid(row=2, column=1, padx=10, pady=5, sticky="nsew")
+
+    label_senha_sindicalizada = ctk.CTkLabel(frame_sindicatos, text="Senha:", width=20)
+    entry_senha_sindicalizada = ctk.CTkEntry(frame_sindicatos, width=80)
+
+    label_senha_sindicalizada.grid(row=1, column=2, padx=10, pady=5, sticky="w")
+    entry_senha_sindicalizada.grid(row=2, column=2, padx=10, pady=5, sticky="nsew")
+
+    frame_treeview_sindicato = ctk.CTkFrame(framedpMaster, border_width=largura_borda, border_color=cor_de_borda)
+    frame_treeview_sindicato.grid(row=12, column=0,columnspan=7, padx=1, pady=5, sticky="nsew")
+
+
+    label_sindicato = ctk.CTkLabel(frame_treeview_sindicato, text="Sindicato", width=20)
+    entry_sindicato = ctk.CTkEntry(frame_treeview_sindicato, width=20)
+
+    label_sindicato.grid(row=8, column=0, padx=10, pady=5, sticky="w")
+    entry_sindicato.grid(row=9, column=0, padx=10, pady=5, sticky="new")
+
+    label_sindicato = ctk.CTkLabel(frame_treeview_sindicato, text="Data Base", width=20)
+    entry_sindicato = ctk.CTkEntry(frame_treeview_sindicato, width=20)
+
+    label_sindicato.grid(row=8, column=1, padx=10, pady=5, sticky="w")
+    entry_sindicato.grid(row=9, column=1, padx=10, pady=5, sticky="new")
+
+    label_sindicato = ctk.CTkLabel(frame_treeview_sindicato, text="Período de Vigência da Última CCT", width=20)
+    entry_sindicato = ctk.CTkEntry(frame_treeview_sindicato, width=20)
+
+    label_sindicato.grid(row=8, column=2, padx=10, pady=5, sticky="w")
+    entry_sindicato.grid(row=9, column=2, padx=10, pady=5, sticky="new")
+
+    label_sindicato = ctk.CTkLabel(frame_treeview_sindicato, text="Site CCT", width=20)
+    entry_sindicato = ctk.CTkEntry(frame_treeview_sindicato, width=20)
+
+    label_sindicato.grid(row=8, column=3, padx=10, pady=5, sticky="w")
+    entry_sindicato.grid(row=9, column=3, padx=10, pady=5, sticky="new")
+
+    logo_add = PhotoImage(file=Caminho_Logo_Add).subsample(25, 25)
+    bt_add = ctk.CTkButton(frame_treeview_sindicato,image=logo_add, text="Adicionar",command="")
+    bt_add.grid(row=8, column=4, padx=5, pady=5, sticky="new")
+
+    logo_excluir = PhotoImage(file=Caminho_Logo_Rem).subsample(25, 25)
+    bt_Excluir = ctk.CTkButton(frame_treeview_sindicato,image=logo_excluir, text="Excluir",command=lambda: "")
+    bt_Excluir.grid(row=9, column=4, padx=5, pady=5, sticky="new")
+
+    TreeviewSindicato = ttk.Treeview(frame_treeview_sindicato, columns=("Sindicato","DataBase","Período de Vigência da Última CCT","Site CCT"), show='headings')
+    TreeviewSindicato.grid(row=10, column=0,columnspan=5, sticky="nsew", padx=(1,0), pady=(5,10))
+    TreeviewSindicato.bind('<<TreeviewSelect>>')
+
+    # Define o as colunas
+    TreeviewSindicato.heading("Sindicato", text="Sindicato")
+    TreeviewSindicato.heading("DataBase", text="DataBase")
+    TreeviewSindicato.heading("Período de Vigência da Última CCT", text="Período de Vigência da Última CCT")
+    TreeviewSindicato.heading("Site CCT", text="Site CCT")
+    
+    
+    # Define o tamanho das colunas em pixels
+    TreeviewSindicato.column("Sindicato", width=200)  # 
+    TreeviewSindicato.column("DataBase", width=200)  # 
+    TreeviewSindicato.column("Período de Vigência da Última CCT", width=200)
+    TreeviewSindicato.column("Site CCT", width=200)  # 
+
+   
+    # Adicionar barra de rolagem vertical ao Treeview
+    scrollbar = ctk.CTkScrollbar(frame_treeview_sindicato, command=TreeviewSindicato.yview,height=100)
+    scrollbar.grid(row=10, column=5, padx=(0,10), pady=(5,10), sticky="nsew")
+    TreeviewSindicato.configure(yscrollcommand=scrollbar.set)
+
+    
+
+    #TreeviewSindicatos = ttk.Treeview(Frame_Treeview_sindicatos, columns=("Sindicato","DataBase","Período de Vigência da Última CCT","Site CCT"), show='headings')
+    #TreeviewSindicatos.grid(row=10, column=0,columnspan=6, sticky="nsew", padx=(1,0), pady=(5,10))
+    #TreeviewSindicatos.bind('<<TreeviewSelect>>')
 #------------------------------BPO
 
     frameBPO = ctk.CTkFrame(Viewer.tab("BPO"), border_width=largura_borda, border_color=cor_de_borda)

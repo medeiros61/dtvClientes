@@ -20,13 +20,13 @@ def parametrosinicias(frame,Frame_atual):
     frameprincipal = frame
     
     #Frame 
-    master_frame = ctk.CTkFrame(master=frameprincipal, width=900, height=580, fg_color=("#808080"))
-    master_frame.grid(row=0, column=0,sticky="nsew")
+    master_frame = ctk.CTkFrame(master=frameprincipal, width=1040, height=580, fg_color=("#808080"))
+    master_frame.grid(row=0,padx=5, column=0,sticky="nw")
     
     # Define a function to set the maximum size of the frame
 
     #criar botão açoes
-    FrameDados = ctk.CTkFrame(master_frame,height=40,width=700)
+    FrameDados = ctk.CTkFrame(master_frame,height=40,width=1000)
     FrameDados.grid(row=0,rowspan=2, column=0,columnspan=5, padx=(5, 0), pady=(1, 0), sticky="nsew")
 
     #criar botão açoes
@@ -48,7 +48,7 @@ def parametrosinicias(frame,Frame_atual):
 
     
     # criar tabview
-    tabview = ctk.CTkTabview(master_frame,width=815, height=540)
+    tabview = ctk.CTkTabview(master_frame,width=940, height=540)
     tabview.grid(row=2, column=0,columnspan=6, padx=5, pady=5, sticky="nsew")
     
     tabview.add("Cliente")
