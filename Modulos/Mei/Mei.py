@@ -16,9 +16,11 @@ def criartelaMEI(frame,DadosUsuario):
         
         filtrar()
         verificarseleção()
+        Tela_Edit_C.RemovertelaEdit_MEI()
         frame.pack(side=RIGHT, fill = BOTH,expand=True)
     finally:
-        pass
+        print("Entrou na tela de MEI")
+
 def RemovertelaMEI(frame): 
     try:
         frame.pack_forget()
@@ -81,6 +83,35 @@ def parametrosinicias(frame):
             TreeviewMEI.insert("", 'end', values=result)
 
 
+    
+    def verificarseleção(*args):
+        seleção = TreeviewMEI.selection()
+
+        if seleção:
+            valor = bt_Editar_MEI.cget("state")  # Obtém o estado atual do botão
+            if valor == "disabled":   
+                bt_Editar_MEI.configure(state='normal') 
+                bt_Excluir_MEI.configure(state='normal') 
+                bt_Comentar_MEI.configure(state='normal') 
+            
+            botãoparceiras = bt_add_MEI_Parceira.cget("state")  # Obtém o estado atual do botão
+            identificação = TreeviewMEI.item(seleção[0])['values'][2]
+            
+            if botãoparceiras == "disabled" and identificação == 'Contratante':   
+                    bt_add_MEI_Parceira.configure(state='normal') 
+            else:
+                if identificação != 'Contratante':
+                    bt_add_MEI_Parceira.configure(state='disabled')     
+        else:
+            bt_add_MEI_Parceira.configure(state='disabled')  
+            bt_Editar_MEI.configure(state='disabled') 
+            bt_Excluir_MEI.configure(state='disabled') 
+            bt_Comentar_MEI.configure(state='disabled') 
+
+    def editarcliente(*args):
+        Func_Mei.editar_MEI(TreeviewMEI,Dadosparateladeedição)
+        
+
 
     ##################################### FIM FUNÇÕES   #####################################################
 
@@ -98,8 +129,9 @@ def parametrosinicias(frame):
 
     #Listagem de MEI
     list_MEI_frame = ctk.CTkFrame(master=master_frame, width=900, height=480, fg_color=("#808080"))
-    list_MEI_frame.pack(side=TOP, fill = X)
-
+    list_MEI_frame.grid(row=0, column=0, sticky="n")
+    master_frame.grid_rowconfigure(0, weight=1)
+    master_frame.grid_columnconfigure(0, weight=1)
     #Frame dos itens do filtro ----------------------------------------------------------------------
     filter_frame = ctk.CTkFrame(master=list_MEI_frame, width=900, height=100, fg_color=("#808080"))
     filter_frame.grid(row=0, column=0, sticky="nsew")
@@ -162,37 +194,12 @@ def parametrosinicias(frame):
   
     #Listagem de MEI-----------------------------------------------------------------------------
 
-    
-    def verificarseleção(*args):
-        seleção = TreeviewMEI.selection()
-
-        if seleção:
-            valor = bt_Editar_MEI.cget("state")  # Obtém o estado atual do botão
-            if valor == "disabled":   
-                bt_Editar_MEI.configure(state='normal') 
-                bt_Excluir_MEI.configure(state='normal') 
-                bt_Comentar_MEI.configure(state='normal') 
-            
-            botãoparceiras = bt_add_MEI_Parceira.cget("state")  # Obtém o estado atual do botão
-            identificação = TreeviewMEI.item(seleção[0])['values'][2]
-            
-            if botãoparceiras == "disabled" and identificação == 'Contratante':   
-                    bt_add_MEI_Parceira.configure(state='normal') 
-            else:
-                if identificação != 'Contratante':
-                    bt_add_MEI_Parceira.configure(state='disabled')     
-        else:
-            bt_add_MEI_Parceira.configure(state='disabled')  
-            bt_Editar_MEI.configure(state='disabled') 
-            bt_Excluir_MEI.configure(state='disabled') 
-            bt_Comentar_MEI.configure(state='disabled') 
-
-    
     EstilodeTela = ThemedStyle(list_MEI_frame)
     EstilodeTela.set_theme("scidsand")
     TreeviewMEI = ttk.Treeview(list_MEI_frame, columns=("#","Nome","Identificação","Status"), show='headings')
     TreeviewMEI.grid(row=1, column=0, sticky="nsew")
     TreeviewMEI.bind('<<TreeviewSelect>>', verificarseleção)
+    TreeviewMEI.bind('<Double-1>',editarcliente)
     # Define o as colunas
     TreeviewMEI.heading("#", text="ID")
     TreeviewMEI.heading("Nome", text="Nome")

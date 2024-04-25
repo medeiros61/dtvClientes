@@ -105,7 +105,7 @@ def GetnameMEI(IDdomei):
 
 def getParceiras_toEdit(IDempresaContratante):
         with connection.cursor() as cursor:
-            ConsultaSQL = f"SELECT `nome`,`pendencias`,`situacao` FROM `meis` WHERE `mei_id` = '{IDempresaContratante}'"
+            ConsultaSQL = f"SELECT `id`,`nome`,`pendencias`,`situacao` FROM `meis` WHERE `mei_id` = '{IDempresaContratante}'"
             cursor.execute(ConsultaSQL)
             results = cursor.fetchall()
             return results
@@ -211,7 +211,7 @@ def getmeidata_toEdit(IDempresa):
                 nova_lista.append(novoitemlistagem)
         
             if nova_lista is not None:
-                meis = getParceiras_toEdit(nova_lista[1]) 
+                meis = getParceiras_toEdit(nova_lista[0]) 
                 return nova_lista,Listadeidentificação,data_quary,meis
             else:
                 return None,None

@@ -19,11 +19,11 @@ def parametrosinicias(frame,Frame_atual):
     framepai = Frame_atual
     frameprincipal = frame
     #Frame 
-    master_frame = ctk.CTkFrame(master=frameprincipal, width=900, height=580, fg_color=("#808080"))
+    master_frame = ctk.CTkFrame(master=frameprincipal, width=1040, height=580, fg_color=("#808080"))
     master_frame.pack(side=TOP, fill = X)
    
     #criar botão açoes
-    FrameDados = ctk.CTkFrame(master_frame,height=40,width=700)
+    FrameDados = ctk.CTkFrame(master_frame,height=40,width=1000)
     FrameDados.grid(row=0,rowspan=2, column=0,columnspan=5, padx=(5, 0), pady=(1, 0), sticky="nsew")
 
     bt_voltar = ctk.CTkButton(FrameDados,text='<',command=RemovertelaEdit_MEI,width=40,height=40)
@@ -50,7 +50,7 @@ def parametrosinicias(frame,Frame_atual):
 
     
     # criar tabview
-    tabview = ctk.CTkTabview(master_frame,width=800, height=540)
+    tabview = ctk.CTkTabview(master_frame,width=940, height=540)
     tabview.grid(row=4, column=0,columnspan=6, padx=5, pady=5, sticky="nsew")
     
     tabview.add("Empresa")
@@ -62,5 +62,7 @@ def parametrosinicias(frame,Frame_atual):
     tabview.add("DASN")
     tabview.tab("DASN").grid_columnconfigure(0, weight=1)   
     
-    bts.criarbotoes(tabview,DadosCliente)
+    Caminho_Logo_Add,Caminho_Logo_Edit,Caminho_Logo_Rem ,Caminho_Logo_Comt,Caminho_Logo_Excel =Imagens_DataBase.baixarimagemPgclientes()  
+    
+    bts.criarbotoes(tabview,DadosCliente,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho_Logo_Rem)
     

@@ -8,8 +8,8 @@ from tkinter import ttk
 
 def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
-    global NumeroID,Frame_dados_cliente_titulo,entry_Alvara_de_funcionamento,entry_Licenca_ambiental,entry_Data_vencimento_Ambiental,entry_Bombeiros,entry_Data_vencimento_Bombeiros,entry_Data_vencimento_Func,entry_Alvara_sanitrio,entry_Data_vencimento_Sanitario,entry_Nome_empresa,entry_CNPJ,entry_Estado,entry_Municpio,entry_Atividade,entry_Data_abertura_,entry_Ativo,entry_Link_WhatsApp,entry_Formas_de_tributao,entry_Anexo_simples_nacional,entry_Folha_de_pagamento,entry_Responsvel_contabil,entry_Responsvel_fiscal,entry_Responsvel_societrio,entry_Responsvel_DP,entry_Domiclio_eletrnico,entry_Email,entry_Nome_representante,entry_CPF_representante_legal,entry_Data_de_nascimento_,entry_Contabilidade_finalizada_,entry_Certificado_digital,entry_Senha_certificado,entry_Data_de_vencimento_,entry_Cdigo_e_cac,entry_Senha_EAC,entry_Cdigo_Simples,entry_Nmero_de_livros_ECD,entry_Ano_Nmero_de_livros_ECD,entry_Nmero_de_livros_ECF,entry_Ano_Nmero_de_livros_ECF,entry_Inscrio_estadual,entry_Credenciamento_NFE,entry_Nmero_CSC,entry_Site_caixa_postal,entry_Inscrio_municipal,entry_Site,entry_Login,entry_Senha,entry_Demais_senhas,entry_Senha_Abertura_Processos,entry_Observaes,entry_Alvara_de_funcionamento,entry_Alvara_sanitrio,entry_Licenca_ambiental,entry_Bombeiros,entry_ltima_alterao_contratual_,entry_Nmero_alterao_contratual,entry_Folha_de_pagto,entry_Quantidade_de_funcionrios,entry_Prolabore,entry_Quantidade_de_scios,entry_Esocial_usurio,entry_Esocial_senha,entry_Esocial_cdigo_de_acesso,entry_FAP_usurio,entry_FAP_senha,entry_Empregador_WEB_usurio,entry_Empregador_WEB_senha,entry_Sistema,entry_Site_Bpo,entry_Usurio,entry_Senha_simples,entry_Banco_1,entry_Banco_2,entry_Tipo_de_BPO,entry_Estado_estaduais,entry_Observaes_gerais_Societario,entry_Observaes_gerais_bpo,siglas_estados,not_or_yes,yes_or_not,formasdetributacao,TreeviewSocios
-
+    global NumeroID,Frame_dados_cliente_titulo,entry_Alvara_de_funcionamento,entry_Licenca_ambiental,entry_Data_vencimento_Ambiental,entry_Bombeiros,entry_Data_vencimento_Bombeiros,entry_Data_vencimento_Func,entry_Alvara_sanitrio,entry_Data_vencimento_Sanitario,entry_Nome_empresa,entry_CNPJ,entry_Estado,entry_Municpio,entry_Atividade,entry_Data_abertura_,entry_Ativo,entry_Link_WhatsApp,entry_Formas_de_tributao,entry_Anexo_simples_nacional,entry_Folha_de_pagamento,entry_Responsvel_contabil,entry_Responsvel_fiscal,entry_Responsvel_societrio,entry_Responsvel_DP,entry_Domiclio_eletrnico,entry_Email,entry_Nome_representante,entry_CPF_representante_legal,entry_Data_de_nascimento_,entry_Contabilidade_finalizada_,entry_Certificado_digital,entry_Senha_certificado,entry_Data_de_vencimento_,entry_Cdigo_e_cac,entry_Senha_EAC,entry_Cdigo_Simples,entry_Nmero_de_livros_ECD,entry_Ano_Nmero_de_livros_ECD,entry_Nmero_de_livros_ECF,entry_Ano_Nmero_de_livros_ECF,entry_Inscrio_estadual,entry_Credenciamento_NFE,entry_Nmero_CSC,entry_Site_caixa_postal,entry_Inscrio_municipal,entry_Site,entry_Login,entry_Senha,entry_Demais_senhas,entry_Senha_Abertura_Processos,entry_Observaes,entry_Alvara_de_funcionamento,entry_Alvara_sanitrio,entry_Licenca_ambiental,entry_Bombeiros,entry_ltima_alterao_contratual_,entry_Nmero_alterao_contratual,entry_Folha_de_pagto,entry_Quantidade_de_funcionrios,entry_Prolabore,entry_Quantidade_de_scios,entry_Esocial_usurio,entry_Esocial_senha,entry_Esocial_cdigo_de_acesso,entry_FAP_usurio,entry_FAP_senha,entry_Empregador_WEB_usurio,entry_Empregador_WEB_senha,entry_Sistema,entry_Site_Bpo,entry_Usurio,entry_Senha_simples,entry_Banco_1,entry_Banco_2,entry_Tipo_de_BPO,entry_Estado_estaduais,entry_Observaes_gerais_Societario,entry_Observaes_gerais_bpo,siglas_estados,not_or_yes,yes_or_not,formasdetributacao,TreeviewSocios,box_sindicalizada,entry_login_sindicalizada,entry_senha_sindicalizada,TabViewGlobal
+    TabViewGlobal = Viewer
     #Configurações de borda
     cor_de_borda = "gray50"
     largura_borda = 2
@@ -33,7 +33,9 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     ]
 
     framecliente = ctk.CTkFrame(Viewer.tab("Cliente"), border_width=largura_borda, border_color=cor_de_borda)
-    framecliente.grid(row=0, column=0, padx=10, pady=5, sticky="new")
+    framecliente.grid(row=0, column=0, sticky="n")
+    Viewer.tab("Cliente").grid_rowconfigure(0, weight=1)
+    Viewer.tab("Cliente").grid_columnconfigure(0, weight=1)
 
     NumeroID = ctk.CTkLabel(framecliente, text="ID")
     NumeroID.grid(row=0, column=1,columnspan=1, padx=10, pady=10, sticky="w")
@@ -97,12 +99,16 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     
  
 
-    scrollframegerais = ctk.CTkScrollableFrame(Viewer.tab("Gerais"), border_width=largura_borda, border_color=cor_de_borda,width=780, height=450)
-    scrollframegerais.grid(row=0, column=0, padx=1, pady=1, sticky="new")
+    scrollframegerais = ctk.CTkScrollableFrame(Viewer.tab("Gerais"), border_width=largura_borda, border_color=cor_de_borda,width=900, height=470)
+    scrollframegerais.grid(row=0, column=0, sticky="n")
+    Viewer.tab("Gerais").grid_rowconfigure(0, weight=1)
+    Viewer.tab("Gerais").grid_columnconfigure(0, weight=1)
     
-    frameGerais = ctk.CTkFrame(scrollframegerais)
-    frameGerais.grid(row=0, column=0, padx=10, pady=5, sticky="new")
-
+ 
+    frameGerais = ctk.CTkFrame(scrollframegerais, border_width=largura_borda, border_color=cor_de_borda)
+    frameGerais.grid(row=0, column=0, sticky="n")
+    scrollframegerais.grid_columnconfigure(0, weight=1)
+    
     label_Formas_de_tributao = ctk.CTkLabel(frameGerais, text="Formas de tributação")
     entry_Formas_de_tributao = ctk.CTkComboBox(frameGerais, width=150,values=formasdetributacao)
 
@@ -282,7 +288,9 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
 #------------------------------Federais
     frame_federais = ctk.CTkFrame(Viewer.tab("Federais"), border_width=largura_borda, border_color=cor_de_borda)
-    frame_federais.grid(row=0, column=0, padx=10, pady=5, sticky="new")
+    frame_federais.grid(row=0, column=0, sticky="n")
+    Viewer.tab("Federais").grid_rowconfigure(0, weight=1)
+    Viewer.tab("Federais").grid_columnconfigure(0, weight=1)
 
     label_Cdigo_e_cac = ctk.CTkLabel(frame_federais, text="Código e-cac")
     entry_Cdigo_e_cac = ctk.CTkEntry(frame_federais, width=230)
@@ -311,7 +319,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
     ### ECD 
     frameECD = ctk.CTkFrame(tab_livros.tab("livros ECD"), border_width=largura_borda, border_color=cor_de_borda)
-    frameECD.grid(row=0, column=0, padx=(10,0), pady=5, sticky="nsew")
+    frameECD.grid(row=0, column=0, sticky="n")
 
     label_Nmero_de_livros_ECD = ctk.CTkLabel(frameECD, text="Numero")
     entry_Nmero_de_livros_ECD = ctk.CTkEntry(frameECD, width=200)
@@ -361,7 +369,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
     ###ECF
     frameECF = ctk.CTkFrame(tab_livros.tab("livros ECF"), border_width=largura_borda, border_color=cor_de_borda)
-    frameECF.grid(row=0, column=0, padx=(10,0), pady=5, sticky="n")
+    frameECF.grid(row=0, column=0, sticky="n")
 
     label_Nmero_de_livros_ECF = ctk.CTkLabel(frameECF, text="Numero")
     entry_Nmero_de_livros_ECF = ctk.CTkEntry(frameECF, width=200)
@@ -410,7 +418,9 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
 #------------------------------Estaduais
     frameestaduais = ctk.CTkFrame(Viewer.tab("Estaduais"), border_width=largura_borda, border_color=cor_de_borda)
-    frameestaduais.grid(row=0, column=0, padx=10, pady=5, sticky="w")
+    frameestaduais.grid(row=0, column=0 ,sticky="n")
+    Viewer.tab("Estaduais").grid_rowconfigure(0, weight=1)
+    Viewer.tab("Estaduais").grid_columnconfigure(0, weight=1)
 
     label_Estado_estaduais = ctk.CTkLabel(frameestaduais, text="Estado")
     entry_Estado_estaduais = ctk.CTkComboBox(frameestaduais,values=siglas_estados)
@@ -449,14 +459,14 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
 
 
-    tab_livros_estaduais=ctk.CTkTabview(frameestaduais, width=750)
-    tab_livros_estaduais.grid(row=4, column=0,columnspan=4, padx=5, pady=0, sticky="nsew")
+    tab_livros_estaduais=ctk.CTkTabview(frameestaduais)
+    tab_livros_estaduais.grid(row=4, column=0,columnspan=4, padx=5, pady=5, sticky="n")
     tab_livros_estaduais.add("Livros Fiscais Entrada")
     tab_livros_estaduais.add("Livros Fiscais Inventário")
 
 #### Livros Fiscais Entrada ### Livros Fiscais Entrada ###
     frameLivrosEntrada = ctk.CTkFrame(tab_livros_estaduais.tab("Livros Fiscais Entrada"), border_width=largura_borda, border_color=cor_de_borda)
-    frameLivrosEntrada.grid(row=0, column=0, padx=(10,0), pady=0, sticky="n")
+    frameLivrosEntrada.grid(row=0, column=0, sticky="n")
 
     label_Livros_Fiscais_Entrada_Numero = ctk.CTkLabel(frameLivrosEntrada, text="Numero")
     entry_Livros_Fiscais_Entrada_Numero = ctk.CTkEntry(frameLivrosEntrada, width=50)
@@ -482,7 +492,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
    
     
     TreeviewEntrada= ttk.Treeview(frameLivrosEntrada, columns=("Numero","Ano"), show='headings')
-    TreeviewEntrada.grid(row=2, column=0,columnspan=3, sticky="nsew", padx=(10,0), pady=(5,2))
+    TreeviewEntrada.grid(row=2, column=0,columnspan=3, sticky="nsew", padx=(10,0), pady=(5,10))
     TreeviewEntrada.bind('<<TreeviewSelect>>')
     
     EstilodeTela = ThemedStyle(TreeviewEntrada)
@@ -497,8 +507,8 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     TreeviewEntrada.column("Ano", width=350)  # 
 
     # Adicionar barra de rolagem vertical ao Treeview
-    scrollbar = ctk.CTkScrollbar(frameLivrosEntrada, command=TreeviewEntrada.yview,height=150)
-    scrollbar.grid(row=2, column=4, padx=(0,10), pady=(5,2), sticky="nsew")
+    scrollbar = ctk.CTkScrollbar(frameLivrosEntrada, command=TreeviewEntrada.yview,height=200)
+    scrollbar.grid(row=2, column=4, padx=(0,10), pady=(5,10), sticky="nsew")
     TreeviewEntrada.configure(yscrollcommand=scrollbar.set)
 
 
@@ -508,7 +518,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 ### Livros Fiscais Inventário ### Livros Fiscais Inventário ###
 
     frameLivrosInventario = ctk.CTkFrame(tab_livros_estaduais.tab("Livros Fiscais Inventário"), border_width=largura_borda, border_color=cor_de_borda)
-    frameLivrosInventario.grid(row=0, column=0, padx=(10,0), pady=0, sticky="n")
+    frameLivrosInventario.grid(row=0, column=0, sticky="n")
 
     label_Livros_Fiscais_Inventario_Numero = ctk.CTkLabel(frameLivrosInventario, text="Numero")
     entry_Livros_Fiscais_Inventario_Numero = ctk.CTkEntry(frameLivrosInventario, width=50)
@@ -534,7 +544,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
    
     
     TreeviewInventario= ttk.Treeview(frameLivrosInventario, columns=("Numero","Ano"), show='headings')
-    TreeviewInventario.grid(row=2, column=0,columnspan=3, sticky="nsew", padx=(10,0), pady=(5,2))
+    TreeviewInventario.grid(row=2, column=0,columnspan=3, sticky="nsew", padx=(10,0), pady=(5,10))
     TreeviewInventario.bind('<<TreeviewSelect>>')
     
     EstilodeTela = ThemedStyle(TreeviewInventario)
@@ -550,15 +560,18 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
    
     # Adicionar barra de rolagem vertical ao Treeview
-    scrollbar = ctk.CTkScrollbar(frameLivrosInventario, command=TreeviewInventario.yview,height=150)
-    scrollbar.grid(row=2, column=4, padx=(0,10), pady=(5,2), sticky="nsew")
+    scrollbar = ctk.CTkScrollbar(frameLivrosInventario, command=TreeviewInventario.yview,height=200)
+    scrollbar.grid(row=2, column=4, padx=(0,10), pady=(5,10), sticky="nsew")
     TreeviewInventario.configure(yscrollcommand=scrollbar.set)
 
 
 
 #------------------------------Municipais
     frameMunicipais = ctk.CTkFrame(Viewer.tab("Municipais"), border_width=largura_borda, border_color=cor_de_borda)
-    frameMunicipais.grid(row=0, column=0, padx=10, pady=5, sticky="w")
+    frameMunicipais.grid(row=0, column=0, sticky="n")
+    Viewer.tab("Municipais").grid_rowconfigure(0, weight=1)
+    Viewer.tab("Municipais").grid_columnconfigure(0, weight=1)
+    
 
     label_Inscrio_municipal = ctk.CTkLabel(frameMunicipais, text="Inscrição municipal")
     entry_Inscrio_municipal = ctk.CTkEntry(frameMunicipais, width=100)
@@ -612,7 +625,9 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 #------------------------------Societario
   
     frameSocietario = ctk.CTkFrame(Viewer.tab("Societário"), border_width=largura_borda, border_color=cor_de_borda)
-    frameSocietario.grid(row=0, column=0, padx=10, pady=5, sticky="new")
+    frameSocietario.grid(row=0, column=0, sticky="n")
+    Viewer.tab("Societário").grid_rowconfigure(0, weight=1)
+    Viewer.tab("Societário").grid_columnconfigure(0, weight=1)
 
     #Funcionamento
     Framealvara_func = ctk.CTkFrame(frameSocietario, border_width=largura_borda, border_color=cor_de_borda)
@@ -710,14 +725,17 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
 #------------------------------DP Pessoal
 
-    scrolldppessoal = ctk.CTkScrollableFrame(Viewer.tab("Departamento pessoal"), border_width=largura_borda, border_color=cor_de_borda,width=900, height=450)
-    scrolldppessoal.grid(row=0, column=0, padx=1, pady=1, sticky="nw")
-    
+    scrolldppessoal = ctk.CTkScrollableFrame(Viewer.tab("Departamento pessoal"), border_width=largura_borda, border_color=cor_de_borda,width=900, height=470)
+    scrolldppessoal.grid(row=0, column=0,sticky="n")
+    Viewer.tab("Departamento pessoal").grid_rowconfigure(0, weight=1)
+    Viewer.tab("Departamento pessoal").grid_columnconfigure(0, weight=1)
+
     framedpMaster = ctk.CTkFrame(scrolldppessoal, border_width=largura_borda, border_color=cor_de_borda)
-    framedpMaster.grid(row=0, column=0, padx=10, pady=5, sticky="w")
+    framedpMaster.grid(row=0, column=0,sticky="n")
+    scrolldppessoal.grid_columnconfigure(0, weight=1)
 
     framedp = ctk.CTkFrame(framedpMaster, border_width=largura_borda, border_color=cor_de_borda)
-    framedp.grid(row=0, column=0, padx=10, pady=5, sticky="w")
+    framedp.grid(row=0, column=0, padx=10, pady=5, sticky="nsew")
 
     label_Folha_de_pagto = ctk.CTkLabel(framedp, text="Folha de pagto", width=20)
     entry_Folha_de_pagto = ctk.CTkComboBox(framedp,values=not_or_yes, width=80)
@@ -748,7 +766,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
     ##Dados esocial
     framedp_esocial = ctk.CTkFrame(framedpMaster, border_width=largura_borda, border_color=cor_de_borda)
-    framedp_esocial.grid(row=2, column=0, padx=10, pady=5, sticky="new")
+    framedp_esocial.grid(row=2, column=0, padx=10, pady=5, sticky="nsew")
 
     label_Esocial_usurio = ctk.CTkLabel(framedp_esocial, text="Esocial usuário", width=100)
     entry_Esocial_usurio = ctk.CTkEntry(framedp_esocial, width=115)
@@ -807,7 +825,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
 
     frame_sindicatos = ctk.CTkFrame(framedpMaster, border_width=largura_borda, border_color=cor_de_borda)
-    frame_sindicatos.grid(row=10, column=0,columnspan=7, padx=10, pady=5, sticky="nsew")
+    frame_sindicatos.grid(row=10, column=0,columnspan=6, padx=10, pady=5, sticky="new")
 
     label_sindicatos = ctk.CTkLabel(frame_sindicatos, text="Sindicatos", width=750)
     label_sindicatos.grid(row=0, column=0,columnspan=3, padx=10, pady=5, sticky="w")
@@ -816,22 +834,22 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     label_sindicalizada.grid(row=1, column=0, padx=10, pady=5, sticky="w")
 
     box_sindicalizada = ctk.CTkComboBox(frame_sindicatos, values=not_or_yes, width=20)
-    box_sindicalizada.grid(row=2, column=0, padx=10, pady=5, sticky="nsew")
+    box_sindicalizada.grid(row=2, column=0, padx=10, pady=5, sticky="new")
 
     label_login_sindicalizada = ctk.CTkLabel(frame_sindicatos, text="Login:", width=20)
     entry_login_sindicalizada = ctk.CTkEntry(frame_sindicatos, width=80)
 
     label_login_sindicalizada.grid(row=1, column=1, padx=10, pady=5, sticky="w")
-    entry_login_sindicalizada.grid(row=2, column=1, padx=10, pady=5, sticky="nsew")
+    entry_login_sindicalizada.grid(row=2, column=1, padx=10, pady=5, sticky="new")
 
     label_senha_sindicalizada = ctk.CTkLabel(frame_sindicatos, text="Senha:", width=20)
     entry_senha_sindicalizada = ctk.CTkEntry(frame_sindicatos, width=80)
 
     label_senha_sindicalizada.grid(row=1, column=2, padx=10, pady=5, sticky="w")
-    entry_senha_sindicalizada.grid(row=2, column=2, padx=10, pady=5, sticky="nsew")
+    entry_senha_sindicalizada.grid(row=2, column=2, padx=10, pady=5, sticky="new")
 
     frame_treeview_sindicato = ctk.CTkFrame(framedpMaster, border_width=largura_borda, border_color=cor_de_borda)
-    frame_treeview_sindicato.grid(row=12, column=0,columnspan=7, padx=1, pady=5, sticky="nsew")
+    frame_treeview_sindicato.grid(row=12, column=0,columnspan=6, padx=10, pady=5, sticky="nsew")
 
 
     label_sindicato = ctk.CTkLabel(frame_treeview_sindicato, text="Sindicato", width=20)
@@ -867,7 +885,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     bt_Excluir.grid(row=9, column=4, padx=5, pady=5, sticky="new")
 
     TreeviewSindicato = ttk.Treeview(frame_treeview_sindicato, columns=("Sindicato","DataBase","Período de Vigência da Última CCT","Site CCT"), show='headings')
-    TreeviewSindicato.grid(row=10, column=0,columnspan=5, sticky="nsew", padx=(1,0), pady=(5,10))
+    TreeviewSindicato.grid(row=10, column=0,columnspan=5, sticky="nsew", padx=(5,5), pady=(5,10))
     TreeviewSindicato.bind('<<TreeviewSelect>>')
 
     # Define o as colunas
@@ -896,8 +914,11 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     #TreeviewSindicatos.bind('<<TreeviewSelect>>')
 #------------------------------BPO
 
+
     frameBPO = ctk.CTkFrame(Viewer.tab("BPO"), border_width=largura_borda, border_color=cor_de_borda)
-    frameBPO.grid(row=0, column=0, padx=10, pady=5, sticky="w")
+    frameBPO.grid(row=0, column=0, sticky="n")
+    Viewer.tab("BPO").grid_rowconfigure(0, weight=1)
+    Viewer.tab("BPO").grid_columnconfigure(0, weight=1)
 
     label_Sistema = ctk.CTkLabel(frameBPO, text="Sistema")
     entry_Sistema = ctk.CTkEntry(frameBPO)
@@ -958,6 +979,8 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
 
 def limparcampos():
+    TabViewGlobal.set("Cliente")
+    
     NumeroID.configure(text=f"" )
     Frame_dados_cliente_titulo.configure(text=f"")
     entry_Nome_empresa.delete(0, 'end')
@@ -1019,7 +1042,8 @@ def limparcampos():
     entry_Banco_2.delete(0, 'end')
     entry_Tipo_de_BPO.delete(0, 'end')
     entry_Observaes_gerais_bpo.delete('1.0', 'end')
-
+    entry_login_sindicalizada.delete(0, 'end')
+    entry_senha_sindicalizada.delete(0, 'end')
 
 
     entry_Estado.set(siglas_estados[0]) 
@@ -1036,7 +1060,9 @@ def limparcampos():
     entry_Bombeiros.set(not_or_yes[0]) 
     entry_Folha_de_pagto.set(not_or_yes[0]) 
     entry_Prolabore.set(not_or_yes[0])
-    
+    box_sindicalizada.set(not_or_yes[0])
+
+
     try:
         for item in TreeviewSocios.get_children():
                 TreeviewSocios.delete(item)     
@@ -1049,6 +1075,7 @@ def limparcampos():
     #        pass         
     
 def Importardados(idcliente):
+    
     Listadedados, identificadores,qr,socios,sindicatos = dbc.getclientdata_toEdit(idcliente)
     
     limparcampos()
@@ -1164,7 +1191,10 @@ def Importardados(idcliente):
     entry_FAP_senha.insert(0,Listadedados[55]) # Campo fap_senha do banco de dados
     entry_Empregador_WEB_usurio.insert(0,Listadedados[56]) # Campo empregador_web_usuario do banco de dados
     entry_Empregador_WEB_senha.insert(0,Listadedados[57]) # Campo empregador_web_senha do banco de dados
-    
+    box_sindicalizada.set(Listadedados[72])# Campo dpto_pessoal_sindicalizada do banco de dados
+    entry_login_sindicalizada.insert(0,Listadedados[73])# Campo dpto_pessoal_login do banco de dados
+    entry_senha_sindicalizada.insert(0,Listadedados[74])# Campo dpto_pessoal_senha do banco de dados
+
     #for result in sindicatos:
     #    TreeviewSindicatos.insert("", 'end', values=result)
             

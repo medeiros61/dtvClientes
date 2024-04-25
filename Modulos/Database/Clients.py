@@ -253,7 +253,7 @@ def getclientdata_toEdit(IDempresa):
             results_list = list(results)
 
             # results_list[7] representa a coluna "ativo" na consulta SQL
-            botões_yesornot = [7,10,15,21,27,29,36,38,40,42,47,49]
+            botões_yesornot = [7,10,15,21,27,29,36,38,40,42,47,49,72]
             for item in botões_yesornot:
                 if results_list[item] == 1:
                     results_list[item] = "SIM"

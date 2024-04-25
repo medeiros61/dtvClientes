@@ -21,8 +21,10 @@ def parametrosinicias(frame,Frame_atual):
     
     #Frame 
     master_frame = ctk.CTkFrame(master=frameprincipal, width=1040, height=580, fg_color=("#808080"))
-    master_frame.grid(row=0,padx=5, column=0,sticky="nw")
-    
+    master_frame.grid(row=0, column=0,sticky="n")
+    frameprincipal.grid_rowconfigure(0, weight=1)
+    frameprincipal.grid_columnconfigure(0, weight=1)
+
     # Define a function to set the maximum size of the frame
 
     #criar botão açoes

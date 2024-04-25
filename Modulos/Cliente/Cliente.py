@@ -19,6 +19,7 @@ def criartelaclientes(frame,DadosUsuario):
         
         filtrar()
         verificarseleção()
+        Tela_Edit_C.RemovertelaEdit_clientes()
         frame.pack(side=RIGHT, fill = BOTH,expand=True)
 
         #clientes_data = dbc.getclientlist_complete()
@@ -44,7 +45,7 @@ def criartelaclientes(frame,DadosUsuario):
         #for result in clientes_data:
         #    TreeviewClientes.insert("", 'end', values=result)
     finally:
-        pass
+        print("Entrou na tela de Clientes")
 
 def Removertelaclientes(frame): 
     try:
@@ -106,6 +107,23 @@ def parametrosinicias(frame):
             TreeviewClientes.insert("", 'end', values=result)
 
 
+    def verificarseleção(*args):
+        seleção = TreeviewClientes.selection()
+
+        if seleção:
+            valor = bt_Editar_clients.cget("state")  # Obtém o estado atual do botão
+            if valor == "disabled":   
+                bt_Editar_clients.configure(state='normal') 
+                bt_Excluir_clients.configure(state='normal') 
+                bt_Comentar_clients.configure(state='normal') 
+        else:
+            
+            bt_Editar_clients.configure(state='disabled') 
+            bt_Excluir_clients.configure(state='disabled') 
+            bt_Comentar_clients.configure(state='disabled')
+    def editarcliete(*args):
+        Func_cli.editar_cliente(TreeviewClientes,Dadosparateladeedição)
+        
 
     ##################################### FIM FUNÇÕES   #####################################################
      
@@ -123,7 +141,9 @@ def parametrosinicias(frame):
     Tela_Edit_C.parametrosinicias(frame_edição_dados,master_frame)
     #Listagem de clientes
     list_clients_frame = ctk.CTkFrame(master=master_frame, width=900, height=480, fg_color=("#808080"))
-    list_clients_frame.pack(side=TOP, fill = X)
+    list_clients_frame.grid(row=0, column=0, sticky="n")
+    master_frame.grid_rowconfigure(0, weight=1)
+    master_frame.grid_columnconfigure(0, weight=1)
     
     #Frame dos itens do filtro ----------------------------------------------------------------------
     filter_frame = ctk.CTkFrame(master=list_clients_frame, width=900, height=100, fg_color=("#808080"))
@@ -189,21 +209,6 @@ def parametrosinicias(frame):
   
     #Listagem de clientes-----------------------------------------------------------------------------
 
-    def verificarseleção(*args):
-        seleção = TreeviewClientes.selection()
-
-        if seleção:
-            valor = bt_Editar_clients.cget("state")  # Obtém o estado atual do botão
-            if valor == "disabled":   
-                bt_Editar_clients.configure(state='normal') 
-                bt_Excluir_clients.configure(state='normal') 
-                bt_Comentar_clients.configure(state='normal') 
-        else:
-            
-            bt_Editar_clients.configure(state='disabled') 
-            bt_Excluir_clients.configure(state='disabled') 
-            bt_Comentar_clients.configure(state='disabled')
-
     
     
     EstilodeTela = ThemedStyle(list_clients_frame)
@@ -211,7 +216,8 @@ def parametrosinicias(frame):
     TreeviewClientes = ttk.Treeview(list_clients_frame, columns=("#","Nome","UF","Município","Status"), show='headings')
     TreeviewClientes.grid(row=1, column=0, sticky="nsew")
     TreeviewClientes.bind('<<TreeviewSelect>>', verificarseleção)
-    
+    TreeviewClientes.bind('<Double-1>',editarcliete)
+
     # Define o as colunas
     TreeviewClientes.heading("#", text="ID")
     TreeviewClientes.heading("Nome", text="Nome")

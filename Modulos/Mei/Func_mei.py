@@ -48,7 +48,7 @@ def editar_MEI(TreeView,Dadosparateladeedição):
                 Frame_atual = Dadosparateladeedição[1]
                 Frame_atual.pack_forget()
                 frame_edição_dados.pack(side=RIGHT, fill = BOTH,expand=True)
-                btedit.Importardados(id)
+                btedit.Importardados(id,Dadosparateladeedição)
                 # Agora você tem o nome do cliente selecionado
                 print(f'Editando cliente: [id:{id}] {nome_cliente}')
             else:

@@ -93,8 +93,9 @@ def parametrosinicias(frame):
     
     #Listagem de Usarios
     list_user_frame = ctk.CTkFrame(master=master_frame, width=900, height=480, fg_color=("#808080"))
-    list_user_frame.pack(side=TOP, fill = X)
-    
+    list_user_frame.grid(row=0, column=0, sticky="n")
+    master_frame.grid_rowconfigure(0, weight=1)
+    master_frame.grid_columnconfigure(0, weight=1)
     #Frame dos itens do filtro ----------------------------------------------------------------------
     filter_frame = ctk.CTkFrame(master=list_user_frame, width=900, height=100, fg_color=("#808080"))
     filter_frame.grid(row=0, column=0, sticky="nsew")
