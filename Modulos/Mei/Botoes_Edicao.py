@@ -1,5 +1,11 @@
 import customtkinter as ctk
 import Modulos.Database.Meis as dbm
+import tkinter as tk
+from tkinter import *
+from ttkthemes import ThemedStyle
+from tkinter import ttk
+
+
 
 def criarbotoes(Viewer,frameprincipal):
     global Tipo,frame_dados_mei,Contratante,id,entry_Nome,entry_Situao,entry_Identificao,entry_CNPJ,entry_Tributao,entry_Data_abertura_,entry_Prefeitura,entry_Login,entry_Senha,entry_Pendncia_de_Recolhimentos,entry_Entrega_de_DAS_Mensal,entry_E_mail,entry_Pendncias,entry_Observaes,entry_CPF,entry_Cdigo_de_Acesso,entry_Senha_GOV,entry_Nvel_GOV,entry_Endereo,entry_Inscrio_Estadual,entry_Inscrio_Municipal,entry_Certificado_Digital,entry_Modelo_Datavix,entry_Homologado___Sindicato,entry_Vencimento_,entry_Ano,entry_Faturamento
@@ -8,6 +14,8 @@ def criarbotoes(Viewer,frameprincipal):
         "SIM","NÃO"
     ]
 
+    cor_de_borda = "gray50"
+    largura_borda = 2
 
 
     label_Nome = ctk.CTkLabel(Viewer.tab("Empresa"), text="Nome")
@@ -186,26 +194,57 @@ def criarbotoes(Viewer,frameprincipal):
     entry_Vencimento_.grid(row=1, column=2, padx=10, pady=5, sticky="nsew")
 
 #DASN
+    FrameDas = ctk.CTkFrame(Viewer.tab("DASN"), border_width=largura_borda, border_color=cor_de_borda)
+    FrameDas.grid(row=0, column=0, padx=10, pady=5, sticky="new")
 
-    label_Ano_dasn = ctk.CTkLabel(Viewer.tab("DASN"), text="Ano")
-    entry_Ano_dasn= ctk.CTkEntry(Viewer.tab("DASN"))
+
+
+    label_Ano_dasn = ctk.CTkLabel(FrameDas, text="Ano")
+    entry_Ano_dasn= ctk.CTkEntry(FrameDas)
 
     label_Ano_dasn.grid(row=0, column=0, padx=10, pady=5, sticky="w")
     entry_Ano_dasn.grid(row=1, column=0, padx=10, pady=5, sticky="nsew")
 
 
-    label_Faturamento = ctk.CTkLabel(Viewer.tab("DASN"), text="Faturamento")
-    entry_Faturamento = ctk.CTkEntry(Viewer.tab("DASN"))
+    label_Faturamento = ctk.CTkLabel(FrameDas, text="Faturamento")
+    entry_Faturamento = ctk.CTkEntry(FrameDas)
 
     label_Faturamento.grid(row=0, column=1, padx=10, pady=5, sticky="w")
     entry_Faturamento.grid(row=1, column=1, padx=10, pady=5, sticky="nsew")
 
 
-    label_Observaes_dasn = ctk.CTkLabel(Viewer.tab("DASN"), text="Observações")
-    entry_Observaes_dasn = ctk.CTkEntry(Viewer.tab("DASN"))
+    label_Observaes_dasn = ctk.CTkLabel(FrameDas, text="Observações")
+    entry_Observaes_dasn = ctk.CTkEntry(FrameDas)
 
     label_Observaes_dasn.grid(row=0, column=2, padx=10, pady=5, sticky="w")
     entry_Observaes_dasn.grid(row=1, column=2, padx=10, pady=5, sticky="nsew")
+
+    TreeviewDas = ttk.Treeview(FrameDas, columns=("Ano","Faturamento","Observações"), show='headings')
+    TreeviewDas.grid(row=2, column=0,columnspan=3, sticky="nsew", padx=(1,0), pady=(5,10))
+    TreeviewDas.bind('<<TreeviewSelect>>')
+
+    # Define o as colunas
+    TreeviewDas.heading("Ano", text="Ano")
+    TreeviewDas.heading("Faturamento", text="Faturamento")
+    TreeviewDas.heading("Observações", text="Observações")
+    
+    
+    # Define o tamanho das colunas em pixels
+    TreeviewDas.column("Ano", width=200)  # 
+    TreeviewDas.column("Faturamento", width=200)  # 
+    TreeviewDas.column("Observações", width=200)  # 
+
+   
+    # Adicionar barra de rolagem vertical ao Treeview
+    scrollbar = ctk.CTkScrollbar(FrameDas, command=TreeviewDas.yview,height=100)
+    scrollbar.grid(row=2, column=4, padx=(0,10), pady=(5,10), sticky="nsew")
+    TreeviewDas.configure(yscrollcommand=scrollbar.set)    
+
+
+
+
+
+
 
 def limparbotões():
     
