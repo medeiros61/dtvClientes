@@ -5,10 +5,20 @@ import Modulos.Mei.Mei as me
 import Modulos.Usuarios.usuarios as user
 import Modulos.imagens.ImagensClientes as Imagens_DataBase
 import threading
-import time
+import Modulos.Database.Logs as log
+
+import warnings
+# Desativar todos os warnings
+warnings.simplefilter("ignore")
+
+
 
 def DataVix(DadosUsuario,janela):
     
+    Evento = 'Logou'
+    log.RegistrarEventosdeLOG(Evento,DadosUsuario)
+    
+
     def ativarmei():
         cl.Removertelaclientes(frame_clientes)
         user.RemovertelaUsarios(frame_user)
@@ -26,7 +36,9 @@ def DataVix(DadosUsuario,janela):
         
     def exit():
         screen_datavix.quit()
-        screen_datavix.destroy()    
+        screen_datavix.destroy()   
+        Evento = 'Saiu'
+        log.RegistrarEventosdeLOG(Evento,DadosUsuario) 
     
     def fecharjanela_anterior():
         #janela.wm_iconify()
@@ -45,6 +57,7 @@ def DataVix(DadosUsuario,janela):
     Username = DadosUsuario[3]
     UserRole = DadosUsuario
     caminho = Imagens_DataBase.baixarimagemLogoDTV()
+    
 
     screen_datavix = ctk.CTk()
 
@@ -111,6 +124,12 @@ def DataVix(DadosUsuario,janela):
     #inicia a contagem para fechar tela de carregamento
     Treadfecharjanela.start()
     
+    # Ativar todos os warnings
+    warnings.simplefilter("default")
+
+    Evento = 'Ativou Modulo Painel Datavix'
+    log.RegistrarEventosdeLOG(Evento,DadosUsuario)
+
     screen_datavix.mainloop()
 
 #---------------------------------------------------------------------------------#

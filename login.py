@@ -7,9 +7,12 @@ import threading
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
+from customtkinter import CTkImage
+import warnings
 
 janela = ctk.CTk()
 
+warnings.simplefilter("ignore")
 
 podelogar = False
 def TelaLogin():
@@ -50,14 +53,14 @@ def TelaLogin():
                 
                 try: 
                     if TesteLogin[0] == True:
-                        print('\n')
+                        TesteLogin
                 except Exception:    
                     tamanho =[TesteLogin]
                     if len(tamanho) == 1:
                         TesteLogin = TesteLogin, TesteLogin
                 
                 if TesteLogin[0] == True:
-                    print('passou')
+                    
                     global podelogar
                     podelogar = True                   
                     if podelogar == True:
@@ -82,7 +85,7 @@ def TelaLogin():
                             barradeprogresso.pack(side=BOTTOM,fill=BOTH,expand=True)
                             barradeprogresso.configure(mode="indeterminate")
                             barradeprogresso.start()  
-                          
+                            
                             telacarregamento.mainloop() 
                            
                         Usuario = TesteLogin[1]
@@ -106,13 +109,13 @@ def TelaLogin():
                     #erro_senha_vazio.place_forget()
                     podelogar = False
                     #Mostrar SPAM com erro 
-                    print('Não Passou')    
+                    
             else:
                 messagebox.showinfo("Erro", "Favor preencher o campo de usuário e senha")    
                 #erro_senha_vazio.place(x=25, y=250)
                 #erro_senha.place_forget()
                 #Mostrar SPAM informando que é obrigatorio preenchimento senha e email
-                print('não preencheu tudo')
+          
 
 
     #janela = lado esquerdo
