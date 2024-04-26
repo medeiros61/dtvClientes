@@ -31,8 +31,9 @@ obs_Sair = ""
 Evento_Sair= 'Usuario Deslogou do sistema'
 
 def DataVix(DadosUsuario,janela):
+    log.dadosusuario(DadosUsuario)
+    log.activites("Entrar")
     log.AtivarRegistrodeLog()
-    log.dadosusuario(DadosUsuario)  
     log.RegistrarEventosdeLOG(Evento_Logar,obs_Logar) 
     
 
@@ -60,8 +61,9 @@ def DataVix(DadosUsuario,janela):
     def exit():
         screen_datavix.quit()
         screen_datavix.destroy()   
-  
-        log.RegistrarEventosdeLOG(Evento_Sair,obs_Sair)  
+    
+        log.RegistrarEventosdeLOG(Evento_Sair,obs_Sair) 
+        log.activites("Sair") 
     
     def fecharjanela_anterior():
         #janela.wm_iconify()
@@ -77,10 +79,11 @@ def DataVix(DadosUsuario,janela):
         # Definir as coordenadas da janela
         window.geometry(f"{width}x{height}+{x}+{y}") 
     def on_close():
+        log.activites("Sair") 
         screen_datavix.quit()
         screen_datavix.destroy() 
-        log.RegistrarEventosdeLOG(Evento_Sair,obs_Sair)  
-
+        log.RegistrarEventosdeLOG(Evento_Sair,obs_Sair) 
+      
     Username = DadosUsuario[3]
     UserRole = DadosUsuario
     caminho = Imagens_DataBase.baixarimagemLogoDTV()

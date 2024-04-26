@@ -44,8 +44,8 @@ def criartelaclientes(frame,DadosUsuario):
 
         #for result in clientes_data:
         #    TreeviewClientes.insert("", 'end', values=result)
-    finally:
-        print("Entrou na tela de Clientes")
+    except Exception:
+        pass
 
 def Removertelaclientes(frame): 
     try:

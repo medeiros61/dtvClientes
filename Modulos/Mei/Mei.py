@@ -18,8 +18,8 @@ def criartelaMEI(frame,DadosUsuario):
         verificarseleção()
         Tela_Edit_C.RemovertelaEdit_MEI()
         frame.pack(side=RIGHT, fill = BOTH,expand=True)
-    finally:
-        print("Entrou na tela de MEI")
+    except Exception:
+        pass
 
 def RemovertelaMEI(frame): 
     try:

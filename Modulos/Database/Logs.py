@@ -46,16 +46,54 @@ def dadosdesegurnaça():
 def dadosusuario(dadosusuario):
     global usuario
     usuario = dadosusuario
+    dadosdesegurnaça()
+
+def activites(type):
+    def Sessão_func():
+        global Sessão
+        if type == "Entrar":
+            
+            Sessão = True
+            User = f"{usuario[3]}({usuario[1]})"
+            connect_to_da()
+            try:
+                with connection.cursor() as cursor:
+                    ConsultaSQL = f"INSERT INTO `pyactivite` (`Usuarios`, `IPs`) VALUES ('{User}', '{ip}')"
+                    cursor.execute(ConsultaSQL)
+                    connection.commit()       
+            finally:
+                connection.close()
+          
+
+        if type == "Sair":
+            time.sleep(1)
+            
+            Sessão = False
+            connect_to_da()
+            
+            try:
+                with connection.cursor() as cursor:
+                    ConsultaSQL = f"DELETE FROM `pyactivite` WHERE `IPs` ='{ip}'"
+                    cursor.execute(ConsultaSQL)
+                    connection.commit()  
+            except Exception as e:
+                # Se ocorrer algum erro, faça rollback para reverter a transação
+                connection.rollback()
+                #print(f"Erro ao deletar: {e}")             
+            finally:
+                connection.close()
+
+           
+        
+
+    #é preciso iniciar thread se nao o processo de registro fica lento
+    ThredSessão = threading.Thread(target=Sessão_func)
+    ThredSessão.start()
 
 def RegistrarEventosdeLOG(evento,obs):
     
     global dadosdeLog,execução,segurança
 
-
-    if execução == 0 :
-        
-        dadosdesegurnaça()
-        execução +=1 
         
         #segurança = f'HOST: IP: MAC:'
 
@@ -69,7 +107,8 @@ def RegistrarEventosdeLOG(evento,obs):
 def AtivarRegistrodeLog():
     def registro():
 
-        while True:
+        while Sessão ==True:
+            
             Contagem=0
             #é preciso dar um time sleep para a thread não entra em loop e travar programa
             time.sleep(10)
