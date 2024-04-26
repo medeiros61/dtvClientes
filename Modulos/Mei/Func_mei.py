@@ -1,15 +1,39 @@
 from tkinter import *
 import Modulos.Mei.Botoes_Edicao as btedit
+import Modulos.Database.Logs as log
+
+Evento_Contratante = f'Entrou na tela de cadastro de MEI Contratante'
+obs_Contratante = ""
+
+Evento_Parceira= f'Entrou na tela de cadastro de MEI Parceira'
+obs_Parceira = ""
+
+Evento_exportar= f'Exportando Listagem MEIS'
+obs_exportar = ""
+
+#FUNÇÃO PARA ADICIONAR
+def Adicionar_MEI_Contratante(Dadosparateladeedição):
+    frame_edição_dados = Dadosparateladeedição[0]
+    Frame_atual = Dadosparateladeedição[1]
+    btedit.limparbotões()
+    Frame_atual.pack_forget()
+    frame_edição_dados.pack(side=RIGHT, fill = BOTH,expand=True) 
+
  
-#FUNÇÃO PARA ADICIONAR
-def Adicionar_MEI_Contratante():
-
-    print(f'Adicionando MEI Contratante')
+    log.RegistrarEventosdeLOG(Evento_Contratante,obs_Contratante) 
 
 #FUNÇÃO PARA ADICIONAR
-def Adicionar_MEI_Parceira():
+def Adicionar_MEI_Parceira(Dadosparateladeedição):
+    frame_edição_dados = Dadosparateladeedição[0]
+    Frame_atual = Dadosparateladeedição[1]
+    btedit.limparbotões()
+    Frame_atual.pack_forget()
+    frame_edição_dados.pack(side=RIGHT, fill = BOTH,expand=True) 
 
-    print(f'Adicionando MEI Parceira')
+
+    log.RegistrarEventosdeLOG(Evento_Parceira,obs_Parceira) 
+
+
 
 
 #FUNÇÃO PARA EXCLUIR
@@ -25,8 +49,10 @@ def excluir_MEI(TreeView):
                 # Obtém o nome do MEI
                 id = valores[0]
                 nome_MEI = valores[1]
-                # Agora você tem o nome do MEI selecionado
-                print(f'Excluindo MEI: [id:{id}] {nome_MEI}')
+                Evento= f'Excluindo MEI: [id:{id}] {nome_MEI}'
+                obs = ""
+                log.RegistrarEventosdeLOG(Evento,obs) 
+
             else:
                 print("Nenhum MEI selecionado.")
 
@@ -49,8 +75,10 @@ def editar_MEI(TreeView,Dadosparateladeedição):
                 Frame_atual.pack_forget()
                 frame_edição_dados.pack(side=RIGHT, fill = BOTH,expand=True)
                 btedit.Importardados(id,Dadosparateladeedição)
-                # Agora você tem o nome do cliente selecionado
-                print(f'Editando cliente: [id:{id}] {nome_cliente}')
+                Evento= f'Editando Cliente Planilha MEI: [id:{id}] {nome_cliente}'
+                obs = ""
+                log.RegistrarEventosdeLOG(Evento,obs) 
+               
             else:
                 print("Nenhum cliente selecionado.")
 
@@ -67,12 +95,15 @@ def comentar_MEI(TreeView):
                 # Obtém o nome do MEI
                 id = valores[0]
                 nome_MEI = valores[1]
-                # Agora você tem o nome do MEI selecionado
-                print(f'Comentando MEI: [id:{id}] {nome_MEI}')
+                Evento= f'Comentando Cliente Planilha MEI: [id:{id}] {nome_MEI}'
+                obs = ""
+                log.RegistrarEventosdeLOG(Evento,obs) 
             else:
                 print("Nenhum MEI selecionado.")
 #FUNÇÃO PARA EXCEL
 
 def Exportar_MEIs():
 
-    print(f'Exportando MEIs')
+
+    log.RegistrarEventosdeLOG(Evento_exportar,obs_exportar) 
+         

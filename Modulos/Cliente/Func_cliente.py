@@ -3,6 +3,13 @@ from tkinter import filedialog
 import Modulos.Cliente.Botoes_Edicao as btedit
 import Modulos.Database.Clients as dbc
 import pandas as pd
+import Modulos.Database.Logs as log
+
+Evento_CAD= f'Entrou na tela de cadastro de cliente'
+obs_CAD = ""
+
+Evento_Exporta= f'Exportando Listagem de clientes'
+obs_Exporta = ""
 
 #FUNÇÃO PARA ADICIONAR
 def Adicionar_cliente(Dadosparateladeedição):
@@ -11,7 +18,8 @@ def Adicionar_cliente(Dadosparateladeedição):
     btedit.limparcampos()
     Frame_atual.pack_forget()
     frame_edição_dados.pack(side=RIGHT, fill = BOTH,expand=True) 
-
+ 
+    log.RegistrarEventosdeLOG(Evento_CAD,obs_CAD) 
 
 
 
@@ -29,7 +37,10 @@ def excluir_cliente(TreeView):
                 id = valores[0]
                 nome_cliente = valores[1]
                 # Agora você tem o nome do cliente selecionado
-                print(f'Excluindo cliente: [id:{id}] {nome_cliente}')
+                Evento= f'Excluindo cliente: [id:{id}] {nome_cliente}'
+                obs = ""
+                log.RegistrarEventosdeLOG(Evento,obs) 
+         
             else:
                 print("Nenhum cliente selecionado.")
 
@@ -53,7 +64,10 @@ def editar_cliente(TreeView,Dadosparateladeedição):
                 Frame_atual.pack_forget()
                 frame_edição_dados.pack(side=RIGHT, fill = BOTH,expand=True) 
                 # Agora você tem o nome do cliente selecionado
-                print(f'Editando cliente: [id:{id}] {nome_cliente}')
+                Evento= f'Editando cliente: [id:{id}] {nome_cliente}'
+                obs = ""
+                log.RegistrarEventosdeLOG(Evento,obs) 
+            
             else:
                 print("Nenhum cliente selecionado.")
 
@@ -72,7 +86,10 @@ def comentar_cliente(TreeView):
                 id = valores[0]
                 nome_cliente = valores[1]
                 # Agora você tem o nome do cliente selecionado
-                print(f'Comentando cliente: [id:{id}] {nome_cliente}')
+                Evento= f'Comentando cliente: [id:{id}] {nome_cliente}'
+                obs = ""
+                log.RegistrarEventosdeLOG(Evento,obs) 
+          
             else:
                 print("Nenhum cliente selecionado.")
 #FUNÇÃO PARA EXCEL
@@ -265,3 +282,6 @@ def Exportar_clientes(clinte_filter_entry,uf_filter_entry,Status_filter_entry):
     
     # Exportar o DataFrame para um arquivo Excel
     df.to_excel(f'{pasta_selecionada}/dados_clientes.xlsx', index=False)  # O argumento index=False evita a inclusão do índice no arquivo Excel
+    
+
+    log.RegistrarEventosdeLOG(Evento_Exporta,obs_Exporta) 

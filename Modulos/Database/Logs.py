@@ -4,8 +4,10 @@ from datetime import datetime, date,timedelta
 import socket
 import uuid
 import requests
-
+import threading
+import time
 execução = 0
+dadosdeLog=[]
 
 def connect_to_da():
     global connection
@@ -38,26 +40,57 @@ def dadosdesegurnaça():
     # Obtém o endereço MAC da interface de rede padrão
     
     endereco_mac = ':'.join(['{:02x}'.format((uuid.getnode() >> elements) & 0xff) for elements in range(0,2*6,2)][::-1])
-
-def RegistrarEventosdeLOG(evento,usuario):
-    if execução == 0 :
-        global segurança
-        dadosdesegurnaça()
-
-        segurança = f'HOST:{hostname} IP:{ip} MAC:{endereco_mac}'
-
-    # Obter a data e hora atual
-    #agora = datetime.now().strftime("%d/%m/%Y - %H:%M:%S")
-
-    dadosdeLog=[usuario[3],usuario[2],evento,segurança]
-    connect_to_da()
+    global segurança
+    segurança = f"HOST:{hostname}_IP:{ip}_MAC:{endereco_mac}"
     
-    try:
-        with connection.cursor() as cursor:
-            ConsultaSQL = f"INSERT INTO `pylogs` (`nome`,`role`, `action`, `security_data`) VALUES ('{dadosdeLog[0]}', '{dadosdeLog[1]}', '{dadosdeLog[2]}', '{dadosdeLog[3]}')"
-            
-            cursor.execute(ConsultaSQL)
-            connection.commit() 
+def dadosusuario(dadosusuario):
+    global usuario
+    usuario = dadosusuario
 
-    finally:
-        connection.close()
+def RegistrarEventosdeLOG(evento,obs):
+    
+    global dadosdeLog,execução,segurança
+
+
+    if execução == 0 :
+        
+        dadosdesegurnaça()
+        execução +=1 
+        
+        #segurança = f'HOST: IP: MAC:'
+
+    #Obter a data e hora atual
+    agora = datetime.now().strftime("%Y-%m-%d  %H:%M:%S")
+
+    dadosdeLog.append([usuario[3], usuario[2], evento, segurança,agora])
+   
+
+
+def AtivarRegistrodeLog():
+    def registro():
+
+        while True:
+            Contagem=0
+            #é preciso dar um time sleep para a thread não entra em loop e travar programa
+            time.sleep(10)
+            qt = len(dadosdeLog)
+            while Contagem < qt:
+                Contagem +=1
+                if len(dadosdeLog)>0:
+                    #puxa os dados que é adicionado na listagem 
+                    DadosparaRegistro=dadosdeLog[0]
+                    connect_to_da()
+                    try:
+                        with connection.cursor() as cursor:
+                            ConsultaSQL = f"CALL InsertPyLog('{DadosparaRegistro[0]}', '{DadosparaRegistro[1]}', '{DadosparaRegistro[4]}', '{DadosparaRegistro[2]}', '{DadosparaRegistro[3]}')"
+                            
+                            cursor.execute(ConsultaSQL)
+                            connection.commit() 
+
+                    finally:
+                        dadosdeLog.pop(0)
+                        connection.close()
+                       
+    #é preciso iniciar thread se nao o processo de registro fica lento
+    BDLOGTread = threading.Thread(target=registro)
+    BDLOGTread.start()

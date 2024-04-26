@@ -6,39 +6,62 @@ import Modulos.Usuarios.usuarios as user
 import Modulos.imagens.ImagensClientes as Imagens_DataBase
 import threading
 import Modulos.Database.Logs as log
-
 import warnings
 # Desativar todos os warnings
 warnings.simplefilter("ignore")
 
+#mensagens
 
+Evento_Logar= 'Usuario Logou no sistema'
+obs_Logar = ""
+ 
+Evento_PainelDtv= 'Ativou Modulo Painel Datavix'
+obs_PainelDtv = ""
+
+Evento_AtivarMEI= 'Ativou Tela de MEI'
+obs_AtivarMEI = ""
+
+Evento_AtivarClientes= 'Ativou Tela de Clientes'
+obs_AtivarClientes = ""
+
+Evento_AtivarUsuarios= 'Ativou Tela de Usarios'
+obs_AtivarUsuarios = ""
+
+obs_Sair = ""
+Evento_Sair= 'Usuario Deslogou do sistema'
 
 def DataVix(DadosUsuario,janela):
-    
-    Evento = 'Logou'
-    log.RegistrarEventosdeLOG(Evento,DadosUsuario)
+    log.AtivarRegistrodeLog()
+    log.dadosusuario(DadosUsuario)  
+    log.RegistrarEventosdeLOG(Evento_Logar,obs_Logar) 
     
 
     def ativarmei():
         cl.Removertelaclientes(frame_clientes)
         user.RemovertelaUsarios(frame_user)
         me.criartelaMEI(frame_mei,UserRole)
+      
+        log.RegistrarEventosdeLOG(Evento_AtivarMEI,obs_AtivarMEI) 
         
     def ativarclientes():
         me.RemovertelaMEI(frame_mei)
         user.RemovertelaUsarios(frame_user)
         cl.criartelaclientes(frame_clientes,UserRole)
-        
+      
+        log.RegistrarEventosdeLOG(Evento_AtivarClientes,obs_AtivarClientes) 
+
     def ativaruser():
         me.RemovertelaMEI(frame_mei)
         cl.Removertelaclientes(frame_clientes)
         user.criartelaUsarios(frame_user,UserRole)
+     
+        log.RegistrarEventosdeLOG(Evento_AtivarUsuarios,obs_AtivarUsuarios) 
         
     def exit():
         screen_datavix.quit()
         screen_datavix.destroy()   
-        Evento = 'Saiu'
-        log.RegistrarEventosdeLOG(Evento,DadosUsuario) 
+  
+        log.RegistrarEventosdeLOG(Evento_Sair,obs_Sair)  
     
     def fecharjanela_anterior():
         #janela.wm_iconify()
@@ -53,6 +76,10 @@ def DataVix(DadosUsuario,janela):
         y = (screen_height - height) // 2
         # Definir as coordenadas da janela
         window.geometry(f"{width}x{height}+{x}+{y}") 
+    def on_close():
+        screen_datavix.quit()
+        screen_datavix.destroy() 
+        log.RegistrarEventosdeLOG(Evento_Sair,obs_Sair)  
 
     Username = DadosUsuario[3]
     UserRole = DadosUsuario
@@ -60,7 +87,7 @@ def DataVix(DadosUsuario,janela):
     
 
     screen_datavix = ctk.CTk()
-
+    screen_datavix.protocol("WM_DELETE_WINDOW", on_close)
     screen_datavix.geometry(f"{1150}x{615}+{0}+{0}") 
     #center_window(screen_datavix,1150,615) caso queria que aparece no centro
 
@@ -127,8 +154,7 @@ def DataVix(DadosUsuario,janela):
     # Ativar todos os warnings
     warnings.simplefilter("default")
 
-    Evento = 'Ativou Modulo Painel Datavix'
-    log.RegistrarEventosdeLOG(Evento,DadosUsuario)
+    log.RegistrarEventosdeLOG(Evento_PainelDtv,obs_PainelDtv)
 
     screen_datavix.mainloop()
 

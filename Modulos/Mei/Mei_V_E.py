@@ -6,6 +6,10 @@ import Modulos.Cliente.Func_cliente as Func_cli
 import Modulos.imagens.ImagensClientes as Imagens_DataBase
 from ttkthemes import ThemedStyle
 import Modulos.Mei.Botoes_Edicao as bts
+import Modulos.Database.Logs as log
+
+Evento_TelaVoltar = f'Usuario voltou para a listagem de MEIS'
+obs_TelaVoltar=""
 
 def criartelaEdit_MEI(frame,cliente):
     print('f')
@@ -13,6 +17,8 @@ def criartelaEdit_MEI(frame,cliente):
 def RemovertelaEdit_MEI(): 
     frameprincipal.pack_forget()
     framepai.pack(side=RIGHT, fill = BOTH,expand=True)
+
+    log.RegistrarEventosdeLOG(Evento_TelaVoltar,obs_TelaVoltar) 
 
 def parametrosinicias(frame,Frame_atual):
     global framepai, frameprincipal

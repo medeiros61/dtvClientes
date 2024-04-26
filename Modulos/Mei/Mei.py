@@ -226,10 +226,10 @@ def parametrosinicias(frame):
     Caminho_Logo_Add,Caminho_Logo_Edit,Caminho_Logo_Rem ,Caminho_Logo_Comt,Caminho_Logo_Excel =Imagens_DataBase.baixarimagemPgclientes()  
 
     logo_add = PhotoImage(file=Caminho_Logo_Add).subsample(25, 25)
-    bt_add_MEI = ctk.CTkButton(master=bt_action_frame,image=logo_add, text="Adicionar Contratante",command= Func_Mei.Adicionar_MEI_Contratante)
+    bt_add_MEI = ctk.CTkButton(master=bt_action_frame,image=logo_add, text="Adicionar Contratante",command=lambda: Func_Mei.Adicionar_MEI_Contratante(Dadosparateladeedição))
     bt_add_MEI.grid(row=0, column=0,  padx=5, pady=1,sticky="nsew")
 
-    bt_add_MEI_Parceira = ctk.CTkButton(master=bt_action_frame,image=logo_add, text="Adicionar Parceira",command= Func_Mei.Adicionar_MEI_Parceira)
+    bt_add_MEI_Parceira = ctk.CTkButton(master=bt_action_frame,image=logo_add, text="Adicionar Parceira",command=lambda: Func_Mei.Adicionar_MEI_Parceira(Dadosparateladeedição))
     bt_add_MEI_Parceira.grid(row=1, column=0,  padx=5, pady=1,sticky="nsew")
 
     logo_editar = PhotoImage(file=Caminho_Logo_Edit).subsample(25, 25)
