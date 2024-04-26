@@ -7,7 +7,7 @@ import threading
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
-
+ 
 janela = ctk.CTk()
 
 
