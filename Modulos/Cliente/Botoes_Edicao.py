@@ -8,7 +8,7 @@ from tkinter import ttk
 
 def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
-    global NumeroID,Frame_dados_cliente_titulo,entry_Alvara_de_funcionamento,entry_Licenca_ambiental,entry_Data_vencimento_Ambiental,entry_Bombeiros,entry_Data_vencimento_Bombeiros,entry_Data_vencimento_Func,entry_Alvara_sanitrio,entry_Data_vencimento_Sanitario,entry_Nome_empresa,entry_CNPJ,entry_Estado,entry_Municpio,entry_Atividade,entry_Data_abertura_,entry_Ativo,entry_Link_WhatsApp,entry_Formas_de_tributao,entry_Anexo_simples_nacional,entry_Folha_de_pagamento,entry_Responsvel_contabil,entry_Responsvel_fiscal,entry_Responsvel_societrio,entry_Responsvel_DP,entry_Domiclio_eletrnico,entry_Email,entry_Nome_representante,entry_CPF_representante_legal,entry_Data_de_nascimento_,entry_Contabilidade_finalizada_,entry_Certificado_digital,entry_Senha_certificado,entry_Data_de_vencimento_,entry_Cdigo_e_cac,entry_Senha_EAC,entry_Cdigo_Simples,entry_Nmero_de_livros_ECD,entry_Ano_Nmero_de_livros_ECD,entry_Nmero_de_livros_ECF,entry_Ano_Nmero_de_livros_ECF,entry_Inscrio_estadual,entry_Credenciamento_NFE,entry_Nmero_CSC,entry_Site_caixa_postal,entry_Inscrio_municipal,entry_Site,entry_Login,entry_Senha,entry_Demais_senhas,entry_Senha_Abertura_Processos,entry_Observaes,entry_Alvara_de_funcionamento,entry_Alvara_sanitrio,entry_Licenca_ambiental,entry_Bombeiros,entry_ltima_alterao_contratual_,entry_Nmero_alterao_contratual,entry_Folha_de_pagto,entry_Quantidade_de_funcionrios,entry_Prolabore,entry_Quantidade_de_scios,entry_Esocial_usurio,entry_Esocial_senha,entry_Esocial_cdigo_de_acesso,entry_FAP_usurio,entry_FAP_senha,entry_Empregador_WEB_usurio,entry_Empregador_WEB_senha,entry_Sistema,entry_Site_Bpo,entry_Usurio,entry_Senha_simples,entry_Banco_1,entry_Banco_2,entry_Tipo_de_BPO,entry_Estado_estaduais,entry_Observaes_gerais_Societario,entry_Observaes_gerais_bpo,siglas_estados,not_or_yes,yes_or_not,formasdetributacao,TreeviewSocios,box_sindicalizada,entry_login_sindicalizada,entry_senha_sindicalizada,TabViewGlobal
+    global NumeroID,Frame_dados_cliente_titulo,entry_Alvara_de_funcionamento,entry_Licenca_ambiental,entry_Data_vencimento_Ambiental,entry_Bombeiros,entry_Data_vencimento_Bombeiros,entry_Data_vencimento_Func,entry_Alvara_sanitrio,entry_Data_vencimento_Sanitario,entry_Nome_empresa,entry_CNPJ,entry_Estado,entry_Municpio,entry_Atividade,entry_Data_abertura_,entry_Ativo,entry_Link_WhatsApp,entry_Formas_de_tributao,entry_Anexo_simples_nacional,entry_Folha_de_pagamento,entry_Responsvel_contabil,entry_Responsvel_fiscal,entry_Responsvel_societrio,entry_Responsvel_DP,entry_Domiclio_eletrnico,entry_Email,entry_Nome_representante,entry_CPF_representante_legal,entry_Data_de_nascimento_,entry_Contabilidade_finalizada_,entry_Certificado_digital,entry_Senha_certificado,entry_Data_de_vencimento_,entry_Cdigo_e_cac,entry_Senha_EAC,entry_Cdigo_Simples,entry_Nmero_de_livros_ECD,entry_Ano_Nmero_de_livros_ECD,entry_Nmero_de_livros_ECF,entry_Ano_Nmero_de_livros_ECF,entry_Inscrio_estadual,entry_Credenciamento_NFE,entry_Nmero_CSC,entry_Site_caixa_postal,entry_Inscrio_municipal,entry_Site,entry_Login,entry_Senha,entry_Demais_senhas,entry_Senha_Abertura_Processos,entry_Observaes,entry_Alvara_de_funcionamento,entry_Alvara_sanitrio,entry_Licenca_ambiental,entry_Bombeiros,entry_ltima_alterao_contratual_,entry_Nmero_alterao_contratual,entry_Folha_de_pagto,entry_Quantidade_de_funcionrios,entry_Prolabore,entry_Quantidade_de_scios,entry_Esocial_usurio,entry_Esocial_senha,entry_Esocial_cdigo_de_acesso,entry_FAP_usurio,entry_FAP_senha,entry_Empregador_WEB_usurio,entry_Empregador_WEB_senha,entry_Sistema,entry_Site_Bpo,entry_Usurio,entry_Senha_simples,entry_Banco_1,entry_Banco_2,entry_Tipo_de_BPO,entry_Estado_estaduais,entry_Observaes_gerais_Societario,entry_Observaes_gerais_bpo,siglas_estados,not_or_yes,yes_or_not,formasdetributacao,TreeviewSocios,box_sindicalizada,entry_login_sindicalizada,entry_senha_sindicalizada,TabViewGlobal,TreeviewSindicato,TreeviewECD,TreeviewECF,TreeviewInventario,TreeviewEntrada
     TabViewGlobal = Viewer
     #Configurações de borda
     cor_de_borda = "gray50"
@@ -319,7 +319,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
     ### ECD 
     frameECD = ctk.CTkFrame(tab_livros.tab("livros ECD"), border_width=largura_borda, border_color=cor_de_borda)
-    frameECD.grid(row=0, column=0, sticky="n")
+    frameECD.grid(row=0, column=0, sticky="nsew")
 
     label_Nmero_de_livros_ECD = ctk.CTkLabel(frameECD, text="Numero")
     entry_Nmero_de_livros_ECD = ctk.CTkEntry(frameECD, width=200)
@@ -369,7 +369,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
     ###ECF
     frameECF = ctk.CTkFrame(tab_livros.tab("livros ECF"), border_width=largura_borda, border_color=cor_de_borda)
-    frameECF.grid(row=0, column=0, sticky="n")
+    frameECF.grid(row=0, column=0, sticky="nsew")
 
     label_Nmero_de_livros_ECF = ctk.CTkLabel(frameECF, text="Numero")
     entry_Nmero_de_livros_ECF = ctk.CTkEntry(frameECF, width=200)
@@ -466,7 +466,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
 #### Livros Fiscais Entrada ### Livros Fiscais Entrada ###
     frameLivrosEntrada = ctk.CTkFrame(tab_livros_estaduais.tab("Livros Fiscais Entrada"), border_width=largura_borda, border_color=cor_de_borda)
-    frameLivrosEntrada.grid(row=0, column=0, sticky="n")
+    frameLivrosEntrada.grid(row=0, column=0, sticky="nsew")
 
     label_Livros_Fiscais_Entrada_Numero = ctk.CTkLabel(frameLivrosEntrada, text="Numero")
     entry_Livros_Fiscais_Entrada_Numero = ctk.CTkEntry(frameLivrosEntrada, width=50)
@@ -518,7 +518,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 ### Livros Fiscais Inventário ### Livros Fiscais Inventário ###
 
     frameLivrosInventario = ctk.CTkFrame(tab_livros_estaduais.tab("Livros Fiscais Inventário"), border_width=largura_borda, border_color=cor_de_borda)
-    frameLivrosInventario.grid(row=0, column=0, sticky="n")
+    frameLivrosInventario.grid(row=0, column=0, sticky="nsew")
 
     label_Livros_Fiscais_Inventario_Numero = ctk.CTkLabel(frameLivrosInventario, text="Numero")
     entry_Livros_Fiscais_Inventario_Numero = ctk.CTkEntry(frameLivrosInventario, width=50)
@@ -825,7 +825,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
 
     frame_sindicatos = ctk.CTkFrame(framedpMaster, border_width=largura_borda, border_color=cor_de_borda)
-    frame_sindicatos.grid(row=10, column=0,columnspan=6, padx=10, pady=5, sticky="new")
+    frame_sindicatos.grid(row=10, column=0,columnspan=6, padx=10, pady=5, sticky="nsew")
 
     label_sindicatos = ctk.CTkLabel(frame_sindicatos, text="Sindicatos", width=750)
     label_sindicatos.grid(row=0, column=0,columnspan=3, padx=10, pady=5, sticky="w")
@@ -977,10 +977,287 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     label_Observaes_gerais_bpo.grid(row=5, column=0, padx=10, pady=3, sticky="w")
     entry_Observaes_gerais_bpo.grid(row=6, column=0,columnspan=3, padx=10, pady=3, sticky="new")
 
+def pegar_dados_para_envio():
+    listadeenvio[1] = entry_Nome_empresa.get() # Campo nome_empresa do banco de dados
+    
+    listadeenvio[2] = entry_CNPJ.get() # Campo cnpj do banco de dados
+    
+    listadeenvio[3] = entry_Estado.get() # Campo uf do banco de dados
+    
+    listadeenvio[4] = entry_Municpio.get() # Campo municipio do banco de dados
+    
+    listadeenvio[5] = entry_Atividade.get() # Campo atividade do banco de dados
+   
+    listadeenvio[6] = entry_Data_abertura_.get() # Campo data_abertura do banco de dados
+    
+    listadeenvio[7] = entry_Ativo.get() # Campo ativo do banco de dados
+    
+    listadeenvio[68] = entry_Link_WhatsApp.get() #Campo link_whatsapp do banco de dados
+
+    ### Gerais
+
+    listadeenvio[8] = entry_Formas_de_tributao.get() # Campo formas_tributacao do banco de dados
+    listadeenvio[9] = entry_Anexo_simples_nacional.get() # Campo anexo_simples_nacional do banco de dados
+    listadeenvio[10] = entry_Folha_de_pagamento.get() # Campo folha_pagamento do banco de dados
+    listadeenvio[11] = entry_Responsvel_contabil.get() # Campo responsavel_contabil do banco de dados
+    listadeenvio[12] = entry_Responsvel_fiscal.get() # Campo responsavel_fiscal do banco de dados
+    listadeenvio[13] = entry_Responsvel_societrio.get() # Campo responsavel_societario do banco de dados
+    listadeenvio[14] = entry_Responsvel_DP.get() # Campo responsavel_dp do banco de dados
+    listadeenvio[15] = entry_Domiclio_eletrnico.get() # Campo domicilio_eletronico do banco de dados
+    listadeenvio[16] = entry_Email.get() # Campo email do banco de dados
+    listadeenvio[17] = entry_Nome_representante.get() # Campo nome_representante do banco de dados
+    listadeenvio[18] = entry_CPF_representante_legal.get() # Campo cpf_representante_legal do banco de dados
+    listadeenvio[19] = entry_Data_de_nascimento_.get() # Campo data_nascimento do banco de dados
+    listadeenvio[20] = entry_Contabilidade_finalizada_.get() # Campo contabilidade_finalizada do banco de dados
+    listadeenvio[21] = entry_Certificado_digital.get() # Campo certificado_digital do banco de dados
+    listadeenvio[22] = entry_Senha_certificado.get() # Campo senha_certificado do banco de dados
+    listadeenvio[23] = entry_Data_de_vencimento_.get() # Campo data_vencimento_certificado do banco de dados
+    
+
+
+    
+
+    ###Federais
+    
+
+    listadeenvio[24] = entry_Cdigo_e_cac.get() # Campo codigo_ecac do banco de dados
+    listadeenvio[25] = entry_Senha_EAC.get() # Campo senha_ecac do banco de dados
+    listadeenvio[26] = entry_Cdigo_Simples.get() # Campo codigo_simples do banco de dados
+
+
+    ##Estaduais
+
+    listadeenvio[3] = entry_Estado_estaduais.get()# Campo uf do banco de dados
+    listadeenvio[28] = entry_Inscrio_estadual.get() # Campo inscricao_estadual do banco de dados
+    listadeenvio[29] = entry_Credenciamento_NFE.get() # Campo estado do banco de dados
+    listadeenvio[30] = entry_Nmero_CSC.get() # Campo inscricao_estadual do banco de dados
+    listadeenvio[31] = entry_Site_caixa_postal.get() # Campo credenciamento_nfe do banco de dados
+
+
+    
+    ## Municipais
+
+    listadeenvio[32] = entry_Inscrio_municipal.get() # Campo inscricao_municipal do banco de dados
+    listadeenvio[33] = entry_Site.get() # Campo site do banco de dados
+    listadeenvio[34] = entry_Login.get() # Campo login do banco de dados
+    listadeenvio[35] = entry_Senha.get() # Campo senha do banco de dados
+    listadeenvio[70] = entry_Demais_senhas.get() # Campo 'municipal_demais_senhas' do banco de dados
+    listadeenvio[71] = entry_Senha_Abertura_Processos.get() # Campo municipal_senha_abertura_processos do banco de dados
+    listadeenvio[69] = entry_Observaes.get() # Campo 'municipal_observacoes' do banco de dados
+    
+
+
+
+    ## Societario
+
+    listadeenvio[36] = entry_Alvara_de_funcionamento.get() # Campo alvara_funcionamento do banco de dados
+    listadeenvio[37] = entry_Data_vencimento_Func.get() # Campo data_vencimento_alvara_funcionamento do banco de dados
+    listadeenvio[38] = entry_Alvara_sanitrio.get() # Campo alvara_sanitario do banco de dados
+    listadeenvio[39] = entry_Data_vencimento_Sanitario.get() #Campo  data_vencimento_alvara_sanitario'do banco de dados
+    listadeenvio[40] = entry_Licenca_ambiental.get() # Campo licenca_ambiental do banco de dados
+    listadeenvio[41] = entry_Data_vencimento_Ambiental.get() #Campo  data_vencimento_licenca_ambiental'do banco de dados
+
+    listadeenvio[42] = entry_Bombeiros.get() # Campo dbombeiros do banco de dados
+    listadeenvio[43] = entry_Data_vencimento_Bombeiros.get() #Campo  data_vencimento_bombeiros'do banco de dados
+    listadeenvio[44] = entry_ltima_alterao_contratual_.get() # Campo ultima_alteracao_contratual do banco de dados
+    listadeenvio[45] = entry_Nmero_alterao_contratual.get() # Campo numero_alteracao_contratual do banco de dados
+    listadeenvio[46] = entry_Observaes_gerais_Societario.get() # Campo observacoes_gerais_societario do banco de dados
+    
+    ## Deparamento Pessoal 
+    
+
+    listadeenvio[47] = entry_Folha_de_pagto.get() # Campo folha_pagto do banco de dados
+    listadeenvio[48] = entry_Quantidade_de_funcionrios.get() # Campo quantidade_funcionarios do banco de dados
+    listadeenvio[49] = entry_Prolabore.get() # Campo prolabore do banco de dados
+    listadeenvio[50] = entry_Quantidade_de_scios.get() # Campo quantidade_socios do banco de dados
+    listadeenvio[51] = entry_Esocial_usurio.get() # Campo esocial_usuario do banco de dados
+    listadeenvio[52] = entry_Esocial_senha.get() # Campo esocial_senha do banco de dados
+    listadeenvio[53] = entry_Esocial_cdigo_de_acesso.get() # Campo esocial_codigo_acesso do banco de dados
+    listadeenvio[54] = entry_FAP_usurio.get() # Campo fap_usuario do banco de dados
+    listadeenvio[55] = entry_FAP_senha.get() # Campo fap_senha do banco de dados
+    listadeenvio[56] = entry_Empregador_WEB_usurio.get() # Campo empregador_web_usuario do banco de dados
+    listadeenvio[57] = entry_Empregador_WEB_senha.get() # Campo empregador_web_senha do banco de dados
+    listadeenvio[72] = box_sindicalizada.get() #Campo dpto_pessoal_sindicalizada do banco de dados
+    listadeenvio[73] = entry_login_sindicalizada.get() #Campo dpto_pessoal_login do banco de dados
+    listadeenvio[74] = entry_senha_sindicalizada.get() #Campo dpto_pessoal_senha do banco de dados
+
+
+
+            
+    ## Sistema
+
+    listadeenvio[58] = entry_Sistema.get() # Campo sistema_bpo do banco de dados
+    listadeenvio[59] = entry_Site_Bpo.get() # Campo site_bpo do banco de dados
+    listadeenvio[60] = entry_Usurio.get() # Campo usuario_bpo do banco de dados
+    listadeenvio[61] = entry_Senha_simples.get() # Campo senha_simples_bpo do banco de dados
+    listadeenvio[62] = entry_Banco_1.get() # Campo banco1 do banco de dados
+    listadeenvio[63] = entry_Banco_2.get() # Campo banco2 do banco de dados
+    listadeenvio[64] = entry_Tipo_de_BPO.get() # Campo tipo_bpo do banco de dados
+    listadeenvio[65] = entry_Observaes_gerais_bpo.get()# Campo observacoes_gerais_bpo do banco de dados
+
+    Envio = tuple(listadeenvio)
+    query = f"""
+    INSERT INTO sua_tabela (
+    nome_empresa,
+    cnpj,
+    uf,
+    municipio,
+    atividade,
+    data_abertura,
+    ativo,
+    link_whatsapp,
+    formas_tributacao,
+    anexo_simples_nacional,
+    folha_pagamento,
+    responsavel_contabil,
+    responsavel_fiscal,
+    responsavel_societario,
+    responsavel_dp,
+    domicilio_eletronico,
+    email,
+    nome_representante,
+    cpf_representante_legal,
+    data_nascimento,
+    contabilidade_finalizada,
+    certificado_digital,
+    senha_certificado,
+    data_vencimento_certificado,
+    codigo_ecac,
+    senha_ecac,
+    codigo_simples,
+    estado_estaduais,
+    inscricao_estadual,
+    credenciamento_nfe,
+    numero_csc,
+    site_caixa_postal,
+    inscricao_municipal,
+    site,
+    login,
+    senha,
+    municipal_demais_senhas,
+    municipal_senha_abertura_processos,
+    municipal_observacoes,
+    alvara_funcionamento,
+    data_vencimento_alvara_funcionamento,
+    alvara_sanitario,
+    data_vencimento_alvara_sanitario,
+    licenca_ambiental,
+    data_vencimento_licenca_ambiental,
+    bombeiros,
+    data_vencimento_bombeiros,
+    ultima_alteracao_contratual,
+    numero_alteracao_contratual,
+    observacoes_gerais_societario,
+    folha_pagto,
+    quantidade_funcionarios,
+    prolabore,
+    quantidade_socios,
+    esocial_usuario,
+    esocial_senha,
+    esocial_codigo_acesso,
+    fap_usuario,
+    fap_senha,
+    empregador_web_usuario,
+    empregador_web_senha,
+    dpto_pessoal_sindicalizada,
+    dpto_pessoal_login,
+    dpto_pessoal_senha,
+    sistema_bpo,
+    site_bpo,
+    usuario_bpo,
+    senha_simples_bpo,
+    banco1,
+    banco2,
+    tipo_bpo,
+    observacoes_gerais_bpo
+    ) VALUES (
+    {listadeenvio[1]},
+    {listadeenvio[2]},
+    {listadeenvio[3]},
+    {listadeenvio[4]},
+    {listadeenvio[5]},
+    {listadeenvio[6]},
+    {listadeenvio[7]},
+    {listadeenvio[68]},
+    {listadeenvio[8]},
+    {listadeenvio[9]},
+    {listadeenvio[10]},
+    {listadeenvio[11]},
+    {listadeenvio[12]},
+    {listadeenvio[13]},
+    {listadeenvio[14]},
+    {listadeenvio[15]},
+    {listadeenvio[16]},
+    {listadeenvio[17]},
+    {listadeenvio[18]},
+    {listadeenvio[19]},
+    {listadeenvio[20]},
+    {listadeenvio[21]},
+    {listadeenvio[22]},
+    {listadeenvio[23]},
+    {listadeenvio[24]},
+    {listadeenvio[25]},
+    {listadeenvio[26]},
+    {listadeenvio[27]},
+    {listadeenvio[28]},
+    {listadeenvio[29]},
+    {listadeenvio[30]},
+    {listadeenvio[31]},
+    {listadeenvio[32]},
+    {listadeenvio[33]},
+    {listadeenvio[34]},
+    {listadeenvio[35]},
+    {listadeenvio[70]},
+    {listadeenvio[71]},
+    {listadeenvio[69]},
+    {listadeenvio[36]},
+    {listadeenvio[37]},
+    {listadeenvio[38]},
+    {listadeenvio[39]},
+    {listadeenvio[40]},
+    {listadeenvio[41]},
+    {listadeenvio[42]},
+    {listadeenvio[43]},
+    {listadeenvio[44]},
+    {listadeenvio[45]},
+    {listadeenvio[46]},
+    {listadeenvio[47]},
+    {listadeenvio[48]},
+    {listadeenvio[49]},
+    {listadeenvio[50]},
+    {listadeenvio[51]},
+    {listadeenvio[52]},
+    {listadeenvio[53]},
+    {listadeenvio[54]},
+    {listadeenvio[55]},
+    {listadeenvio[56]},
+    {listadeenvio[57]},
+    {listadeenvio[72]},
+    {listadeenvio[73]},
+    {listadeenvio[74]},
+    {listadeenvio[58]},
+    {listadeenvio[59]},
+    {listadeenvio[60]},
+    {listadeenvio[61]},
+    {listadeenvio[62]},
+    {listadeenvio[63]},
+    {listadeenvio[64]},
+    {listadeenvio[65]}
+    )
+    """
+
+
+    print(Envio)
 
 def limparcampos():
-    TabViewGlobal.set("Cliente")
-    
+    def Limpartreeview(TreeV):
+        try:
+            for item in TreeV.get_children():
+                    TreeV.delete(item)     
+        except Exception :
+                pass
+
+    TabViewGlobal.set("Cliente") 
     NumeroID.configure(text=f"" )
     Frame_dados_cliente_titulo.configure(text=f"")
     entry_Nome_empresa.delete(0, 'end')
@@ -1044,8 +1321,6 @@ def limparcampos():
     entry_Observaes_gerais_bpo.delete('1.0', 'end')
     entry_login_sindicalizada.delete(0, 'end')
     entry_senha_sindicalizada.delete(0, 'end')
-
-
     entry_Estado.set(siglas_estados[0]) 
     entry_Ativo.set(yes_or_not[0]) 
     entry_Formas_de_tributao.set(formasdetributacao[0]) 
@@ -1063,22 +1338,27 @@ def limparcampos():
     box_sindicalizada.set(not_or_yes[0])
 
 
-    try:
-        for item in TreeviewSocios.get_children():
-                TreeviewSocios.delete(item)     
-    except Exception :
-            pass
-    #try:
-    #    for item in TreeviewSindicatos.get_children():
-    #            TreeviewSindicatos.delete(item)     
-    #except Exception :
-    #        pass         
-    
+    Limpartreeview(TreeviewSocios)
+    Limpartreeview(TreeviewSindicato)
+    Limpartreeview(TreeviewEntrada)
+    Limpartreeview(TreeviewInventario)
+    Limpartreeview(TreeviewECD)
+    Limpartreeview(TreeviewECF)
+   
+            
 def Importardados(idcliente):
     
-    Listadedados, identificadores,qr,socios,sindicatos = dbc.getclientdata_toEdit(idcliente)
+    def importar_dados_treeview(TreeV,dados):
+        for result in dados:
+            TreeV.insert("", 'end', values=result)
+
+
+    Listadedados, identificadores,qr,socios,sindicatos,livroECD,LivroECF,LivroEntradas,Livroinvetario = dbc.getclientdata_toEdit(idcliente)
     
     limparcampos()
+
+    global listadeenvio
+    listadeenvio = list(Listadedados)
 
     if Listadedados[1]!= "N/A" and Listadedados[0] is not None:
         Frame_dados_cliente_titulo.configure(text=f"EMPRESA: {Listadedados[1]} (ID:{Listadedados[0]})")
@@ -1123,11 +1403,10 @@ def Importardados(idcliente):
     entry_Senha_certificado.insert(0,Listadedados[22]) # Campo senha_certificado do banco de dados
     entry_Data_de_vencimento_.insert(0,Listadedados[23]) # Campo data_vencimento_certificado do banco de dados
     
-
-    for result in socios:
-            TreeviewSocios.insert("", 'end', values=result)
+    importar_dados_treeview(TreeviewSocios,socios)
 
 
+    
 
     ###Federais
     
@@ -1139,7 +1418,9 @@ def Importardados(idcliente):
     entry_Ano_Nmero_de_livros_ECD.insert(0,"")
     entry_Nmero_de_livros_ECF.insert(0,"")
     entry_Ano_Nmero_de_livros_ECF.insert(0,"")
-    
+    importar_dados_treeview(TreeviewECF,LivroECF)
+    importar_dados_treeview(TreeviewECD,livroECD)    
+
     ##Estaduais
 
     entry_Estado_estaduais.set(Listadedados[3])
@@ -1147,6 +1428,8 @@ def Importardados(idcliente):
     entry_Credenciamento_NFE.set(Listadedados[29]) # Campo estado do banco de dados
     entry_Nmero_CSC.insert(0,Listadedados[30]) # Campo inscricao_estadual do banco de dados
     entry_Site_caixa_postal.insert(0,Listadedados[31]) # Campo credenciamento_nfe do banco de dados
+    importar_dados_treeview(TreeviewEntrada,LivroEntradas)
+    importar_dados_treeview(TreeviewInventario,Livroinvetario)
 
     
     ## Municipais
@@ -1195,8 +1478,8 @@ def Importardados(idcliente):
     entry_login_sindicalizada.insert(0,Listadedados[73])# Campo dpto_pessoal_login do banco de dados
     entry_senha_sindicalizada.insert(0,Listadedados[74])# Campo dpto_pessoal_senha do banco de dados
 
-    #for result in sindicatos:
-    #    TreeviewSindicatos.insert("", 'end', values=result)
+    importar_dados_treeview(TreeviewSindicato,sindicatos)
+
             
     ## Sistema
 

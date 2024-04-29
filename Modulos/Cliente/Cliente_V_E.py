@@ -8,7 +8,7 @@ from ttkthemes import ThemedStyle
 import Modulos.Cliente.Botoes_Edicao as bts
 import Modulos.Database.Logs as log
 
-Evento_TelaVoltar = f'Usuario voltou para a listagem de clientes'
+Evento_TelaVoltar = f'Usuario saiu da Edição de de clientes'
 obs_TelaVoltar=""
 
 def criartelaEdit_clientes(frame,cliente):

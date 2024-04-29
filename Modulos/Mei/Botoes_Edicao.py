@@ -8,7 +8,7 @@ import Modulos.Mei.Func_mei as Func_Mei
 
 
 def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho_Logo_Rem):
-    global Tipo,frame_dados_mei,Contratante,id,entry_Nome,entry_Situao,entry_Identificao,entry_CNPJ,entry_Tributao,entry_Data_abertura_,entry_Prefeitura,entry_Login,entry_Senha,entry_Pendncia_de_Recolhimentos,entry_Entrega_de_DAS_Mensal,entry_E_mail,entry_Pendncias,entry_Observaes,entry_CPF,entry_Cdigo_de_Acesso,entry_Senha_GOV,entry_Nvel_GOV,entry_Endereo,entry_Inscrio_Estadual,entry_Inscrio_Municipal,entry_Certificado_Digital,entry_Modelo_Datavix,entry_Homologado___Sindicato,entry_Vencimento_,entry_Ano,entry_Faturamento,TreeViewParceiras,scrollbarParceiras,bt_Editar_MEI_Parceiras,TabViewGlobal
+    global Tipo,frame_dados_mei,Contratante,id,entry_Nome,entry_Situao,entry_Identificao,entry_CNPJ,entry_Tributao,entry_Data_abertura_,entry_Prefeitura,entry_Login,entry_Senha,entry_Pendncia_de_Recolhimentos,entry_Entrega_de_DAS_Mensal,entry_E_mail,entry_Pendncias,entry_Observaes,entry_CPF,entry_Cdigo_de_Acesso,entry_Senha_GOV,entry_Nvel_GOV,entry_Endereo,entry_Inscrio_Estadual,entry_Inscrio_Municipal,entry_Certificado_Digital,entry_Modelo_Datavix,entry_Homologado___Sindicato,entry_Vencimento_,entry_Ano,entry_Faturamento,TreeViewParceiras,scrollbarParceiras,bt_Editar_MEI_Parceiras,TabViewGlobal,TreeviewDas
     TabViewGlobal = Viewer
     
     def dadosparceira(*args):
@@ -354,6 +354,13 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
 
 
 def limparbotões():
+    def Limpartreeview(TreeV):
+        try:
+            for item in TreeV.get_children():
+                    TreeV.delete(item)     
+        except Exception :
+                pass
+        
     TabViewGlobal.set("Empresa")
     
     entry_Nome.delete(0, 'end')
@@ -383,17 +390,18 @@ def limparbotões():
     #entry_Faturamento.delete(0, 'end')
     #entry_Observaes_dasn.delete(0, 'end')
 
-    try:
-        for item in TreeViewParceiras.get_children():
-                TreeViewParceiras.delete(item)     
-    except Exception :
-            pass 
+    Limpartreeview(TreeViewParceiras)
 
+   
 def Importardados(idcliente,Dadosparateladeedição):
+    def importar_dados_treeview(TreeV,dados):
+        for result in dados:
+            TreeV.insert("", 'end', values=result)
+
     global tela_Mae
     tela_Mae = Dadosparateladeedição
 
-    Listadedados, identificadores,qr,meis = dbm.getmeidata_toEdit(idcliente)
+    Listadedados, identificadores,qr,meis,Lista_de_DAS = dbm.getmeidata_toEdit(idcliente)
 
     limparbotões()
 
@@ -413,6 +421,9 @@ def Importardados(idcliente,Dadosparateladeedição):
         TreeViewParceiras.grid(row=2, column=0,columnspan=3, sticky="nsew", padx=(1,0), pady=(5,10))
         scrollbarParceiras.grid(row=2, column=4, padx=(0,10), pady=(5,10), sticky="nsew")
         bt_Editar_MEI_Parceiras.grid(row=3, column=0,columnspan=3, sticky="n", padx=(1,0), pady=(5,10))
+
+
+    importar_dados_treeview(TreeviewDas,Lista_de_DAS)
 
     entry_Nome.insert(0,Listadedados[3]) # Campo nome do banco de dados
 

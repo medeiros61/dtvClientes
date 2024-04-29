@@ -8,7 +8,7 @@ from ttkthemes import ThemedStyle
 import Modulos.Mei.Botoes_Edicao as bts
 import Modulos.Database.Logs as log
 
-Evento_TelaVoltar = f'Usuario voltou para a listagem de MEIS'
+Evento_TelaVoltar = f'Usuario saiu da Edição de de MEIS'
 obs_TelaVoltar=""
 
 def criartelaEdit_MEI(frame,cliente):

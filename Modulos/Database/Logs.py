@@ -54,7 +54,7 @@ def activites(type):
         if type == "Entrar":
             
             Sessão = True
-            User = f"{usuario[3]}({usuario[1]})"
+            User = f"{usuario[3]}({usuario[1]}-{usuario[0]})"
             connect_to_da()
             try:
                 with connection.cursor() as cursor:
@@ -100,7 +100,7 @@ def RegistrarEventosdeLOG(evento,obs):
     #Obter a data e hora atual
     agora = datetime.now().strftime("%Y-%m-%d  %H:%M:%S")
 
-    dadosdeLog.append([usuario[3], usuario[2], evento, segurança,agora])
+    dadosdeLog.append([f'{usuario[3]}({usuario[0]})', usuario[2], evento, segurança,agora])
    
 
 

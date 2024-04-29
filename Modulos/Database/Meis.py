@@ -110,7 +110,13 @@ def getParceiras_toEdit(IDempresaContratante):
             results = cursor.fetchall()
             return results
 
-
+def getLista_De_DASN_toEdit(IDempresaContratante):
+        with connection.cursor() as cursor:
+            ConsultaSQL = f"SELECT `ano`,`faturamento`,`observacao` FROM `das` WHERE `mei_id` = '{IDempresaContratante}'"
+            cursor.execute(ConsultaSQL)
+            results = cursor.fetchall()
+            return results
+        
 def getmeidata_toEdit(IDempresa):
     # Conecta ao banco de dados
     
@@ -212,7 +218,8 @@ def getmeidata_toEdit(IDempresa):
         
             if nova_lista is not None:
                 meis = getParceiras_toEdit(nova_lista[0]) 
-                return nova_lista,Listadeidentificação,data_quary,meis
+                Lista_de_DAS = getLista_De_DASN_toEdit(nova_lista[1])
+                return nova_lista,Listadeidentificação,data_quary,meis,Lista_de_DAS
             else:
                 return None,None
 

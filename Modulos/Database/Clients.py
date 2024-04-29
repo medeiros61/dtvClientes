@@ -136,6 +136,41 @@ def getassocietes_toEdit(IDempresa):
             cursor.execute(ConsultaSQL)
             results = cursor.fetchall()
             return results
+   
+def getLivro_Entradas_toEdit(IDempresa):
+    
+      with connection.cursor() as cursor:
+            ConsultaSQL = f"SELECT `numero`,`ano` FROM `livro_entradas` WHERE `client_id` = '{IDempresa}'"
+            cursor.execute(ConsultaSQL)
+            results = cursor.fetchall()
+            return results
+
+   
+def getLivro_Inventarios_toEdit(IDempresa):
+    
+
+      with connection.cursor() as cursor:
+            ConsultaSQL = f"SELECT `numero`,`ano` FROM `livro_inventarios` WHERE `client_id` = '{IDempresa}'"
+            cursor.execute(ConsultaSQL)
+            results = cursor.fetchall()
+            return results
+
+def getLivroECD_toEdit(IDempresa):
+    
+      with connection.cursor() as cursor:
+            ConsultaSQL = f"SELECT `numero`,`ano` FROM `livro_ecfs` WHERE `client_id` = '{IDempresa}'"
+            cursor.execute(ConsultaSQL)
+            results = cursor.fetchall()
+            return results
+        
+def getLivroECF_toEdit(IDempresa):
+    
+
+        with connection.cursor() as cursor:
+            ConsultaSQL = f"SELECT `numero`,`ano` FROM `livro_ecds` WHERE `client_id` = '{IDempresa}'"
+            cursor.execute(ConsultaSQL)
+            results = cursor.fetchall()
+            return results
 
 
 def getsyndicates_toEdit(IDempresa):
@@ -298,9 +333,13 @@ def getclientdata_toEdit(IDempresa):
             if nova_lista is not None: 
                 socios = getassocietes_toEdit(IDempresa)
                 sindicatos = getsyndicates_toEdit(IDempresa)
-                return nova_lista,Listadeidentificação,data_quary,socios,sindicatos
+                livroECD = getLivroECD_toEdit(IDempresa)
+                LivroECF=getLivroECF_toEdit(IDempresa)
+                LivroEntradas = getLivro_Entradas_toEdit(IDempresa)
+                Livroinvetario = getLivro_Inventarios_toEdit(IDempresa)
+                return nova_lista,Listadeidentificação,data_quary,socios,sindicatos,livroECD,LivroECF,LivroEntradas,Livroinvetario
             else:
-                return None,None,None,None,None
+                return None,None,None,None,None,None,None,None,None
 
     finally:
         connection.close() 
