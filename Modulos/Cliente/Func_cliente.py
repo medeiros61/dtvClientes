@@ -4,7 +4,7 @@ import Modulos.Cliente.Botoes_Edicao as btedit
 import Modulos.Database.Clients as dbc
 import pandas as pd
 import Modulos.Database.Logs as log
-
+import Modulos.Cliente.Cliente_V_E as C_Tela_Edit
 Evento_CAD= f'Entrou na tela de cadastro de cliente'
 obs_CAD = ""
 
@@ -15,10 +15,11 @@ obs_Exporta = ""
 def Adicionar_cliente(Dadosparateladeedição):
     frame_edição_dados = Dadosparateladeedição[0]
     Frame_atual = Dadosparateladeedição[1]
+    C_Tela_Edit.definiçãotipodeentrada('Criação')
     btedit.limparcampos()
     Frame_atual.pack_forget()
     frame_edição_dados.pack(side=RIGHT, fill = BOTH,expand=True) 
- 
+    
     log.RegistrarEventosdeLOG(Evento_CAD,obs_CAD) 
 
 
@@ -67,6 +68,7 @@ def editar_cliente(TreeView,Dadosparateladeedição):
                 Evento= f'Editando cliente: [id:{id}] {nome_cliente}'
                 obs = ""
                 log.RegistrarEventosdeLOG(Evento,obs) 
+                C_Tela_Edit.definiçãotipodeentrada('Edição')
             
             else:
                 print("Nenhum cliente selecionado.")

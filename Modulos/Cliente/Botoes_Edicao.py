@@ -15,6 +15,24 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     largura_borda = 2
     Frame_dados_cliente_titulo=DadosCliente
 
+
+    def validate_input_255(event, entry_widget):
+        text = entry_widget.get()
+        if len(text) > 255:
+            # Truncate the text to 255 characters
+            truncated_text = text[:255]
+            entry_widget.delete(0, "end")
+            entry_widget.insert(0, truncated_text)
+
+    def validate_input_50(event, entry_widget):
+        text = entry_widget.get()
+        if len(text) > 50:
+            # Truncate the text to 255 characters
+            truncated_text = text[:50]
+            entry_widget.delete(0, "end")
+            entry_widget.insert(0, truncated_text)
+
+
 #------------------------------cliente
     siglas_estados = [
         "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS",
@@ -52,25 +70,35 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
     label_CNPJ.grid(row=0, column=3, padx=10, pady=10, sticky="w")
     entry_CNPJ.grid(row=1, column=3, padx=10, pady=15, sticky="new")
-
+     # Vincula o evento KeyRelease ao widget entry_Atividade
+    entry_CNPJ.bind("<KeyRelease>", lambda event, widget=entry_CNPJ: validate_input_255(event, widget))
 
     label_Estado = ctk.CTkLabel(framecliente, text="Estado")
     entry_Estado = ctk.CTkComboBox(framecliente,values= siglas_estados)
 
     label_Estado.grid(row=2, column=1, padx=10, pady=1, sticky="w")
     entry_Estado.grid(row=3, column=1, padx=10, pady=15, sticky="new")
-    #entry_Estado.grid(row=2, column=1, padx=10, pady=(5, 5), sticky="new")
+    
 
     label_Municpio = ctk.CTkLabel(framecliente, text="Município")
     entry_Municpio = ctk.CTkEntry(framecliente)
 
     label_Municpio.grid(row=2, column=2, padx=10, pady=1, sticky="w")
     entry_Municpio.grid(row=3, column=2, padx=10, pady=15, sticky="new")
+    # Vincula o evento KeyRelease ao widget entry_Atividade
+    entry_Municpio.bind("<KeyRelease>", lambda event, widget=entry_Municpio: validate_input_255(event, widget))
+    
+
+  
 
 
     label_Atividade = ctk.CTkLabel(framecliente, text="Atividade")
     entry_Atividade = ctk.CTkEntry(framecliente)
+    # Vincula o evento KeyRelease ao widget entry_Atividade
+    entry_Atividade.bind("<KeyRelease>", lambda event, widget=entry_Atividade: validate_input_255(event, widget))
 
+
+    
     label_Atividade.grid(row=2, column=0, padx=10, pady=1, sticky="w")
     entry_Atividade.grid(row=3, column=0, padx=10, pady=15, sticky="new")
 
@@ -977,279 +1005,363 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     label_Observaes_gerais_bpo.grid(row=5, column=0, padx=10, pady=3, sticky="w")
     entry_Observaes_gerais_bpo.grid(row=6, column=0,columnspan=3, padx=10, pady=3, sticky="new")
 
-def pegar_dados_para_envio():
-    listadeenvio[1] = entry_Nome_empresa.get() # Campo nome_empresa do banco de dados
-    
-    listadeenvio[2] = entry_CNPJ.get() # Campo cnpj do banco de dados
-    
-    listadeenvio[3] = entry_Estado.get() # Campo uf do banco de dados
-    
-    listadeenvio[4] = entry_Municpio.get() # Campo municipio do banco de dados
-    
-    listadeenvio[5] = entry_Atividade.get() # Campo atividade do banco de dados
-   
-    listadeenvio[6] = entry_Data_abertura_.get() # Campo data_abertura do banco de dados
-    
-    listadeenvio[7] = entry_Ativo.get() # Campo ativo do banco de dados
-    
-    listadeenvio[68] = entry_Link_WhatsApp.get() #Campo link_whatsapp do banco de dados
-
-    ### Gerais
-
-    listadeenvio[8] = entry_Formas_de_tributao.get() # Campo formas_tributacao do banco de dados
-    listadeenvio[9] = entry_Anexo_simples_nacional.get() # Campo anexo_simples_nacional do banco de dados
-    listadeenvio[10] = entry_Folha_de_pagamento.get() # Campo folha_pagamento do banco de dados
-    listadeenvio[11] = entry_Responsvel_contabil.get() # Campo responsavel_contabil do banco de dados
-    listadeenvio[12] = entry_Responsvel_fiscal.get() # Campo responsavel_fiscal do banco de dados
-    listadeenvio[13] = entry_Responsvel_societrio.get() # Campo responsavel_societario do banco de dados
-    listadeenvio[14] = entry_Responsvel_DP.get() # Campo responsavel_dp do banco de dados
-    listadeenvio[15] = entry_Domiclio_eletrnico.get() # Campo domicilio_eletronico do banco de dados
-    listadeenvio[16] = entry_Email.get() # Campo email do banco de dados
-    listadeenvio[17] = entry_Nome_representante.get() # Campo nome_representante do banco de dados
-    listadeenvio[18] = entry_CPF_representante_legal.get() # Campo cpf_representante_legal do banco de dados
-    listadeenvio[19] = entry_Data_de_nascimento_.get() # Campo data_nascimento do banco de dados
-    listadeenvio[20] = entry_Contabilidade_finalizada_.get() # Campo contabilidade_finalizada do banco de dados
-    listadeenvio[21] = entry_Certificado_digital.get() # Campo certificado_digital do banco de dados
-    listadeenvio[22] = entry_Senha_certificado.get() # Campo senha_certificado do banco de dados
-    listadeenvio[23] = entry_Data_de_vencimento_.get() # Campo data_vencimento_certificado do banco de dados
-    
+def pegar_dados_para_envio(tipo):
 
 
     
-
-    ###Federais
     
 
-    listadeenvio[24] = entry_Cdigo_e_cac.get() # Campo codigo_ecac do banco de dados
-    listadeenvio[25] = entry_Senha_EAC.get() # Campo senha_ecac do banco de dados
-    listadeenvio[26] = entry_Cdigo_Simples.get() # Campo codigo_simples do banco de dados
+    ##Definições da Query
+    CamposBD = ''
+    ItensParaBD = ''
 
+    #2 nome_empresa - VARCHAR(255)  
+    ItensParaBD += f"'{entry_Nome_empresa.get()}'¬¬"
+    CamposBD +='nome_empresa,'
 
-    ##Estaduais
-
-    listadeenvio[3] = entry_Estado_estaduais.get()# Campo uf do banco de dados
-    listadeenvio[28] = entry_Inscrio_estadual.get() # Campo inscricao_estadual do banco de dados
-    listadeenvio[29] = entry_Credenciamento_NFE.get() # Campo estado do banco de dados
-    listadeenvio[30] = entry_Nmero_CSC.get() # Campo inscricao_estadual do banco de dados
-    listadeenvio[31] = entry_Site_caixa_postal.get() # Campo credenciamento_nfe do banco de dados
-
-
+    #3 cnpj   - VARCHAR(255) 
+    ItensParaBD += f"'{entry_CNPJ.get()}'¬¬" 
+    CamposBD +='cnpj,'
     
-    ## Municipais
+    #4 uf- VARCHAR(255) 
+    ItensParaBD += f"'{entry_Estado.get()}'¬¬"
+    CamposBD +='uf,'
 
-    listadeenvio[32] = entry_Inscrio_municipal.get() # Campo inscricao_municipal do banco de dados
-    listadeenvio[33] = entry_Site.get() # Campo site do banco de dados
-    listadeenvio[34] = entry_Login.get() # Campo login do banco de dados
-    listadeenvio[35] = entry_Senha.get() # Campo senha do banco de dados
-    listadeenvio[70] = entry_Demais_senhas.get() # Campo 'municipal_demais_senhas' do banco de dados
-    listadeenvio[71] = entry_Senha_Abertura_Processos.get() # Campo municipal_senha_abertura_processos do banco de dados
-    listadeenvio[69] = entry_Observaes.get() # Campo 'municipal_observacoes' do banco de dados
+    #5 municipio- VARCHAR(255) 
+    ItensParaBD += f"'{entry_Municpio.get()}'¬¬"
+    CamposBD +='municipio,'
+
+    #6 atividade- VARCHAR(255) 
+    ItensParaBD += f"'{entry_Atividade.get()}'¬¬" 
+    CamposBD +='atividade,'
+
+    #7 data_abertura - date
+    ItensParaBD += f"'{entry_Data_abertura_.get()}'¬¬"
+    CamposBD +='data_abertura,'
+
+    #8 ativo - tinyint(1)
+    ativo = entry_Ativo.get()
+    if ativo == "SIM":
+        ItensParaBD += "1¬¬" 
+    else:
+        ItensParaBD += "0¬¬" 
+    CamposBD +='ativo,'
+
+    #9 formas_tributacao - VARCHAR(255) 
+    ItensParaBD += f"'{entry_Formas_de_tributao.get()}'¬¬"  
+    CamposBD +='formas_tributacao,'
+
+
+    #10 anexo_simples_nacional- VARCHAR(255) 
+    ItensParaBD += f"'{entry_Anexo_simples_nacional.get()}'¬¬"
+    CamposBD += 'anexo_simples_nacional,'
+
+    #11 folha_pagamento- VARCHAR(255) 
+    ItensParaBD += f"'{entry_Folha_de_pagamento.get()}'¬¬"
+    CamposBD += 'folha_pagamento,'
+
+    #12 responsavel_contabil- VARCHAR(255)
+    ItensParaBD += f"'{entry_Responsvel_contabil.get()}'¬¬" 
+    CamposBD +='responsavel_contabil,'
+
+    #13 responsavel_fiscal- VARCHAR(255)
+    ItensParaBD += f"'{entry_Responsvel_fiscal.get()}'¬¬" 
+    CamposBD +='responsavel_fiscal,'
+
+    #14 responsavel_societario- VARCHAR(255)
+    ItensParaBD += f"'{entry_Responsvel_societrio.get()}'¬¬"
+    CamposBD +='responsavel_societario,'
+
+    #15 responsavel_dp- VARCHAR(255)
+    ItensParaBD += f"'{entry_Responsvel_DP.get()}'¬¬" 
+    CamposBD += 'responsavel_dp,'
+
+    #16 domicilio_eletronico- VARCHAR(255)
+    ItensParaBD += f"'{entry_Domiclio_eletrnico.get()}'¬¬" 
+    CamposBD += 'domicilio_eletronico,'
+
+    #17 email- VARCHAR(255)
+    ItensParaBD += f"'{entry_Email.get()}'¬¬"
+    CamposBD += 'email,'
+
+    #18 nome_representante - VARCHAR(255)
+    ItensParaBD += f"'{entry_Nome_representante.get()}'¬¬"  
+    CamposBD += 'nome_representante,'
+
+    #19 cpf_representante_legal - VARCHAR(255)
+    ItensParaBD += f"'{entry_CPF_representante_legal.get()}'¬¬"
+    CamposBD += 'cpf_representante_legal,'
+
+    #20 data_nascimento - date
+    ItensParaBD += f"'{entry_Data_de_nascimento_.get()}'¬¬" 
+    CamposBD += 'data_nascimento,'
+
+    #21 contabilidade_finalizada- date
+    ItensParaBD += f"'{entry_Contabilidade_finalizada_.get()}'¬¬"
+    CamposBD += 'contabilidade_finalizada,'
+
+    #22 certificado_digital- tinyint(1)
+    ativo = f'{entry_Certificado_digital.get()}'
+    if ativo == "SIM":
+        ItensParaBD += "1¬¬" 
+    else:
+        ItensParaBD += "0¬¬" 
+    CamposBD += 'certificado_digital,'
+
+    #23 senha_certificado - varchar(255)
+    ItensParaBD += f"'{entry_Senha_certificado.get()}'¬¬"
+    CamposBD += 'senha_certificado,'
+
+    #24 data_vencimento_certificado - date
+    ItensParaBD += f"'{entry_Data_de_vencimento_.get()}'¬¬"
+    CamposBD += 'data_vencimento_certificado,'
+
+    #25 codigo_ecac - varchar(255)
+    ItensParaBD += f"'{entry_Cdigo_e_cac.get()}'¬¬" 
+    CamposBD += 'codigo_ecac,'
+
+    #26 senha_ecac - varchar(255)
+    ItensParaBD += f"'{entry_Senha_EAC.get()}'¬¬" 
+    CamposBD += 'senha_ecac,'
+    
+    #27 codigo_simples - varchar(255)
+    ItensParaBD += f"'{entry_Cdigo_Simples.get()}'¬¬"
+    CamposBD += 'codigo_simples,'
+
+    #28 estado - varchar(255)
+    ItensParaBD += f"'{entry_Estado_estaduais.get()}'¬¬" 
+    CamposBD += 'estado,'
+
+    #29 inscricao_estadual - varchar(255)
+    ItensParaBD += f"'{entry_Inscrio_estadual.get()}'¬¬"
+    CamposBD += 'inscricao_estadual,'
+
+    #30 credenciamento_nfe- tinyint(1)
+    testeValor = f'{entry_Credenciamento_NFE.get()}'
+    if testeValor == "SIM":
+        ItensParaBD += "1¬¬" 
+    else:
+        ItensParaBD += "0¬¬" 
+    CamposBD += 'credenciamento_nfe,'
+
+    #31 numero_csc- varchar(255)
+    ItensParaBD += f"'{entry_Nmero_CSC.get()}'¬¬"
+    CamposBD += 'numero_csc,'
+
+    #32 site_caixa_postal- varchar(255)
+    ItensParaBD += f"'{entry_Site_caixa_postal.get()}'¬¬" 
+    CamposBD += 'site_caixa_postal,'
+
+    #33 inscricao_municipal- varchar(255)
+    ItensParaBD += f"'{entry_Inscrio_municipal.get()}'¬¬" 
+    CamposBD += 'inscricao_municipal,'
+
+    #34 site- varchar(255)
+    ItensParaBD += f"'{entry_Site.get()}'¬¬"
+    CamposBD += 'site,'
+
+    #35 login- varchar(255)
+    ItensParaBD += f"'{entry_Login.get()}'¬¬"  
+    CamposBD += 'login,'
+
+    #36 senha- varchar(255)
+    ItensParaBD += f"'{entry_Senha.get()}'¬¬"
+    CamposBD += 'senha,'
+    
+    #37 alvara_funcionamento - tinyint(1)
+    ItensParaBD += f"'{entry_Alvara_de_funcionamento.get()}'¬¬" 
+    CamposBD += 'alvara_funcionamento,'
+
+    #38 data_vencimento_alvara_funcionamento- date
+    ItensParaBD += f"'{entry_Data_vencimento_Func.get()}'¬¬" 
+    CamposBD += 'data_vencimento_alvara_funcionamento,'
+
+    #39 alvara_sanitario - tinyint(1)
+    ItensParaBD += f"'{entry_Alvara_sanitrio.get()}'¬¬"
+    CamposBD += 'alvara_sanitario,'
+
+    #40 data_vencimento_alvara_sanitario- date
+    ItensParaBD += f"'{entry_Data_vencimento_Sanitario.get()}'¬¬" 
+    CamposBD += 'data_vencimento_alvara_sanitario,'
+
+    #41 licenca_ambiental- tinyint(1)
+    ItensParaBD += f"'{entry_Licenca_ambiental.get()}'¬¬"
+    CamposBD += 'licenca_ambiental,'
+
+    #42 data_vencimento_licenca_ambiental- date
+    ItensParaBD += f"'{entry_Data_vencimento_Ambiental.get()}'¬¬"
+    CamposBD += 'data_vencimento_licenca_ambiental,'
+
+    #43 bombeiros- tinyint(1)
+    ItensParaBD += f"'{entry_Bombeiros.get()}'¬¬"
+    CamposBD += 'bombeiros,'
+
+    #44 data_vencimento_bombeiros- date
+    ItensParaBD += f"'{entry_Data_vencimento_Bombeiros.get()}'¬¬"
+    CamposBD += 'data_vencimento_bombeiros,'
+
+    #45 ultima_alteracao_contratual- date
+    ItensParaBD += f"'{entry_ltima_alterao_contratual_.get()}'¬¬"
+    CamposBD += 'ultima_alteracao_contratual,'
+
+    #46 numero_alteracao_contratual- varchar(255)
+    ItensParaBD += f"'{entry_Nmero_alterao_contratual.get()}'¬¬" 
+    CamposBD += 'numero_alteracao_contratual,'
+
+    #47 observacoes_gerais_societario - text
+    ItensParaBD += f"'{entry_Observaes_gerais_Societario.get("1.0", "end-1c")}'¬¬"
+    CamposBD += 'observacoes_gerais_societario,'
+
+    #48 folha_pagto- tinyint(1)
+    ItensParaBD += f"'{entry_Folha_de_pagto.get()}'¬¬"
+    CamposBD += 'folha_pagto,'
+
+    #49 quantidade_funcionarios- varchar(50)
+    ItensParaBD += f"'{entry_Quantidade_de_funcionrios.get()}'¬¬" 
+    CamposBD += 'quantidade_funcionarios,'
+
+    #50 prolabore- tinyint(1)
+    ItensParaBD += f"'{entry_Prolabore.get()}'¬¬" 
+    CamposBD += 'prolabore,'
+
+    #51 quantidade_socios- varchar(50)
+    ItensParaBD += f"'{entry_Quantidade_de_scios.get()}'¬¬" 
+    CamposBD += 'quantidade_socios,'
+
+    #52 esocial_usuario- varchar(255)
+    ItensParaBD += f"'{entry_Esocial_usurio.get()}'¬¬" 
+    CamposBD += 'esocial_usuario,'
+
+    #53 esocial_senha- varchar(255)
+    ItensParaBD += f"'{entry_Esocial_senha.get()}'¬¬"
+    CamposBD += 'esocial_senha,'
+
+    #54 esocial_codigo_acesso- varchar(255)
+    ItensParaBD += f"'{entry_Esocial_cdigo_de_acesso.get()}'¬¬" 
+    CamposBD += 'esocial_codigo_acesso,'
+
+    #55 fap_usuario- varchar(255)
+    ItensParaBD += f"'{entry_FAP_usurio.get()}'¬¬" 
+    CamposBD += 'fap_usuario,'
+
+    #56 fap_senha- varchar(255)
+    ItensParaBD += f"'{entry_FAP_senha.get()}'¬¬"
+    CamposBD += 'fap_senha,'
+
+    #57 empregador_web_usuario- varchar(255)
+    ItensParaBD += f"'{entry_Empregador_WEB_usurio.get()}'¬¬" 
+    CamposBD += 'empregador_web_usuario,'
+
+    #58 empregador_web_senha- varchar(255)
+    ItensParaBD += f"'{entry_Empregador_WEB_senha.get()}'¬¬"
+    CamposBD += 'empregador_web_senha,'
+
+    #59 sistema_bpo- varchar(255)
+    ItensParaBD += f"'{entry_Sistema.get()}'¬¬" 
+    CamposBD += 'sistema_bpo,'
+
+    #60 site_bpo- varchar(255)
+    ItensParaBD += f"'{entry_Site_Bpo.get()}'¬¬"
+    CamposBD += 'site_bpo,'
+
+    #61 usuario_bpo- varchar(255)
+    ItensParaBD += f"'{entry_Usurio.get()}'¬¬" 
+    CamposBD += 'usuario_bpo,'
+
+    #62 senha_simples_bpo- varchar(255)
+    ItensParaBD += f"'{entry_Senha_simples.get()}'¬¬"
+    CamposBD += 'senha_simples_bpo,'
+
+    #63 banco1- varchar(255)
+    ItensParaBD += f"'{entry_Banco_1.get()}'¬¬" 
+    CamposBD += 'banco1,'
+
+    #64 banco2- varchar(255)
+    ItensParaBD += f"'{entry_Banco_2.get()}'¬¬"
+    CamposBD += 'banco2,'
+
+    #65 tipo_bpo- varchar(255)
+    ItensParaBD += f"'{entry_Tipo_de_BPO.get()}'¬¬" 
+    CamposBD += 'tipo_bpo,'
+
+    #66 observacoes_gerais_bpo - text
+    ItensParaBD += f"'{entry_Observaes_gerais_bpo.get("1.0", "end-1c")}'¬¬"
+    CamposBD += 'observacoes_gerais_bpo,'
+    
+    #69 link_whatsapp- varchar(255)
+    ItensParaBD += f"'{entry_Link_WhatsApp.get()}'¬¬"
+    CamposBD += 'link_whatsapp,'
+
+    #70 municipal_observacoes- text
+    ItensParaBD += f"'{entry_Observaes.get("1.0", "end-1c")}'¬¬"
+    CamposBD += 'municipal_observacoes,'
+
+    #71 municipal_demais_senhas- varchar(255)
+    ItensParaBD += f"'{entry_Demais_senhas.get()}'¬¬"  
+    CamposBD += 'municipal_demais_senhas,'
+
+    #72 municipal_senha_abertura_processos- varchar(255)
+    ItensParaBD += f"'{entry_Senha_Abertura_Processos.get()}'¬¬" 
+    CamposBD += 'municipal_senha_abertura_processos,'
+
+    #73 dpto_pessoal_sindicalizada- tinyint(1)
+    ItensParaBD += f"'{box_sindicalizada.get()}'¬¬"
+    CamposBD += 'dpto_pessoal_sindicalizada,'
+
+    #74 dpto_pessoal_login- varchar(255)
+    ItensParaBD += f"'{entry_login_sindicalizada.get()}'¬¬" 
+    CamposBD += 'dpto_pessoal_login,'
+
+    #75 dpto_pessoal_senha- varchar(255)
+    ItensParaBD += f"'{entry_senha_sindicalizada.get()}'" 
+    CamposBD += 'dpto_pessoal_senha'
+
+    # Transforma a string em uma lista de campos separados por vírgula
+    CamposBD_List = CamposBD.split(',')
+    ItensParaBD_List = ItensParaBD.split('¬¬')
+
+    # Transforma a lista em uma tupla
+    CamposBD_tupla = tuple(CamposBD_List)
+    ItensParaBD_tupla = tuple(ItensParaBD_List)
+
+    queryCriação = f"""INSERT INTO `clients` ("""
+    
+    for index,item in enumerate(CamposBD_tupla):
+        queryCriação += f"{CamposBD_tupla[index]}" 
+        if index < len(CamposBD_tupla) - 1:
+            queryCriação += ","
+
+    queryCriação += f") VALUES ("
+
+    for index,item in enumerate(ItensParaBD_tupla):
+        queryCriação += f"{ItensParaBD_tupla[index]}" 
+        if index < len(ItensParaBD_tupla) - 1:
+            queryCriação += ","
+    queryCriação += f")"
+
+
+    queryUpdate = f"""UPDATE `clients` SET """
+    for index,item in enumerate(CamposBD_tupla):
+        queryUpdate += f"{CamposBD_tupla[index]} = {ItensParaBD_tupla[index]}"
+        if index < len(CamposBD_tupla) - 1:
+            queryUpdate += "," 
     
 
 
 
-    ## Societario
+    if tipo =="Edição":
+        queryUpdate += f"WHERE id = {Listadedados[0]};"
+        global QuerydeExecução
+        QuerydeExecução = queryUpdate
+        #QuerydeExecução =''
+        #print("Edição")
+    else:
+        QuerydeExecução = queryCriação 
 
-    listadeenvio[36] = entry_Alvara_de_funcionamento.get() # Campo alvara_funcionamento do banco de dados
-    listadeenvio[37] = entry_Data_vencimento_Func.get() # Campo data_vencimento_alvara_funcionamento do banco de dados
-    listadeenvio[38] = entry_Alvara_sanitrio.get() # Campo alvara_sanitario do banco de dados
-    listadeenvio[39] = entry_Data_vencimento_Sanitario.get() #Campo  data_vencimento_alvara_sanitario'do banco de dados
-    listadeenvio[40] = entry_Licenca_ambiental.get() # Campo licenca_ambiental do banco de dados
-    listadeenvio[41] = entry_Data_vencimento_Ambiental.get() #Campo  data_vencimento_licenca_ambiental'do banco de dados
-
-    listadeenvio[42] = entry_Bombeiros.get() # Campo dbombeiros do banco de dados
-    listadeenvio[43] = entry_Data_vencimento_Bombeiros.get() #Campo  data_vencimento_bombeiros'do banco de dados
-    listadeenvio[44] = entry_ltima_alterao_contratual_.get() # Campo ultima_alteracao_contratual do banco de dados
-    listadeenvio[45] = entry_Nmero_alterao_contratual.get() # Campo numero_alteracao_contratual do banco de dados
-    listadeenvio[46] = entry_Observaes_gerais_Societario.get() # Campo observacoes_gerais_societario do banco de dados
-    
-    ## Deparamento Pessoal 
-    
-
-    listadeenvio[47] = entry_Folha_de_pagto.get() # Campo folha_pagto do banco de dados
-    listadeenvio[48] = entry_Quantidade_de_funcionrios.get() # Campo quantidade_funcionarios do banco de dados
-    listadeenvio[49] = entry_Prolabore.get() # Campo prolabore do banco de dados
-    listadeenvio[50] = entry_Quantidade_de_scios.get() # Campo quantidade_socios do banco de dados
-    listadeenvio[51] = entry_Esocial_usurio.get() # Campo esocial_usuario do banco de dados
-    listadeenvio[52] = entry_Esocial_senha.get() # Campo esocial_senha do banco de dados
-    listadeenvio[53] = entry_Esocial_cdigo_de_acesso.get() # Campo esocial_codigo_acesso do banco de dados
-    listadeenvio[54] = entry_FAP_usurio.get() # Campo fap_usuario do banco de dados
-    listadeenvio[55] = entry_FAP_senha.get() # Campo fap_senha do banco de dados
-    listadeenvio[56] = entry_Empregador_WEB_usurio.get() # Campo empregador_web_usuario do banco de dados
-    listadeenvio[57] = entry_Empregador_WEB_senha.get() # Campo empregador_web_senha do banco de dados
-    listadeenvio[72] = box_sindicalizada.get() #Campo dpto_pessoal_sindicalizada do banco de dados
-    listadeenvio[73] = entry_login_sindicalizada.get() #Campo dpto_pessoal_login do banco de dados
-    listadeenvio[74] = entry_senha_sindicalizada.get() #Campo dpto_pessoal_senha do banco de dados
-
-
-
-            
-    ## Sistema
-
-    listadeenvio[58] = entry_Sistema.get() # Campo sistema_bpo do banco de dados
-    listadeenvio[59] = entry_Site_Bpo.get() # Campo site_bpo do banco de dados
-    listadeenvio[60] = entry_Usurio.get() # Campo usuario_bpo do banco de dados
-    listadeenvio[61] = entry_Senha_simples.get() # Campo senha_simples_bpo do banco de dados
-    listadeenvio[62] = entry_Banco_1.get() # Campo banco1 do banco de dados
-    listadeenvio[63] = entry_Banco_2.get() # Campo banco2 do banco de dados
-    listadeenvio[64] = entry_Tipo_de_BPO.get() # Campo tipo_bpo do banco de dados
-    listadeenvio[65] = entry_Observaes_gerais_bpo.get()# Campo observacoes_gerais_bpo do banco de dados
-
-    Envio = tuple(listadeenvio)
-    query = f"""
-    INSERT INTO sua_tabela (
-    nome_empresa,
-    cnpj,
-    uf,
-    municipio,
-    atividade,
-    data_abertura,
-    ativo,
-    link_whatsapp,
-    formas_tributacao,
-    anexo_simples_nacional,
-    folha_pagamento,
-    responsavel_contabil,
-    responsavel_fiscal,
-    responsavel_societario,
-    responsavel_dp,
-    domicilio_eletronico,
-    email,
-    nome_representante,
-    cpf_representante_legal,
-    data_nascimento,
-    contabilidade_finalizada,
-    certificado_digital,
-    senha_certificado,
-    data_vencimento_certificado,
-    codigo_ecac,
-    senha_ecac,
-    codigo_simples,
-    estado_estaduais,
-    inscricao_estadual,
-    credenciamento_nfe,
-    numero_csc,
-    site_caixa_postal,
-    inscricao_municipal,
-    site,
-    login,
-    senha,
-    municipal_demais_senhas,
-    municipal_senha_abertura_processos,
-    municipal_observacoes,
-    alvara_funcionamento,
-    data_vencimento_alvara_funcionamento,
-    alvara_sanitario,
-    data_vencimento_alvara_sanitario,
-    licenca_ambiental,
-    data_vencimento_licenca_ambiental,
-    bombeiros,
-    data_vencimento_bombeiros,
-    ultima_alteracao_contratual,
-    numero_alteracao_contratual,
-    observacoes_gerais_societario,
-    folha_pagto,
-    quantidade_funcionarios,
-    prolabore,
-    quantidade_socios,
-    esocial_usuario,
-    esocial_senha,
-    esocial_codigo_acesso,
-    fap_usuario,
-    fap_senha,
-    empregador_web_usuario,
-    empregador_web_senha,
-    dpto_pessoal_sindicalizada,
-    dpto_pessoal_login,
-    dpto_pessoal_senha,
-    sistema_bpo,
-    site_bpo,
-    usuario_bpo,
-    senha_simples_bpo,
-    banco1,
-    banco2,
-    tipo_bpo,
-    observacoes_gerais_bpo
-    ) VALUES (
-    {listadeenvio[1]},
-    {listadeenvio[2]},
-    {listadeenvio[3]},
-    {listadeenvio[4]},
-    {listadeenvio[5]},
-    {listadeenvio[6]},
-    {listadeenvio[7]},
-    {listadeenvio[68]},
-    {listadeenvio[8]},
-    {listadeenvio[9]},
-    {listadeenvio[10]},
-    {listadeenvio[11]},
-    {listadeenvio[12]},
-    {listadeenvio[13]},
-    {listadeenvio[14]},
-    {listadeenvio[15]},
-    {listadeenvio[16]},
-    {listadeenvio[17]},
-    {listadeenvio[18]},
-    {listadeenvio[19]},
-    {listadeenvio[20]},
-    {listadeenvio[21]},
-    {listadeenvio[22]},
-    {listadeenvio[23]},
-    {listadeenvio[24]},
-    {listadeenvio[25]},
-    {listadeenvio[26]},
-    {listadeenvio[27]},
-    {listadeenvio[28]},
-    {listadeenvio[29]},
-    {listadeenvio[30]},
-    {listadeenvio[31]},
-    {listadeenvio[32]},
-    {listadeenvio[33]},
-    {listadeenvio[34]},
-    {listadeenvio[35]},
-    {listadeenvio[70]},
-    {listadeenvio[71]},
-    {listadeenvio[69]},
-    {listadeenvio[36]},
-    {listadeenvio[37]},
-    {listadeenvio[38]},
-    {listadeenvio[39]},
-    {listadeenvio[40]},
-    {listadeenvio[41]},
-    {listadeenvio[42]},
-    {listadeenvio[43]},
-    {listadeenvio[44]},
-    {listadeenvio[45]},
-    {listadeenvio[46]},
-    {listadeenvio[47]},
-    {listadeenvio[48]},
-    {listadeenvio[49]},
-    {listadeenvio[50]},
-    {listadeenvio[51]},
-    {listadeenvio[52]},
-    {listadeenvio[53]},
-    {listadeenvio[54]},
-    {listadeenvio[55]},
-    {listadeenvio[56]},
-    {listadeenvio[57]},
-    {listadeenvio[72]},
-    {listadeenvio[73]},
-    {listadeenvio[74]},
-    {listadeenvio[58]},
-    {listadeenvio[59]},
-    {listadeenvio[60]},
-    {listadeenvio[61]},
-    {listadeenvio[62]},
-    {listadeenvio[63]},
-    {listadeenvio[64]},
-    {listadeenvio[65]}
-    )
-    """
-
-
-    print(Envio)
+    dbc.Query_Save_Data(QuerydeExecução)
 
 def limparcampos():
+   
     def Limpartreeview(TreeV):
         try:
             for item in TreeV.get_children():
@@ -1347,7 +1459,7 @@ def limparcampos():
    
             
 def Importardados(idcliente):
-    
+    global listadeenvio,Listadedados
     def importar_dados_treeview(TreeV,dados):
         for result in dados:
             TreeV.insert("", 'end', values=result)
@@ -1357,8 +1469,8 @@ def Importardados(idcliente):
     
     limparcampos()
 
-    global listadeenvio
-    listadeenvio = list(Listadedados)
+    
+   
 
     if Listadedados[1]!= "N/A" and Listadedados[0] is not None:
         Frame_dados_cliente_titulo.configure(text=f"EMPRESA: {Listadedados[1]} (ID:{Listadedados[0]})")

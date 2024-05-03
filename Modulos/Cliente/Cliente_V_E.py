@@ -10,6 +10,9 @@ import Modulos.Database.Logs as log
 
 Evento_TelaVoltar = f'Usuario saiu da Edição de de clientes'
 obs_TelaVoltar=""
+def definiçãotipodeentrada(tipo):
+    global tpEntrada
+    tpEntrada = tipo
 
 def criartelaEdit_clientes(frame,cliente):
     print('f')
@@ -47,7 +50,7 @@ def parametrosinicias(frame,Frame_atual):
 
     DadosCliente = id
 
-    bt_salvar = ctk.CTkButton(master_frame,text='Salvar',command='',height=20,width=80)
+    bt_salvar = ctk.CTkButton(master_frame,text='Salvar',command=lambda:bts.pegar_dados_para_envio(tpEntrada),height=20,width=80)
     bt_salvar.grid(row=0, column=5, padx=(5, 0), pady=(1, 10), sticky="nsew")
    
     bt_cancelar = ctk.CTkButton(master_frame,text='Cancelar',command=RemovertelaEdit_clientes,height=20,width=80)

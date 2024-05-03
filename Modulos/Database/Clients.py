@@ -1,7 +1,7 @@
 import pymysql
 from datetime import datetime, date,timedelta
 
-def connect_to_da():
+def connect_to_db():
     global connection
     connection = pymysql.connect(
             host='mysql02-farm10.kinghost.net',
@@ -13,7 +13,7 @@ def connect_to_da():
 def getclientlist_complete():
     # Conecta ao banco de dados
     
-    connect_to_da()
+    connect_to_db()
     
     try:
         with connection.cursor() as cursor:
@@ -47,11 +47,10 @@ def getclientlist_complete():
     finally:
         connection.close()
 
-
 def getclientlist_byfilter(nome_empresa_p,nome,uf_p,uf,ativo_p,ativo):
     # Conecta ao banco de dados
     
-    connect_to_da()
+    connect_to_db()
     
     try:
         with connection.cursor() as cursor:
@@ -90,11 +89,10 @@ def getclientlist_byfilter(nome_empresa_p,nome,uf_p,uf,ativo_p,ativo):
     finally:
         connection.close()
 
-
 def getmunicipioslist_complete():
     # Conecta ao banco de dados
     
-    connect_to_da()
+    connect_to_db()
     
     try:
         with connection.cursor() as cursor:
@@ -144,7 +142,6 @@ def getLivro_Entradas_toEdit(IDempresa):
             cursor.execute(ConsultaSQL)
             results = cursor.fetchall()
             return results
-
    
 def getLivro_Inventarios_toEdit(IDempresa):
     
@@ -172,21 +169,17 @@ def getLivroECF_toEdit(IDempresa):
             results = cursor.fetchall()
             return results
 
-
 def getsyndicates_toEdit(IDempresa):
         with connection.cursor() as cursor:
             ConsultaSQL = f"SELECT `nome`,`data_base`,`periodo_vigencia_ultima_cct`,`site_cct` FROM `syndicates` WHERE `client_id` = '{IDempresa}'"
             cursor.execute(ConsultaSQL)
             results = cursor.fetchall()
             return results
-
-
-    
     
 def getclientdata_toEdit(IDempresa):
     # Conecta ao banco de dados
     
-    connect_to_da()
+    connect_to_db()
     data_quary = [
         "id",
         "nome_empresa",
@@ -347,7 +340,7 @@ def getclientdata_toEdit(IDempresa):
 def getclientdata_all(nome_empresa_p,nome,uf_p,uf,ativo_p,ativo):
     # Conecta ao banco de dados
     
-    connect_to_da()
+    connect_to_db()
     data_quary = [
         "id",
         "nome_empresa",
@@ -597,3 +590,15 @@ def gerartexto():
 
         #print(f"""{item}.configure = {Listadedados[i]} #{identificadores[i]}""")
 
+def Query_Save_Data(Query):
+    
+    connect_to_db() 
+
+    try:
+        with connection.cursor() as cursor:
+            ConsultaSQL = Query
+            cursor.execute(ConsultaSQL)
+            connection.commit()       
+    finally:
+        connection.close()
+   
