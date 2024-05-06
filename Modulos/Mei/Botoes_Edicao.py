@@ -1,14 +1,352 @@
 import customtkinter as ctk
 import Modulos.Database.Meis as dbm
-import tkinter as tk
 from tkinter import *
-from ttkthemes import ThemedStyle
 from tkinter import ttk
 import Modulos.Mei.Func_mei as Func_Mei
+ 
+def preencher_tipo(tipo_Cont_ou_Parc,contratante):
+    if tipo_Cont_ou_Parc == "Criar_Contratante":
+        frame_dados_mei[0].configure(text=f"")
+        entry_Identificao.configure(state='normal')
+        entry_Identificao.delete(0,'end')
+        entry_Identificao.insert(0,'Contratante')
+        entry_Identificao.configure(state='disabled')
+        
+    if tipo_Cont_ou_Parc == "Criar_Parceira":
+        frame_dados_mei[0].configure(text=f"CONTRATANTE: {contratante}")
+        entry_Identificao.configure(state='normal')
+        entry_Identificao.delete(0,'end')
+        entry_Identificao.insert(0,'Parceira')
+        entry_Identificao.configure(state='disabled')
+
+    if tipo_Cont_ou_Parc == "Contratante":
+     
+        entry_Identificao.configure(state='normal')
+        entry_Identificao.delete(0,'end')
+        entry_Identificao.insert(0,'Contratante')
+        entry_Identificao.configure(state='disabled')
+        
+    if tipo_Cont_ou_Parc == "Parceira":
+
+        entry_Identificao.configure(state='normal')
+        entry_Identificao.delete(0,'end')
+        entry_Identificao.insert(0,'Parceira')
+        entry_Identificao.configure(state='disabled')
+
+def id_empresa_Contratante(idmei):
+    global Id_Contratante
+    Id_Contratante = idmei
+
+def pegar_dados_para_envio(tipo):
+
+    ##Definições da Query
+    CamposBD = ''
+    ItensParaBD = ''
+
+    #mei_id
+    if tipo == "Criação_Contratante":
+        pass
+    elif tipo =="Criação_Parceira":
+        ItensParaBD += f"'{Id_Contratante}'¬¬"
+        CamposBD +='mei_id,'
+        
+    #situacao - tinyint(1)
+    testeValor = entry_Situao.get()
+    if testeValor == "SIM":
+        ItensParaBD += "1¬¬" 
+    else:
+        ItensParaBD += "0¬¬" 
+    CamposBD +='situacao,'
+
+    #nome - varchar(255)
+    ItensParaBD += f"'{entry_Nome.get()}'¬¬"
+    CamposBD +='nome,'
+
+    #identificacao - varchar(255)
+    ItensParaBD += f"'{entry_Identificao.get()}'¬¬"
+    CamposBD +='identificacao,'
+
+    #cnpj - varchar(255)
+    ItensParaBD += f"'{entry_CNPJ.get()}'¬¬"
+    CamposBD +='cnpj,'
+
+    #tributacao - varchar(255)
+    ItensParaBD += f"'{entry_Tributao.get()}'¬¬"
+    CamposBD +='tributacao,'
+
+    #data_abertura - date
+    ItensParaBD += f"'{entry_Data_abertura_.get()}'¬¬"
+    CamposBD +='data_abertura,'
+
+    #prefeitura - varchar(255)	
+    ItensParaBD += f"'{entry_Prefeitura.get()}'¬¬"
+    CamposBD +='prefeitura,'
+
+    #login- varchar(255)
+    ItensParaBD += f"'{entry_Login.get()}'¬¬"
+    CamposBD +='login,'
+
+    #senha- varchar(255)
+    ItensParaBD += f"'{entry_Senha.get()}'¬¬"
+    CamposBD +='senha,'
+
+    #pendencia_recolhimentos- varchar(255)
+    ItensParaBD += f"'{entry_Pendncia_de_Recolhimentos.get()}'¬¬"
+    CamposBD +='pendencia_recolhimentos,'
+
+    #entrega_das_mensal- varchar(255)
+    ItensParaBD += f"'{entry_Entrega_de_DAS_Mensal.get()}'¬¬"
+    CamposBD +='entrega_das_mensal,'
+
+    #pendencias- varchar(255)
+    ItensParaBD += f"'{entry_Pendncias.get("1.0", "end-1c")}'¬¬"
+    CamposBD +='pendencias,'
+
+    #email- varchar(255)
+    ItensParaBD += f"'{entry_E_mail.get()}'¬¬"
+    CamposBD +='email,'
+
+    #observacoes - text
+    ItensParaBD += f"'{entry_Observaes.get("1.0", "end-1c")}'¬¬"
+    CamposBD +='observacoes,'
+
+    #cpf- varchar(255)
+    ItensParaBD += f"'{entry_CPF.get()}'¬¬"
+    CamposBD +='cpf,'
+
+    #codigo_acesso- varchar(255)
+    ItensParaBD += f"'{entry_Cdigo_de_Acesso.get()}'¬¬"
+    CamposBD +='codigo_acesso,'
+
+    #senha_gov- varchar(255)
+    ItensParaBD += f"'{entry_Senha_GOV.get()}'¬¬"
+    CamposBD +='senha_gov,'
+
+    #nivel_gov- varchar(255)
+    ItensParaBD += f"'{entry_Nvel_GOV.get()}'¬¬"
+    CamposBD +='nivel_gov,'
+
+    #endereco- varchar(255)
+    ItensParaBD += f"'{entry_Endereo.get()}'¬¬"
+    CamposBD +='endereco,'
+
+    #inscricao_estadual- varchar(255)
+    ItensParaBD += f"'{entry_Inscrio_Estadual.get()}'¬¬"
+    CamposBD +='inscricao_estadual,'
+
+    #inscricao_municipal- varchar(255)
+    ItensParaBD += f"'{entry_Inscrio_Municipal.get()}'¬¬"
+    CamposBD +='inscricao_municipal,'
+
+    #certificado_digital - tinyint(1)
+    testeValor = entry_Certificado_Digital.get()
+    if testeValor == "SIM":
+        ItensParaBD += "1¬¬" 
+    else:
+        ItensParaBD += "0¬¬" 
+    CamposBD +='certificado_digital,'
+
+    #modelo_datavix- varchar(255)
+    ItensParaBD += f"'{entry_Modelo_Datavix.get()}'¬¬"
+    CamposBD +='modelo_datavix,'
+
+    #homologado_sindicato- varchar(255)
+    ItensParaBD += f"'{entry_Homologado___Sindicato.get()}'¬¬"
+    CamposBD +='homologado_sindicato,'
+
+    #vencimento- date
+    ItensParaBD += f"'{entry_Vencimento_.get()}'"
+    CamposBD +='vencimento'
+
+    
+    # Transforma a string em uma lista de campos separados por vírgula
+    CamposBD_List = CamposBD.split(',')
+    ItensParaBD_List = ItensParaBD.split('¬¬')
+
+    # Transforma a lista em uma tupla
+    CamposBD_tupla = tuple(CamposBD_List)
+    ItensParaBD_tupla = tuple(ItensParaBD_List)
+
+    if tipo =="Edição":
+        queryUpdate = f"""UPDATE `meis` SET """
+        for index,item in enumerate(CamposBD_tupla):
+            queryUpdate += f"{CamposBD_tupla[index]} = {ItensParaBD_tupla[index]}"
+            if index < len(CamposBD_tupla) - 1:
+                queryUpdate += "," 
+
+        queryUpdate += f"WHERE id = {Listadedados[0]};"
+        global QuerydeExecução
+        QuerydeExecução = queryUpdate
+        #QuerydeExecução =''
+        #print("Edição")
+    else:
+        queryCriação = f"""INSERT INTO `meis` ("""
+    
+        for index,item in enumerate(CamposBD_tupla):
+            queryCriação += f"{CamposBD_tupla[index]}" 
+            if index < len(CamposBD_tupla) - 1:
+                queryCriação += ","
+
+        queryCriação += f") VALUES ("
+
+        for index,item in enumerate(ItensParaBD_tupla):
+            queryCriação += f"{ItensParaBD_tupla[index]}" 
+            if index < len(ItensParaBD_tupla) - 1:
+                queryCriação += ","
+        queryCriação += f")"
+
+        QuerydeExecução = queryCriação 
+
+    dbm.Query_Save_Data(QuerydeExecução)
+
+def limparbotões():
+    def Limpartreeview(TreeV):
+        try:
+            for item in TreeV.get_children():
+                    TreeV.delete(item)     
+        except Exception :
+                pass
+        
+    TabViewGlobal.set("Empresa")
+    
+    entry_Nome.delete(0, 'end')
+    entry_Identificao.delete(0, 'end')
+    entry_CNPJ.delete(0, 'end')
+    entry_Tributao.delete(0, 'end')
+    entry_Data_abertura_.delete(0, 'end')
+    entry_Prefeitura.delete(0, 'end')
+    entry_Login.delete(0, 'end')
+    entry_Senha.delete(0, 'end')
+    entry_Pendncia_de_Recolhimentos.delete(0, 'end')
+    entry_Entrega_de_DAS_Mensal.delete(0, 'end')
+    entry_E_mail.delete(0, 'end')
+    entry_Pendncias.delete('1.0', 'end')
+    entry_Observaes.delete('1.0', 'end')
+    entry_CPF.delete(0, 'end')
+    entry_Cdigo_de_Acesso.delete(0, 'end')
+    entry_Senha_GOV.delete(0, 'end')
+    entry_Nvel_GOV.delete(0, 'end')
+    entry_Endereo.delete(0, 'end')
+    entry_Inscrio_Estadual.delete(0, 'end')
+    entry_Inscrio_Municipal.delete(0, 'end')
+    entry_Modelo_Datavix.delete(0, 'end')
+    entry_Homologado___Sindicato.delete(0, 'end')
+    entry_Vencimento_.delete(0, 'end')
+    #entry_Ano_dasn.delete(0, 'end')
+    #entry_Faturamento.delete(0, 'end')
+    #entry_Observaes_dasn.delete(0, 'end')
+
+    Limpartreeview(TreeViewParceiras)
+  
+def Importardados(idcliente,Dadosparateladeedição):
+    def importar_dados_treeview(TreeV,dados):
+        for result in dados:
+            TreeV.insert("", 'end', values=result)
+   
+    limparbotões()
+
+    global tela_Mae,Listadedados
+    tela_Mae = Dadosparateladeedição
+
+    Listadedados, identificadores,qr,meis,Lista_de_DAS = dbm.getmeidata_toEdit(idcliente)
+
+    
+
+    if Listadedados[0]:
+        frame_dados_mei[1].configure(text=f"EMPRESA: {Listadedados[3]} (ID:{Listadedados[0]})")
+        frame_dados_mei[2].configure(text=f"TIPO: {Listadedados[4]}")
+
+    if Listadedados[1] != "N/A":
+        nomemei=  dbm.GetnameMEI(Listadedados[1])
+        
+        frame_dados_mei[0].configure(text=f"CONTRATANTE: {nomemei[0]}")
+        TreeViewParceiras.grid_remove()
+        scrollbarParceiras.grid_remove()
+        bt_Editar_MEI_Parceiras.grid_remove()
+    else:
+        frame_dados_mei[0].configure(text=f"")
+        TreeViewParceiras.grid(row=2, column=0,columnspan=3, sticky="nsew", padx=(1,0), pady=(5,10))
+        scrollbarParceiras.grid(row=2, column=4, padx=(0,10), pady=(5,10), sticky="nsew")
+        bt_Editar_MEI_Parceiras.grid(row=3, column=0,columnspan=3, sticky="n", padx=(1,0), pady=(5,10))
 
 
+    importar_dados_treeview(TreeviewDas,Lista_de_DAS)
+
+    entry_Nome.insert(0,Listadedados[3]) # Campo nome do banco de dados
+
+
+    entry_Situao.set(Listadedados[2]) # Campo situacao do banco de dados
+
+    preencher_tipo(Listadedados[4],"") # Campo identificacao do banco de dados
+
+    entry_CNPJ.insert(0,Listadedados[5]) # Campo cnpj do banco de dados
+
+    entry_Tributao.insert(0,Listadedados[6]) # Campo tributacao do banco de dados
+
+    entry_Data_abertura_.insert(0,Listadedados[7]) # Campo data_abertura do banco de dados
+
+    entry_Prefeitura.insert(0,Listadedados[8]) # Campo prefeitura do banco de dados
+
+    entry_Login.insert(0,Listadedados[9]) # Campo login do banco de dados
+
+    entry_Senha.insert(0,Listadedados[10]) # Campo senha do banco de dados
+
+    entry_Pendncia_de_Recolhimentos.insert(0,Listadedados[11]) # Campo pendencia_recolhimentos do banco de dados
+
+    entry_Entrega_de_DAS_Mensal.insert(0,Listadedados[12]) # Campo entrega_das_mensal do banco de dados
+
+    entry_E_mail.insert(0,Listadedados[14]) # Campo email do banco de dados
+
+    entry_Pendncias.insert('1.0',Listadedados[13]) # Campo pendencias do banco de dados
+
+    entry_Observaes.insert('1.0',Listadedados[16]) # Campo observacoes do banco de dados
+
+    entry_CPF.insert(0,Listadedados[17]) # Campo cpf do banco de dados
+
+    entry_Cdigo_de_Acesso.insert(0,Listadedados[18]) # Campo codigo_acesso do banco de dados
+
+    entry_Senha_GOV.insert(0,Listadedados[19]) # Campo senha_gov do banco de dados
+
+    entry_Nvel_GOV.insert(0,Listadedados[20]) # Campo nivel_gov do banco de dados
+
+    entry_Endereo.insert(0,Listadedados[21]) # Campo endereco do banco de dados
+
+    entry_Inscrio_Estadual.insert(0,Listadedados[22]) # Campo inscricao_estadual do banco de dados
+
+    entry_Inscrio_Municipal.insert(0,Listadedados[23]) # Campo inscricao_municipal do banco de dados
+
+
+    entry_Certificado_Digital.set(Listadedados[24]) # Campo certificado_digital do banco de dados
+
+    entry_Modelo_Datavix.insert(0,Listadedados[25]) # Campo modelo_datavix do banco de dados
+
+    entry_Homologado___Sindicato.insert(0,Listadedados[26]) # Campo homologado_sindicato do banco de dados
+
+    entry_Vencimento_.insert(0,Listadedados[27]) # Campo vencimento do banco de dados
+
+    #entry_Ano_dasn.insert(0,Listadedados[28]) # Campo created_at do banco de dados
+
+    #entry_Faturamento.insert(0,Listadedados[29]) # Campo updated_at do banco de dados
+
+    #entry_Observaes_dasn.insert(0,Listadedados[29]) # Campo updated_at do banco de dados
+
+    
+    for id,result in enumerate(meis):
+        if result[2] == None:
+            pendencias = ""
+        else:
+            pendencias = result[2]    
+        if result[3] == 1:
+            ativo = "ATIVO"
+        else:
+            ativo = "INATIVO"    
+            
+        Lista = [result[0],result[1],pendencias,ativo]
+
+        TreeViewParceiras.insert("", 'end', values=Lista)
+        
 def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho_Logo_Rem):
-    global Tipo,frame_dados_mei,Contratante,id,entry_Nome,entry_Situao,entry_Identificao,entry_CNPJ,entry_Tributao,entry_Data_abertura_,entry_Prefeitura,entry_Login,entry_Senha,entry_Pendncia_de_Recolhimentos,entry_Entrega_de_DAS_Mensal,entry_E_mail,entry_Pendncias,entry_Observaes,entry_CPF,entry_Cdigo_de_Acesso,entry_Senha_GOV,entry_Nvel_GOV,entry_Endereo,entry_Inscrio_Estadual,entry_Inscrio_Municipal,entry_Certificado_Digital,entry_Modelo_Datavix,entry_Homologado___Sindicato,entry_Vencimento_,entry_Ano,entry_Faturamento,TreeViewParceiras,scrollbarParceiras,bt_Editar_MEI_Parceiras,TabViewGlobal,TreeviewDas
+    global frame_dados_mei,entry_Nome,entry_Situao,entry_Identificao,entry_CNPJ,entry_Tributao,entry_Data_abertura_,entry_Prefeitura,entry_Login,entry_Senha,entry_Pendncia_de_Recolhimentos,entry_Entrega_de_DAS_Mensal,entry_E_mail,entry_Pendncias,entry_Observaes,entry_CPF,entry_Cdigo_de_Acesso,entry_Senha_GOV,entry_Nvel_GOV,entry_Endereo,entry_Inscrio_Estadual,entry_Inscrio_Municipal,entry_Certificado_Digital,entry_Modelo_Datavix,entry_Homologado___Sindicato,entry_Vencimento_,entry_Faturamento,TreeViewParceiras,scrollbarParceiras,bt_Editar_MEI_Parceiras,TabViewGlobal,TreeviewDas
     TabViewGlobal = Viewer
     
     def dadosparceira(*args):
@@ -110,10 +448,11 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
 
     label_Identificao = ctk.CTkLabel(FrameDadosEmpresas, text="Identificação")
     entry_Identificao = ctk.CTkEntry(FrameDadosEmpresas)
-
+    
     label_Identificao.grid(row=0, column=4, padx=10, pady=5, sticky="w")
     entry_Identificao.grid(row=0, column=5, padx=10, pady=5, sticky="new")
-
+    entry_Identificao.configure(state='disabled')
+    
 
     label_Tributao = ctk.CTkLabel(FrameDadosEmpresas, text="Tributação")
     entry_Tributao = ctk.CTkEntry(FrameDadosEmpresas)
@@ -346,155 +685,4 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     scrollbar = ctk.CTkScrollbar(FrameDas, command=TreeviewDas.yview,height=100)
     scrollbar.grid(row=2, column=4, padx=(0,10), pady=(5,10), sticky="nsew")
     TreeviewDas.configure(yscrollcommand=scrollbar.set)    
-
-
-
-
-
-
-
-def limparbotões():
-    def Limpartreeview(TreeV):
-        try:
-            for item in TreeV.get_children():
-                    TreeV.delete(item)     
-        except Exception :
-                pass
-        
-    TabViewGlobal.set("Empresa")
-    
-    entry_Nome.delete(0, 'end')
-    entry_Identificao.delete(0, 'end')
-    entry_CNPJ.delete(0, 'end')
-    entry_Tributao.delete(0, 'end')
-    entry_Data_abertura_.delete(0, 'end')
-    entry_Prefeitura.delete(0, 'end')
-    entry_Login.delete(0, 'end')
-    entry_Senha.delete(0, 'end')
-    entry_Pendncia_de_Recolhimentos.delete(0, 'end')
-    entry_Entrega_de_DAS_Mensal.delete(0, 'end')
-    entry_E_mail.delete(0, 'end')
-    entry_Pendncias.delete('1.0', 'end')
-    entry_Observaes.delete('1.0', 'end')
-    entry_CPF.delete(0, 'end')
-    entry_Cdigo_de_Acesso.delete(0, 'end')
-    entry_Senha_GOV.delete(0, 'end')
-    entry_Nvel_GOV.delete(0, 'end')
-    entry_Endereo.delete(0, 'end')
-    entry_Inscrio_Estadual.delete(0, 'end')
-    entry_Inscrio_Municipal.delete(0, 'end')
-    entry_Modelo_Datavix.delete(0, 'end')
-    entry_Homologado___Sindicato.delete(0, 'end')
-    entry_Vencimento_.delete(0, 'end')
-    #entry_Ano_dasn.delete(0, 'end')
-    #entry_Faturamento.delete(0, 'end')
-    #entry_Observaes_dasn.delete(0, 'end')
-
-    Limpartreeview(TreeViewParceiras)
-
-   
-def Importardados(idcliente,Dadosparateladeedição):
-    def importar_dados_treeview(TreeV,dados):
-        for result in dados:
-            TreeV.insert("", 'end', values=result)
-
-    global tela_Mae
-    tela_Mae = Dadosparateladeedição
-
-    Listadedados, identificadores,qr,meis,Lista_de_DAS = dbm.getmeidata_toEdit(idcliente)
-
-    limparbotões()
-
-    if Listadedados[0]:
-        frame_dados_mei[1].configure(text=f"EMPRESA: {Listadedados[3]} (ID:{Listadedados[0]})")
-        frame_dados_mei[2].configure(text=f"TIPO: {Listadedados[4]}")
-
-    if Listadedados[1] != "N/A":
-        nomemei=  dbm.GetnameMEI(Listadedados[1])
-        
-        frame_dados_mei[0].configure(text=f"CONTRATANTE: {nomemei[0]}")
-        TreeViewParceiras.grid_remove()
-        scrollbarParceiras.grid_remove()
-        bt_Editar_MEI_Parceiras.grid_remove()
-    else:
-        frame_dados_mei[0].configure(text=f"")
-        TreeViewParceiras.grid(row=2, column=0,columnspan=3, sticky="nsew", padx=(1,0), pady=(5,10))
-        scrollbarParceiras.grid(row=2, column=4, padx=(0,10), pady=(5,10), sticky="nsew")
-        bt_Editar_MEI_Parceiras.grid(row=3, column=0,columnspan=3, sticky="n", padx=(1,0), pady=(5,10))
-
-
-    importar_dados_treeview(TreeviewDas,Lista_de_DAS)
-
-    entry_Nome.insert(0,Listadedados[3]) # Campo nome do banco de dados
-
-
-    entry_Situao.set(Listadedados[2]) # Campo situacao do banco de dados
-
-    entry_Identificao.insert(0,Listadedados[4]) # Campo identificacao do banco de dados
-
-    entry_CNPJ.insert(0,Listadedados[5]) # Campo cnpj do banco de dados
-
-    entry_Tributao.insert(0,Listadedados[6]) # Campo tributacao do banco de dados
-
-    entry_Data_abertura_.insert(0,Listadedados[7]) # Campo data_abertura do banco de dados
-
-    entry_Prefeitura.insert(0,Listadedados[8]) # Campo prefeitura do banco de dados
-
-    entry_Login.insert(0,Listadedados[9]) # Campo login do banco de dados
-
-    entry_Senha.insert(0,Listadedados[10]) # Campo senha do banco de dados
-
-    entry_Pendncia_de_Recolhimentos.insert(0,Listadedados[11]) # Campo pendencia_recolhimentos do banco de dados
-
-    entry_Entrega_de_DAS_Mensal.insert(0,Listadedados[12]) # Campo entrega_das_mensal do banco de dados
-
-    entry_E_mail.insert(0,Listadedados[14]) # Campo email do banco de dados
-
-    entry_Pendncias.insert('1.0',Listadedados[13]) # Campo pendencias do banco de dados
-
-    entry_Observaes.insert('1.0',Listadedados[16]) # Campo observacoes do banco de dados
-
-    entry_CPF.insert(0,Listadedados[17]) # Campo cpf do banco de dados
-
-    entry_Cdigo_de_Acesso.insert(0,Listadedados[18]) # Campo codigo_acesso do banco de dados
-
-    entry_Senha_GOV.insert(0,Listadedados[19]) # Campo senha_gov do banco de dados
-
-    entry_Nvel_GOV.insert(0,Listadedados[20]) # Campo nivel_gov do banco de dados
-
-    entry_Endereo.insert(0,Listadedados[21]) # Campo endereco do banco de dados
-
-    entry_Inscrio_Estadual.insert(0,Listadedados[22]) # Campo inscricao_estadual do banco de dados
-
-    entry_Inscrio_Municipal.insert(0,Listadedados[23]) # Campo inscricao_municipal do banco de dados
-
-
-    entry_Certificado_Digital.set(Listadedados[24]) # Campo certificado_digital do banco de dados
-
-    entry_Modelo_Datavix.insert(0,Listadedados[25]) # Campo modelo_datavix do banco de dados
-
-    entry_Homologado___Sindicato.insert(0,Listadedados[26]) # Campo homologado_sindicato do banco de dados
-
-    entry_Vencimento_.insert(0,Listadedados[27]) # Campo vencimento do banco de dados
-
-    #entry_Ano_dasn.insert(0,Listadedados[28]) # Campo created_at do banco de dados
-
-    #entry_Faturamento.insert(0,Listadedados[29]) # Campo updated_at do banco de dados
-
-    #entry_Observaes_dasn.insert(0,Listadedados[29]) # Campo updated_at do banco de dados
-
-    
-    for id,result in enumerate(meis):
-        if result[2] == None:
-            pendencias = ""
-        else:
-            pendencias = result[2]    
-        if result[3] == 1:
-            ativo = "ATIVO"
-        else:
-            ativo = "INATIVO"    
-            
-        Lista = [result[0],result[1],pendencias,ativo]
-
-        TreeViewParceiras.insert("", 'end', values=Lista)
-        
+ 

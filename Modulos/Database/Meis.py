@@ -1,7 +1,7 @@
 import pymysql
-from datetime import datetime, date,timedelta
+from datetime import date
 
-def connect_to_da():
+def connect_to_db():
     global connection
     connection = pymysql.connect(
             host='mysql02-farm10.kinghost.net',
@@ -12,7 +12,7 @@ def connect_to_da():
 def getMeilist_complete():
     # Conecta ao banco de dados
     
-    connect_to_da()
+    connect_to_db()
     
     try:
         with connection.cursor() as cursor:
@@ -46,7 +46,7 @@ def getMeilist_complete():
 def getMEIlist_byfilter(nome_empresa_p,nome,identificacao_p,identificacao,ativo_p,ativo):
     # Conecta ao banco de dados
     
-    connect_to_da()
+    connect_to_db()
     
     try:
         with connection.cursor() as cursor:
@@ -84,7 +84,7 @@ def getMEIlist_byfilter(nome_empresa_p,nome,identificacao_p,identificacao,ativo_
 def GetnameMEI(IDdomei):
     # Conecta ao banco de dados
     
-    connect_to_da()
+    connect_to_db()
     
     try:
         with connection.cursor() as cursor:
@@ -120,7 +120,7 @@ def getLista_De_DASN_toEdit(IDempresaContratante):
 def getmeidata_toEdit(IDempresa):
     # Conecta ao banco de dados
     
-    connect_to_da()
+    connect_to_db()
     data_quary = [
     "id",
     "mei_id",
@@ -229,7 +229,7 @@ def getmeidata_toEdit(IDempresa):
 def getmeidata_all(IDempresa):
     # Conecta ao banco de dados
     
-    connect_to_da()
+    connect_to_db()
     data_quary = [
     "id",
     "mei_id",
@@ -398,3 +398,15 @@ def gerartexto():
 
         #print(f"""{item}.configure = {Listadedados[i]} #{identificadores[i]}""")
 
+
+def Query_Save_Data(Query):
+    
+    connect_to_db() 
+
+    try:
+        with connection.cursor() as cursor:
+            ConsultaSQL = Query
+            cursor.execute(ConsultaSQL)
+            connection.commit()       
+    finally:
+        connection.close()

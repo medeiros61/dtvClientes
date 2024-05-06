@@ -1,5 +1,5 @@
 import pymysql
-from datetime import datetime, date,timedelta
+from datetime import date
 
 def connect_to_db():
     global connection
@@ -155,7 +155,7 @@ def getLivro_Inventarios_toEdit(IDempresa):
 def getLivroECD_toEdit(IDempresa):
     
       with connection.cursor() as cursor:
-            ConsultaSQL = f"SELECT `numero`,`ano` FROM `livro_ecfs` WHERE `client_id` = '{IDempresa}'"
+            ConsultaSQL = f"SELECT `numero`,`ano` FROM `livro_ecds` WHERE `client_id` = '{IDempresa}'"
             cursor.execute(ConsultaSQL)
             results = cursor.fetchall()
             return results
@@ -164,7 +164,7 @@ def getLivroECF_toEdit(IDempresa):
     
 
         with connection.cursor() as cursor:
-            ConsultaSQL = f"SELECT `numero`,`ano` FROM `livro_ecds` WHERE `client_id` = '{IDempresa}'"
+            ConsultaSQL = f"SELECT `numero`,`ano` FROM `livro_ecfs` WHERE `client_id` = '{IDempresa}'"
             cursor.execute(ConsultaSQL)
             results = cursor.fetchall()
             return results
@@ -602,3 +602,16 @@ def Query_Save_Data(Query):
     finally:
         connection.close()
    
+
+def Query_remove_Data(Query):
+    
+    connect_to_db() 
+
+    try:
+        with connection.cursor() as cursor:
+            ConsultaSQL = Query
+            cursor.execute(ConsultaSQL)
+            connection.commit()       
+    finally:
+        connection.close()
+      

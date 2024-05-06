@@ -3,7 +3,7 @@ from tkinter import *
 from tkinter import ttk 
 import Modulos.Database.Meis as dbmei
 import Modulos.imagens.ImagensClientes as Imagens_DataBase
-from ttkthemes import ThemedStyle
+
 import Modulos.Mei.Func_mei as Func_Mei
 import Modulos.Mei.Mei_V_E as Tela_Edit_C 
 
@@ -194,8 +194,8 @@ def parametrosinicias(frame):
   
     #Listagem de MEI-----------------------------------------------------------------------------
 
-    EstilodeTela = ThemedStyle(list_MEI_frame)
-    EstilodeTela.set_theme("scidsand")
+
+
     TreeviewMEI = ttk.Treeview(list_MEI_frame, columns=("#","Nome","Identificação","Status"), show='headings')
     TreeviewMEI.grid(row=1, column=0, sticky="nsew")
     TreeviewMEI.bind('<<TreeviewSelect>>', verificarseleção)
@@ -229,7 +229,7 @@ def parametrosinicias(frame):
     bt_add_MEI = ctk.CTkButton(master=bt_action_frame,image=logo_add, text="Adicionar Contratante",command=lambda: Func_Mei.Adicionar_MEI_Contratante(Dadosparateladeedição))
     bt_add_MEI.grid(row=0, column=0,  padx=5, pady=1,sticky="nsew")
 
-    bt_add_MEI_Parceira = ctk.CTkButton(master=bt_action_frame,image=logo_add, text="Adicionar Parceira",command=lambda: Func_Mei.Adicionar_MEI_Parceira(Dadosparateladeedição))
+    bt_add_MEI_Parceira = ctk.CTkButton(master=bt_action_frame,image=logo_add, text="Adicionar Parceira",command=lambda: Func_Mei.Adicionar_MEI_Parceira(Dadosparateladeedição,TreeviewMEI))
     bt_add_MEI_Parceira.grid(row=1, column=0,  padx=5, pady=1,sticky="nsew")
 
     logo_editar = PhotoImage(file=Caminho_Logo_Edit).subsample(25, 25)

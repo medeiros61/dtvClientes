@@ -5,7 +5,7 @@ import Modulos.Database.Users as dbu
 
 import Modulos.Usuarios.Func_users as Func_users
 import Modulos.imagens.ImagensClientes as Imagens_DataBase
-from ttkthemes import ThemedStyle
+
 
 
 def criartelaUsarios(frame,DadosUsuario):
@@ -167,8 +167,7 @@ def parametrosinicias(frame):
             bt_Excluir_user.configure(state='disabled') 
            
     
-    EstilodeTela = ThemedStyle(list_user_frame)
-    EstilodeTela.set_theme("scidsand")
+
     TreeviewUsuarios = ttk.Treeview(list_user_frame, columns=("#","Nome","Email","Data_Cadastro","Perfil"), show='headings')
     TreeviewUsuarios.grid(row=1, column=0, sticky="nsew")
     TreeviewUsuarios.bind('<<TreeviewSelect>>',verificarseleção)

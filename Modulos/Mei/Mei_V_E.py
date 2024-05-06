@@ -1,15 +1,16 @@
 import customtkinter as ctk
 from tkinter import *
-from tkinter import ttk 
-import Modulos.Database.Clients as dbc
-import Modulos.Cliente.Func_cliente as Func_cli
 import Modulos.imagens.ImagensClientes as Imagens_DataBase
-from ttkthemes import ThemedStyle
 import Modulos.Mei.Botoes_Edicao as bts
 import Modulos.Database.Logs as log
+from tkinter import messagebox
 
 Evento_TelaVoltar = f'Usuario saiu da Edição de de MEIS'
 obs_TelaVoltar=""
+
+def definiçãotipodeentrada(tipo):
+    global tpEntrada
+    tpEntrada = tipo
 
 def criartelaEdit_MEI(frame,cliente):
     print('f')
@@ -19,6 +20,12 @@ def RemovertelaEdit_MEI():
     framepai.pack(side=RIGHT, fill = BOTH,expand=True)
 
     log.RegistrarEventosdeLOG(Evento_TelaVoltar,obs_TelaVoltar) 
+
+def SalvarDados(*args):
+    resposta = messagebox.askquestion("Confirmação", "Deseja realmente salvar os dados?")
+    if resposta == 'yes':
+        bts.pegar_dados_para_envio(tpEntrada)
+        RemovertelaEdit_MEI()
 
 def parametrosinicias(frame,Frame_atual):
     global framepai, frameprincipal
@@ -43,11 +50,11 @@ def parametrosinicias(frame,Frame_atual):
     Tipo.grid(row=0, column=2, padx=10, sticky="nsew")
     
     Contratante = ctk.CTkLabel(FrameDados, text="")
-    Contratante.grid(row=1, column=1, padx=10, sticky="nsew")
+    Contratante.grid(row=1, column=1, padx=10, sticky="w")
 
     DadosCliente = Contratante,id,Tipo
 
-    bt_salvar = ctk.CTkButton(master_frame,text='Salvar',command='',height=20,width=80)
+    bt_salvar = ctk.CTkButton(master_frame,text='Salvar',command=SalvarDados,height=20,width=80)
     bt_salvar.grid(row=0, column=5, padx=(5, 0), pady=(1, 10), sticky="nsew")
    
     bt_cancelar = ctk.CTkButton(master_frame,text='Cancelar',command=RemovertelaEdit_MEI,height=20,width=80)

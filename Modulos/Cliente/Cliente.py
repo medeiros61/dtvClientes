@@ -4,7 +4,6 @@ from tkinter import ttk
 import Modulos.Database.Clients as dbc
 import Modulos.Cliente.Func_cliente as Func_cli
 import Modulos.imagens.ImagensClientes as Imagens_DataBase
-from ttkthemes import ThemedStyle
 import Modulos.Cliente.Cliente_V_E as Tela_Edit_C 
 
 
@@ -211,8 +210,8 @@ def parametrosinicias(frame):
 
     
     
-    EstilodeTela = ThemedStyle(list_clients_frame)
-    EstilodeTela.set_theme("scidsand")
+
+
     TreeviewClientes = ttk.Treeview(list_clients_frame, columns=("#","Nome","UF","Município","Status"), show='headings')
     TreeviewClientes.grid(row=1, column=0, sticky="nsew")
     TreeviewClientes.bind('<<TreeviewSelect>>', verificarseleção)

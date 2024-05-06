@@ -7,6 +7,7 @@ import Modulos.imagens.ImagensClientes as Imagens_DataBase
 import threading
 import Modulos.Database.Logs as log
 import warnings
+import time
 # Desativar todos os warnings
 warnings.simplefilter("ignore")
 
@@ -67,8 +68,13 @@ def DataVix(DadosUsuario,janela):
     
     def fecharjanela_anterior():
         #janela.wm_iconify()
+        time.sleep(0.5)
         janela.quit()
- 
+        try: 
+            janela.destroy()
+        except Exception:
+            pass
+
     def center_window(window, width, height):
         # Obter as dimensões da tela
         screen_width = window.winfo_screenwidth()

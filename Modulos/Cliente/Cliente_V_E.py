@@ -1,12 +1,9 @@
 import customtkinter as ctk
 from tkinter import *
-from tkinter import ttk 
-import Modulos.Database.Clients as dbc
-import Modulos.Cliente.Func_cliente as Func_cli
 import Modulos.imagens.ImagensClientes as Imagens_DataBase
-from ttkthemes import ThemedStyle
 import Modulos.Cliente.Botoes_Edicao as bts
 import Modulos.Database.Logs as log
+from tkinter import messagebox
 
 Evento_TelaVoltar = f'Usuario saiu da Edição de de clientes'
 obs_TelaVoltar=""
@@ -22,6 +19,12 @@ def RemovertelaEdit_clientes():
     framepai.pack(side=RIGHT, fill = BOTH,expand=True)
     
     log.RegistrarEventosdeLOG(Evento_TelaVoltar,obs_TelaVoltar) 
+
+def SalvarDados(*args):
+    resposta = messagebox.askquestion("Confirmação", "Deseja realmente salvar os dados?")
+    if resposta == 'yes':
+        bts.pegar_dados_para_envio(tpEntrada)
+        RemovertelaEdit_clientes()
 
 def parametrosinicias(frame,Frame_atual):
     global framepai, frameprincipal
@@ -50,7 +53,7 @@ def parametrosinicias(frame,Frame_atual):
 
     DadosCliente = id
 
-    bt_salvar = ctk.CTkButton(master_frame,text='Salvar',command=lambda:bts.pegar_dados_para_envio(tpEntrada),height=20,width=80)
+    bt_salvar = ctk.CTkButton(master_frame,text='Salvar',command=SalvarDados,height=20,width=80)
     bt_salvar.grid(row=0, column=5, padx=(5, 0), pady=(1, 10), sticky="nsew")
    
     bt_cancelar = ctk.CTkButton(master_frame,text='Cancelar',command=RemovertelaEdit_clientes,height=20,width=80)

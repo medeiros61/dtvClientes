@@ -1,3 +1,5 @@
+Versão = '1.0'
+
 import customtkinter as ctk
 from tkinter import *
 import Modulos.Database.Users as dbu
