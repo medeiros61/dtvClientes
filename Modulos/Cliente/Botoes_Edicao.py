@@ -1324,38 +1324,40 @@ def pegar_dados_para_envio(tipo):
     CamposBD_tupla = tuple(CamposBD_List)
     ItensParaBD_tupla = tuple(ItensParaBD_List)
 
-    queryCriação = f"""INSERT INTO `clients` ("""
-    
-    for index,item in enumerate(CamposBD_tupla):
-        queryCriação += f"{CamposBD_tupla[index]}" 
-        if index < len(CamposBD_tupla) - 1:
-            queryCriação += ","
-
-    queryCriação += f") VALUES ("
-
-    for index,item in enumerate(ItensParaBD_tupla):
-        queryCriação += f"{ItensParaBD_tupla[index]}" 
-        if index < len(ItensParaBD_tupla) - 1:
-            queryCriação += ","
-    queryCriação += f")"
 
 
-    queryUpdate = f"""UPDATE `clients` SET """
-    for index,item in enumerate(CamposBD_tupla):
-        queryUpdate += f"{CamposBD_tupla[index]} = {ItensParaBD_tupla[index]}"
-        if index < len(CamposBD_tupla) - 1:
-            queryUpdate += "," 
-    
 
+ 
 
 
     if tipo =="Edição":
+        queryUpdate = f"""UPDATE `clients` SET """
+        for index,item in enumerate(CamposBD_tupla):
+            queryUpdate += f"{CamposBD_tupla[index]} = {ItensParaBD_tupla[index]}"
+            if index < len(CamposBD_tupla) - 1:
+                queryUpdate += "," 
+
         queryUpdate += f"WHERE id = {Listadedados[0]};"
         global QuerydeExecução
         QuerydeExecução = queryUpdate
         #QuerydeExecução =''
         #print("Edição")
     else:
+        queryCriação = f"""INSERT INTO `clients` ("""
+    
+        for index,item in enumerate(CamposBD_tupla):
+            queryCriação += f"{CamposBD_tupla[index]}" 
+            if index < len(CamposBD_tupla) - 1:
+                queryCriação += ","
+
+        queryCriação += f") VALUES ("
+
+        for index,item in enumerate(ItensParaBD_tupla):
+            queryCriação += f"{ItensParaBD_tupla[index]}" 
+            if index < len(ItensParaBD_tupla) - 1:
+                queryCriação += ","
+        queryCriação += f")"
+
         QuerydeExecução = queryCriação 
 
     dbc.Query_Save_Data(QuerydeExecução)
