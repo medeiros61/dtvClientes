@@ -2,6 +2,8 @@ import customtkinter as ctk
 from tkinter import *
 import Modulos.Database.Clients as dbc
 from tkinter import ttk 
+from tkinter import messagebox
+from datetime import datetime
 
 
 def pegar_dados_para_envio(tipo):
@@ -35,7 +37,7 @@ def pegar_dados_para_envio(tipo):
     CamposBD +='atividade,'
 
     #7 data_abertura - date
-    ItensParaBD += f"'{entry_Data_abertura_.get()}'¬¬"
+    ItensParaBD += f"'{DataEnviadaParaOBD(entry_Data_abertura_.get())}'¬¬"
     CamposBD +='data_abertura,'
 
     #8 ativo - tinyint(1)
@@ -50,13 +52,18 @@ def pegar_dados_para_envio(tipo):
     ItensParaBD += f"'{entry_Formas_de_tributao.get()}'¬¬"  
     CamposBD +='formas_tributacao,'
 
-
+    anexos =pegarAnexos()
     #10 anexo_simples_nacional- VARCHAR(255) 
-    ItensParaBD += f"'{entry_Anexo_simples_nacional.get()}'¬¬"
+    ItensParaBD += f"'{anexos}'¬¬"
     CamposBD += 'anexo_simples_nacional,'
 
     #11 folha_pagamento- VARCHAR(255) 
-    ItensParaBD += f"'{entry_Folha_de_pagamento.get()}'¬¬"
+    testeValor = f'{entry_Folha_de_pagamento.get()}'
+    if testeValor == "SIM":
+        ItensParaBD += "1¬¬" 
+    else:
+        ItensParaBD += "0¬¬" 
+
     CamposBD += 'folha_pagamento,'
 
     #12 responsavel_contabil- VARCHAR(255)
@@ -76,7 +83,11 @@ def pegar_dados_para_envio(tipo):
     CamposBD += 'responsavel_dp,'
 
     #16 domicilio_eletronico- VARCHAR(255)
-    ItensParaBD += f"'{entry_Domiclio_eletrnico.get()}'¬¬" 
+    testeValor = f'{entry_Domiclio_eletrnico.get()}'
+    if testeValor == "SIM":
+        ItensParaBD += "1¬¬" 
+    else:
+        ItensParaBD += "0¬¬" 
     CamposBD += 'domicilio_eletronico,'
 
     #17 email- VARCHAR(255)
@@ -92,11 +103,11 @@ def pegar_dados_para_envio(tipo):
     CamposBD += 'cpf_representante_legal,'
 
     #20 data_nascimento - date
-    ItensParaBD += f"'{entry_Data_de_nascimento_.get()}'¬¬" 
+    ItensParaBD += f"'{DataEnviadaParaOBD(entry_Data_de_nascimento_.get())}'¬¬" 
     CamposBD += 'data_nascimento,'
 
     #21 contabilidade_finalizada- date
-    ItensParaBD += f"'{entry_Contabilidade_finalizada_.get()}'¬¬"
+    ItensParaBD += f"'{DataEnviadaParaOBD(entry_Contabilidade_finalizada_.get())}'¬¬"
     CamposBD += 'contabilidade_finalizada,'
 
     #22 certificado_digital- tinyint(1)
@@ -112,7 +123,7 @@ def pegar_dados_para_envio(tipo):
     CamposBD += 'senha_certificado,'
 
     #24 data_vencimento_certificado - date
-    ItensParaBD += f"'{entry_Data_de_vencimento_.get()}'¬¬"
+    ItensParaBD += f"'{DataEnviadaParaOBD(entry_Data_de_vencimento_Certificado.get())}'¬¬"
     CamposBD += 'data_vencimento_certificado,'
 
     #25 codigo_ecac - varchar(255)
@@ -168,39 +179,57 @@ def pegar_dados_para_envio(tipo):
     CamposBD += 'senha,'
     
     #37 alvara_funcionamento - tinyint(1)
-    ItensParaBD += f"'{entry_Alvara_de_funcionamento.get()}'¬¬" 
+    testeValor = f'{entry_Alvara_de_funcionamento.get()}'
+    if testeValor == "SIM":
+        ItensParaBD += "1¬¬" 
+    else:
+        ItensParaBD += "0¬¬" 
+
     CamposBD += 'alvara_funcionamento,'
 
     #38 data_vencimento_alvara_funcionamento- date
-    ItensParaBD += f"'{entry_Data_vencimento_Func.get()}'¬¬" 
+    ItensParaBD += f"'{DataEnviadaParaOBD(entry_Data_vencimento_Func.get())}'¬¬" 
     CamposBD += 'data_vencimento_alvara_funcionamento,'
 
     #39 alvara_sanitario - tinyint(1)
-    ItensParaBD += f"'{entry_Alvara_sanitrio.get()}'¬¬"
+    testeValor = f'{entry_Alvara_sanitrio.get()}'
+    if testeValor == "SIM":
+        ItensParaBD += "1¬¬" 
+    else:
+        ItensParaBD += "0¬¬" 
     CamposBD += 'alvara_sanitario,'
 
     #40 data_vencimento_alvara_sanitario- date
-    ItensParaBD += f"'{entry_Data_vencimento_Sanitario.get()}'¬¬" 
+    ItensParaBD += f"'{DataEnviadaParaOBD(entry_Data_vencimento_Sanitario.get())}'¬¬" 
     CamposBD += 'data_vencimento_alvara_sanitario,'
 
     #41 licenca_ambiental- tinyint(1)
-    ItensParaBD += f"'{entry_Licenca_ambiental.get()}'¬¬"
+    testeValor = f'{entry_Licenca_ambiental.get()}'
+    if testeValor == "SIM":
+        ItensParaBD += "1¬¬" 
+    else:
+        ItensParaBD += "0¬¬" 
     CamposBD += 'licenca_ambiental,'
 
     #42 data_vencimento_licenca_ambiental- date
-    ItensParaBD += f"'{entry_Data_vencimento_Ambiental.get()}'¬¬"
+    ItensParaBD += f"'{DataEnviadaParaOBD(entry_Data_vencimento_Ambiental.get())}'¬¬"
     CamposBD += 'data_vencimento_licenca_ambiental,'
 
     #43 bombeiros- tinyint(1)
-    ItensParaBD += f"'{entry_Bombeiros.get()}'¬¬"
+    testeValor = f'{entry_Bombeiros.get()}'
+    if testeValor == "SIM":
+        ItensParaBD += "1¬¬" 
+    else:
+        ItensParaBD += "0¬¬" 
+  
     CamposBD += 'bombeiros,'
 
     #44 data_vencimento_bombeiros- date
-    ItensParaBD += f"'{entry_Data_vencimento_Bombeiros.get()}'¬¬"
+    ItensParaBD += f"'{DataEnviadaParaOBD(entry_Data_vencimento_Bombeiros.get())}'¬¬"
     CamposBD += 'data_vencimento_bombeiros,'
 
     #45 ultima_alteracao_contratual- date
-    ItensParaBD += f"'{entry_ltima_alterao_contratual_.get()}'¬¬"
+    ItensParaBD += f"'{DataEnviadaParaOBD(entry_ltima_alterao_contratual_.get())}'¬¬"
     CamposBD += 'ultima_alteracao_contratual,'
 
     #46 numero_alteracao_contratual- varchar(255)
@@ -212,7 +241,12 @@ def pegar_dados_para_envio(tipo):
     CamposBD += 'observacoes_gerais_societario,'
 
     #48 folha_pagto- tinyint(1)
-    ItensParaBD += f"'{entry_Folha_de_pagto.get()}'¬¬"
+    testeValor = f'{entry_Folha_de_pagto.get()}'
+    if testeValor == "SIM":
+        ItensParaBD += "1¬¬" 
+    else:
+        ItensParaBD += "0¬¬" 
+  
     CamposBD += 'folha_pagto,'
 
     #49 quantidade_funcionarios- varchar(50)
@@ -220,7 +254,12 @@ def pegar_dados_para_envio(tipo):
     CamposBD += 'quantidade_funcionarios,'
 
     #50 prolabore- tinyint(1)
-    ItensParaBD += f"'{entry_Prolabore.get()}'¬¬" 
+    testeValor = f'{entry_Prolabore.get()}'
+    if testeValor == "SIM":
+        ItensParaBD += "1¬¬" 
+    else:
+        ItensParaBD += "0¬¬" 
+
     CamposBD += 'prolabore,'
 
     #51 quantidade_socios- varchar(50)
@@ -304,7 +343,13 @@ def pegar_dados_para_envio(tipo):
     CamposBD += 'municipal_senha_abertura_processos,'
 
     #73 dpto_pessoal_sindicalizada- tinyint(1)
-    ItensParaBD += f"'{box_sindicalizada.get()}'¬¬"
+    testeValor = f'{box_sindicalizada.get()}'
+    if testeValor == "SIM":
+        ItensParaBD += "1¬¬" 
+    else:
+        ItensParaBD += "0¬¬" 
+
+
     CamposBD += 'dpto_pessoal_sindicalizada,'
 
     #74 dpto_pessoal_login- varchar(255)
@@ -362,14 +407,14 @@ def pegar_dados_para_envio(tipo):
     dbc.Query_Save_Data(QuerydeExecução)
 
 def limparcampos():
-   
+    
     def Limpartreeview(TreeV):
         try:
             for item in TreeV.get_children():
                     TreeV.delete(item)     
         except Exception :
                 pass
-
+    entry_Estado_estaduais.configure(state='normal')            
     TabViewGlobal.set("Cliente") 
     NumeroID.configure(text=f"" )
     Frame_dados_cliente_titulo.configure(text=f"")
@@ -390,7 +435,7 @@ def limparcampos():
     entry_Data_de_nascimento_.delete(0, 'end')
     entry_Contabilidade_finalizada_.delete(0, 'end')
     entry_Senha_certificado.delete(0, 'end')
-    entry_Data_de_vencimento_.delete(0, 'end')
+    entry_Data_de_vencimento_Certificado.delete(0, 'end')
     entry_Cdigo_e_cac.delete(0, 'end')
     entry_Senha_EAC.delete(0, 'end')
     entry_Cdigo_Simples.delete(0, 'end')
@@ -458,6 +503,11 @@ def limparcampos():
     Limpartreeview(TreeviewECD)
     Limpartreeview(TreeviewECF)
 
+
+    # Remarcar os checkboxes de acordo com os itens selecionados
+    for item, var in checkboxes.items():
+            var.set(0)  # Desmarcar o checkbox
+
     #Ocultar Grids 
     tab_livros.grid_remove()
     tab_livros_estaduais.grid_remove()
@@ -506,6 +556,21 @@ def Importardados(idcliente):
 
     entry_Formas_de_tributao.set(Listadedados[8].upper()) # Campo formas_tributacao do banco de dados
     entry_Anexo_simples_nacional.insert(0,Listadedados[9]) # Campo anexo_simples_nacional do banco de dados
+    
+    if Listadedados[9] != 'N/A':
+        if ',' in Listadedados[9]:
+            itens_selecionados = eval(Listadedados[9])
+        else:
+            itens_selecionados = [eval(Listadedados[9])]
+
+        # Remarcar os checkboxes de acordo com os itens selecionados
+        for item, var in checkboxes.items():
+            t = f'{item}' 
+            if t in itens_selecionados:
+                    var.set(1)  # Marcar o checkbox
+            else:
+                    var.set(0)  # Desmarcar o checkbox
+   
     entry_Folha_de_pagamento.set(Listadedados[10]) # Campo folha_pagamento do banco de dados
     entry_Responsvel_contabil.insert(0,Listadedados[11]) # Campo responsavel_contabil do banco de dados
     entry_Responsvel_fiscal.insert(0,Listadedados[12]) # Campo responsavel_fiscal do banco de dados
@@ -519,7 +584,7 @@ def Importardados(idcliente):
     entry_Contabilidade_finalizada_.insert(0,Listadedados[20]) # Campo contabilidade_finalizada do banco de dados
     entry_Certificado_digital.set(Listadedados[21]) # Campo certificado_digital do banco de dados
     entry_Senha_certificado.insert(0,Listadedados[22]) # Campo senha_certificado do banco de dados
-    entry_Data_de_vencimento_.insert(0,Listadedados[23]) # Campo data_vencimento_certificado do banco de dados
+    entry_Data_de_vencimento_Certificado.insert(0,Listadedados[23]) # Campo data_vencimento_certificado do banco de dados
     
     importar_dados_treeview(TreeviewSocios,socios)
 
@@ -616,17 +681,25 @@ def Importardados(idcliente):
     frame_treeview_sindicato.grid(row=12, column=0,columnspan=6, padx=10, pady=5, sticky="n")
     frame_treeview_socios.grid(row=11, column=0,columnspan=4, padx=10, pady=3, sticky="n")
 
+    entry_Estado_estaduais.configure(state='disabled') 
+
 def adicição_dados_complementares(Classificação,operacao):
     IDcliente = Listadedados[0]
     queryCriação = f"INSERT INTO "
 
     if Classificação == 'Sindicato':      
         if operacao == 'ADD':
-            CamposBD = 'client_id,nome,data_base,periodo_vigencia_ultima_cct,site_cct'
-            ValoresBD = f"'{entry_sindicato_Nome.get()}', '{entry_sindicato_DataBase.get()}', '{entry_sindicato_Vigencia.get()}', '{entry_sindicato_Site.get()}'"
-            ValoresBD_lista = [valor.strip("'") for valor in ValoresBD.split(',')]
-            importar_dados_treeview(TreeviewSindicato,ValoresBD_lista)
-            queryCriação += f"`syndicates`({CamposBD}) VALUES ({IDcliente},{ValoresBD})"
+            if entry_sindicato_Nome.get() !='':
+                CamposBD = 'client_id,nome,data_base,periodo_vigencia_ultima_cct,site_cct'
+                ValoresBD = f"'{entry_sindicato_Nome.get()}','{entry_sindicato_DataBase.get()}','{entry_sindicato_Vigencia.get()}','{entry_sindicato_Site.get()}'"
+                ValoresBD_lista = [valor.strip("'") for valor in ValoresBD.split(',')]
+                importar_dados_treeview(TreeviewSindicato,[ValoresBD_lista])
+                queryCriação += f"`syndicates`({CamposBD}) VALUES ({IDcliente},{ValoresBD})"
+                entry_sindicato_Nome.delete(0, 'end')
+                entry_sindicato_DataBase.delete(0, 'end')
+                entry_sindicato_Vigencia.delete(0, 'end')
+                entry_sindicato_Site.delete(0, 'end')
+                dbc.Query_Save_Data(queryCriação)
 
         if operacao == 'DEL':
             # Obtém a seleção da TreeView
@@ -640,20 +713,26 @@ def adicição_dados_complementares(Classificação,operacao):
                     # Obtém o nome do cliente
                     Sindicato = valores[0]
                     Database = valores[1]
-                    Vigencia = valores[1]
-                    Cct = valores[1]
+                    Vigencia = valores[2]
+                    Cct = valores[3]
                     queryDeleção = f"DELETE FROM `syndicates` WHERE client_id = {IDcliente} AND nome = '{f'{Sindicato}'}' AND data_base = '{f'{Database}'}' AND periodo_vigencia_ultima_cct = '{f'{Vigencia}'}' AND site_cct = '{f'{Cct}'}'" 
                     TreeviewSindicato.delete(selecao)
+                    dbc.Query_remove_Data(queryDeleção) 
+
 
     if Classificação == 'Socios':
         if operacao == 'ADD':
-            CamposBD = 'client_id,nome,cpf,porcentagem'
-            ValoresBD = f"'{entry_nome_Socios.get()}','{entry_cpf_Socios.get()}' ,'{entry_porcentagem_Socios.get()}'"
-            ValoresBD_lista = [valor.strip("'") for valor in ValoresBD.split(',')]
-            importar_dados_treeview(TreeviewSocios,ValoresBD_lista)
-            queryCriação += f"`associates`({CamposBD}) VALUES ({IDcliente},{ValoresBD})"
-        
-        
+            if entry_nome_Socios.get() !='':
+                CamposBD = 'client_id,nome,cpf,porcentagem'
+                ValoresBD = f"'{entry_nome_Socios.get()}','{entry_cpf_Socios.get()}','{entry_porcentagem_Socios.get()}'"
+                ValoresBD_lista = [valor.strip("'") for valor in ValoresBD.split(',')]
+                importar_dados_treeview(TreeviewSocios,[ValoresBD_lista])
+                queryCriação += f"`associates`({CamposBD}) VALUES ({IDcliente},{ValoresBD})"
+                entry_nome_Socios.delete(0, 'end')
+                entry_cpf_Socios.delete(0, 'end')
+                entry_porcentagem_Socios.delete(0, 'end')
+                dbc.Query_Save_Data(queryCriação)
+
         if operacao == 'DEL':
             # Obtém a seleção da TreeView
             selecao = TreeviewSocios.selection()
@@ -666,17 +745,22 @@ def adicição_dados_complementares(Classificação,operacao):
                     # Obtém o nome do cliente
                     Nome = valores[0]
                     cpf = valores[1]
-                    porcentagem = valores[1]
+                    porcentagem = valores[2]
                     queryDeleção = f"DELETE FROM `associates` WHERE client_id = {IDcliente} AND nome = '{f'{Nome}'}' AND cpf = '{f'{cpf}'}' AND porcentagem = '{f'{porcentagem}'}'"   
-                    TreeviewSocios.delete(selecao)  
+                    TreeviewSocios.delete(selecao)
+                    dbc.Query_remove_Data(queryDeleção)  
 
     if Classificação == 'Livro ECD': 
         if operacao == 'ADD':
-            CamposBD = 'client_id,numero,ano'
-            ValoresBD = f'{entry_Ano_Nmero_de_livros_ECD.get()}, {entry_Nmero_de_livros_ECD.get()}'
-            ValoresBD_lista = [valor.strip("'") for valor in ValoresBD.split(',')]
-            importar_dados_treeview(TreeviewECD,[ValoresBD])
-            queryCriação += f"`livro_ecds`({CamposBD}) VALUES ({IDcliente},{ValoresBD})"
+            if entry_Ano_Nmero_de_livros_ECD.get() !='':
+                CamposBD = 'client_id,numero,ano'
+                ValoresBD = f'{entry_Nmero_de_livros_ECD.get()},{entry_Ano_Nmero_de_livros_ECD.get()}'
+                ValoresBD_lista = [valor.strip("'") for valor in ValoresBD.split(',')]
+                importar_dados_treeview(TreeviewECD,[ValoresBD_lista])
+                queryCriação += f"`livro_ecds`({CamposBD}) VALUES ({IDcliente},{ValoresBD})"
+                entry_Ano_Nmero_de_livros_ECD.delete(0, 'end')
+                entry_Nmero_de_livros_ECD.delete(0, 'end')
+                dbc.Query_Save_Data(queryCriação)
 
         if operacao == 'DEL':
             # Obtém a seleção da TreeView
@@ -692,15 +776,20 @@ def adicição_dados_complementares(Classificação,operacao):
                     ano = valores[1]
                     queryDeleção = f"DELETE FROM `livro_ecds` WHERE client_id = {IDcliente} AND ano = {ano} AND numero = {Numero}" 
                     TreeviewECD.delete(selecao)
-        
+                    dbc.Query_remove_Data(queryDeleção)       
+
     if Classificação == 'Livro ECF':  
         if operacao == 'ADD':
-            CamposBD = 'client_id,numero,ano'
-            ValoresBD = f'{entry_Ano_Nmero_de_livros_ECF.get()}, {entry_Nmero_de_livros_ECF.get()}'
-            ValoresBD_lista = [valor.strip("'") for valor in ValoresBD.split(',')]
-            importar_dados_treeview(TreeviewECF,[ValoresBD])
-            queryCriação += f"`livro_ecfs`({CamposBD}) VALUES ({IDcliente},{ValoresBD})"
-            
+            if entry_Ano_Nmero_de_livros_ECF.get() !='':
+                CamposBD = 'client_id,numero,ano'
+                ValoresBD = f'{entry_Nmero_de_livros_ECF.get()},{entry_Ano_Nmero_de_livros_ECF.get()}'
+                ValoresBD_lista = [valor.strip("'") for valor in ValoresBD.split(',')]
+                importar_dados_treeview(TreeviewECF,[ValoresBD_lista])
+                queryCriação += f"`livro_ecfs`({CamposBD}) VALUES ({IDcliente},{ValoresBD})"
+                entry_Ano_Nmero_de_livros_ECF.delete(0, 'end')
+                entry_Nmero_de_livros_ECF.delete(0, 'end')
+                dbc.Query_Save_Data(queryCriação)
+
         if operacao == 'DEL':
             # Obtém a seleção da TreeView
             selecao = TreeviewECF.selection()
@@ -715,16 +804,19 @@ def adicição_dados_complementares(Classificação,operacao):
                     ano = valores[1]
                     queryDeleção = f"DELETE FROM `livro_ecfs` WHERE client_id = {IDcliente} ano = {ano} AND numero = {Numero}" 
                     TreeviewECF.delete(selecao)
-
+                    dbc.Query_remove_Data(queryDeleção) 
 
     if Classificação == 'Livros Entrada':
         if operacao == 'ADD':
-            CamposBD = 'client_id,numero,ano'
-            ValoresBD = f'{entry_Livros_Fiscais_Entrada_Ano.get()}, {entry_Livros_Fiscais_Entrada_Numero.get()}'
-            ValoresBD_lista = [valor.strip("'") for valor in ValoresBD.split(',')]
-            importar_dados_treeview(TreeviewEntrada,[ValoresBD])
-            queryCriação += f"`livro_entradas`({CamposBD}) VALUES ({IDcliente},{ValoresBD})"
-        
+            if entry_Livros_Fiscais_Entrada_Ano.get() !='':
+                CamposBD = 'client_id,numero,ano'
+                ValoresBD = f'{entry_Livros_Fiscais_Entrada_Numero.get()},{entry_Livros_Fiscais_Entrada_Ano.get()}'
+                ValoresBD_lista = [valor.strip("'") for valor in ValoresBD.split(',')]
+                importar_dados_treeview(TreeviewEntrada,[ValoresBD_lista])
+                queryCriação += f"`livro_entradas`({CamposBD}) VALUES ({IDcliente},{ValoresBD})"
+                entry_Livros_Fiscais_Entrada_Ano.delete(0, 'end')
+                entry_Livros_Fiscais_Entrada_Numero.delete(0, 'end')
+                dbc.Query_Save_Data(queryCriação)
         if operacao == 'DEL':
 
             # Obtém a seleção da TreeView
@@ -740,16 +832,20 @@ def adicição_dados_complementares(Classificação,operacao):
                     ano = valores[1]
                     queryDeleção = f"DELETE FROM `livro_entradas` WHERE client_id = {IDcliente} AND ano = {ano} AND numero = {Numero}" 
                     TreeviewEntrada.delete(selecao)
-
+                    dbc.Query_remove_Data(queryDeleção)            
 
     if Classificação == 'Livros Inventarios':
         if operacao == 'ADD':
-            CamposBD = 'client_id,numero,ano'
-            ValoresBD = f'{entry_Livros_Fiscais_Inventario_Ano.get()}, {entry_Livros_Fiscais_Inventario_Numero.get()}'
-            ValoresBD_lista = [valor.strip("'") for valor in ValoresBD.split(',')]
-            importar_dados_treeview(TreeviewInventario,[ValoresBD])
-            queryCriação += f"`livro_inventarios`({CamposBD}) VALUES ({IDcliente},{ValoresBD})"
-        
+            if entry_Livros_Fiscais_Inventario_Ano.get() !='':
+                CamposBD = 'client_id,numero,ano'
+                ValoresBD = f'{entry_Livros_Fiscais_Inventario_Numero.get()},{entry_Livros_Fiscais_Inventario_Ano.get()}'
+                ValoresBD_lista = [valor.strip("'") for valor in ValoresBD.split(',')]
+                importar_dados_treeview(TreeviewInventario,[ValoresBD_lista])
+                queryCriação += f"`livro_inventarios`({CamposBD}) VALUES ({IDcliente},{ValoresBD})"
+                entry_Livros_Fiscais_Inventario_Ano.delete(0, 'end')
+                entry_Livros_Fiscais_Inventario_Numero.delete(0, 'end')
+                dbc.Query_Save_Data(queryCriação)
+
         if operacao == 'DEL':
             # Obtém a seleção da TreeView
             selecao = TreeviewInventario.selection()
@@ -764,20 +860,26 @@ def adicição_dados_complementares(Classificação,operacao):
                     ano = valores[1]
                     queryDeleção = f"DELETE FROM `livro_inventarios` WHERE client_id = {IDcliente} AND ano = {ano} AND numero = {Numero}" 
                     TreeviewInventario.delete(selecao)
-    
-    
-    entry_sindicato_Nome.get()}', '{entry_sindicato_DataBase.get()}', '{entry_sindicato_Vigencia.get()}', '{entry_sindicato_Site.get()entry_sindicato_Nome.get()}', '{entry_sindicato_DataBase.get()}', '{entry_sindicato_Vigencia.get()}', '{entry_sindicato_Site.get()
-                                                                                                                                                                                                                                              
+                    dbc.Query_remove_Data(queryDeleção)     
 
-    if operacao == 'ADD':
-        dbc.Query_Save_Data(queryCriação)
-        
-    if operacao == 'DEL':
-        dbc.Query_remove_Data(queryDeleção)
+                                                                                                                                       
+
+def DataEnviadaParaOBD(datainformada):                      
+    try:
+        data = datetime.strptime(datainformada, "%d/%m/%Y")
+        data_formatada = data.strftime("%Y-%m-%d")   
+        return data_formatada  
+    except Exception:
+        pass
+
+def DataRecebidoDoBD(datainformada):                      
+    data = datetime.strptime(datainformada, "%Y-%m-%d")
+    data_formatada = data.strftime("%d/%m/%Y")   
+    return data_formatada  
 
 def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
-    global NumeroID,Frame_dados_cliente_titulo,entry_Alvara_de_funcionamento,entry_Licenca_ambiental,entry_Data_vencimento_Ambiental,entry_Bombeiros,entry_Data_vencimento_Bombeiros,entry_Data_vencimento_Func,entry_Alvara_sanitrio,entry_Data_vencimento_Sanitario,entry_Nome_empresa,entry_CNPJ,entry_Estado,entry_Municpio,entry_Atividade,entry_Data_abertura_,entry_Ativo,entry_Link_WhatsApp,entry_Formas_de_tributao,entry_Anexo_simples_nacional,entry_Folha_de_pagamento,entry_Responsvel_contabil,entry_Responsvel_fiscal,entry_Responsvel_societrio,entry_Responsvel_DP,entry_Domiclio_eletrnico,entry_Email,entry_Nome_representante,entry_CPF_representante_legal,entry_Data_de_nascimento_,entry_Contabilidade_finalizada_,entry_Certificado_digital,entry_Senha_certificado,entry_Data_de_vencimento_,entry_Cdigo_e_cac,entry_Senha_EAC,entry_Cdigo_Simples,entry_Nmero_de_livros_ECD,entry_Ano_Nmero_de_livros_ECD,entry_Nmero_de_livros_ECF,entry_Ano_Nmero_de_livros_ECF,entry_Inscrio_estadual,entry_Credenciamento_NFE,entry_Nmero_CSC,entry_Site_caixa_postal,entry_Inscrio_municipal,entry_Site,entry_Login,entry_Senha,entry_Demais_senhas,entry_Senha_Abertura_Processos,entry_Observaes,entry_Alvara_de_funcionamento,entry_Alvara_sanitrio,entry_Licenca_ambiental,entry_Bombeiros,entry_ltima_alterao_contratual_,entry_Nmero_alterao_contratual,entry_Folha_de_pagto,entry_Quantidade_de_funcionrios,entry_Prolabore,entry_Quantidade_de_scios,entry_Esocial_usurio,entry_Esocial_senha,entry_Esocial_cdigo_de_acesso,entry_FAP_usurio,entry_FAP_senha,entry_Empregador_WEB_usurio,entry_Empregador_WEB_senha,entry_Sistema,entry_Site_Bpo,entry_Usurio,entry_Senha_simples,entry_Banco_1,entry_Banco_2,entry_Tipo_de_BPO,entry_Estado_estaduais,entry_Observaes_gerais_Societario,entry_Observaes_gerais_bpo,siglas_estados,not_or_yes,yes_or_not,formasdetributacao,TreeviewSocios,box_sindicalizada,entry_login_sindicalizada,entry_senha_sindicalizada,TabViewGlobal,TreeviewSindicato,TreeviewECD,TreeviewECF,TreeviewInventario,TreeviewEntrada,entry_sindicato_Nome,entry_sindicato_DataBase,entry_sindicato_Vigencia,entry_sindicato_Site,    entry_nome_Socios,entry_cpf_Socios,entry_porcentagem_Socios,entry_Livros_Fiscais_Entrada_Numero,entry_Livros_Fiscais_Entrada_Ano,entry_Livros_Fiscais_Inventario_Numero,entry_Livros_Fiscais_Inventario_Ano,tab_livros,tab_livros_estaduais,frame_treeview_sindicato,frame_treeview_socios
+    global NumeroID,Frame_dados_cliente_titulo,entry_Alvara_de_funcionamento,entry_Licenca_ambiental,entry_Data_vencimento_Ambiental,entry_Bombeiros,entry_Data_vencimento_Bombeiros,entry_Data_vencimento_Func,entry_Alvara_sanitrio,entry_Data_vencimento_Sanitario,entry_Nome_empresa,entry_CNPJ,entry_Estado,entry_Municpio,entry_Atividade,entry_Data_abertura_,entry_Ativo,entry_Link_WhatsApp,entry_Formas_de_tributao,entry_Anexo_simples_nacional,entry_Folha_de_pagamento,entry_Responsvel_contabil,entry_Responsvel_fiscal,entry_Responsvel_societrio,entry_Responsvel_DP,entry_Domiclio_eletrnico,entry_Email,entry_Nome_representante,entry_CPF_representante_legal,entry_Data_de_nascimento_,entry_Contabilidade_finalizada_,entry_Certificado_digital,entry_Senha_certificado,entry_Data_de_vencimento_,entry_Cdigo_e_cac,entry_Senha_EAC,entry_Cdigo_Simples,entry_Nmero_de_livros_ECD,entry_Ano_Nmero_de_livros_ECD,entry_Nmero_de_livros_ECF,entry_Ano_Nmero_de_livros_ECF,entry_Inscrio_estadual,entry_Credenciamento_NFE,entry_Nmero_CSC,entry_Site_caixa_postal,entry_Inscrio_municipal,entry_Site,entry_Login,entry_Senha,entry_Demais_senhas,entry_Senha_Abertura_Processos,entry_Observaes,entry_Alvara_de_funcionamento,entry_Alvara_sanitrio,entry_Licenca_ambiental,entry_Bombeiros,entry_ltima_alterao_contratual_,entry_Nmero_alterao_contratual,entry_Folha_de_pagto,entry_Quantidade_de_funcionrios,entry_Prolabore,entry_Quantidade_de_scios,entry_Esocial_usurio,entry_Esocial_senha,entry_Esocial_cdigo_de_acesso,entry_FAP_usurio,entry_FAP_senha,entry_Empregador_WEB_usurio,entry_Empregador_WEB_senha,entry_Sistema,entry_Site_Bpo,entry_Usurio,entry_Senha_simples,entry_Banco_1,entry_Banco_2,entry_Tipo_de_BPO,entry_Estado_estaduais,entry_Observaes_gerais_Societario,entry_Observaes_gerais_bpo,siglas_estados,not_or_yes,yes_or_not,formasdetributacao,TreeviewSocios,box_sindicalizada,entry_login_sindicalizada,entry_senha_sindicalizada,TabViewGlobal,TreeviewSindicato,TreeviewECD,TreeviewECF,TreeviewInventario,TreeviewEntrada,entry_sindicato_Nome,entry_sindicato_DataBase,entry_sindicato_Vigencia,entry_sindicato_Site,    entry_nome_Socios,entry_cpf_Socios,entry_porcentagem_Socios,entry_Livros_Fiscais_Entrada_Numero,entry_Livros_Fiscais_Entrada_Ano,entry_Livros_Fiscais_Inventario_Numero,entry_Livros_Fiscais_Inventario_Ano,tab_livros,tab_livros_estaduais,frame_treeview_sindicato,frame_treeview_socios,entry_Data_de_vencimento_Certificado,pegarAnexos,checkboxes
 
     TabViewGlobal = Viewer
     #Configurações de borda
@@ -812,7 +914,41 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
             entry_widget.delete(0, "end")
             entry_widget.insert(0, truncated_text)
 
+    def validar_data(entrada):
+        if len(entrada) != 10:
+            messagebox.showerror("Erro", "Formato de data inválido. Use DD/MM/AAAA.")
+            return False
 
+        partes = entrada.split('/')
+        if len(partes) != 3:
+            messagebox.showerror("Erro", "Formato de data inválido. Use DD/MM/AAAA.")
+            return False
+
+        dia, mes, ano = partes
+        if not (dia.isdigit() and mes.isdigit() and ano.isdigit()):
+            messagebox.showerror("Erro", "Formato de data inválido. Use DD/MM/AAAA.")
+            return False
+
+        dia = int(dia)
+        mes = int(mes)
+        ano = int(ano)
+
+        if not (1 <= dia <= 31 and 1 <= mes <= 12 and 1900 <= ano <= 9999):
+            messagebox.showerror("Erro", "Data fora do intervalo válido.")
+            return False
+
+        return True
+
+    def verificar_entrada_data(event,campo):
+        entrada = campo.get()
+        if not validar_data(entrada):
+            campo.delete(0, 'end')
+
+    def pegarAnexos():
+        checkbox_states = [item for item, var in checkboxes.items() if var.get() == 1]
+        formatted_states = [f'"{state}"' for state in checkbox_states]
+        result_string = "[" + ",".join(formatted_states) + "]"
+        return result_string         
 #------------------------------cliente
     siglas_estados = [
         "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS",
@@ -885,6 +1021,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
     label_Data_abertura_ = ctk.CTkLabel(framecliente, text="Data abertura")
     entry_Data_abertura_ = ctk.CTkEntry(framecliente)
+    entry_Data_abertura_.bind('<FocusOut>', lambda event: verificar_entrada_data(event, entry_Data_abertura_))
 
     label_Data_abertura_.grid(row=2, column=3, padx=10, pady=1, sticky="w")
     entry_Data_abertura_.grid(row=3, column=3, padx=10, pady=15, sticky="new")
@@ -928,8 +1065,26 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     entry_Anexo_simples_nacional = ctk.CTkEntry(frameGerais, width=150)
 
     label_Anexo_simples_nacional.grid(row=1, column=0, padx=10, pady=3, sticky="w")
-    entry_Anexo_simples_nacional.grid(row=1, column=1, padx=10, pady=3, sticky="new")
+    #entry_Anexo_simples_nacional.grid(row=1, column=1, padx=10, pady=3, sticky="new")
     
+    FrameAnexos = ctk.CTkFrame(frameGerais, border_width=largura_borda, border_color=cor_de_borda)
+    FrameAnexos.grid(row=1, column=1, padx=10, pady=3, sticky="new")
+
+    # armazena  variaveis do check
+    checkboxes = {}
+
+    # Checkbox items
+    items = ["I", "II", "III", "IV", "V"]
+
+    # Create Checkbuttons and store their variables in the dictionary
+    for index,item in enumerate(items):
+       
+        var = IntVar()
+        checkboxes[item] = var
+        checkbox = ctk.CTkCheckBox(FrameAnexos, text=item, variable=var,width=40)
+        checkbox.grid(row=0, column=index, padx=0, pady=0, sticky="new")
+
+      
 
   
     label_Folha_de_pagamento = ctk.CTkLabel(frameGerais, text="Folha de pagamento")
@@ -999,16 +1154,17 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
     label_Data_de_nascimento_ = ctk.CTkLabel(frameGerais, text="Data de nascimento (dd/mm/aaaa)")
     entry_Data_de_nascimento_ = ctk.CTkEntry(frameGerais, width=150)
 
+
     label_Data_de_nascimento_.grid(row=1, column=2, padx=10, pady=3, sticky="w")
     entry_Data_de_nascimento_.grid(row=1, column=3, padx=10, pady=3, sticky="new")
-
+    entry_Data_de_nascimento_.bind('<FocusOut>', lambda event: verificar_entrada_data(event, entry_Data_de_nascimento_))
 
     label_Contabilidade_finalizada_ = ctk.CTkLabel(frameGerais, text="Contabilidade finalizada (dd/mm/aaaa)")
     entry_Contabilidade_finalizada_ = ctk.CTkEntry(frameGerais, width=150)
 
     label_Contabilidade_finalizada_.grid(row=2, column=2, padx=10, pady=3, sticky="w")
     entry_Contabilidade_finalizada_.grid(row=2, column=3, padx=10, pady=3, sticky="new")
-
+    entry_Contabilidade_finalizada_.bind('<FocusOut>', lambda event: verificar_entrada_data(event, entry_Contabilidade_finalizada_))
 
     label_Certificado_digital = ctk.CTkLabel(frameGerais, text="Certificado digital")
     entry_Certificado_digital = ctk.CTkComboBox(frameGerais, width=150,values=not_or_yes)
@@ -1025,13 +1181,14 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
 
     label_Data_de_vencimento_ = ctk.CTkLabel(frameGerais, text="Data de vencimento (dd/mm/aaaa)")
-    entry_Data_de_vencimento_ = ctk.CTkEntry(frameGerais, width=150)
+    entry_Data_de_vencimento_Certificado = ctk.CTkEntry(frameGerais, width=150)
 
     label_Data_de_vencimento_.grid(row=5, column=2, padx=10, pady=3, sticky="w")
-    entry_Data_de_vencimento_.grid(row=5, column=3, padx=10, pady=3, sticky="new")
+    entry_Data_de_vencimento_Certificado.grid(row=5, column=3, padx=10, pady=3, sticky="new")
+    entry_Data_de_vencimento_Certificado.bind('<FocusOut>', lambda event: verificar_entrada_data(event, entry_Data_de_vencimento_Certificado))
 
-    entry_Cad_NomeSocio = ctk.CTkEntry(frameGerais)
-    entry_Cad_NomeSocio.grid(row=5, column=3, padx=10, pady=3, sticky="new")
+    #entry_Cad_NomeSocio = ctk.CTkEntry(frameGerais)
+    #entry_Cad_NomeSocio.grid(row=5, column=3, padx=10, pady=3, sticky="new")
 
     frame_treeview_socios = ctk.CTkFrame(frameGerais, border_width=largura_borda, border_color=cor_de_borda)
 
@@ -1329,7 +1486,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 ### Livros Fiscais Inventário ### Livros Fiscais Inventário ###
 
     frameLivrosInventario = ctk.CTkFrame(tab_livros_estaduais.tab("Livros Fiscais Inventário"), border_width=largura_borda, border_color=cor_de_borda)
-    
+    frameLivrosInventario.grid(row=0, column=0, sticky="nsew")
 
     label_Livros_Fiscais_Inventario_Numero = ctk.CTkLabel(frameLivrosInventario, text="Numero")
     entry_Livros_Fiscais_Inventario_Numero = ctk.CTkEntry(frameLivrosInventario, width=50)
@@ -1457,7 +1614,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
     label_Data_vencimento_Func.grid(row=1, column=0, padx=10, pady=5, sticky="new")
     entry_Data_vencimento_Func.grid(row=1, column=1, padx=10, pady=5, sticky="new")
-
+    entry_Data_vencimento_Func.bind('<FocusOut>', lambda event: verificar_entrada_data(event, entry_Data_vencimento_Func))
 
     #Sanitario
     Framealvara_sani = ctk.CTkFrame(frameSocietario, border_width=largura_borda, border_color=cor_de_borda)
@@ -1475,6 +1632,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
     label_Data_vencimento_Sanitario.grid(row=3, column=0, padx=10, pady=5, sticky="new")
     entry_Data_vencimento_Sanitario.grid(row=3, column=1, padx=10, pady=5, sticky="nsew")
+    entry_Data_vencimento_Sanitario.bind('<FocusOut>', lambda event: verificar_entrada_data(event, entry_Data_vencimento_Sanitario))
 
    
     #ambiental
@@ -1493,6 +1651,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
     label_Data_vencimento_Ambiental.grid(row=5, column=0, padx=10, pady=5, sticky="new")
     entry_Data_vencimento_Ambiental.grid(row=5, column=1, padx=10, pady=5, sticky="nsew")
+    entry_Data_vencimento_Ambiental.bind('<FocusOut>', lambda event: verificar_entrada_data(event, entry_Data_vencimento_Ambiental))
 
     #Bombeiros
     Framealvara_Bombeiro = ctk.CTkFrame(frameSocietario, border_width=largura_borda, border_color=cor_de_borda)
@@ -1510,6 +1669,8 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
     label_Data_vencimento_Bombeiros.grid(row=7, column=0, padx=10, pady=5, sticky="new")
     entry_Data_vencimento_Bombeiros.grid(row=7, column=1, padx=10, pady=5, sticky="nsew")
+    entry_Data_vencimento_Bombeiros.bind('<FocusOut>', lambda event: verificar_entrada_data(event, entry_Data_vencimento_Bombeiros))
+
 
     # alteração 
     Framealterações = ctk.CTkFrame(frameSocietario, border_width=largura_borda, border_color=cor_de_borda)
@@ -1520,6 +1681,7 @@ def criarbotoes(Viewer,Caminho_Logo_Add,Caminho_Logo_Rem,DadosCliente):
 
     label_ltima_alterao_contratual_.grid(row=0, column=0, padx=10, pady=5, sticky="new")
     entry_ltima_alterao_contratual_.grid(row=1, column=0, padx=10, pady=5, sticky="new")
+    entry_ltima_alterao_contratual_.bind('<FocusOut>', lambda event: verificar_entrada_data(event, entry_ltima_alterao_contratual_))
 
 
     label_Nmero_alterao_contratual = ctk.CTkLabel(Framealterações, text="Número alteração contratual")

@@ -3,7 +3,9 @@ import Modulos.Database.Meis as dbm
 from tkinter import *
 from tkinter import ttk
 import Modulos.Mei.Func_mei as Func_Mei
- 
+from tkinter import messagebox
+from datetime import datetime
+
 def preencher_tipo(tipo_Cont_ou_Parc,contratante):
     if tipo_Cont_ou_Parc == "Criar_Contratante":
         frame_dados_mei[0].configure(text=f"")
@@ -75,7 +77,7 @@ def pegar_dados_para_envio(tipo):
     CamposBD +='tributacao,'
 
     #data_abertura - date
-    ItensParaBD += f"'{entry_Data_abertura_.get()}'¬¬"
+    ItensParaBD += f"'{DataEnviadaParaOBD(entry_Data_abertura_.get())}'¬¬"
     CamposBD +='data_abertura,'
 
     #prefeitura - varchar(255)	
@@ -155,7 +157,7 @@ def pegar_dados_para_envio(tipo):
     CamposBD +='homologado_sindicato,'
 
     #vencimento- date
-    ItensParaBD += f"'{entry_Vencimento_.get()}'"
+    ItensParaBD += f"'{DataEnviadaParaOBD(entry_Vencimento_.get())}'"
     CamposBD +='vencimento'
 
     
@@ -237,8 +239,12 @@ def limparbotões():
     #entry_Observaes_dasn.delete(0, 'end')
 
     Limpartreeview(TreeViewParceiras)
+
+    FrameDas.grid_remove()
+    
   
 def Importardados(idcliente,Dadosparateladeedição):
+    global importar_dados_treeview
     def importar_dados_treeview(TreeV,dados):
         for result in dados:
             TreeV.insert("", 'end', values=result)
@@ -344,9 +350,62 @@ def Importardados(idcliente,Dadosparateladeedição):
         Lista = [result[0],result[1],pendencias,ativo]
 
         TreeViewParceiras.insert("", 'end', values=Lista)
+    #reativa o grid do dasn    
+    FrameDas.grid(row=0, column=0, sticky="n")
+
+def DataEnviadaParaOBD(datainformada):                      
+    try:
+        data = datetime.strptime(datainformada, "%d/%m/%Y")
+        data_formatada = data.strftime("%Y-%m-%d")   
+        return data_formatada  
+    except Exception:
+        pass
+
+
+
+
+def adicição_dados_DASN(operacao):
+    IDcliente = Listadedados[0]
+    queryCriação = f"INSERT INTO "
+
+         
+    if operacao == 'ADD':
+        if entry_Ano_dasn.get() !='' and entry_Faturamento.get() !='':
+                
+            CamposBD = 'mei_id,ano,faturamento,observacao'
+            ValoresBD = f"{entry_Ano_dasn.get()},'{entry_Faturamento.get()}','{entry_Observaes_dasn.get()}'"
+            ValoresBD_lista = [valor.strip("'") for valor in ValoresBD.split(',')]
+            importar_dados_treeview(TreeviewDas,[ValoresBD_lista])
+            queryCriação += f"`das`({CamposBD}) VALUES ({IDcliente},{ValoresBD})"
+            entry_Ano_dasn.delete(0, 'end')
+            entry_Faturamento.delete(0, 'end')
+            entry_Observaes_dasn.delete(0, 'end')
+            dbm.Query_Save_Data(queryCriação)
+
+    if operacao == 'DEL':
+            # Obtém a seleção da TreeView
+        selecao = TreeviewDas.selection()
+            # Verifica se há algum item selecionado
+        if selecao:
+                # Obtém as informações do item selecionado
+            valores = TreeviewDas.item(selecao[0])['values']
+                # Verifica se há valores associados
+            if valores:
+                    # Obtém o nome do cliente
+                v1 = valores[0]
+                v2 = valores[1]
+                v3 = valores[2]
+                queryDeleção = f"DELETE FROM `das` WHERE mei_id = {IDcliente} AND ano = {f'{v1}'} AND faturamento = '{f'{v2}'}' AND observacao = '{f'{v3}'}'" 
+                TreeviewDas.delete(selecao)
+                dbm.Query_remove_Data(queryDeleção) 
+
+ 
+
         
+
+
 def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho_Logo_Rem):
-    global frame_dados_mei,entry_Nome,entry_Situao,entry_Identificao,entry_CNPJ,entry_Tributao,entry_Data_abertura_,entry_Prefeitura,entry_Login,entry_Senha,entry_Pendncia_de_Recolhimentos,entry_Entrega_de_DAS_Mensal,entry_E_mail,entry_Pendncias,entry_Observaes,entry_CPF,entry_Cdigo_de_Acesso,entry_Senha_GOV,entry_Nvel_GOV,entry_Endereo,entry_Inscrio_Estadual,entry_Inscrio_Municipal,entry_Certificado_Digital,entry_Modelo_Datavix,entry_Homologado___Sindicato,entry_Vencimento_,entry_Faturamento,TreeViewParceiras,scrollbarParceiras,bt_Editar_MEI_Parceiras,TabViewGlobal,TreeviewDas
+    global frame_dados_mei,entry_Nome,entry_Situao,entry_Identificao,entry_CNPJ,entry_Tributao,entry_Data_abertura_,entry_Prefeitura,entry_Login,entry_Senha,entry_Pendncia_de_Recolhimentos,entry_Entrega_de_DAS_Mensal,entry_E_mail,entry_Pendncias,entry_Observaes,entry_CPF,entry_Cdigo_de_Acesso,entry_Senha_GOV,entry_Nvel_GOV,entry_Endereo,entry_Inscrio_Estadual,entry_Inscrio_Municipal,entry_Certificado_Digital,entry_Modelo_Datavix,entry_Homologado___Sindicato,entry_Vencimento_,entry_Faturamento,TreeViewParceiras,scrollbarParceiras,bt_Editar_MEI_Parceiras,TabViewGlobal,TreeviewDas,entry_Ano_dasn,entry_Faturamento,entry_Observaes_dasn,FrameDas
     TabViewGlobal = Viewer
     
     def dadosparceira(*args):
@@ -384,6 +443,37 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
                 PendenciasLB_inf.configure(state='disabled')
                 TeladadosParceiras.resizable(False,False)
 
+    
+    def validar_data(entrada):
+        if len(entrada) != 10:
+            messagebox.showerror("Erro", "Formato de data inválido. Use DD/MM/AAAA.")
+            return False
+
+        partes = entrada.split('/')
+        if len(partes) != 3:
+            messagebox.showerror("Erro", "Formato de data inválido. Use DD/MM/AAAA.")
+            return False
+
+        dia, mes, ano = partes
+        if not (dia.isdigit() and mes.isdigit() and ano.isdigit()):
+            messagebox.showerror("Erro", "Formato de data inválido. Use DD/MM/AAAA.")
+            return False
+
+        dia = int(dia)
+        mes = int(mes)
+        ano = int(ano)
+
+        if not (1 <= dia <= 31 and 1 <= mes <= 12 and 1900 <= ano <= 9999):
+            messagebox.showerror("Erro", "Data fora do intervalo válido.")
+            return False
+
+        return True
+
+    def verificar_entrada_data(event,campo):
+        entrada = campo.get()
+        if not validar_data(entrada):
+            campo.delete(0, 'end')
+
     def ativarbotãoEditar(*args):
         selecao = TreeViewParceiras.selection()
 
@@ -394,6 +484,27 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
         else:
             bt_Editar_MEI_Parceiras.configure(state='disabled') 
     
+    def verificarseleção(treeAnalisada,bt):
+        seleção = treeAnalisada.selection()
+
+        if seleção:
+            valor = bt.cget("state")  # Obtém o estado atual do botão
+            if valor == "disabled":   
+                bt.configure(state='normal') 
+        else:
+           bt.configure(state='disabled') 
+    
+    def Somentenumero(P):
+        if str.isdigit(P) or P == "":
+            return True
+        else:
+            return False
+
+    def Somentenumeroevigulaeponto(P):
+        if all(char.isdigit() or char in ",." for char in P) or P == "":
+            return True
+        else:
+            return False
 
     frame_dados_mei=frameprincipal
     yes_or_not = [
@@ -444,7 +555,7 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
 
     label_Data_abertura_.grid(row=1, column=4, padx=10, pady=5, sticky="w")
     entry_Data_abertura_.grid(row=1, column=5, padx=10, pady=5, sticky="new")
-    
+    entry_Data_abertura_.bind('<FocusOut>', lambda event: verificar_entrada_data(event, entry_Data_abertura_))
 
     label_Identificao = ctk.CTkLabel(FrameDadosEmpresas, text="Identificação")
     entry_Identificao = ctk.CTkEntry(FrameDadosEmpresas)
@@ -600,7 +711,7 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     label_Vencimento_.grid(row=0, column=2, padx=10, pady=5, sticky="w")
     entry_Vencimento_.grid(row=1, column=2, padx=10, pady=5, sticky="nsew")
 
-    
+    entry_Vencimento_.bind('<FocusOut>', lambda event: verificar_entrada_data(event, entry_Vencimento_))
     
 
     TreeViewParceiras = ttk.Treeview(FrameParceiras, columns=("#","Nome","Pendências","Situação"), show='headings')
@@ -631,21 +742,26 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     bt_Editar_MEI_Parceiras.configure(state='disabled') 
 
 #DASN
+   
+
     FrameDas = ctk.CTkFrame(Viewer.tab("DASN"), border_width=largura_borda, border_color=cor_de_borda)
-    FrameDas.grid(row=0, column=0, sticky="n")
+    ValidarapenasNumero = FrameDas.register(Somentenumero)
+    ValidarNumeroevigulaeponto = FrameDas.register(Somentenumeroevigulaeponto)
+                                            
     Viewer.tab("DASN").grid_rowconfigure(0, weight=1)
     Viewer.tab("DASN").grid_columnconfigure(0, weight=1)
 
-
+   
+    
     label_Ano_dasn = ctk.CTkLabel(FrameDas, text="Ano")
-    entry_Ano_dasn= ctk.CTkEntry(FrameDas)
+    entry_Ano_dasn= ctk.CTkEntry(FrameDas, validate="key", validatecommand=(ValidarapenasNumero, "%P"))
 
     label_Ano_dasn.grid(row=0, column=0, padx=10, pady=5, sticky="w")
     entry_Ano_dasn.grid(row=1, column=0, padx=10, pady=5, sticky="nsew")
 
 
     label_Faturamento = ctk.CTkLabel(FrameDas, text="Faturamento")
-    entry_Faturamento = ctk.CTkEntry(FrameDas)
+    entry_Faturamento = ctk.CTkEntry(FrameDas, validate="key", validatecommand=(ValidarNumeroevigulaeponto, "%P"))
 
     label_Faturamento.grid(row=0, column=1, padx=10, pady=5, sticky="w")
     entry_Faturamento.grid(row=1, column=1, padx=10, pady=5, sticky="nsew")
@@ -658,16 +774,17 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     entry_Observaes_dasn.grid(row=1, column=2, padx=10, pady=5, sticky="nsew")
 
     logo_add = PhotoImage(file=Caminho_Logo_Add).subsample(25, 25)
-    bt_add = ctk.CTkButton(FrameDas,image=logo_add, text="Adicionar",command="")
+    bt_add = ctk.CTkButton(FrameDas,image=logo_add, text="Adicionar",command=lambda:adicição_dados_DASN('ADD'))
     bt_add.grid(row=0, column=3, padx=5, pady=5, sticky="new")
 
     logo_excluir = PhotoImage(file=Caminho_Logo_Rem).subsample(25, 25)
-    bt_Excluir = ctk.CTkButton(FrameDas,image=logo_excluir, text="Excluir",command=lambda: "")
+    bt_Excluir = ctk.CTkButton(FrameDas,image=logo_excluir, text="Excluir",command=lambda:adicição_dados_DASN('DEL'))
     bt_Excluir.grid(row=1, column=3, padx=5, pady=5, sticky="new")
+    bt_Excluir.configure(state='disabled')
 
     TreeviewDas = ttk.Treeview(FrameDas, columns=("Ano","Faturamento","Observações"), show='headings')
     TreeviewDas.grid(row=2, column=0,columnspan=4, sticky="nsew", padx=(5,5), pady=(5,10))
-    TreeviewDas.bind('<<TreeviewSelect>>')
+    TreeviewDas.bind('<<TreeviewSelect>>',lambda event: verificarseleção(TreeviewDas, bt_Excluir))
 
     # Define o as colunas
     TreeviewDas.heading("Ano", text="Ano")

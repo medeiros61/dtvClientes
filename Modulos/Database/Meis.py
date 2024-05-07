@@ -410,3 +410,16 @@ def Query_Save_Data(Query):
             connection.commit()       
     finally:
         connection.close()
+
+
+def Query_remove_Data(Query):
+    
+    connect_to_db() 
+
+    try:
+        with connection.cursor() as cursor:
+            ConsultaSQL = Query
+            cursor.execute(ConsultaSQL)
+            connection.commit()       
+    finally:
+        connection.close()

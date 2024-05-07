@@ -7,7 +7,40 @@ def connect_to_da():
             password='R4QePW2ze9Hpa6F',
             database='datavixsolucao'
         )
-    
+
+def VerificaçãoEmail_existe(Email):
+   
+    Email = Email.lower()
+
+    connect_to_da()
+    try:
+        with connection.cursor() as cursor:
+            ConsultaSQL = f"SELECT `email` FROM `pyusers` WHERE `email` = '{Email}'"
+            cursor.execute(ConsultaSQL)
+            result = cursor.fetchone()
+            if result is not None: 
+                return True
+            else:
+                return False
+
+    finally:
+        connection.close()
+
+def Alterasenha(Email,novasenha):
+   
+    Email = Email.lower()
+
+    connect_to_da()
+    try:
+        with connection.cursor() as cursor:
+            ConsultaSQL = f"UPDATE `pyusers` SET password = '{novasenha}' WHERE `email` = '{Email}'"
+            cursor.execute(ConsultaSQL)
+            connection.commit()       
+
+    finally:
+        connection.close()
+
+
 def VerificaçãoLogin(Email,Senha):
    
     Email = Email.lower()

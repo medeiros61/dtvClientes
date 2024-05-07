@@ -102,7 +102,7 @@ def DataVix(DadosUsuario,janela):
 
     
     screen_datavix.title("Master")
-    screen_datavix.resizable(False,False)
+    #screen_datavix.resizable(False,False)
     #username_entry = ctk.CTkEntry(master=screen_datavix, placeholder_text="TESTE", width=300, font=("Roboto",14))
     #username_entry.pack(side=RIGHT)
     ctk.set_appearance_mode("dark")
