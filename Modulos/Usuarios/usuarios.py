@@ -204,19 +204,19 @@ def parametrosinicias(frame):
 
     logo_add = PhotoImage(file=Caminho_Logo_Add).subsample(25, 25)
     bt_add_user = ctk.CTkButton(master=bt_action_frame,image=logo_add, text="Adicionair Cliente",command= Func_users.Adicionar_cliente)
-    bt_add_user.grid(row=0, column=0,  padx=5, pady=5,sticky="nsew")
+    #bt_add_user.grid(row=0, column=0,  padx=5, pady=5,sticky="nsew")
 
     logo_editar = PhotoImage(file=Caminho_Logo_Edit).subsample(25, 25)
     bt_Editar_user = ctk.CTkButton(master=bt_action_frame,image=logo_editar, text="Editar",command=lambda: Func_users.editar_cliente(TreeviewUsuarios))
-    bt_Editar_user.grid(row=0, column=2,   padx=5, pady=5,sticky="nsew")
+    #bt_Editar_user.grid(row=0, column=2,   padx=5, pady=5,sticky="nsew")
     
     logo_excluir = PhotoImage(file=Caminho_Logo_Rem).subsample(25, 25)
     bt_Excluir_user = ctk.CTkButton(master=bt_action_frame,image=logo_excluir, text="Excluir Cliente",command=lambda: Func_users.excluir_cliente(TreeviewUsuarios))
-    bt_Excluir_user.grid(row=0, column=3,   padx=5, pady=5,sticky="nsew")
+    #bt_Excluir_user.grid(row=0, column=3,   padx=5, pady=5,sticky="nsew")
 
     logo_excel = PhotoImage(file=Caminho_Logo_Excel).subsample(30, 30)
     bt_exportar_user = ctk.CTkButton(master=bt_action_frame, image=logo_excel,text="Exportar Usarios",command='')
-    bt_exportar_user.grid(row=0, column=5,  padx=5, pady=5,sticky="nsew")
+    #bt_exportar_user.grid(row=0, column=5,  padx=5, pady=5,sticky="nsew")
 
     bt_Editar_user.configure(state='disabled') 
     bt_Excluir_user.configure(state='disabled') 

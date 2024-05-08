@@ -4,14 +4,14 @@ import Modulos.Database.Clients as dbc
 from tkinter import ttk 
 from tkinter import messagebox
 from datetime import datetime
-
+import Modulos.Database.Logs as log
 
 def pegar_dados_para_envio(tipo):
 
 
     
     
-
+    nomeclienteparalog = entry_Nome_empresa.get()
     ##Definições da Query
     CamposBD = ''
     ItensParaBD = ''
@@ -405,6 +405,8 @@ def pegar_dados_para_envio(tipo):
         QuerydeExecução = queryCriação 
 
     dbc.Query_Save_Data(QuerydeExecução)
+    
+    log.RegistrarEventosdeLOG('Registrou um cliente novo',f'Novo cliente : {nomeclienteparalog}') 
 
 def limparcampos():
     

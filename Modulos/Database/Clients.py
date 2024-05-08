@@ -1,5 +1,5 @@
 import pymysql
-from datetime import date
+from datetime import date,datetime
 
 def connect_to_db():
     global connection
@@ -46,6 +46,60 @@ def getclientlist_complete():
 
     finally:
         connection.close()
+
+   
+def getclientComents(id):
+    # Conecta ao banco de dados
+    
+    connect_to_db()
+    
+    try:
+        with connection.cursor() as cursor:
+            ConsultaSQL = f"SELECT `created_at`,`observacao`,`user_id` FROM `events` WHERE `client_id`= {id}"
+            cursor.execute(ConsultaSQL)
+            results = cursor.fetchall()
+            
+            nova_lista = []  # Lista para armazenar os itens convertidos
+
+            for item in results:
+                id_user = item[2]
+                ConsultaSQL = f"SELECT `name` FROM `users` WHERE `id`= {id_user}"
+                cursor.execute(ConsultaSQL)
+                usuario = cursor.fetchone()
+                usuario = list(usuario)
+
+                # Cria uma nova tupla com o item convertido e adiciona à nova lista
+                novoitemlistagem = (item[0], item[1], usuario[0])
+                nova_lista.append(novoitemlistagem)
+        
+            if nova_lista is not None: 
+                return nova_lista
+            else:
+                return None
+
+    finally:
+        connection.close()
+
+def RegisterclientComents(Clientid,Mensagem,userid,agora):
+    # Conecta ao banco de dados
+    
+    connect_to_db()
+
+    try:
+      
+
+        
+        with connection.cursor() as cursor:
+            ConsultaSQL = f"SELECT `id` FROM `users` WHERE `email`= '{userid}'"
+            cursor.execute(ConsultaSQL)
+            usuario = cursor.fetchone()
+
+            ConsultaSQL = f"INSERT INTO `events` (`client_id`,`observacao`,`user_id`,`created_at`) VALUES ({Clientid},'{Mensagem}',{usuario[0]},'{agora}')"
+            cursor.execute(ConsultaSQL)
+            connection.commit()  
+    finally:
+        connection.close()
+
 
 def getclientlist_byfilter(nome_empresa_p,nome,uf_p,uf,ativo_p,ativo):
     # Conecta ao banco de dados

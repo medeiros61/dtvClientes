@@ -5,6 +5,7 @@ from tkinter import ttk
 import Modulos.Mei.Func_mei as Func_Mei
 from tkinter import messagebox
 from datetime import datetime
+import Modulos.Database.Logs as log
 
 def preencher_tipo(tipo_Cont_ou_Parc,contratante):
     if tipo_Cont_ou_Parc == "Criar_Contratante":
@@ -40,6 +41,8 @@ def id_empresa_Contratante(idmei):
     Id_Contratante = idmei
 
 def pegar_dados_para_envio(tipo):
+
+    nomeclienteparalog = entry_Nome.get()
 
     ##Definições da Query
     CamposBD = ''
@@ -200,6 +203,7 @@ def pegar_dados_para_envio(tipo):
         QuerydeExecução = queryCriação 
 
     dbm.Query_Save_Data(QuerydeExecução)
+    log.RegistrarEventosdeLOG('Registrou um MEI  novo',f'Novo cliente : {nomeclienteparalog}') 
 
 def limparbotões():
     def Limpartreeview(TreeV):

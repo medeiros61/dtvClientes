@@ -240,11 +240,11 @@ def parametrosinicias(frame):
     
     logo_excluir = PhotoImage(file=Caminho_Logo_Rem).subsample(25, 25)
     bt_Excluir_MEI = ctk.CTkButton(master=bt_action_frame,image=logo_excluir, text="Excluir MEI",command=lambda: Func_Mei.excluir_MEI(TreeviewMEI))
-    bt_Excluir_MEI.grid(row=0, column=3,   padx=5, pady=5,sticky="nsew", rowspan = 2)
+    #bt_Excluir_MEI.grid(row=0, column=3,   padx=5, pady=5,sticky="nsew", rowspan = 2)
 
     logo_comentar = PhotoImage(file=Caminho_Logo_Comt).subsample(25, 25)
     bt_Comentar_MEI = ctk.CTkButton(master=bt_action_frame,image=logo_comentar, text="Adicionar Comentario",command=lambda: Func_Mei.comentar_MEI(TreeviewMEI))
-    bt_Comentar_MEI.grid(row=0, column=4,  padx=5, pady=5,sticky="nsew", rowspan = 2)
+    #bt_Comentar_MEI.grid(row=0, column=4,  padx=5, pady=5,sticky="nsew", rowspan = 2)
 
     logo_excel = PhotoImage(file=Caminho_Logo_Excel).subsample(30, 30)
    

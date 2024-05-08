@@ -25,6 +25,7 @@ def SalvarDados(*args):
     if resposta == 'yes':
         bts.pegar_dados_para_envio(tpEntrada)
         RemovertelaEdit_clientes()
+        
 
 def parametrosinicias(frame,Frame_atual):
     global framepai, frameprincipal

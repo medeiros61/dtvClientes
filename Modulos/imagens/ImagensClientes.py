@@ -103,6 +103,23 @@ def baixarimagemLogoDTV():
    
     return Logo_DTV                                
 
+def baixarimagemLogoDTVIcon():
+
+    imagens_path = pegarcaminhodaappdata()
+    if not os.path.exists(imagens_path):
+        os.makedirs(imagens_path)
+
+    Logo_DTV = os.path.join(imagens_path,"logodatavix.ico")
+
+    ##Funções 
+    #Baixar as imagens dos botões caso não exista
+    if not os.path.exists(Logo_DTV):
+            file_id = "1RRPgMFYm2ssaY5sbtkO46ERYMyuNWpuF"
+            destination_path = Logo_DTV  
+            download_file_from_google_drive(file_id, destination_path)
+   
+                                
+
 
 def baixarimagemLogin():
 

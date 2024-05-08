@@ -37,7 +37,7 @@ def DataVix(DadosUsuario,janela):
     log.AtivarRegistrodeLog()
     log.RegistrarEventosdeLOG(Evento_Logar,obs_Logar) 
     
-
+    
     def ativarmei():
         cl.Removertelaclientes(frame_clientes)
         user.RemovertelaUsarios(frame_user)
@@ -99,7 +99,7 @@ def DataVix(DadosUsuario,janela):
     screen_datavix.protocol("WM_DELETE_WINDOW", on_close)
     screen_datavix.geometry(f"{1150}x{615}+{0}+{0}") 
     #center_window(screen_datavix,1150,615) caso queria que aparece no centro
-
+    screen_datavix.iconbitmap(default='logodatavix.ico')
     
     screen_datavix.title("Master")
     #screen_datavix.resizable(False,False)

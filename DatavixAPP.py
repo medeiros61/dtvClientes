@@ -5,12 +5,14 @@ from tkinter import *
 import Modulos.Database.Users as dbu
 import PainelDatavix as PD
 import Modulos.imagens.ImagensClientes as Imagens_DataBase
+import Modulos.Database.Parametros as bdp
 import Modulos.Database.Email as f2aut
 import threading
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 import warnings
+import os
 
 janela = ctk.CTk()
 
@@ -80,6 +82,7 @@ def TelaLogin():
 
         JanelaSenha = ctk.CTkToplevel(janela)
         JanelaSenha.title('Esqueci minha senha')
+        
         Frameemail= ctk.CTkFrame(JanelaSenha)
         Frameemail.grid(row=0, column=0, padx=10,rowspan=3, pady=5, sticky="new")
 
@@ -109,6 +112,7 @@ def TelaLogin():
 
     def tela():
         janela.geometry(f"{700}x{400}+{0}+{0}") 
+        janela.iconbitmap(default='logodatavix.ico')
         #center_window(janela, 700, 400) caso queria que aparece no centro
 
         janela.title("Sistema de Datavix")
@@ -247,17 +251,17 @@ def TelaLogin():
     tela_login()
     janela.mainloop()
     
+Vatual = bdp.pegar_parametro('versao_atual')
+if Vatual == Versão: 
+    TelaLogin()
+else:
+    # Especifique o caminho relativo para o arquivo EXE
+    caminho_do_exe = r'DatavixAPP_Update.exe'
+
+    os.execl(caminho_do_exe,'DatavixAPP.exe',Vatual)    
 
 
-#User
-#Usuario : t@teste
-#Senha : teste
-#pip install openpyxl pandas requests ttkthemes 
 
-#master@datavix.com.br , 1234
-#admin@datavix.com.br , 1234
-
-TelaLogin()
 
 
 
