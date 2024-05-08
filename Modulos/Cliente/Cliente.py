@@ -55,7 +55,9 @@ def parametrosinicias(frame):
     global list_clients_frame,Scrollable,uf_filter_entry,filtrar,verificarseleção,TreeviewClientes,frame_edição_dados,bt_Excluir_clients
     Scrollable = None
     #####################################  FUNÇÕES   #####################################################
-   
+    def exportar(*args):
+        Func_cli.Exportar_clientes(clinte_filter_entry.get(),uf_filter_entry.get(),Status_filter_entry.get())
+        
     #FUNÇÃO PARA FILTRAR
     def filtrar(*args):
         nome = clinte_filter_entry.get() 
@@ -265,8 +267,7 @@ def parametrosinicias(frame):
 
     logo_excel = PhotoImage(file=Caminho_Logo_Excel).subsample(30, 30)
    
-    def exportar(*args):
-        Func_cli.Exportar_clientes(clinte_filter_entry.get(),uf_filter_entry.get(),Status_filter_entry.get())
+    
     bt_exportar_clients = ctk.CTkButton(master=bt_action_frame, image=logo_excel,text="Exportar clientes",command=exportar)
     bt_exportar_clients.grid(row=0, column=5,  padx=5, pady=5,sticky="nsew")
 

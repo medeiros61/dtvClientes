@@ -81,6 +81,112 @@ def getMEIlist_byfilter(nome_empresa_p,nome,identificacao_p,identificacao,ativo_
     finally:
         connection.close()
 
+
+def getMEIdata_all(nome_empresa_p,nome,identificacao_p,identificacao,ativo_p,ativo):
+    # Conecta ao banco de dados
+    
+    connect_to_db()
+    data_quary = [
+    "id",
+    "mei_id",
+    "situacao",
+    "nome",
+    "identificacao",
+    "cnpj",
+    "tributacao",
+    "data_abertura",
+    "prefeitura",
+    "login",
+    "senha",
+    "pendencia_recolhimentos",
+    "entrega_das_mensal",
+    "pendencias",
+    "email",
+    "pendencia",
+    "observacoes",
+    "cpf",
+    "codigo_acesso",
+    "senha_gov",
+    "nivel_gov",
+    "endereco",
+    "inscricao_estadual",
+    "inscricao_municipal",
+    "certificado_digital",
+    "modelo_datavix",
+    "homologado_sindicato",
+    "vencimento",
+    "created_at",
+    "updated_at"
+    ]
+    try:
+        with connection.cursor() as cursor:
+            ConsultaSQL = f"SELECT "
+            for index,item in enumerate(data_quary):
+                ConsultaSQL += f'`{item}`'
+
+                if index < len(data_quary) - 1:
+                    ConsultaSQL += ","
+                    
+            ConsultaSQL += f"FROM `meis` WHERE `{nome_empresa_p}` LIKE '%{nome}%'"
+            if identificacao_p and identificacao:
+                ConsultaSQL += f" AND `{identificacao_p}` LIKE '%{identificacao}%'"
+            if ativo_p and ativo is not None:
+                ConsultaSQL += f" AND `{ativo_p}` LIKE '%{ativo}%'"
+            
+            cursor.execute(ConsultaSQL)
+            results = cursor.fetchall()
+            
+            nova_listacompleta = []
+            for cliente in results:
+
+                # Convertendo a tupla em lista para poder modificar valores
+                cliente = list(cliente)
+
+                # cliente[7] representa a coluna "ativo" na consulta SQL
+                botões_yesornot = [2,24]
+                for item in botões_yesornot:
+                    if cliente[item] == 1:
+                        cliente[item] = "SIM"
+                    else:
+                        cliente[item] = "NÃO"
+
+        
+                
+                
+                # Convertendo de volta para tupla, se necessário
+                resultscliente = tuple(cliente)
+
+                nova_lista = []  # Lista para armazenar os itens convertidos
+                n=0
+                Listadeidentificação=[]
+                for item in resultscliente:
+                    
+                    if item == None:
+                        item="N/A"
+                    if item == '':
+                        item="N/A"    
+                    #try:
+                    if isinstance(item, date):    
+                            # Formatando a data para "DD/MM/AAAA"
+                            data_formatada = item.strftime("%d/%m/%Y") # Convertendo para datetime
+
+                            #print(data_formatada)  # Saída
+                            item = data_formatada
+                    #except Exception:
+                    #    pass
+
+                    novoitemlistagem = (item)
+                    nova_lista.append(novoitemlistagem)
+                nova_listacompleta.append(nova_lista)
+            if nova_listacompleta is not None: 
+                return nova_listacompleta
+            else:
+                return None
+
+    finally:
+        connection.close()
+
+
 def GetnameMEI(IDdomei):
     # Conecta ao banco de dados
     

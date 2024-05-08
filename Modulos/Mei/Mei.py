@@ -32,6 +32,8 @@ def parametrosinicias(frame):
     global list_MEI_frame,Scrollable,filtrar,verificarseleção,TreeviewMEI,bt_Excluir_MEI
     Scrollable = None
     #####################################  FUNÇÕES   #####################################################
+    def exportar(*args):
+        Func_Mei.Exportar_MEIs(MEI_filter_entry.get(),Identificação_filter_entry.get(),Status_filter_entry.get())    
         
     #FUNÇÃO PARA FILTRAR
     def filtrar(*args):
@@ -246,7 +248,7 @@ def parametrosinicias(frame):
 
     logo_excel = PhotoImage(file=Caminho_Logo_Excel).subsample(30, 30)
    
-    bt_exportar_MEI = ctk.CTkButton(master=bt_action_frame, image=logo_excel,text="Exportar MEI",command= Func_Mei.Exportar_MEIs)
+    bt_exportar_MEI = ctk.CTkButton(master=bt_action_frame, image=logo_excel,text="Exportar MEI",command=exportar)
     bt_exportar_MEI.grid(row=0, column=5,  padx=5, pady=5,sticky="nsew", rowspan = 2)
 
 
