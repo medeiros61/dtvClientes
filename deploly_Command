@@ -1,0 +1,6 @@
+pyinstaller --onefile --icon=logodatavix.ico --version-file=version.txt --noconsole DatavixAPP.py
+
+pyinstaller --onefile --icon=logodatavix.ico --version-file=version.txt --noconsole DatavixAPP_Update.py
+
+pyinstaller --onefile --version-file=version.txt --noconsole Datavix.py
+ 
