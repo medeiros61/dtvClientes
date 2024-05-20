@@ -34,10 +34,16 @@ def parametrosinicias(frame,Frame_atual):
     #Frame 
     master_frame = ctk.CTkFrame(master=frameprincipal, width=1040, height=580, fg_color=("#808080"))
     master_frame.pack(side=TOP, fill = X)
-   
+    
+
     #criar botão açoes
-    FrameDados = ctk.CTkFrame(master_frame,height=40,width=1000)
-    FrameDados.grid(row=0,rowspan=2, column=0,columnspan=5, padx=(5, 0), pady=(1, 0), sticky="nsew")
+    Frametitulo = ctk.CTkFrame(master_frame)
+    Frametitulo.pack(side=TOP, fill = X)
+
+    #criar botão açoes
+    FrameDados = ctk.CTkFrame(Frametitulo,height=40,width=1000)
+    FrameDados.pack(side=LEFT, fill = X)
+    #FrameDados.grid(row=0,rowspan=2, column=0,columnspan=5, padx=(5, 0), pady=(1, 0), sticky="nsew")
 
     bt_voltar = ctk.CTkButton(FrameDados,text='<',command=RemovertelaEdit_MEI,width=40,height=40)
     bt_voltar.grid(row=0,rowspan=2,pady=1,padx=1, column=0, sticky="ns")
@@ -54,18 +60,26 @@ def parametrosinicias(frame,Frame_atual):
 
     DadosCliente = Contratante,id,Tipo
 
-    bt_salvar = ctk.CTkButton(master_frame,text='Salvar',command=SalvarDados,height=20,width=80)
+    #
+    FrameBotões = ctk.CTkFrame(Frametitulo)
+    FrameBotões.pack(side=RIGHT, fill = X)
+    #FrameBotões.grid(row=0,rowspan=2,pady=1,padx=1, column=9, sticky="ns")
+
+    bt_salvar = ctk.CTkButton(FrameBotões,text='Salvar',command=SalvarDados,height=20,width=200)
     bt_salvar.grid(row=0, column=5, padx=(5, 0), pady=(1, 10), sticky="nsew")
-   
-    bt_cancelar = ctk.CTkButton(master_frame,text='Cancelar',command=RemovertelaEdit_MEI,height=20,width=80)
+    #bt_salvar.pack(side=TOP, fill = X)
+
+    bt_cancelar = ctk.CTkButton(FrameBotões,text='Cancelar',command=RemovertelaEdit_MEI,height=20,width=200)
     bt_cancelar.grid(row=1, column=5, padx=(5, 0), pady=(0, 1), sticky="nsew")
+    #bt_cancelar.pack(side=TOP, fill = X)
 
 
     
     # criar tabview
     tabview = ctk.CTkTabview(master_frame,width=940, height=540)
-    tabview.grid(row=4, column=0,columnspan=6, padx=5, pady=5, sticky="nsew")
-    
+    #tabview.grid(row=4, column=0,columnspan=6, padx=5, pady=5, sticky="nsew")
+    tabview.pack(side=TOP, fill = BOTH)
+
     tabview.add("Empresa")
     tabview.tab("Empresa").grid_columnconfigure(0, weight=1) 
     

@@ -160,10 +160,26 @@ def pegar_dados_para_envio(tipo):
     CamposBD +='homologado_sindicato,'
 
     #vencimento- date
-    ItensParaBD += f"'{DataEnviadaParaOBD(entry_Vencimento_.get())}'"
-    CamposBD +='vencimento'
+    ItensParaBD += f"'{DataEnviadaParaOBD(entry_Vencimento_.get())}'¬¬"
+    CamposBD +='vencimento,'
 
+    #homologado_sindicato- varchar(255)
+    ItensParaBD += f"'{entry_Homologado___Sindicato.get()}'¬¬"
+    CamposBD +='nome_fantasia,'
     
+    agora = datetime.now()
+    if tipo =="Edição":
+        #- date
+        ItensParaBD += f"'{agora}'"
+        CamposBD +='updated_at'
+    else: 
+        #- date   
+        ItensParaBD += f"'{agora}'¬¬"
+        CamposBD +='created_at,'
+        #- date
+        ItensParaBD += f"'{agora}'"
+        CamposBD +='updated_at'
+
     # Transforma a string em uma lista de campos separados por vírgula
     CamposBD_List = CamposBD.split(',')
     ItensParaBD_List = ItensParaBD.split('¬¬')
@@ -186,7 +202,7 @@ def pegar_dados_para_envio(tipo):
         #print("Edição")
     else:
         queryCriação = f"""INSERT INTO `meis` ("""
-    
+      
         for index,item in enumerate(CamposBD_tupla):
             queryCriação += f"{CamposBD_tupla[index]}" 
             if index < len(CamposBD_tupla) - 1:
@@ -433,7 +449,7 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
                 NomeLB.grid(row = 0, column = 0, padx=10, pady=5, sticky="w")
                 NomeLB_inf = ctk.CTkLabel(TeladadosParceiras,text=Nome)
                 NomeLB_inf.grid(row = 0, column = 1, padx=10, sticky="w")
-
+                
                 StatusLB = ctk.CTkLabel(TeladadosParceiras,text='Status: ')
                 StatusLB.grid(row = 1, column = 0, padx=10, pady=5, sticky="w")
                 StatusLB_inf = ctk.CTkLabel(TeladadosParceiras,text=Status)
@@ -519,8 +535,9 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     largura_borda = 2
 
 ### Empresa
-    ScrollFrameEmpresas = ctk.CTkScrollableFrame(Viewer.tab("Empresa"), border_width=largura_borda, border_color=cor_de_borda,width=900, height=470)
-    ScrollFrameEmpresas.grid(row=0, column=0, sticky="n")
+    ScrollFrameEmpresas = ctk.CTkScrollableFrame(Viewer.tab("Empresa"), border_width=largura_borda, border_color=cor_de_borda,height=450)
+    ScrollFrameEmpresas.pack(side=TOP, fill = BOTH)
+    #ScrollFrameEmpresas.grid(row=0, column=0, sticky="n")
     Viewer.tab("Empresa").grid_rowconfigure(0, weight=1)
     Viewer.tab("Empresa").grid_columnconfigure(0, weight=1)
 
@@ -536,59 +553,106 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
 
     label_Nome = ctk.CTkLabel(FrameDadosEmpresas, text="Nome")
     entry_Nome = ctk.CTkEntry(FrameDadosEmpresas)
-
     label_Nome.grid(row=0, column=0, padx=10, pady=5, sticky="w")
     entry_Nome.grid(row=0, column=1, columnspan=3, padx=10, pady=5, sticky="new")
 
+    label_Fantasia = ctk.CTkLabel(FrameDadosEmpresas, text="Nome Fantasia")
+    entry_Fantasia = ctk.CTkEntry(FrameDadosEmpresas)
+    label_Fantasia.grid(row=1, column=0, padx=10, pady=5, sticky="w")
+    entry_Fantasia.grid(row=1, column=1, columnspan=3, padx=10, pady=5, sticky="new")
+
+    label_Identificao = ctk.CTkLabel(FrameDadosEmpresas, text="Identificação")
+    entry_Identificao = ctk.CTkEntry(FrameDadosEmpresas)  
+    label_Identificao.grid(row=0, column=4, padx=10, pady=5, sticky="w")
+    entry_Identificao.grid(row=0, column=5, padx=10, pady=5, sticky="new")
+    entry_Identificao.configure(state='disabled')
 
     label_Situao = ctk.CTkLabel(FrameDadosEmpresas, text="Ativo")
-    entry_Situao = ctk.CTkComboBox(FrameDadosEmpresas,values=yes_or_not)
-
-    label_Situao.grid(row=1, column=2, padx=10, pady=5, sticky="w")
-    entry_Situao.grid(row=1, column=3, padx=10, pady=5, sticky="new")
-
-    
+    entry_Situao = ctk.CTkComboBox(FrameDadosEmpresas,values=yes_or_not)  
+    label_Situao.grid(row=2, column=2, padx=10, pady=5, sticky="w")
+    entry_Situao.grid(row=2, column=3, padx=10, pady=5, sticky="new")
+ 
     label_CNPJ = ctk.CTkLabel(FrameDadosEmpresas, text="CNPJ")
     entry_CNPJ = ctk.CTkEntry(FrameDadosEmpresas)
-
-    label_CNPJ.grid(row=1, column=0, padx=10, pady=5, sticky="w")
-    entry_CNPJ.grid(row=1, column=1, padx=10, pady=5, sticky="new")
+    label_CNPJ.grid(row=2, column=0, padx=10, pady=5, sticky="w")
+    entry_CNPJ.grid(row=2, column=1, padx=10, pady=5, sticky="new")
 
     label_Data_abertura_ = ctk.CTkLabel(FrameDadosEmpresas, text="Data abertura (dd/mm/aaaa)")
     entry_Data_abertura_ = ctk.CTkEntry(FrameDadosEmpresas)
 
-    label_Data_abertura_.grid(row=1, column=4, padx=10, pady=5, sticky="w")
-    entry_Data_abertura_.grid(row=1, column=5, padx=10, pady=5, sticky="new")
-    entry_Data_abertura_.bind('<FocusOut>', lambda event: verificar_entrada_data(event, entry_Data_abertura_))
-
-    label_Identificao = ctk.CTkLabel(FrameDadosEmpresas, text="Identificação")
-    entry_Identificao = ctk.CTkEntry(FrameDadosEmpresas)
-    
-    label_Identificao.grid(row=0, column=4, padx=10, pady=5, sticky="w")
-    entry_Identificao.grid(row=0, column=5, padx=10, pady=5, sticky="new")
-    entry_Identificao.configure(state='disabled')
-    
+    label_Data_abertura_.grid(row=2, column=4, padx=10, pady=5, sticky="w")
+    entry_Data_abertura_.grid(row=2, column=5, padx=10, pady=5, sticky="new")
+    entry_Data_abertura_.bind('<FocusOut>', lambda event: verificar_entrada_data(event, entry_Data_abertura_)) 
 
     label_Tributao = ctk.CTkLabel(FrameDadosEmpresas, text="Tributação")
     entry_Tributao = ctk.CTkEntry(FrameDadosEmpresas)
-
-    label_Tributao.grid(row=2, column=0, padx=10, pady=5, sticky="w")
-    entry_Tributao.grid(row=2, column=1, padx=10, pady=5, sticky="new")
+    label_Tributao.grid(row=3, column=0, padx=10, pady=5, sticky="w")
+    entry_Tributao.grid(row=3, column=1, padx=10, pady=5, sticky="new")
 
     label_E_mail = ctk.CTkLabel(FrameDadosEmpresas, text="E-mail")
     entry_E_mail = ctk.CTkEntry(FrameDadosEmpresas)
-
-    label_E_mail.grid(row=2, column=2, padx=10, pady=5, sticky="w")
-    entry_E_mail.grid(row=2, column=3,columnspan=3, padx=10, pady=5, sticky="new")
+    label_E_mail.grid(row=3, column=2, padx=10, pady=5, sticky="w")
+    entry_E_mail.grid(row=3, column=3,columnspan=3, padx=10, pady=5, sticky="new")
 
     label_Endereo = ctk.CTkLabel(FrameDadosEmpresas, text="Endereço")
     entry_Endereo = ctk.CTkEntry(FrameDadosEmpresas)
+    #label_Endereo.grid(row=4, column=0, padx=10, pady=5, sticky="w")
+    #entry_Endereo.grid(row=4, column=1,columnspan=5, padx=10, pady=5, sticky="new")
+  
+    # Defina a fonte sublinhada
+    underline_font = ctk.CTkFont(family="Helvetica", size=12, underline=True)
 
-    label_Endereo.grid(row=3, column=0, padx=10, pady=5, sticky="w")
-    entry_Endereo.grid(row=3, column=1,columnspan=5, padx=10, pady=5, sticky="new")
+    label_Celular = ctk.CTkLabel(FrameDadosEmpresas, text="Celular/Whatsapp")
+    entry_Celular = ctk.CTkEntry(FrameDadosEmpresas)
+    label_Celular.grid(row=4, column=0, padx=10, pady=5, sticky="w")
+    entry_Celular.grid(row=4, column=1, padx=10, pady=5, sticky="new")
+
+
+    label_cep = ctk.CTkLabel(FrameDadosEmpresas, text="CEP")
+    entry_cep = ctk.CTkEntry(FrameDadosEmpresas)
+    label_cep.grid(row=5, column=0, padx=10, pady=5, sticky="w")
+    entry_cep.grid(row=5, column=1, padx=10, pady=5, sticky="new")
+
+    label_rua = ctk.CTkLabel(FrameDadosEmpresas, text="Rua")
+    entry_rua = ctk.CTkEntry(FrameDadosEmpresas)
+    label_rua.grid(row=5, column=2, padx=10, pady=5, sticky="w")
+    entry_rua.grid(row=5, column=3, padx=10,columnspan=3, pady=5, sticky="new")
+
+    label_numero = ctk.CTkLabel(FrameDadosEmpresas, text="Nº")
+    entry_numero = ctk.CTkEntry(FrameDadosEmpresas)
+    label_numero.grid(row=6, column=0, padx=10, pady=5, sticky="w")
+    entry_numero.grid(row=6, column=1, padx=10, pady=5, sticky="new")
+
+    label_complemento = ctk.CTkLabel(FrameDadosEmpresas, text="Complemento")
+    entry_complemento = ctk.CTkEntry(FrameDadosEmpresas)
+    label_complemento.grid(row=6, column=2, padx=10, pady=5, sticky="w")
+    entry_complemento.grid(row=6, column=3,columnspan=3 , padx=10, pady=5, sticky="new")
+
+    label_bairro = ctk.CTkLabel(FrameDadosEmpresas, text="Bairro")
+    entry_bairro = ctk.CTkEntry(FrameDadosEmpresas)
+    label_bairro.grid(row=7, column=0, padx=10, pady=5, sticky="w")
+    entry_bairro.grid(row=7, column=1, padx=10, pady=5, sticky="new")
+
+    label_cidade = ctk.CTkLabel(FrameDadosEmpresas, text="Cidade")
+    entry_cidade = ctk.CTkEntry(FrameDadosEmpresas)
+    label_cidade.grid(row=7, column=2, padx=10, pady=5, sticky="w")
+    entry_cidade.grid(row=7, column=3, padx=10, pady=5, sticky="new")
+
+
+    siglas_estados = [
+        "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS",
+        "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC",
+        "SP", "SE", "TO"
+    ]
+    label_Estado = ctk.CTkLabel(FrameDadosEmpresas, text="Estado")
+    entry_Estado = ctk.CTkComboBox(FrameDadosEmpresas,values= siglas_estados)
+
+    label_Estado.grid(row=7, column=4, padx=10, pady=5, sticky="w")
+    entry_Estado.grid(row=7, column=5, padx=10, pady=5, sticky="new")
+
 
     FrameGerais = ctk.CTkFrame(FrameEmpresas, border_width=largura_borda, border_color=cor_de_borda)
-    FrameGerais.grid(row=3, column=0, sticky="new")
+    FrameGerais.grid(row=4, column=0, sticky="new")
    
     ## Dados Gerias de Acessos 
     FrameAcessosEprefeituras = ctk.CTkFrame(FrameGerais, border_width=largura_borda, border_color=cor_de_borda)
@@ -707,8 +771,6 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
 
     label_Homologado___Sindicato.grid(row=0, column=1, padx=10, pady=5, sticky="w")
     entry_Homologado___Sindicato.grid(row=1, column=1, padx=10, pady=5, sticky="nsew")
-
-
     label_Vencimento_ = ctk.CTkLabel(FrameParceiras, text="Vencimento (dd/mm/aaaa)")
     entry_Vencimento_ = ctk.CTkEntry(FrameParceiras)
 
@@ -717,7 +779,66 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
 
     entry_Vencimento_.bind('<FocusOut>', lambda event: verificar_entrada_data(event, entry_Vencimento_))
     
+  
 
+
+    Viewer.add("Informações Complementares")
+    Viewer.tab("Informações Complementares").grid_columnconfigure(0, weight=1) 
+
+    #### Interface para empresa parceira
+    
+    FrameDadosParceira = ctk.CTkFrame(Viewer.tab("Informações Complementares"), border_width=largura_borda, border_color=cor_de_borda)
+    Viewer.tab("Informações Complementares").grid_rowconfigure(0, weight=1)
+    Viewer.tab("Informações Complementares").grid_columnconfigure(0, weight=1)
+
+    FrameDadosParceira.grid(row=0, column=0,columnspan=3, sticky="nsew", padx=(1,0), pady=(5,10))
+
+    label_NomePF = ctk.CTkLabel(FrameDadosParceira, text="Nome")
+    entry_NomePF = ctk.CTkEntry(FrameDadosParceira)
+    label_NomePF.grid(row=0, column=0, padx=10, pady=5, sticky="w")
+    entry_NomePF.grid(row=0, column=1, padx=10, pady=5, sticky="nsew")
+
+    label_NomePF = ctk.CTkLabel(FrameDadosParceira, text="Sobrenome")
+    entry_NomePF = ctk.CTkEntry(FrameDadosParceira)
+    label_NomePF.grid(row=0, column=2, padx=10, pady=5, sticky="w")
+    entry_NomePF.grid(row=0, column=3, padx=10, pady=5, sticky="nsew")
+
+    label_dtNascimento = ctk.CTkLabel(FrameDadosParceira, text="Data de Nascimento")
+    entry_dtNascimento = ctk.CTkEntry(FrameDadosParceira)
+    label_dtNascimento.grid(row=0, column=4, padx=10, pady=5, sticky="w")
+    entry_dtNascimento.grid(row=0, column=5, padx=10, pady=5, sticky="nsew")
+
+    label_Mae = ctk.CTkLabel(FrameDadosParceira, text="Nome da Mãe")
+    entry_Mae = ctk.CTkEntry(FrameDadosParceira)
+    label_Mae.grid(row=1, column=0, padx=10, pady=5, sticky="w")
+    entry_Mae.grid(row=1, column=1, padx=10, pady=5, sticky="nsew")
+
+    label_EstadoCivil = ctk.CTkLabel(FrameDadosParceira, text="Estado Civil")
+    entry_EstadoCivil = ctk.CTkEntry(FrameDadosParceira)
+    label_EstadoCivil.grid(row=1, column=2, padx=10, pady=5, sticky="w")
+    entry_EstadoCivil.grid(row=1, column=3, padx=10, pady=5, sticky="nsew")
+
+    label_Genero = ctk.CTkLabel(FrameDadosParceira, text="Gênero")
+    entry_Genero = ctk.CTkEntry(FrameDadosParceira)
+    label_Genero.grid(row=1, column=4, padx=10, pady=5, sticky="w")
+    entry_Genero.grid(row=1, column=5, padx=10, pady=5, sticky="nsew")
+
+    label_RG = ctk.CTkLabel(FrameDadosParceira, text="Nº RG")
+    entry_RG = ctk.CTkEntry(FrameDadosParceira)
+    label_RG.grid(row=2, column=0, padx=10, pady=5, sticky="w")
+    entry_RG.grid(row=2, column=1, padx=10, pady=5, sticky="nsew")
+
+    label_RGOrgao = ctk.CTkLabel(FrameDadosParceira, text="Órgão Expedidor")
+    entry_RGOrgao = ctk.CTkEntry(FrameDadosParceira)
+    label_RGOrgao.grid(row=2, column=2, padx=10, pady=5, sticky="w")
+    entry_RGOrgao.grid(row=2, column=3, padx=10, pady=5, sticky="nsew")
+
+    label_RGData = ctk.CTkLabel(FrameDadosParceira, text="Data Expedição")
+    entry_RGData = ctk.CTkEntry(FrameDadosParceira)
+    label_RGData.grid(row=2, column=4, padx=10, pady=5, sticky="w")
+    entry_RGData.grid(row=2, column=5, padx=10, pady=5, sticky="nsew")
+
+    #### Interface para empresa contratante 
     TreeViewParceiras = ttk.Treeview(FrameParceiras, columns=("#","Nome","Pendências","Situação"), show='headings')
     TreeViewParceiras.grid(row=2, column=0,columnspan=3, sticky="nsew", padx=(1,0), pady=(5,10))
     TreeViewParceiras.bind('<<TreeviewSelect>>',ativarbotãoEditar)

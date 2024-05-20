@@ -357,8 +357,18 @@ def pegar_dados_para_envio(tipo):
     CamposBD += 'dpto_pessoal_login,'
 
     #75 dpto_pessoal_senha- varchar(255)
-    ItensParaBD += f"'{entry_senha_sindicalizada.get()}'" 
-    CamposBD += 'dpto_pessoal_senha'
+    ItensParaBD += f"'{entry_senha_sindicalizada.get()}'¬¬" 
+    CamposBD += 'dpto_pessoal_senha,'
+
+    agora = datetime.now()
+    if tipo =="Edição":
+        ItensParaBD += f"'{agora}'"
+        CamposBD +='updated_at'
+    else:    
+        ItensParaBD += f"'{agora}'¬¬"
+        CamposBD +='created_at,'
+        ItensParaBD += f"'{agora}'"
+        CamposBD +='updated_at'
 
     # Transforma a string em uma lista de campos separados por vírgula
     CamposBD_List = CamposBD.split(',')
