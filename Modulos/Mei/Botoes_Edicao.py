@@ -286,14 +286,17 @@ def Importardados(idcliente,Dadosparateladeedição):
         nomemei=  dbm.GetnameMEI(Listadedados[1])
         
         frame_dados_mei[0].configure(text=f"CONTRATANTE: {nomemei[0]}")
-        TreeViewParceiras.grid_remove()
-        scrollbarParceiras.grid_remove()
-        bt_Editar_MEI_Parceiras.grid_remove()
+        Framelistaparceiras.grid_remove()
+        #TreeViewParceiras.grid_remove()
+        #scrollbarParceiras.grid_remove()
+        #bt_Editar_MEI_Parceiras.grid_remove()
     else:
         frame_dados_mei[0].configure(text=f"")
-        TreeViewParceiras.grid(row=2, column=0,columnspan=3, sticky="nsew", padx=(1,0), pady=(5,10))
-        scrollbarParceiras.grid(row=2, column=4, padx=(0,10), pady=(5,10), sticky="nsew")
-        bt_Editar_MEI_Parceiras.grid(row=3, column=0,columnspan=3, sticky="n", padx=(1,0), pady=(5,10))
+        Framelistaparceiras.grid(row=0, column=0,pady=5, padx=10, sticky="new")
+
+        #TreeViewParceiras.grid(row=2, column=0,columnspan=3, sticky="nsew", padx=(5,0), pady=(5,10))
+        #scrollbarParceiras.grid(row=2, column=4, padx=(0,10), pady=(5,10), sticky="nsew")
+        #bt_Editar_MEI_Parceiras.grid(row=3, column=0,columnspan=3, sticky="n", padx=(1,0), pady=(5,10))
 
 
     importar_dados_treeview(TreeviewDas,Lista_de_DAS)
@@ -425,7 +428,7 @@ def adicição_dados_DASN(operacao):
 
 
 def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho_Logo_Rem):
-    global frame_dados_mei,entry_Nome,entry_Situao,entry_Identificao,entry_CNPJ,entry_Tributao,entry_Data_abertura_,entry_Prefeitura,entry_Login,entry_Senha,entry_Pendncia_de_Recolhimentos,entry_Entrega_de_DAS_Mensal,entry_E_mail,entry_Pendncias,entry_Observaes,entry_CPF,entry_Cdigo_de_Acesso,entry_Senha_GOV,entry_Nvel_GOV,entry_Endereo,entry_Inscrio_Estadual,entry_Inscrio_Municipal,entry_Certificado_Digital,entry_Modelo_Datavix,entry_Homologado___Sindicato,entry_Vencimento_,entry_Faturamento,TreeViewParceiras,scrollbarParceiras,bt_Editar_MEI_Parceiras,TabViewGlobal,TreeviewDas,entry_Ano_dasn,entry_Faturamento,entry_Observaes_dasn,FrameDas
+    global frame_dados_mei,entry_Nome,entry_Situao,entry_Identificao,entry_CNPJ,entry_Tributao,entry_Data_abertura_,entry_Prefeitura,entry_Login,entry_Senha,entry_Pendncia_de_Recolhimentos,entry_Entrega_de_DAS_Mensal,entry_E_mail,entry_Pendncias,entry_Observaes,entry_CPF,entry_Cdigo_de_Acesso,entry_Senha_GOV,entry_Nvel_GOV,entry_Endereo,entry_Inscrio_Estadual,entry_Inscrio_Municipal,entry_Certificado_Digital,entry_Modelo_Datavix,entry_Homologado___Sindicato,entry_Vencimento_,entry_Faturamento,TreeViewParceiras,scrollbarParceiras,bt_Editar_MEI_Parceiras,TabViewGlobal,TreeviewDas,entry_Ano_dasn,entry_Faturamento,entry_Observaes_dasn,FrameDas,Framelistaparceiras,FrameDadosContratoParceira
     TabViewGlobal = Viewer
     
     def dadosparceira(*args):
@@ -759,88 +762,17 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     Viewer.tab("Contrato de Parceria").grid_rowconfigure(0, weight=1)
     Viewer.tab("Contrato de Parceria").grid_columnconfigure(0, weight=1)
 
-    label_Modelo_Datavix = ctk.CTkLabel(FrameParceiras, text="Modelo Datavix")
-    entry_Modelo_Datavix = ctk.CTkEntry(FrameParceiras)
-
-    label_Modelo_Datavix.grid(row=0, column=0, padx=10, pady=5, sticky="w")
-    entry_Modelo_Datavix.grid(row=1, column=0, padx=10, pady=5, sticky="nsew")
-
-
-    label_Homologado___Sindicato = ctk.CTkLabel(FrameParceiras, text="Homologado - Sindicato")
-    entry_Homologado___Sindicato = ctk.CTkEntry(FrameParceiras)
-
-    label_Homologado___Sindicato.grid(row=0, column=1, padx=10, pady=5, sticky="w")
-    entry_Homologado___Sindicato.grid(row=1, column=1, padx=10, pady=5, sticky="nsew")
-    label_Vencimento_ = ctk.CTkLabel(FrameParceiras, text="Vencimento (dd/mm/aaaa)")
-    entry_Vencimento_ = ctk.CTkEntry(FrameParceiras)
-
-    label_Vencimento_.grid(row=0, column=2, padx=10, pady=5, sticky="w")
-    entry_Vencimento_.grid(row=1, column=2, padx=10, pady=5, sticky="nsew")
-
-    entry_Vencimento_.bind('<FocusOut>', lambda event: verificar_entrada_data(event, entry_Vencimento_))
+    Framelistaparceiras = ctk.CTkFrame(FrameParceiras, border_width=largura_borda, border_color=cor_de_borda)
+    Framelistaparceiras.grid(row=0, column=0,pady=5, padx=10, sticky="new")
     
-  
+    label_Homologado___Sindicato = ctk.CTkLabel(Framelistaparceiras, text="Parceiras")
 
+    label_Homologado___Sindicato.grid(row=0, column=0,columnspan=4, padx=10, pady=5, sticky="nsew")
 
-    Viewer.add("Informações Complementares")
-    Viewer.tab("Informações Complementares").grid_columnconfigure(0, weight=1) 
-
-    #### Interface para empresa parceira
     
-    FrameDadosParceira = ctk.CTkFrame(Viewer.tab("Informações Complementares"), border_width=largura_borda, border_color=cor_de_borda)
-    Viewer.tab("Informações Complementares").grid_rowconfigure(0, weight=1)
-    Viewer.tab("Informações Complementares").grid_columnconfigure(0, weight=1)
-
-    FrameDadosParceira.grid(row=0, column=0,columnspan=3, sticky="nsew", padx=(1,0), pady=(5,10))
-
-    label_NomePF = ctk.CTkLabel(FrameDadosParceira, text="Nome")
-    entry_NomePF = ctk.CTkEntry(FrameDadosParceira)
-    label_NomePF.grid(row=0, column=0, padx=10, pady=5, sticky="w")
-    entry_NomePF.grid(row=0, column=1, padx=10, pady=5, sticky="nsew")
-
-    label_NomePF = ctk.CTkLabel(FrameDadosParceira, text="Sobrenome")
-    entry_NomePF = ctk.CTkEntry(FrameDadosParceira)
-    label_NomePF.grid(row=0, column=2, padx=10, pady=5, sticky="w")
-    entry_NomePF.grid(row=0, column=3, padx=10, pady=5, sticky="nsew")
-
-    label_dtNascimento = ctk.CTkLabel(FrameDadosParceira, text="Data de Nascimento")
-    entry_dtNascimento = ctk.CTkEntry(FrameDadosParceira)
-    label_dtNascimento.grid(row=0, column=4, padx=10, pady=5, sticky="w")
-    entry_dtNascimento.grid(row=0, column=5, padx=10, pady=5, sticky="nsew")
-
-    label_Mae = ctk.CTkLabel(FrameDadosParceira, text="Nome da Mãe")
-    entry_Mae = ctk.CTkEntry(FrameDadosParceira)
-    label_Mae.grid(row=1, column=0, padx=10, pady=5, sticky="w")
-    entry_Mae.grid(row=1, column=1, padx=10, pady=5, sticky="nsew")
-
-    label_EstadoCivil = ctk.CTkLabel(FrameDadosParceira, text="Estado Civil")
-    entry_EstadoCivil = ctk.CTkEntry(FrameDadosParceira)
-    label_EstadoCivil.grid(row=1, column=2, padx=10, pady=5, sticky="w")
-    entry_EstadoCivil.grid(row=1, column=3, padx=10, pady=5, sticky="nsew")
-
-    label_Genero = ctk.CTkLabel(FrameDadosParceira, text="Gênero")
-    entry_Genero = ctk.CTkEntry(FrameDadosParceira)
-    label_Genero.grid(row=1, column=4, padx=10, pady=5, sticky="w")
-    entry_Genero.grid(row=1, column=5, padx=10, pady=5, sticky="nsew")
-
-    label_RG = ctk.CTkLabel(FrameDadosParceira, text="Nº RG")
-    entry_RG = ctk.CTkEntry(FrameDadosParceira)
-    label_RG.grid(row=2, column=0, padx=10, pady=5, sticky="w")
-    entry_RG.grid(row=2, column=1, padx=10, pady=5, sticky="nsew")
-
-    label_RGOrgao = ctk.CTkLabel(FrameDadosParceira, text="Órgão Expedidor")
-    entry_RGOrgao = ctk.CTkEntry(FrameDadosParceira)
-    label_RGOrgao.grid(row=2, column=2, padx=10, pady=5, sticky="w")
-    entry_RGOrgao.grid(row=2, column=3, padx=10, pady=5, sticky="nsew")
-
-    label_RGData = ctk.CTkLabel(FrameDadosParceira, text="Data Expedição")
-    entry_RGData = ctk.CTkEntry(FrameDadosParceira)
-    label_RGData.grid(row=2, column=4, padx=10, pady=5, sticky="w")
-    entry_RGData.grid(row=2, column=5, padx=10, pady=5, sticky="nsew")
-
     #### Interface para empresa contratante 
-    TreeViewParceiras = ttk.Treeview(FrameParceiras, columns=("#","Nome","Pendências","Situação"), show='headings')
-    TreeViewParceiras.grid(row=2, column=0,columnspan=3, sticky="nsew", padx=(1,0), pady=(5,10))
+    TreeViewParceiras = ttk.Treeview(Framelistaparceiras, columns=("#","Nome","Pendências","Situação"), show='headings')
+    TreeViewParceiras.grid(row=2, column=0,columnspan=3, sticky="new", padx=(5,0), pady=(5,10))
     TreeViewParceiras.bind('<<TreeviewSelect>>',ativarbotãoEditar)
     TreeViewParceiras.bind('<Double-1>',dadosparceira)
     # Define o as colunas
@@ -857,14 +789,51 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
 
    
     # Adicionar barra de rolagem vertical ao Treeview
-    scrollbarParceiras = ctk.CTkScrollbar(FrameParceiras, command=TreeViewParceiras.yview,height=100)
+    scrollbarParceiras = ctk.CTkScrollbar(Framelistaparceiras, command=TreeViewParceiras.yview)
     scrollbarParceiras.grid(row=2, column=4, padx=(0,10), pady=(5,10), sticky="nsew")
     TreeViewParceiras.configure(yscrollcommand=scrollbarParceiras.set)    
 
     logo_editar = PhotoImage(file=Caminho_Logo_Edit).subsample(25, 25)
-    bt_Editar_MEI_Parceiras = ctk.CTkButton(master=FrameParceiras,image=logo_editar, text="Editar",command=lambda: Func_Mei.editar_MEI(TreeViewParceiras,tela_Mae))
-    bt_Editar_MEI_Parceiras.grid(row=3, column=0,columnspan=3, sticky="nsew", padx=(1,0), pady=(5,10))
+    bt_Editar_MEI_Parceiras = ctk.CTkButton(master=Framelistaparceiras,image=logo_editar, text="Editar",command=lambda: Func_Mei.editar_MEI(TreeViewParceiras,tela_Mae))
+    bt_Editar_MEI_Parceiras.grid(row=3, column=0,columnspan=3, sticky="new", padx=(1,0), pady=(5,10))
     bt_Editar_MEI_Parceiras.configure(state='disabled') 
+
+    
+    ### Frame dados complemetares
+    
+    
+    
+    ##Frame da Homologação 
+    
+    FrameDadoshomologação = ctk.CTkFrame(FrameParceiras, border_width=largura_borda, border_color=cor_de_borda)
+    FrameDadoshomologação.grid(row=1, column=0, sticky="n", padx=(5,5), pady=(5,10))
+    
+    label_Modelo_Datavix = ctk.CTkLabel(FrameDadoshomologação, text="Modelo Datavix")
+    entry_Modelo_Datavix = ctk.CTkEntry(FrameDadoshomologação)
+
+    label_Modelo_Datavix.grid(row=0, column=0, padx=10, pady=5, sticky="w")
+    entry_Modelo_Datavix.grid(row=1, column=0, padx=10, pady=5, sticky="nsew")
+
+
+    label_Homologado___Sindicato = ctk.CTkLabel(FrameDadoshomologação, text="Homologado - Sindicato")
+    entry_Homologado___Sindicato = ctk.CTkEntry(FrameDadoshomologação)
+
+    label_Homologado___Sindicato.grid(row=0, column=1, padx=10, pady=5, sticky="w")
+    entry_Homologado___Sindicato.grid(row=1, column=1, padx=10, pady=5, sticky="nsew")
+    
+    label_Vencimento_ = ctk.CTkLabel(FrameDadoshomologação, text="Vencimento (dd/mm/aaaa)")
+    entry_Vencimento_ = ctk.CTkEntry(FrameDadoshomologação)
+    label_Vencimento_.grid(row=0, column=2, padx=10, pady=5, sticky="w")
+    entry_Vencimento_.grid(row=1, column=2, padx=10, pady=5, sticky="nsew")
+
+    entry_Vencimento_.bind('<FocusOut>', lambda event: verificar_entrada_data(event, entry_Vencimento_))
+    
+  
+
+
+    #### Interface para empresa parceira
+    
+
 
 #DASN
    
@@ -928,3 +897,220 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     scrollbar.grid(row=2, column=4, padx=(0,10), pady=(5,10), sticky="nsew")
     TreeviewDas.configure(yscrollcommand=scrollbar.set)    
  
+ 
+ 
+ #### Dados compelementares 
+    ScrollComplementar = ctk.CTkScrollableFrame(Viewer.tab("Outras Informações"), border_width=largura_borda, border_color=cor_de_borda,height=450)
+    ScrollComplementar.pack(side=TOP, fill = BOTH)
+    #ScrollFrameEmpresas.grid(row=0, column=0, sticky="n")
+    Viewer.tab("Outras Informações").grid_rowconfigure(0, weight=1)
+    Viewer.tab("Outras Informações").grid_columnconfigure(0, weight=1)
+
+
+    FramedadosComp = ctk.CTkFrame(ScrollComplementar, border_width=largura_borda, border_color=cor_de_borda)                                  
+    FramedadosComp.grid(row=0, column=0, sticky="n")
+    ScrollComplementar.grid_rowconfigure(0, weight=1)
+    ScrollComplementar.grid_columnconfigure(0, weight=1)
+    
+    #Frame Dados pessoais
+    FrameDadosParceira = ctk.CTkFrame(FramedadosComp, border_width=largura_borda, border_color=cor_de_borda)
+    FrameDadosParceira.grid(row=0, column=0, sticky="nsew", padx=(5,5), pady=(5,10))
+    
+    labelDadosPessoais = ctk.CTkLabel(FrameDadosParceira, text="Dados Pessoais")
+    labelDadosPessoais.grid(row=0, column=0,columnspan=5, padx=10, pady=5, sticky="nsew")
+    
+    label_NomePF = ctk.CTkLabel(FrameDadosParceira, text="Nome")
+    entry_NomePF = ctk.CTkEntry(FrameDadosParceira)
+    label_NomePF.grid(row=1, column=0, padx=10, pady=5, sticky="w")
+    entry_NomePF.grid(row=1, column=1, padx=10, pady=5, sticky="nsew")
+
+    label_NomePF = ctk.CTkLabel(FrameDadosParceira, text="Sobrenome")
+    entry_NomePF = ctk.CTkEntry(FrameDadosParceira)
+    label_NomePF.grid(row=1, column=2, padx=10, pady=5, sticky="w")
+    entry_NomePF.grid(row=1, column=3, padx=10, pady=5, sticky="nsew")
+
+    label_Mae = ctk.CTkLabel(FrameDadosParceira, text="Nome da Mãe")
+    entry_Mae = ctk.CTkEntry(FrameDadosParceira)
+    label_Mae.grid(row=2, column=0, padx=10, pady=5, sticky="w")
+    entry_Mae.grid(row=2, column=1, padx=10, pady=5, sticky="nsew")
+
+    label_EstadoCivil = ctk.CTkLabel(FrameDadosParceira, text="Estado Civil")
+    entry_EstadoCivil = ctk.CTkEntry(FrameDadosParceira)
+    label_EstadoCivil.grid(row=2, column=2, padx=10, pady=5, sticky="w")
+    entry_EstadoCivil.grid(row=2, column=3, padx=10, pady=5, sticky="nsew")
+
+    
+    label_dtNascimento = ctk.CTkLabel(FrameDadosParceira, text="Data de Nascimento")
+    entry_dtNascimento = ctk.CTkEntry(FrameDadosParceira)
+    label_dtNascimento.grid(row=4, column=0, padx=10, pady=5, sticky="w")
+    entry_dtNascimento.grid(row=4, column=1, padx=10, pady=5, sticky="nsew")
+
+    label_Genero = ctk.CTkLabel(FrameDadosParceira, text="Gênero")
+    entry_Genero = ctk.CTkEntry(FrameDadosParceira)
+    label_Genero.grid(row=4, column=2, padx=10, pady=5, sticky="w")
+    entry_Genero.grid(row=4, column=3, padx=10, pady=5, sticky="nsew")
+
+    #Frame rg
+    FrameRG = ctk.CTkFrame(FrameDadosParceira, border_width=largura_borda, border_color=cor_de_borda)
+    FrameRG.grid(row=1, column=4, rowspan=4, sticky="nsew", padx=5, pady=5)
+
+
+    label_RG = ctk.CTkLabel(FrameRG, text="Nº RG")
+    entry_RG = ctk.CTkEntry(FrameRG)
+    label_RG.grid(row=0, column=0, padx=10, pady=5, sticky="w")
+    entry_RG.grid(row=0, column=1, padx=10, pady=5, sticky="nsew")
+
+    label_RGOrgao = ctk.CTkLabel(FrameRG, text="Órgão Expedidor")
+    entry_RGOrgao = ctk.CTkEntry(FrameRG)
+    label_RGOrgao.grid(row=2, column=0, padx=10, pady=5, sticky="w")
+    entry_RGOrgao.grid(row=2, column=1, padx=10, pady=5, sticky="nsew")
+
+    label_RGData = ctk.CTkLabel(FrameRG, text="Data Expedição")
+    entry_RGData = ctk.CTkEntry(FrameRG)
+    label_RGData.grid(row=3, column=0, padx=10, pady=5, sticky="w")
+    entry_RGData.grid(row=3, column=1, padx=10, pady=5, sticky="nsew")
+    
+    #Frame Dados pessoais
+    
+    FrameDadosContratoParceira = ctk.CTkFrame(FramedadosComp, border_width=largura_borda, border_color=cor_de_borda)
+    FrameDadosContratoParceira.grid(row=1, column=0, sticky="nsew", padx=(5,5), pady=(5,10))
+   
+    labelTitulo = ctk.CTkLabel(FrameDadosParceira, text="Dados Contrato")
+    labelTitulo.grid(row=3, column=1, padx=10, pady=5, sticky="nsew") 
+    
+    #Data de contrato     
+    
+    #Inicio da parcceria 
+    label_DATA_INICIAL_PARCEIRA = ctk.CTkLabel(FrameDadosContratoParceira, text="Data Incio Parceria")
+    entry_DATA_INICIAL_PARCEIRA = ctk.CTkEntry(FrameDadosContratoParceira)
+    label_DATA_INICIAL_PARCEIRA.grid(row=4, column=0, padx=10, pady=5, sticky="w")
+    entry_DATA_INICIAL_PARCEIRA.grid(row=4, column=1, padx=10, pady=5, sticky="nsew") 
+                      
+    #Cnae profissional parceiro ####-#/##  
+    label_CNAE = ctk.CTkLabel(FrameDadosContratoParceira, text="CNAE (Ativdade da parceira)")
+    entry_CNAE = ctk.CTkEntry(FrameDadosContratoParceira)
+    label_CNAE.grid(row=4, column=2, padx=10, pady=5, sticky="w")
+    entry_CNAE.grid(row=4, column=3, padx=10, pady=5, sticky="nsew")
+    
+    ## Servicos Frame
+    FrameServicos = ctk.CTkFrame(FrameDadosContratoParceira, border_width=largura_borda, border_color=cor_de_borda)
+    FrameServicos.grid(row=5, column=0, columnspan=4, padx=10, pady=5, sticky="nsew")
+
+    #Selecionar tipo Repasse - Valor ou percentual
+    def SelecaoMenu(choice):
+        if choice == 'Percentual':
+            label_REPASSE_SALAO.configure(text="Percentual Salão")
+            label_REPASSE_PROFISSIONAL.configure(text="Percentual Profissional")
+        if choice == 'Valor':
+            label_REPASSE_SALAO.configure(text="Valor Salão")
+            label_REPASSE_PROFISSIONAL.configure(text="Valor Profissional")
+        
+    label_TP_REPASSE = ctk.CTkLabel(FrameServicos, text="Selecionar repasse")
+    label_TP_REPASSE.grid(row=5, column=0, padx=10, sticky="w")
+   
+    optionmenu_var = ctk.StringVar(value="Percentual")
+    optionmenu = ctk.CTkOptionMenu(FrameServicos,values=["Percentual", "Valor"],
+                                            command=SelecaoMenu,
+                                            variable=optionmenu_var)
+    optionmenu.grid(row=6, column=0, padx=10, pady=5, sticky="new")
+    
+    
+    #Servico , Percentual , Percentual profissional parceiro
+    
+    label_NOME_SERVICO = ctk.CTkLabel(FrameServicos, text="Serviço")
+    entry_NOME_SERVICO = ctk.CTkEntry(FrameServicos)
+    label_NOME_SERVICO.grid(row=7, column=0, padx=10, sticky="w")
+    entry_NOME_SERVICO.grid(row=8, column=0, padx=10, pady=5, sticky="new") 
+    
+    label_REPASSE_SALAO = ctk.CTkLabel(FrameServicos, text="Percentual Salão")
+    entry_REPASSE_SALAO = ctk.CTkEntry(FrameServicos)
+    label_REPASSE_SALAO.grid(row=9, column=0, padx=10, sticky="w")
+    entry_REPASSE_SALAO.grid(row=10, column=0, padx=10, pady=5, sticky="new") 
+    
+    label_REPASSE_PROFISSIONAL = ctk.CTkLabel(FrameServicos, text="Percentual Profissional")
+    entry_REPASSE_PROFISSIONAL = ctk.CTkEntry(FrameServicos)
+    label_REPASSE_PROFISSIONAL.grid(row=11, column=0, padx=10, sticky="w")
+    entry_REPASSE_PROFISSIONAL.grid(row=12, column=0, padx=10, pady=5, sticky="new") 
+    
+    logo_add = PhotoImage(file=Caminho_Logo_Add).subsample(25, 25)
+    bt_add = ctk.CTkButton(FrameServicos,image=logo_add, text="Adicionar",command=1)
+    bt_add.grid(row=13, column=0, padx=10, pady=5, sticky="new")
+
+    def ativarbotãoEditar(*args):
+        selecao = TreeViewParceiras.selection()
+
+        if selecao:
+            valor = bt_Editar_MEI_Parceiras.cget("state")  # Obtém o estado atual do botão
+            if valor == "disabled":   
+                bt_Editar_MEI_Parceiras.configure(state='normal')  
+        else:
+            bt_Editar_MEI_Parceiras.configure(state='disabled') 
+    
+    TreeViewServicos = ttk.Treeview(FrameServicos, columns=("Tipo","Serviço","Salão","Profissional"), show='headings',height=14)
+    TreeViewServicos.grid(row=6, rowspan=8,column=1,columnspan=5, sticky="new", padx=(5,5), pady=(5,5))
+    TreeViewServicos.bind('<<TreeviewSelect>>',ativarbotãoEditar)
+    # Define o as colunas
+    TreeViewServicos.heading("Tipo", text="Tipo")
+    TreeViewServicos.heading("Serviço", text="Serviço")
+    TreeViewServicos.heading("Salão", text="Salão")
+    TreeViewServicos.heading("Profissional", text="Profissional")
+    
+    # Define o tamanho das colunas em pixels
+    TreeViewServicos.column("Tipo", width=150)  # 
+    TreeViewServicos.column("Serviço", width=150)  # 
+    TreeViewServicos.column("Salão", width=150)  # 
+    TreeViewServicos.column("Profissional", width=150)  # 
+
+   
+    # Adicionar barra de rolagem vertical ao Treeview
+    scrollbarServicos = ctk.CTkScrollbar(FrameServicos, command=TreeViewServicos.yview)
+    scrollbarServicos.grid(row=6, rowspan=8, column=6, padx=(0,10), pady=(5,10), sticky="nsew")
+    TreeViewServicos.configure(yscrollcommand=scrollbarParceiras.set)   
+    
+    logo_excluir = PhotoImage(file=Caminho_Logo_Rem).subsample(25, 25)
+    bt_Excluir = ctk.CTkButton(FrameServicos,image=logo_excluir, text="Excluir",command=2)
+    bt_Excluir.grid(row=5, column=5, columnspan=2, padx=10, pady=5, sticky="new")
+    bt_Excluir.configure(state='disabled')
+    
+    
+    #Responsalbel pelo recolhimentos
+    label_repasse = ctk.CTkLabel(FrameDadosContratoParceira, text="Responsavel pelo recolhimento")
+    entry_repasse = ctk.CTkEntry(FrameDadosContratoParceira)
+    label_repasse.grid(row=4, column=0, padx=10, pady=5, sticky="w")
+    entry_repasse.grid(row=4, column=1, padx=10, pady=5, sticky="nsew") 
+    
+    #Horarios disponveis salão 
+    label_repasse = ctk.CTkLabel(FrameDadosContratoParceira, text="Horarios do salão")
+    entry_repasse = ctk.CTkEntry(FrameDadosContratoParceira)
+    label_repasse.grid(row=4, column=0, padx=10, pady=5, sticky="w")
+    entry_repasse.grid(row=4, column=1, padx=10, pady=5, sticky="nsew") 
+    
+    #periodo do repasse (Mensal, quinzenal , semanal , diario)
+    label_repasse = ctk.CTkLabel(FrameDadosContratoParceira, text="Periodo de Repasse")
+    entry_repasse = ctk.CTkEntry(FrameDadosContratoParceira)
+    label_repasse.grid(row=4, column=0, padx=10, pady=5, sticky="w")
+    entry_repasse.grid(row=4, column=1, padx=10, pady=5, sticky="nsew") 
+    
+    #ultizar kit padrao de moveis                       
+    label_repasse = ctk.CTkLabel(FrameDadosContratoParceira, text="Ultizar kit padrão de moveis")
+    entry_repasse = ctk.CTkEntry(FrameDadosContratoParceira)
+    label_repasse.grid(row=4, column=0, padx=10, pady=5, sticky="w")
+    entry_repasse.grid(row=4, column=1, padx=10, pady=5, sticky="nsew") 
+    
+    
+     #Dados contabilidade , cnpj , nome e telefone
+    ##  TOP level
+    label_repasse = ctk.CTkLabel(FrameDadosContratoParceira, text="Remover")
+    entry_repasse = ctk.CTkEntry(FrameDadosContratoParceira)
+    label_repasse.grid(row=4, column=0, padx=10, pady=5, sticky="w")
+    entry_repasse.grid(row=4, column=1, padx=10, pady=5, sticky="nsew") 
+    
+    label_repasse = ctk.CTkLabel(FrameDadosContratoParceira, text="Remover")
+    entry_repasse = ctk.CTkEntry(FrameDadosContratoParceira)
+    label_repasse.grid(row=4, column=0, padx=10, pady=5, sticky="w")
+    entry_repasse.grid(row=4, column=1, padx=10, pady=5, sticky="nsew") 
+    
+    label_repasse = ctk.CTkLabel(FrameDadosContratoParceira, text="Remover")
+    entry_repasse = ctk.CTkEntry(FrameDadosContratoParceira)
+    label_repasse.grid(row=4, column=0, padx=10, pady=5, sticky="w")
+    entry_repasse.grid(row=4, column=1, padx=10, pady=5, sticky="nsew") 

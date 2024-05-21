@@ -89,6 +89,9 @@ def parametrosinicias(frame,Frame_atual):
     tabview.add("DASN")
     tabview.tab("DASN").grid_columnconfigure(0, weight=1)   
     
+    tabview.add("Outras Informações")
+    tabview.tab("Outras Informações").grid_columnconfigure(0, weight=1)   
+     
     Caminho_Logo_Add,Caminho_Logo_Edit,Caminho_Logo_Rem ,Caminho_Logo_Comt,Caminho_Logo_Excel =Imagens_DataBase.baixarimagemPgclientes()  
     
     bts.criarbotoes(tabview,DadosCliente,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho_Logo_Rem)
