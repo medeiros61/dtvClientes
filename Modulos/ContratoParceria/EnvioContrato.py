@@ -41,8 +41,12 @@ try:
     Contrato.click()
 
     time.sleep(2)
-    #Contrato = wait.until(EC.presence_of_element_located((By.XPATH, f'//button[contains(text(), "Continuar")]')))
-    #Contrato.click()
+    Contrato = wait.until(EC.presence_of_element_located((By.XPATH, f'//button[contains(text(), "Continuar")]')))
+    # Rola a página até que o botão esteja visível
+    driver.execute_script("arguments[0].scrollIntoView();", Contrato)
+    
+    # Clica no botão usando JavaScript
+    driver.execute_script("arguments[0].click();", Contrato)
     
     Input_cnpj_salao_parceiro = wait.until(EC.presence_of_element_located((By.ID, 'cnpj_salao_parceiro')))
     Input_cnpj_salao_parceiro.send_keys('1')
