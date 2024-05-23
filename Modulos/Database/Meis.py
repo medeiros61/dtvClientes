@@ -222,7 +222,14 @@ def getLista_De_DASN_toEdit(IDempresaContratante):
             cursor.execute(ConsultaSQL)
             results = cursor.fetchall()
             return results
-        
+
+def getLista_De_Servicos_toEdit(Idmei):
+        with connection.cursor() as cursor:
+            ConsultaSQL = f"SELECT `tipo`,`servico`,`salao`,`parceiro` FROM `py_meis_servicos` WHERE `mei_id` = '{Idmei}'"
+            cursor.execute(ConsultaSQL)
+            results = cursor.fetchall()
+            return results
+                
 def getmeidata_toEdit(IDempresa):
     # Conecta ao banco de dados
     
@@ -324,10 +331,34 @@ def getmeidata_toEdit(IDempresa):
         
             if nova_lista is not None:
                 meis = getParceiras_toEdit(nova_lista[0]) 
-                Lista_de_DAS = getLista_De_DASN_toEdit(nova_lista[1])
-                return nova_lista,Listadeidentificação,data_quary,meis,Lista_de_DAS
+                Lista_de_DAS = getLista_De_DASN_toEdit(nova_lista[0])
+                Lista_de_Servicos = getLista_De_Servicos_toEdit(nova_lista[0])
+                DadosComplemtares = Novosdados_ParaContrato(nova_lista[0])
+                ListaDadosContrato = []  # Lista para armazenar os itens convertidos
+                for item in DadosComplemtares:
+    
+                    if item == None:
+                        item="N/A"
+                    if item == '':
+                        item="N/A"    
+                    #try:
+                    if isinstance(item, date):    
+                            # Formatando a data para "DD/MM/AAAA"
+                            data_formatada = item.strftime("%d/%m/%Y") # Convertendo para datetime
+
+                            #print(data_formatada)  # Saída
+                            item = data_formatada
+                    #except Exception:
+                    #    pass
+
+                    novoitemlistagem = (item)
+                    ListaDadosContrato.append(novoitemlistagem)
+        
+                
+                
+                return nova_lista,Listadeidentificação,data_quary,meis,Lista_de_DAS,Lista_de_Servicos,ListaDadosContrato
             else:
-                return None,None
+                return None,None,None,None,None,None,None,None
 
     finally:
         connection.close() 
@@ -529,3 +560,36 @@ def Query_remove_Data(Query):
             connection.commit()       
     finally:
         connection.close()
+
+
+def Pegar_dados_contabilidade():
+    # Conecta ao banco de dados
+    
+    connect_to_db()
+    
+    try:
+        with connection.cursor() as cursor:
+            ConsultaSQL = f"SELECT `cnpj`,`nome`,`telefone` FROM `py_cont_meis`"
+            cursor.execute(ConsultaSQL)
+            results = cursor.fetchall()
+
+        
+            if results is not None: 
+                return results
+            else:
+                return None
+
+    finally:
+        connection.close()
+
+
+
+
+
+def Novosdados_ParaContrato(idmei):
+
+    with connection.cursor() as cursor:
+            ConsultaSQL = f"SELECT `nome_fantasia`,`razao_social`,`celular`,`cep`,`rua`,`numero`,`complemento`,`bairro`,`cidade`,`estado`,`senha_certificado`,`liberacao_nf`,`nome_pessoa`,`sobrenome`,`nome_mae`,`estado_civil`,`genero`,`data_nascimento`,`numero_rg`,`orgao_rg`,`data_expedicao_rg`,`modelo_contrato`,`data_inicio_parceria`,`data_distrato`,`cnae`,`responsavel_recolhimento`,`valores_recebidos_adm`,`repasse`,`kit_padrao`,`assessoria_contabil`,`nome_assessoria_contabil`,`dias_abertura`,`hora_seg`,`hora_ter`,`hora_qua`,`hora_qui`,`hora_sex`,`hora_sab`,`hora_dom` FROM `meis` WHERE `id` = {idmei}"
+            cursor.execute(ConsultaSQL)
+            results = cursor.fetchone()
+            return results

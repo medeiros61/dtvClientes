@@ -14,11 +14,39 @@ from tkinter import messagebox
 import warnings
 import os
 
+import pyshortcuts
 janela = ctk.CTk()
 
 warnings.simplefilter("ignore")
 
 podelogar = False
+def fazer_atalho():
+
+    def pegarcaminhodaappdata():
+                    # Obter o diretório de dados do usuário (AppData/Roaming)
+                    global appdata_roaming
+                    appdata_roaming = os.getenv('APPDATA')
+                    # Caminho completo para a pasta Datavix
+                    datavix_path = os.path.join('C:\\', 'Datavix')
+                    datavix_path = os.path.join(appdata_roaming, 'Datavix')
+                    # Caminho para a pasta de imagens dentro de Datavix
+                    imagens_path = os.path.join(datavix_path, 'App')
+                    if not os.path.exists(imagens_path):
+                            os.makedirs(imagens_path)
+                    return imagens_path
+    
+    imagens_path = pegarcaminhodaappdata()
+    caminho_exe = os.path.join(imagens_path, "DatavixAPP.exe")
+    # Definir o caminho do executável e do ícone
+    caminho_exe = rf"{caminho_exe}"
+            
+    atalho_path = os.path.join(appdata_roaming, r"\Roaming\Microsoft\Windows\Start Menu\Programs\Datavix App.lnk")
+    
+    icone = caminho_completo_imagem = os.path.join(imagens_path, "logodatavix.ico")
+    pyshortcuts.make_shortcut(caminho_exe, atalho_path, icone)
+
+fazer_atalho()
+
 def TelaLogin():
     def Redefinirsenha():   
         def telacodigo():

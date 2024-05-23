@@ -163,10 +163,189 @@ def pegar_dados_para_envio(tipo):
     ItensParaBD += f"'{DataEnviadaParaOBD(entry_Vencimento_.get())}'¬¬"
     CamposBD +='vencimento,'
 
-    #homologado_sindicato- varchar(255)
-    ItensParaBD += f"'{entry_Homologado___Sindicato.get()}'¬¬"
+    #nome_fantasia VARCHAR(255)
+    ItensParaBD += f"'{entry_Fantasia.get()}'¬¬"
     CamposBD +='nome_fantasia,'
+
+    #razao_social VARCHAR(255)
+    ItensParaBD += f"'{entry_RAZÃO_SOCIAL.get()}'¬¬"
+    CamposBD +='razao_social,'
     
+    #celular VARCHAR(255)
+    ItensParaBD += f"'{entry_Celular.get()}'¬¬"
+    CamposBD +='celular,'
+    
+    #cep VARCHAR(255)
+    ItensParaBD += f"'{entry_cep.get()}'¬¬"
+    CamposBD +='cep,'
+    
+    #rua VARCHAR(255)
+    ItensParaBD += f"'{entry_rua.get()}'¬¬"
+    CamposBD +='rua,'
+    
+    #numero VARCHAR(255)
+    ItensParaBD += f"'{entry_numero.get()}'¬¬"
+    CamposBD +='numero,'
+    
+    #complemento VARCHAR(255)
+    ItensParaBD += f"'{entry_complemento.get()}'¬¬"
+    CamposBD +='complemento,'
+    
+    #bairro VARCHAR(255)
+    ItensParaBD += f"'{entry_bairro.get()}'¬¬"
+    CamposBD +='bairro,'
+    
+    #cidade VARCHAR(255)
+    ItensParaBD += f"'{entry_cidade.get()}'¬¬"
+    CamposBD +='cidade,'
+    
+    #estado VARCHAR(255)
+    ItensParaBD += f"'{entry_Estado.get()}'¬¬"
+    CamposBD +='estado,'
+    
+    #senha_certificado VARCHAR(255)
+    ItensParaBD += f"'{entry_Senha_Certificado_Digital.get()}'¬¬"
+    CamposBD +='senha_certificado,'
+    
+    #liberacao_nf VARCHAR(255)
+    ItensParaBD += f"'{entry_NF_LIBERADA.get()}'¬¬"
+    CamposBD +='liberacao_nf,'
+    
+    #nome_pessoa VARCHAR(255)
+    ItensParaBD += f"'{entry_NomePF.get()}'¬¬"
+    CamposBD +='nome_pessoa,'
+    
+    #sobrenome VARCHAR(255)
+    ItensParaBD += f"'{entry_SobrenomePF.get()}'¬¬"
+    CamposBD +='sobrenome,'
+    
+    #nome_mae VARCHAR(255)
+    ItensParaBD += f"'{entry_Mae.get()}'¬¬"
+    CamposBD +='nome_mae,'
+    
+    #estado_civil VARCHAR(255)
+    ItensParaBD += f"'{ESTADO_CIVIL_var.get()}'¬¬"
+    CamposBD +='estado_civil,'
+    
+    #genero VARCHAR(255)
+    ItensParaBD += f"'{GENERO_var.get()}'¬¬"
+    CamposBD +='genero,'
+    
+    #data_nascimento DATE
+    ItensParaBD += f"'{DataEnviadaParaOBD(entry_dtNascimento.get())}'¬¬"
+    CamposBD +='data_nascimento,'
+    
+    #numero_rg VARCHAR(255)
+    ItensParaBD += f"'{entry_RG.get()}'¬¬"
+    CamposBD +='numero_rg,'
+    
+    #orgao_rg VARCHAR(255)
+    ItensParaBD += f"'{entry_RGOrgao.get()}'¬¬"
+    CamposBD +='orgao_rg,'
+    
+    #data_expedicao_rg DATE
+    ItensParaBD += f"'{DataEnviadaParaOBD(entry_RGData.get())}'¬¬"
+    CamposBD +='data_expedicao_rg,'
+    
+    #modelo_contrato VARCHAR(255)
+    ItensParaBD += f"'{MODELO_CONTRATO_var.get()}'¬¬"
+    CamposBD +='modelo_contrato,'
+    
+    #data_inicio_parceria DATE
+    ItensParaBD += f"'{DataEnviadaParaOBD(entry_DATA_INICIAL_PARCEIRA.get())}'¬¬"
+    CamposBD +='data_inicio_parceria,'
+    
+    #data_distrato DATE
+    ItensParaBD += f"'{DataEnviadaParaOBD(entry_DATA_DISTRATO_PARCEIRA.get())}'¬¬"
+    CamposBD +='data_distrato,'
+
+    #cnae VARCHAR(255)
+    ItensParaBD += f"'{entry_CNAE.get()}'¬¬"
+    CamposBD +='cnae,'
+    
+    #responsavel_recolhimento VARCHAR(255)
+    ItensParaBD += f"'{RESPONSAVEL_RECOLHIMENTO_var.get()}'¬¬"
+    CamposBD +='responsavel_recolhimento,'
+    
+    #valores_recebidos_adm VARCHAR(255)
+    ItensParaBD += f"'{GESTAO_VALORES_var.get()}'¬¬"
+    CamposBD +='valores_recebidos_adm,'
+    
+    #repasse VARCHAR(255)
+    ItensParaBD += f"'{PERIODO_REPASSE_var.get()}'¬¬"
+    CamposBD +='repasse,'
+    
+    #kit_padrao VARCHAR(255)
+    ItensParaBD += f"'{Sw_KIT_PADRAO.get()}'¬¬"
+    CamposBD +='kit_padrao,'
+    
+    #assessoria_contabil VARCHAR(255)
+    ItensParaBD += f"'{ASSESSORIA_CONTABIL_var.get()}'¬¬"
+    CamposBD +='assessoria_contabil,'
+    
+    #nome_assessoria_contabil VARCHAR(255)
+    ItensParaBD += f"'{CONTABILIDADE_ASSESORA_var.get()}'¬¬"
+    CamposBD +='nome_assessoria_contabil,'
+    
+    #dias_abertura VARCHAR(255)
+    DiasMarcados =verificar_dias_marcados()
+    nomes_dias = [dia for dia in DiasMarcados]
+    nomes_dias = list(nomes_dias)
+    dias_abertura_str = ','.join(nomes_dias)
+    ItensParaBD += f"'{dias_abertura_str}'¬¬"
+    CamposBD +='dias_abertura,'
+    
+    #hora_seg VARCHAR(255)
+    Dia = 'SEG'
+    HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
+    HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
+    ItensParaBD += f"'{HorarioABRIR}-{HorarioFECHAR}'¬¬"
+    CamposBD +='hora_seg,'
+    
+    #hora_ter VARCHAR(255)
+    Dia = 'TER'
+    HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
+    HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
+    ItensParaBD += f"'{HorarioABRIR}-{HorarioFECHAR}'¬¬"
+    CamposBD +='hora_ter,'
+    
+    #hora_qua VARCHAR(255)
+    Dia = 'QUA'
+    HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
+    HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
+    ItensParaBD += f"'{HorarioABRIR}-{HorarioFECHAR}'¬¬"
+    CamposBD +='hora_qua,'
+    
+    #hora_qui VARCHAR(255)
+    Dia = 'QUI'
+    HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
+    HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
+    ItensParaBD += f"'{HorarioABRIR}-{HorarioFECHAR}'¬¬"
+    CamposBD +='hora_qui,'
+    
+    #hora_sex VARCHAR(255)
+    Dia = 'SEX'
+    HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
+    HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
+    ItensParaBD += f"'{HorarioABRIR}-{HorarioFECHAR}'¬¬"
+    CamposBD +='hora_sex,'
+    
+    #hora_sab VARCHAR(255)
+    Dia = 'SAB'
+    HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
+    HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
+    ItensParaBD += f"'{HorarioABRIR}-{HorarioFECHAR}'¬¬"
+    CamposBD +='hora_sab,'
+    
+    #hora_dom VARCHAR(255)
+    Dia = 'DOM'
+    HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
+    HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
+    ItensParaBD += f"'{HorarioABRIR}-{HorarioFECHAR}'¬¬"
+    CamposBD +='hora_dom,'
+
+    
+
     agora = datetime.now()
     if tipo =="Edição":
         #- date
@@ -257,24 +436,74 @@ def limparbotões():
     #entry_Ano_dasn.delete(0, 'end')
     #entry_Faturamento.delete(0, 'end')
     #entry_Observaes_dasn.delete(0, 'end')
+    entry_Fantasia.delete(0, 'end')
+    entry_RAZÃO_SOCIAL.delete(0, 'end')
+    entry_Celular.delete(0, 'end')
+    entry_cep.delete(0, 'end')
+    entry_rua.delete(0, 'end')
+    entry_numero.delete(0, 'end')
+    entry_complemento.delete(0, 'end')
+    entry_bairro.delete(0, 'end')
+    entry_cidade.delete(0, 'end')
+    entry_Estado.set(siglas_estados[0])
+    entry_Senha_Certificado_Digital.delete(0, 'end')
+    entry_NF_LIBERADA.set('Não')
+    entry_NomePF.delete(0, 'end')
+    entry_SobrenomePF.delete(0, 'end')
+    entry_Mae.delete(0, 'end')
+    ESTADO_CIVIL_var.set('Solteiro')
+    GENERO_var.set('Feminino')
+    entry_dtNascimento.delete(0, 'end')
+    entry_RG.delete(0, 'end')
+    entry_RGOrgao.delete(0, 'end')
+    entry_RGData.delete(0, 'end')
+    MODELO_CONTRATO_var.set("CONTRATO PADRÃO - VERSÃO DATAVIX CONTÁBIL DIGITAL EIRELI")
+    entry_DATA_INICIAL_PARCEIRA.delete(0, 'end')
+    entry_DATA_DISTRATO_PARCEIRA.delete(0, 'end')
+    entry_CNAE.delete(0, 'end')
+    RESPONSAVEL_RECOLHIMENTO_var.set("Salão Parceiro")
+    GESTAO_VALORES_var.set("Salão Parceiro")
+    PERIODO_REPASSE_var.set("Mensal")
+    #Sw_KIT_PADRAO.set(1)
+    ASSESSORIA_CONTABIL_var.set("Sim")
+    CONTABILIDADE_ASSESORA_var.set("")
+    
+
+    dias_da_semana = ["SEG", "TER", "QUA", "QUI", "SEX", "SAB", "DOM"]
+    
+    if len(dias_da_semana)>0:
+        for dia in dias_da_semana:
+            if dia !='N/A' and dia !='':
+                eval(f"Chk_{dia}_var").set(True)
+                ativardia(f"Chk_{dia}", dia)
+                eval(f"Hora_Abertura_{dia}").set(eval(f'00'))
+                eval(f"Min_Abertura_{dia}").set(eval(f'00'))
+                eval(f"Hora_Fechamento_{dia}").set(eval(f'00'))
+                eval(f"Min_Fechamento_{dia}").set(eval(f'00'))
+                eval(f"Chk_{dia}_var").set(False)
+                ativardia(f"Chk_{dia}", dia)
 
     Limpartreeview(TreeViewParceiras)
-
+    Limpartreeview(TreeViewServicos)
+    Limpartreeview(TreeviewDas)
     FrameDas.grid_remove()
     
 def Importardados(idcliente,Dadosparateladeedição):
-    global importar_dados_treeview
-    def importar_dados_treeview(TreeV,dados):
+    global importar_dados_treeview,CONTABILIDADES_assesoras,tela_Mae,Listadedados
+
+    def importar_dados_treeview(TreeV,dados,):
         for result in dados:
             TreeV.insert("", 'end', values=result)
-   
+    
     limparbotões()
 
-    global tela_Mae,Listadedados
     tela_Mae = Dadosparateladeedição
 
-    Listadedados, identificadores,qr,meis,Lista_de_DAS = dbm.getmeidata_toEdit(idcliente)
+    CONTABILIDADES_assesoras=[]
+   
+    Listadedados, identificadores,qr,meis,Lista_de_DAS,Lista_Servicos,DadosComplemtares = dbm.getmeidata_toEdit(idcliente)
 
+    Contabilidades_Dados_Gerais = dbm.Pegar_dados_contabilidade()
     
 
     if Listadedados[0]:
@@ -300,8 +529,7 @@ def Importardados(idcliente,Dadosparateladeedição):
         #scrollbarParceiras.grid(row=2, column=4, padx=(0,10), pady=(5,10), sticky="nsew")
         #bt_Editar_MEI_Parceiras.grid(row=3, column=0,columnspan=3, sticky="n", padx=(1,0), pady=(5,10))
 
-
-    importar_dados_treeview(TreeviewDas,Lista_de_DAS)
+    
 
     entry_Nome.insert(0,Listadedados[3]) # Campo nome do banco de dados
 
@@ -355,13 +583,78 @@ def Importardados(idcliente,Dadosparateladeedição):
 
     entry_Vencimento_.insert(0,Listadedados[27]) # Campo vencimento do banco de dados
 
+    entry_Fantasia.insert(0,DadosComplemtares[0])
+    entry_RAZÃO_SOCIAL.insert(0,DadosComplemtares[1])
+    entry_Celular.insert(0,DadosComplemtares[2])
+    entry_cep.insert(0,DadosComplemtares[3])
+    entry_rua.insert(0,DadosComplemtares[4])
+    entry_numero.insert(0,DadosComplemtares[5])
+    entry_complemento.insert(0,DadosComplemtares[6])
+    entry_bairro.insert(0,DadosComplemtares[7])
+    entry_cidade.insert(0,DadosComplemtares[8])
+    entry_Estado.set(DadosComplemtares[9])
+    entry_Senha_Certificado_Digital.insert(0,DadosComplemtares[10])
+    entry_NF_LIBERADA.set(DadosComplemtares[11])
+    entry_NomePF.insert(0,DadosComplemtares[12])
+    entry_SobrenomePF.insert(0,DadosComplemtares[13])
+    entry_Mae.insert(0,DadosComplemtares[14])
+    ESTADO_CIVIL_var.set(DadosComplemtares[15])
+    GENERO_var.set(DadosComplemtares[16])
+    entry_dtNascimento.insert(0,DadosComplemtares[17])
+    entry_RG.insert(0,DadosComplemtares[18])
+    entry_RGOrgao.insert(0,DadosComplemtares[19])
+    entry_RGData.insert(0,DadosComplemtares[20])
+    MODELO_CONTRATO_var.set(DadosComplemtares[21])
+    entry_DATA_INICIAL_PARCEIRA.insert(0,DadosComplemtares[22])
+    entry_DATA_DISTRATO_PARCEIRA.insert(0,DadosComplemtares[23])
+    entry_CNAE.insert(0,DadosComplemtares[24])
+    RESPONSAVEL_RECOLHIMENTO_var.set(DadosComplemtares[25])
+    GESTAO_VALORES_var.set(DadosComplemtares[26])
+    PERIODO_REPASSE_var.set(DadosComplemtares[27])
+    Sw_KIT_PADRAO.setvar(DadosComplemtares[28])
+    ASSESSORIA_CONTABIL_var.set(DadosComplemtares[29])
+    CONTABILIDADE_ASSESORA_var.set(DadosComplemtares[30])
+    # Parse 'dias_abertura' and set corresponding widgets
+    dias_abertura_str = DadosComplemtares[31]
+    dias_marcados = dias_abertura_str.split(',')
+    # Set dias_marcados to corresponding widgets
+
+    # Parse and set the opening and closing hours
+    hora_SEG = DadosComplemtares[32].split('-')
+    hora_TER = DadosComplemtares[33].split('-')
+    hora_QUA = DadosComplemtares[34].split('-')
+    hora_QUI = DadosComplemtares[35].split('-')
+    hora_SEX = DadosComplemtares[36].split('-')
+    hora_SAB = DadosComplemtares[37].split('-')
+    hora_DOM = DadosComplemtares[38].split('-')
+    if len(dias_marcados)>0:
+        for dia in dias_marcados:
+            if dia !='N/A' and dia !='':
+                eval(f"Chk_{dia}_var").set(True)
+                ativardia(f"Chk_{dia}", dia)
+                eval(f"Hora_Abertura_{dia}").set(eval(f'hora_{dia}[0]'))
+                eval(f"Min_Abertura_{dia}").set(eval(f'hora_{dia}[1]'))
+                eval(f"Hora_Fechamento_{dia}").set(eval(f'hora_{dia}[2]'))
+                eval(f"Min_Fechamento_{dia}").set(eval(f'hora_{dia}[3]'))
+                
+    
+    
+    
+    
     #entry_Ano_dasn.insert(0,Listadedados[28]) # Campo created_at do banco de dados
 
     #entry_Faturamento.insert(0,Listadedados[29]) # Campo updated_at do banco de dados
 
     #entry_Observaes_dasn.insert(0,Listadedados[29]) # Campo updated_at do banco de dados
+    try:
+        for contabilidade in Contabilidades_Dados_Gerais:
+            CONTABILIDADES_assesoras.append(f'{contabilidade[1]}({contabilidade[0]}) Tel: {contabilidade[2]}')
+        Menu_CONTABILIDADE_ASSESORA.configure(values=CONTABILIDADES_assesoras)
+        CONTABILIDADE_ASSESORA_var.set(value=CONTABILIDADES_assesoras[0])   
+        Menu_CONTABILIDADE_ASSESORA.configure(state='normal')     
+    except Exception:
+        Menu_CONTABILIDADE_ASSESORA.configure(state='disabled')
 
-    
     for id,result in enumerate(meis):
         if result[2] == None:
             pendencias = ""
@@ -375,9 +668,19 @@ def Importardados(idcliente,Dadosparateladeedição):
         Lista = [result[0],result[1],pendencias,ativo]
 
         TreeViewParceiras.insert("", 'end', values=Lista)
+    
+    importar_dados_treeview(TreeViewServicos,Lista_Servicos)
+    importar_dados_treeview(TreeviewDas,Lista_de_DAS)
+    if verificar_se_tem_valores_na_treeview(TreeViewServicos)==False:
+            Menu_TP_REPASSE.configure(state='normal')  
+    else:
+            Menu_TP_REPASSE.configure(state='disabled')  
     #reativa o grid do dasn    
     FrameDas.grid(row=0, column=0, sticky="n")
 
+
+
+    
 def DataEnviadaParaOBD(datainformada):                      
     try:
         data = datetime.strptime(datainformada, "%d/%m/%Y")
@@ -421,9 +724,81 @@ def adicição_dados_DASN(operacao):
                 TreeviewDas.delete(selecao)
                 dbm.Query_remove_Data(queryDeleção) 
 
+def verificar_se_tem_valores_na_treeview(tree):
+    # Obtém todos os itens da TreeView
+    itens = tree.get_children()
+    
+    # Verifica se a lista de itens está vazia
+    if len(itens) > 0:
+        return True
+    else:
+        return False
+
+def Envio_dados_servico(operacao):
+    IDcliente = Listadedados[0]
+    queryCriação = f"INSERT INTO "
+
+         
+    if operacao == 'ADD':
+        if entry_NOME_SERVICO.get() !='' and entry_REPASSE_SALAO.get() !=''and entry_REPASSE_PROFISSIONAL.get():  
+            CamposBD = 'mei_id,tipo,servico,salao,parceiro'
+            ValoresBD = f"'{TP_REPASSE_var.get()}','{entry_NOME_SERVICO.get()}','{entry_REPASSE_SALAO.get()}','{entry_REPASSE_PROFISSIONAL.get()}'"
+            ValoresBD_lista = [valor.strip("'") for valor in ValoresBD.split(',')]
+            importar_dados_treeview(TreeViewServicos,[ValoresBD_lista])
+            queryCriação += f"`py_meis_servicos`({CamposBD}) VALUES ({IDcliente},{ValoresBD})"
+            entry_REPASSE_SALAO.delete(0, 'end')
+            entry_REPASSE_PROFISSIONAL.delete(0, 'end')
+            entry_NOME_SERVICO.delete(0, 'end')
+            Menu_TP_REPASSE.configure(state='disabled')
+            dbm.Query_Save_Data(queryCriação)
+            
+    if operacao == 'DEL':
+            # Obtém a seleção da TreeView
+        selecao = TreeViewServicos.selection()
+            # Verifica se há algum item selecionado
+        if selecao:
+                # Obtém as informações do item selecionado
+            valores = TreeViewServicos.item(selecao[0])['values']
+                # Verifica se há valores associados
+            if valores:
+                    # Obtém o nome do cliente
+                v1 = valores[0]
+                v2 = valores[1]
+                v3 = valores[2]
+                v4 = valores[3]
+                queryDeleção = f"DELETE FROM `py_meis_servicos` WHERE mei_id = {IDcliente} AND tipo = '{f'{v1}'}' AND servico = '{f'{v2}'}' AND salao = '{f'{v3}'}'AND parceiro = '{f'{v4}'}'" 
+                TreeViewServicos.delete(selecao)
+                dbm.Query_remove_Data(queryDeleção) 
+
+        if verificar_se_tem_valores_na_treeview(TreeViewServicos)==False:
+            Menu_TP_REPASSE.configure(state='normal')
+            
+def Addcontabildiades():
+    IDcliente = Listadedados[0]
+    queryCriação = f"INSERT INTO "
+
+    operacao = 'ADD'    
+    if operacao == 'ADD':
+        if entry_CNPJ_CONT_MEIS.get() !='' and entry_NOME_CONT_MEIS.get() !=''and entry_TEL_CONT_MEIS.get() !='':  
+            CamposBD = 'cnpj,nome,telefone'
+            ValoresBD = f"{entry_CNPJ_CONT_MEIS.get()},'{entry_NOME_CONT_MEIS.get()}','{entry_TEL_CONT_MEIS.get()}'"
+            ValoresBD_lista = [valor.strip("'") for valor in ValoresBD.split(',')]
+
+            CONTABILIDADES_assesoras.append(f'{entry_NOME_CONT_MEIS.get()}({entry_CNPJ_CONT_MEIS.get()}) Tel: {entry_TEL_CONT_MEIS.get()}')    
+
+            Menu_CONTABILIDADE_ASSESORA.configure(values=CONTABILIDADES_assesoras)
+            queryCriação += f"`py_cont_meis`({CamposBD}) VALUES ({ValoresBD})"
+            entry_NOME_CONT_MEIS.delete(0, 'end')
+            entry_TEL_CONT_MEIS.delete(0, 'end')
+            entry_CNPJ_CONT_MEIS.delete(0, 'end')
+            dbm.Query_Save_Data(queryCriação)
+            TopLevel_CONTABILIDADE.quit()
+            TopLevel_CONTABILIDADE.destroy()
+            
 
 def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho_Logo_Rem):
-    global frame_dados_mei,entry_Nome,entry_Situao,entry_Identificao,entry_CNPJ,entry_Tributao,entry_Data_abertura_,entry_Prefeitura,entry_Login,entry_Senha,entry_Pendncia_de_Recolhimentos,entry_Entrega_de_DAS_Mensal,entry_E_mail,entry_Pendncias,entry_Observaes,entry_CPF,entry_Cdigo_de_Acesso,entry_Senha_GOV,entry_Nvel_GOV,entry_Endereo,entry_Inscrio_Estadual,entry_Inscrio_Municipal,entry_Certificado_Digital,entry_Modelo_Datavix,entry_Homologado___Sindicato,entry_Vencimento_,entry_Faturamento,TreeViewParceiras,scrollbarParceiras,bt_Editar_MEI_Parceiras,TabViewGlobal,TreeviewDas,entry_Ano_dasn,entry_Faturamento,entry_Observaes_dasn,FrameDas,Framelistaparceiras,FrameDadosContratoParceira,Se_For_Contratante,Se_For_Parciera
+    global frame_dados_mei,entry_Nome,entry_Situao,entry_Identificao,entry_CNPJ,entry_Tributao,entry_Data_abertura_,entry_Prefeitura,entry_Login,entry_Senha,entry_Pendncia_de_Recolhimentos,entry_Entrega_de_DAS_Mensal,entry_E_mail,entry_Pendncias,entry_Observaes,entry_CPF,entry_Cdigo_de_Acesso,entry_Senha_GOV,entry_Nvel_GOV,entry_Endereo,entry_Inscrio_Estadual,entry_Inscrio_Municipal,entry_Certificado_Digital,entry_Modelo_Datavix,entry_Homologado___Sindicato,entry_Vencimento_,entry_Faturamento,TreeViewParceiras,scrollbarParceiras,bt_Editar_MEI_Parceiras,TabViewGlobal,TreeviewDas,entry_Ano_dasn,entry_Faturamento,entry_Observaes_dasn,FrameDas,Framelistaparceiras,FrameDadosContratoParceira,Se_For_Contratante,Se_For_Parciera,entry_Fantasia,entry_RAZÃO_SOCIAL,entry_Celular,entry_cep,entry_rua,entry_numero,entry_complemento,entry_bairro,entry_cidade,entry_Estado,entry_Senha_Certificado_Digital,entry_NF_LIBERADA,entry_NomePF,entry_SobrenomePF,entry_Mae,ESTADO_CIVIL_var,GENERO_var,entry_dtNascimento,entry_RG,entry_RGOrgao,entry_RGData,MODELO_CONTRATO_var,entry_DATA_INICIAL_PARCEIRA,entry_DATA_DISTRATO_PARCEIRA,entry_CNAE,RESPONSAVEL_RECOLHIMENTO_var,GESTAO_VALORES_var,PERIODO_REPASSE_var,Sw_KIT_PADRAO,ASSESSORIA_CONTABIL_var,CONTABILIDADE_ASSESORA_var,verificar_dias_marcados,TreeViewServicos,entry_REPASSE_PROFISSIONAL,entry_REPASSE_SALAO,entry_NOME_SERVICO,TP_REPASSE_var,Menu_TP_REPASSE,Menu_CONTABILIDADE_ASSESORA,ativardia,siglas_estados
+
     TabViewGlobal = Viewer
     
     def dadosparceira(*args):
@@ -461,6 +836,9 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
                 PendenciasLB_inf.configure(state='disabled')
                 TeladadosParceiras.resizable(False,False)
     
+    def validar_entrada_Numero_7Caracter(digit):
+        return digit.isdigit() and len(digit) <= 7 or digit == ""
+
     def validar_data(entrada):
         if len(entrada) != 10:
             messagebox.showerror("Erro", "Formato de data inválido. Use DD/MM/AAAA.")
@@ -532,7 +910,12 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
         if choice == 'Valor':
             label_REPASSE_SALAO.configure(text="Valor Salão")
             label_REPASSE_PROFISSIONAL.configure(text="Valor Profissional")
-    
+    def contabilidadeAssessora(choice):
+        if choice == 'Não':
+            Menu_CONTABILIDADE_ASSESORA.configure(state='disabled')
+        if choice == 'Sim':
+            Menu_CONTABILIDADE_ASSESORA.configure(state='normal') 
+
     def AtivarBTExcluir_Repasse(*args):
         selecao = TreeViewServicos.selection()
 
@@ -545,26 +928,28 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     
     def TopLevel_CadastraCont():
         #Dados contabilidade , cnpj , nome e telefone
+        global entry_CNPJ_CONT_MEIS,entry_NOME_CONT_MEIS,entry_TEL_CONT_MEIS,TopLevel_CONTABILIDADE
+
         TopLevel_CONTABILIDADE = ctk.CTkToplevel(FrameDadosContratoParceira)
         TopLevel_CONTABILIDADE.title("Contabilidade")
         ##  TOP level
-        label_repasse = ctk.CTkLabel(TopLevel_CONTABILIDADE, text="CNPJ")
-        entry_repasse = ctk.CTkEntry(TopLevel_CONTABILIDADE)
-        label_repasse.grid(row=11, column=0, padx=10, pady=5, sticky="w")
-        entry_repasse.grid(row=11, column=1, padx=10, pady=5, sticky="nsew") 
+        label_CNPJ_CONT_MEIS = ctk.CTkLabel(TopLevel_CONTABILIDADE, text="CNPJ")
+        entry_CNPJ_CONT_MEIS = ctk.CTkEntry(TopLevel_CONTABILIDADE)
+        label_CNPJ_CONT_MEIS.grid(row=11, column=0, padx=10, pady=5, sticky="w")
+        entry_CNPJ_CONT_MEIS.grid(row=11, column=1, padx=10, pady=5, sticky="nsew") 
         
-        label_repasse = ctk.CTkLabel(TopLevel_CONTABILIDADE, text="Nome")
-        entry_repasse = ctk.CTkEntry(TopLevel_CONTABILIDADE)
-        label_repasse.grid(row=12, column=0, padx=10, pady=5, sticky="w")
-        entry_repasse.grid(row=12, column=1, padx=10, pady=5, sticky="nsew") 
+        label_NOME_CONT_MEIS = ctk.CTkLabel(TopLevel_CONTABILIDADE, text="Nome")
+        entry_NOME_CONT_MEIS = ctk.CTkEntry(TopLevel_CONTABILIDADE)
+        label_NOME_CONT_MEIS.grid(row=12, column=0, padx=10, pady=5, sticky="w")
+        entry_NOME_CONT_MEIS.grid(row=12, column=1, padx=10, pady=5, sticky="nsew") 
         
-        label_repasse = ctk.CTkLabel(TopLevel_CONTABILIDADE, text="Telefone")
-        entry_repasse = ctk.CTkEntry(TopLevel_CONTABILIDADE)
-        label_repasse.grid(row=13, column=0, padx=10, pady=5, sticky="w")
-        entry_repasse.grid(row=13, column=1, padx=10, pady=5, sticky="nsew") 
+        label_TEL_CONT_MEIS = ctk.CTkLabel(TopLevel_CONTABILIDADE, text="Telefone")
+        entry_TEL_CONT_MEIS = ctk.CTkEntry(TopLevel_CONTABILIDADE)
+        label_TEL_CONT_MEIS.grid(row=13, column=0, padx=10, pady=5, sticky="w")
+        entry_TEL_CONT_MEIS.grid(row=13, column=1, padx=10, pady=5, sticky="nsew") 
 
         logo_add = PhotoImage(file=Caminho_Logo_Add).subsample(25, 25)
-        bt_add = ctk.CTkButton(TopLevel_CONTABILIDADE,image=logo_add,text="",command=1,width =20)
+        bt_add = ctk.CTkButton(TopLevel_CONTABILIDADE,image=logo_add,text="",command=Addcontabildiades,width =20)
         bt_add.grid(row=11,rowspan=3, column=2, padx=10, pady=5, sticky="nsew")
 
     def Se_For_Parciera():
@@ -580,7 +965,41 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
         FrameDadosContratoParceira.grid_remove()
         label_Fantasia.grid(row=1, column=0, padx=10, pady=5, sticky="w")
         entry_Fantasia.grid(row=1, column=1, columnspan=3, padx=10, pady=5, sticky="new")
-
+         
+    
+    def ativardia(variavel, Dia):
+        if eval(f"{variavel}_var").get() == True:
+            eval(f"Hora_Abertura_{Dia}").configure(state="normal")
+            eval(f"Min_Abertura_{Dia}").configure(state="normal")
+            eval(f"Hora_Fechamento_{Dia}").configure(state="normal")
+            eval(f"Min_Fechamento_{Dia}").configure(state="normal")
+        else:
+            eval(f"Hora_Abertura_{Dia}").configure(state="disabled")
+            eval(f"Min_Abertura_{Dia}").configure(state="disabled")
+            eval(f"Hora_Fechamento_{Dia}").configure(state="disabled")
+            eval(f"Min_Fechamento_{Dia}").configure(state="disabled")
+    
+    def verificar_dias_marcados():
+        #dias_marcados = [dia for dia in dias_da_semana if eval(f"Chk_{dia}_var").get()]
+        dias_com_horarios = {}
+        for dia in dias_da_semana:
+            if eval(f"Chk_{dia}_var").get():
+                horario_abertura = eval(f"Hora_Abertura_{dia}").get()
+                Min_abertura = eval(f"Min_Abertura_{dia}").get()
+                horario_fechamento = eval(f"Hora_Fechamento_{dia}").get()
+                Min_fechamento = eval(f"Min_Fechamento_{dia}").get()
+                dias_com_horarios[dia] = {
+                    "abertura": f'{horario_abertura}:{Min_abertura}',
+                    "fechamento": f'{horario_fechamento}:{Min_fechamento}'
+                }
+        #print(dias_com_horarios)
+        #if 'TER' in dias_com_horarios:
+        #    horarios_terca = dias_com_horarios['TER']
+        #    print("Horários de Terça-feira:", horarios_terca)
+        #else:
+        #    print("Terça-feira não está marcada.")
+        return dias_com_horarios
+    
     frame_dados_mei=frameprincipal
     yes_or_not = [
         "SIM","NÃO"
@@ -1006,10 +1425,10 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     label_NomePF.grid(row=1, column=0, padx=10, pady=5, sticky="w")
     entry_NomePF.grid(row=1, column=1, padx=10, pady=5, sticky="nsew")
 
-    label_NomePF = ctk.CTkLabel(FrameDadosParceira, text="Sobrenome")
-    entry_NomePF = ctk.CTkEntry(FrameDadosParceira)
-    label_NomePF.grid(row=1, column=2, padx=10, pady=5, sticky="w")
-    entry_NomePF.grid(row=1, column=3, padx=10, pady=5, sticky="nsew")
+    label_SobrenomePF = ctk.CTkLabel(FrameDadosParceira, text="Sobrenome")
+    entry_SobrenomePF = ctk.CTkEntry(FrameDadosParceira)
+    label_SobrenomePF.grid(row=1, column=2, padx=10, pady=5, sticky="w")
+    entry_SobrenomePF.grid(row=1, column=3, padx=10, pady=5, sticky="nsew")
 
     label_Mae = ctk.CTkLabel(FrameDadosParceira, text="Nome da Mãe")
     entry_Mae = ctk.CTkEntry(FrameDadosParceira)
@@ -1060,7 +1479,7 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     entry_RGData = ctk.CTkEntry(FrameRG)
     label_RGData.grid(row=3, column=0, padx=10, pady=5, sticky="w")
     entry_RGData.grid(row=3, column=1, padx=10, pady=5, sticky="nsew")
-    
+    entry_RGData.bind('<FocusOut>', lambda event: verificar_entrada_data(event, entry_RGData)) 
     #Frame Dados PARCEIRA (NAO VISIVEL NO CONTRANTE)
     
     FrameDadosContratoParceira = ctk.CTkFrame(FramedadosComp, border_width=largura_borda, border_color=cor_de_borda)
@@ -1092,16 +1511,19 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     entry_DATA_INICIAL_PARCEIRA = ctk.CTkEntry(FrameContrato)
     label_DATA_INICIAL_PARCEIRA.grid(row=4, column=0, padx=10, pady=5, sticky="w")
     entry_DATA_INICIAL_PARCEIRA.grid(row=4, column=1, padx=10, pady=5, sticky="nsew") 
+    entry_DATA_INICIAL_PARCEIRA.bind('<FocusOut>', lambda event: verificar_entrada_data(event, entry_DATA_INICIAL_PARCEIRA)) 
 
     #Inicio da parcceria 
     label_DATA_DISTRATO_PARCEIRA = ctk.CTkLabel(FrameContrato, text="Data do Distrato")
     entry_DATA_DISTRATO_PARCEIRA = ctk.CTkEntry(FrameContrato)
     label_DATA_DISTRATO_PARCEIRA.grid(row=4, column=2, padx=10, pady=5, sticky="w")
     entry_DATA_DISTRATO_PARCEIRA.grid(row=4, column=3, padx=10, pady=5, sticky="nsew") 
+    entry_DATA_DISTRATO_PARCEIRA.bind('<FocusOut>', lambda event: verificar_entrada_data(event, entry_DATA_DISTRATO_PARCEIRA))
 
+    Validaçao = (FrameContrato.register(validar_entrada_Numero_7Caracter), '%P')
     #Cnae profissional parceiro ####-#/##  
     label_CNAE = ctk.CTkLabel(FrameContrato, text="CNAE (Ativdade da parceira)")
-    entry_CNAE = ctk.CTkEntry(FrameContrato)
+    entry_CNAE = ctk.CTkEntry(FrameContrato,validate='key', validatecommand=Validaçao)
     label_CNAE.grid(row=4, column=4, padx=10, pady=5, sticky="w")
     entry_CNAE.grid(row=4, column=5, padx=10, pady=5, sticky="nsew")
     
@@ -1141,7 +1563,7 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     entry_REPASSE_PROFISSIONAL.grid(row=12, column=0, padx=10, pady=5, sticky="new") 
     
     logo_add = PhotoImage(file=Caminho_Logo_Add).subsample(25, 25)
-    bt_add = ctk.CTkButton(FrameServicos,image=logo_add, text="Adicionar",command=1)
+    bt_add = ctk.CTkButton(FrameServicos,image=logo_add, text="Adicionar",command=lambda:Envio_dados_servico('ADD'))
     bt_add.grid(row=13, column=0, padx=10, pady=5, sticky="new")
 
   
@@ -1167,7 +1589,7 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     
     #BOTAO EXCLUIR SERVICOS ----------------------------------------------------------------
     logo_excluir = PhotoImage(file=Caminho_Logo_Rem).subsample(25, 25)
-    bt_EXCLUIR_REPASSE = ctk.CTkButton(FrameServicos,image=logo_excluir, text="Excluir",command=2)
+    bt_EXCLUIR_REPASSE = ctk.CTkButton(FrameServicos,image=logo_excluir, text="Excluir",command=lambda:Envio_dados_servico('DEL'))
     bt_EXCLUIR_REPASSE.grid(row=5, column=5, columnspan=2, padx=10, pady=5, sticky="new")
     bt_EXCLUIR_REPASSE.configure(state='disabled')
     
@@ -1216,7 +1638,7 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     label_BENS_MATERIAIS = ctk.CTkLabel(Frame_REPASSE, text="BENS MATERIAIS")
     label_BENS_MATERIAIS.grid(row=7, column=1, padx=10, pady=5, columnspan=3, sticky="w")
 
-    Sw_KIT_PADRAO = ctk.CTkSwitch(Frame_REPASSE, text="UTILIZAR KIT PADRÃO DE MÓVEIS E UTENSÍLIOS",command='ativarcomentarios')
+    Sw_KIT_PADRAO = ctk.CTkSwitch(Frame_REPASSE, text="UTILIZAR KIT PADRÃO DE MÓVEIS E UTENSÍLIOS")
     Sw_KIT_PADRAO.grid(row=8, column=1, padx=10, pady=5, columnspan=3, sticky="w")
 
 
@@ -1231,59 +1653,27 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
 
     ASSESSORIA_CONTABIL_var = ctk.StringVar(value="Sim")
     Menu_ASSESSORIA_CONTABIL = ctk.CTkOptionMenu(FrameoutrosDados_maiores2,values=['Sim','Não'],
-                                            command=SelecaoMenu,
+                                            command=contabilidadeAssessora,
                                             variable=ASSESSORIA_CONTABIL_var)
     Menu_ASSESSORIA_CONTABIL.grid(row=9, column=2, padx=10, pady=5, sticky="new")
 
     #NOME ASSESSORIA CONTABIL---------------------------------------------------------------
     label_CONTABILIDADE_ASSESORA = ctk.CTkLabel(FrameoutrosDados_maiores2, text="Nome")
     label_CONTABILIDADE_ASSESORA.grid(row=10, column=0, padx=10, pady=5, sticky="w")
-    CONTABILIDADE_ASSESORA_var = ctk.StringVar(value="EMPRESA")
-    Menu_CONTABILIDADE_ASSESORA = ctk.CTkOptionMenu(FrameoutrosDados_maiores2,values=['EMPRESA','EMPRESA'],
-                                            command=SelecaoMenu,
-                                            variable=CONTABILIDADE_ASSESORA_var)
-    Menu_CONTABILIDADE_ASSESORA.grid(row=10, column=1, padx=10, pady=5, sticky="new")
+    CONTABILIDADES_assesoras=[]
+    CONTABILIDADE_ASSESORA_var = ctk.StringVar(value="")
+    Menu_CONTABILIDADE_ASSESORA = ctk.CTkOptionMenu(FrameoutrosDados_maiores2,values=CONTABILIDADES_assesoras,                                           variable=CONTABILIDADE_ASSESORA_var)
+    Menu_CONTABILIDADE_ASSESORA.grid(row=10, column=1, columnspan=3, padx=10, pady=5, sticky="nsew")
 
     logo_add = PhotoImage(file=Caminho_Logo_Add).subsample(25, 25)
     bt_add = ctk.CTkButton(FrameoutrosDados_maiores2,image=logo_add,text="",command=TopLevel_CadastraCont)
-    bt_add.grid(row=10, column=2, padx=10, pady=5, sticky="new")
+    bt_add.grid(row=9, column=3, padx=10, pady=5, sticky="new")
 
    
    
    #------------------------------------------------------------------------------------------------#
     #Frame Dados CONTRATANTE (NAO VISIVEL NO PARCEIRA) 
-    def ativardia(variavel, Dia):
-        if eval(f"{variavel}_var").get() == True:
-            eval(f"Hora_Abertura_{Dia}").configure(state="normal")
-            eval(f"Min_Abertura_{Dia}").configure(state="normal")
-            eval(f"Hora_Fechamento_{Dia}").configure(state="normal")
-            eval(f"Min_Fechamento_{Dia}").configure(state="normal")
-        else:
-            eval(f"Hora_Abertura_{Dia}").configure(state="disabled")
-            eval(f"Min_Abertura_{Dia}").configure(state="disabled")
-            eval(f"Hora_Fechamento_{Dia}").configure(state="disabled")
-            eval(f"Min_Fechamento_{Dia}").configure(state="disabled")
-    
-    def verificar_dias_marcados():
-        #dias_marcados = [dia for dia in dias_da_semana if eval(f"Chk_{dia}_var").get()]
-        dias_com_horarios = {}
-        for dia in dias_da_semana:
-            if eval(f"Chk_{dia}_var").get():
-                horario_abertura = eval(f"Hora_Abertura_{dia}").get()
-                Min_abertura = eval(f"Min_Abertura_{dia}").get()
-                horario_fechamento = eval(f"Hora_Fechamento_{dia}").get()
-                Min_fechamento = eval(f"Min_Fechamento_{dia}").get()
-                dias_com_horarios[dia] = {
-                    "abertura": f'{horario_abertura}:{Min_abertura}',
-                    "fechamento": f'{horario_fechamento}:{Min_fechamento}'
-                }
-        #print(dias_com_horarios)
-        #if 'TER' in dias_com_horarios:
-        #    horarios_terca = dias_com_horarios['TER']
-        #    print("Horários de Terça-feira:", horarios_terca)
-        #else:
-        #    print("Terça-feira não está marcada.")
-        return dias_com_horarios
+
 
     hours = [f"{i:02d}" for i in range(24)]
     minutes = [f"{i:02d}" for i in range(60)]
@@ -1373,7 +1763,7 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     
     
 #novos Campos em 22/05    
-#nome_fantasia
+#nome_fantasia  
 #razao_Social
 #celular
 #cep
@@ -1415,3 +1805,6 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
 #reponsavel contabil (nome,cnpj,telefone)(Outra Tabela)
 
 #servicos (Outra Tabela ?)
+
+
+

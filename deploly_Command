@@ -1,6 +1,16 @@
-pyinstaller --onefile --icon=logodatavix.ico --version-file=version.txt --noconsole DatavixAPP.py
+pyinstaller --onefile --add-data="logodatavix.ico;." --icon=logodatavix.ico --version-file=version.txt --noconsole DatavixAPP.py
 
-pyinstaller --onefile --icon=logodatavix.ico --version-file=version.txt --noconsole DatavixAPP_Update.py
+pyinstaller --onefile --add-data="logodatavix.ico;." --icon=logodatavix.ico --version-file=version.txt --noconsole DatavixAPP_Update.py
 
-pyinstaller --onefile --version-file=version.txt --noconsole Datavix.py
- 
+ pyinstaller --onefile --uac-admin --add-data="logodatavix.ico;." --icon=logodatavix.ico --version-file=version.txt --noconsole Datavix.py
+
+
+
+
+
+
+--resource logo.png
+
+--uac-admin
+--version-file FILE
+-r RESOURCE, --resource RESOURCE
