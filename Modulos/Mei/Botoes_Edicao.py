@@ -1441,7 +1441,7 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     label_ESTADO_CIVIL.grid(row=2, column=2, padx=10, pady=5, sticky="w")
     ESTADO_CIVIL_var = ctk.StringVar(value="Solteiro")
     Menu_ESTADO_CIVIL = ctk.CTkOptionMenu(FrameDadosParceira,values=['Solteiro','Casado','Viúvo','Separado juducialmente','Divorciado'],
-                                            command=1,
+                                           
                                             variable=ESTADO_CIVIL_var)
     Menu_ESTADO_CIVIL.grid(row=2, column=3, padx=10, pady=5, sticky="nsew")
 
@@ -1456,7 +1456,7 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     label_GENERO.grid(row=4, column=2, padx=10, pady=5, sticky="w")
     GENERO_var = ctk.StringVar(value="Feminino")
     Menu_GENERO = ctk.CTkOptionMenu(FrameDadosParceira,values=['Feminino','Masculino'],
-                                            command=1,
+                                           
                                             variable=GENERO_var)
     Menu_GENERO.grid(row=4, column=3, padx=10, pady=5, sticky="new")
 
