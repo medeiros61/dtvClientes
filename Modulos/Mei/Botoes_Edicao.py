@@ -6,6 +6,7 @@ import Modulos.Mei.Func_mei as Func_Mei
 from tkinter import messagebox
 from datetime import datetime
 import Modulos.Database.Logs as log
+import Modulos.ContratoParceria.EnvioContrato as Selenium
 
 def preencher_tipo(tipo_Cont_ou_Parc,contratante):
     if tipo_Cont_ou_Parc == "Criar_Contratante":
@@ -678,8 +679,170 @@ def Importardados(idcliente,Dadosparateladeedição):
     #reativa o grid do dasn    
     FrameDas.grid(row=0, column=0, sticky="n")
 
+def preparo_para_enviar_contrato():   
+    global Id_Contratante
+
+    idMaster = Listadedados[1]
+    ConsultaBD = ""
+    ConsultaBD +='cnpj,'
+    ConsultaBD +='razao_social,'
+    ConsultaBD +='nome_fantasia,'
+    ConsultaBD +='cpf,'
+    ConsultaBD +='nome_pessoa,'
+    ConsultaBD +='sobrenome,'
+    ConsultaBD +='data_nascimento,'
+    ConsultaBD +='email,'
+    ConsultaBD +='celular,'
+    ConsultaBD +='nome_mae,'
+    ConsultaBD +='estado_civil,'
+    ConsultaBD +='genero,'
+    ConsultaBD +='cep,'
+    ConsultaBD +='rua,'
+    ConsultaBD +='numero,'
+    ConsultaBD +='complemento,'
+    ConsultaBD +='bairro,'
+    ConsultaBD +='cidade,'
+    ConsultaBD +='estado,'
+    ConsultaBD +='numero_rg,'
+    ConsultaBD +='orgao_rg,'
+    ConsultaBD +='data_expedicao_rg'
+    
+    DadosContratante = dbm.Pegar_dados_para_Contrato(idMaster,ConsultaBD)
 
 
+
+    ##profissional parceiro
+
+
+    Profissional_Parceiro = ''
+    Profissional_Parceiro += f"{entry_CPF.get()}¬¬"
+    Profissional_Parceiro += f"{entry_NomePF.get()}¬¬"
+    Profissional_Parceiro += f"{entry_SobrenomePF.get()}¬¬"
+    Profissional_Parceiro += f"{DataEnviadaParaOBD(entry_dtNascimento.get())}¬¬"
+    Profissional_Parceiro += f"{entry_E_mail.get()}¬¬"
+    Profissional_Parceiro += f"{entry_Celular.get()}¬¬"
+    Profissional_Parceiro += f"{entry_Mae.get()}¬¬"
+    Profissional_Parceiro += f"{ESTADO_CIVIL_var.get()}¬¬"
+    Profissional_Parceiro += f"{GENERO_var.get()}¬¬"
+    Profissional_Parceiro += f"{entry_cep.get()}¬¬"
+    Profissional_Parceiro += f"{entry_rua.get()}¬¬"
+    Profissional_Parceiro += f"{entry_numero.get()}¬¬"
+    Profissional_Parceiro += f"{entry_complemento.get()}¬¬"
+    Profissional_Parceiro += f"{entry_bairro.get()}¬¬"
+    Profissional_Parceiro += f"{entry_cidade.get()}¬¬"
+    Profissional_Parceiro += f"{entry_Estado.get()}¬¬"
+    Profissional_Parceiro += f"{entry_RG.get()}¬¬"
+    Profissional_Parceiro += f"{entry_RGOrgao.get()}¬¬"
+    Profissional_Parceiro += f"{DataEnviadaParaOBD(entry_RGData.get())}¬¬"
+       
+
+    #CNPJ - PROFISSIONAL PARCEIRO
+    Profissional_Parceiro_CNPJ =""
+    Profissional_Parceiro_CNPJ += f"{entry_CNPJ.get()}¬¬"
+    Profissional_Parceiro_CNPJ += f"{entry_RAZÃO_SOCIAL.get()}¬¬"
+    Profissional_Parceiro_CNPJ += f"{entry_CNAE.get()}¬¬"
+
+    #CONTABILIDADE - PROFISSIONAL PARCEIRO
+    Contabilidade_Profissional_Parceiro = ""
+    Contabilidade_Profissional_Parceiro += f"{ASSESSORIA_CONTABIL_var.get()}¬¬"
+    Contabilidade_Profissional_Parceiro += f"{CONTABILIDADE_ASSESORA_var.get()}¬¬"##Separar dados
+
+    #GESTÃO DE OUTRAS INFORMAÇÕES
+    OutrasInformacoes=""
+    OutrasInformacoes += f"{DataEnviadaParaOBD(entry_DATA_INICIAL_PARCEIRA.get())}¬¬"
+    OutrasInformacoes += f"{RESPONSAVEL_RECOLHIMENTO_var.get()}¬¬"
+
+
+
+    
+    Servicos = []
+    for item in TreeViewServicos.get_children():
+        Linha = TreeViewServicos.item(item, 'values')
+        Servicos.append([Linha[0], Linha[1], Linha[2], Linha[3]])
+   
+
+    DiasAbertos = ''        
+    #dias_abertura VARCHAR(255)
+    DiasMarcados =verificar_dias_marcados()
+    nomes_dias = [dia for dia in DiasMarcados]
+    nomes_dias = list(nomes_dias)
+    dias_abertura_str = ','.join(nomes_dias)
+    DiasAbertos += f"{dias_abertura_str}¬¬"
+
+    Horarios = ''
+    #hora_seg VARCHAR(255)
+    Dia = 'SEG'
+    HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
+    HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
+    Horarios += f"{HorarioABRIR}-{HorarioFECHAR}¬¬"
+
+    #hora_ter VARCHAR(255)
+    Dia = 'TER'
+    HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
+    HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
+    Horarios += f"{HorarioABRIR}-{HorarioFECHAR}¬¬"
+
+    #hora_qua VARCHAR(255)
+    Dia = 'QUA'
+    HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
+    HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
+    Horarios += f"{HorarioABRIR}-{HorarioFECHAR}¬¬"
+
+    #hora_qui VARCHAR(255)
+    Dia = 'QUI'
+    HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
+    HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
+    Horarios += f"{HorarioABRIR}-{HorarioFECHAR}¬¬"
+
+    #hora_sex VARCHAR(255)
+    Dia = 'SEX'
+    HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
+    HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
+    Horarios += f"{HorarioABRIR}-{HorarioFECHAR}¬¬"
+
+    #hora_sab VARCHAR(255)
+    Dia = 'SAB'
+    HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
+    HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
+    Horarios += f"{HorarioABRIR}-{HorarioFECHAR}¬¬"
+
+    #hora_dom VARCHAR(255)
+    Dia = 'DOM'
+    HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
+    HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
+    Horarios += f"{HorarioABRIR}-{HorarioFECHAR}¬¬"
+
+    #Periodicidade do repasse:
+    OutrasInformacoes += f"{PERIODO_REPASSE_var.get()}¬¬"
+
+
+    #Os valores recebidos pelo cliente final serão geridos e administrados por:
+    OutrasInformacoes += f"{GESTAO_VALORES_var.get()}¬¬"
+
+
+    OutrasInformacoes += f"{Sw_KIT_PADRAO.get()}¬¬"
+
+
+    Profissional_Parceiro = Profissional_Parceiro.split('¬¬')  
+    Profissional_Parceiro_CNPJ = Profissional_Parceiro_CNPJ.split('¬¬')    
+    Contabilidade_Profissional_Parceiro = Contabilidade_Profissional_Parceiro.split('¬¬')    
+    OutrasInformacoes = OutrasInformacoes.split('¬¬')    
+    DiasAbertos = DiasAbertos.split('¬¬')
+    Horarios = Horarios.split('¬¬')
+
+
+    Profissional_Parceiro.pop()
+    Profissional_Parceiro_CNPJ.pop()
+    Contabilidade_Profissional_Parceiro.pop()
+    OutrasInformacoes.pop()
+    DiasAbertos.pop()
+    Horarios.pop()
+
+    return DadosContratante,Profissional_Parceiro,Profissional_Parceiro_CNPJ,Contabilidade_Profissional_Parceiro,OutrasInformacoes,Servicos,DiasAbertos,Horarios
+ 
+def envio_dados_contrato():
+    Dados = preparo_para_enviar_contrato()
+    Selenium.enviarcontrato(Dados)
     
 def DataEnviadaParaOBD(datainformada):                      
     try:
@@ -1489,6 +1652,9 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     labelTitulo.grid(row=1, column=0, padx=10, columnspan=8, pady=5, sticky="new") 
     
     #TIPO DO CONTRATO---------------------------------------------------------------
+    bt_digitar_contrato = ctk.CTkButton(FrameDadosContratoParceira,text="Digitar Contrato", command=envio_dados_contrato)
+    bt_digitar_contrato.grid(row=2, column=0, padx=10, columnspan=8, pady=5, sticky="e")
+
     label_MODELO_CONTRATO = ctk.CTkLabel(FrameDadosContratoParceira, text="Modelo de contrato")
     label_MODELO_CONTRATO.grid(row=3, column=0, padx=10, pady=5, sticky="w")
 

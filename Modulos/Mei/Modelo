@@ -1,0 +1,179 @@
+Id_Contratante
+
+##Salão parceiro
+CamposBD +='razao_social,'
+CamposBD +='cnpj,'
+CamposBD +='nome_fantasia,'
+CamposBD +='email,'
+CamposBD +='cep,'
+CamposBD +='rua,'
+CamposBD +='numero,'
+CamposBD +='complemento,'
+CamposBD +='bairro,'
+CamposBD +='cidade,'
+CamposBD +='estado,'
+
+## Representante legal - Salão parceiro
+CamposBD +='cpf,'
+CamposBD +='nome_pessoa,'
+CamposBD +='sobrenome,'
+CamposBD +='data_nascimento,'
+CamposBD +='email,'
+CamposBD +='celular,'
+CamposBD +='nome_mae,'
+CamposBD +='estado_civil,'
+CamposBD +='genero,'
+CamposBD +='cep,'
+CamposBD +='rua,'
+CamposBD +='numero,'
+CamposBD +='complemento,'
+CamposBD +='bairro,'
+CamposBD +='cidade,'
+CamposBD +='estado,'
+CamposBD +='numero_rg,'
+CamposBD +='orgao_rg,'
+CamposBD +='data_expedicao_rg,'
+
+
+##profissional parceiro
+ItensParaBD += f"'{entry_CPF.get()}'¬¬"
+ItensParaBD += f"'{entry_NomePF.get()}'¬¬"
+ItensParaBD += f"'{entry_SobrenomePF.get()}'¬¬"
+ItensParaBD += f"'{DataEnviadaParaOBD(entry_dtNascimento.get())}'¬¬"
+ItensParaBD += f"'{entry_E_mail.get()}'¬¬"
+ItensParaBD += f"'{entry_Celular.get()}'¬¬"
+ItensParaBD += f"'{entry_Mae.get()}'¬¬"
+ItensParaBD += f"'{ESTADO_CIVIL_var.get()}'¬¬"
+ItensParaBD += f"'{GENERO_var.get()}'¬¬"
+ItensParaBD += f"'{entry_cep.get()}'¬¬"
+ItensParaBD += f"'{entry_rua.get()}'¬¬"
+ItensParaBD += f"'{entry_numero.get()}'¬¬"
+ItensParaBD += f"'{entry_complemento.get()}'¬¬"
+ItensParaBD += f"'{entry_bairro.get()}'¬¬"
+ItensParaBD += f"'{entry_cidade.get()}'¬¬"
+ItensParaBD += f"'{entry_Estado.get()}'¬¬"
+ItensParaBD += f"'{entry_RG.get()}'¬¬"
+ItensParaBD += f"'{entry_RGOrgao.get()}'¬¬"
+ItensParaBD += f"'{DataEnviadaParaOBD(entry_RGData.get())}'¬¬"
+          
+
+#CNPJ - PROFISSIONAL PARCEIRO
+ItensParaBD += f"'{entry_CNPJ.get()}'¬¬"
+ItensParaBD += f"'{entry_RAZÃO_SOCIAL.get()}'¬¬"
+ItensParaBD += f"'{entry_CNAE.get()}'¬¬"
+
+
+#CONTABILIDADE - PROFISSIONAL PARCEIRO
+ItensParaBD += f"'{ASSESSORIA_CONTABIL_var.get()}'¬¬"
+ItensParaBD += f"'{CONTABILIDADE_ASSESORA_var.get()}'¬¬"##Separar dados
+
+
+#GESTÃO DE OUTRAS INFORMAÇÕES
+ItensParaBD += f"'{DataEnviadaParaOBD(entry_DATA_INICIAL_PARCEIRA.get())}'¬¬"
+ItensParaBD += f"'{RESPONSAVEL_RECOLHIMENTO_var.get()}'¬¬"
+
+
+TreeViewServicos
+        try:
+            for item in TreeV.get_children():
+                    TreeV.get(item)     
+        except Exception :
+                pass
+        
+#dias_abertura VARCHAR(255)
+DiasMarcados =verificar_dias_marcados()
+nomes_dias = [dia for dia in DiasMarcados]
+nomes_dias = list(nomes_dias)
+dias_abertura_str = ','.join(nomes_dias)
+ItensParaBD += f"'{dias_abertura_str}'¬¬"
+
+#hora_seg VARCHAR(255)
+Dia = 'SEG'
+HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
+HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
+ItensParaBD += f"'{HorarioABRIR}-{HorarioFECHAR}'¬¬"
+
+#hora_ter VARCHAR(255)
+Dia = 'TER'
+HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
+HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
+ItensParaBD += f"'{HorarioABRIR}-{HorarioFECHAR}'¬¬"
+
+#hora_qua VARCHAR(255)
+Dia = 'QUA'
+HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
+HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
+ItensParaBD += f"'{HorarioABRIR}-{HorarioFECHAR}'¬¬"
+
+#hora_qui VARCHAR(255)
+Dia = 'QUI'
+HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
+HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
+ItensParaBD += f"'{HorarioABRIR}-{HorarioFECHAR}'¬¬"
+
+#hora_sex VARCHAR(255)
+Dia = 'SEX'
+HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
+HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
+ItensParaBD += f"'{HorarioABRIR}-{HorarioFECHAR}'¬¬"
+
+#hora_sab VARCHAR(255)
+Dia = 'SAB'
+HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
+HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
+ItensParaBD += f"'{HorarioABRIR}-{HorarioFECHAR}'¬¬"
+
+#hora_dom VARCHAR(255)
+Dia = 'DOM'
+HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
+HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
+ItensParaBD += f"'{HorarioABRIR}-{HorarioFECHAR}'¬¬"
+
+#Periodicidade do repasse:
+ItensParaBD += f"'{PERIODO_REPASSE_var.get()}'¬¬"
+
+
+#Os valores recebidos pelo cliente final serão geridos e administrados por:
+ItensParaBD += f"'{GESTAO_VALORES_var.get()}'¬¬"
+
+
+ItensParaBD += f"'{Sw_KIT_PADRAO.get()}'¬¬"
+
+
+
+    ##Salão parceiro
+    Salao_parceiro =[]
+    Salao_parceiro +='cnpj,'
+    Salao_parceiro +='razao_social,'
+    Salao_parceiro +='nome_fantasia,'
+    Salao_parceiro +='celular,'
+    Salao_parceiro +='email,'
+    Salao_parceiro +='cep,'
+    Salao_parceiro +='rua,'
+    Salao_parceiro +='numero,'
+    Salao_parceiro +='complemento,'
+    Salao_parceiro +='bairro,'
+    Salao_parceiro +='cidade,'
+    Salao_parceiro +='estado,'
+
+    ## Representante legal - Salão parceiro
+    Representante_salao_parceiro =""
+    Representante_salao_parceiro +='cpf,'
+    Representante_salao_parceiro +='nome_pessoa,'
+    Representante_salao_parceiro +='sobrenome,'
+    Representante_salao_parceiro +='data_nascimento,'
+    Representante_salao_parceiro +='email,'
+    Representante_salao_parceiro +='celular,'
+    Representante_salao_parceiro +='nome_mae,'
+    Representante_salao_parceiro +='estado_civil,'
+    Representante_salao_parceiro +='genero,'
+    Representante_salao_parceiro +='cep,'
+    Representante_salao_parceiro +='rua,'
+    Representante_salao_parceiro +='numero,'
+    Representante_salao_parceiro +='complemento,'
+    Representante_salao_parceiro +='bairro,'
+    Representante_salao_parceiro +='cidade,'
+    Representante_salao_parceiro +='estado,'
+    Representante_salao_parceiro +='numero_rg,'
+    Representante_salao_parceiro +='orgao_rg,'
+    Representante_salao_parceiro +='data_expedicao_rg,'

@@ -583,7 +583,44 @@ def Pegar_dados_contabilidade():
         connection.close()
 
 
+def Pegar_dados_para_Contrato(Id,Campos):
+    # Conecta ao banco de dados
+    
+    connect_to_db()
+    
+    try:
+        with connection.cursor() as cursor:
+            ConsultaSQL = f"SELECT {Campos} FROM `meis` WHERE id = {Id}"
+            cursor.execute(ConsultaSQL)
+            results = cursor.fetchone()
 
+            if results is not None: 
+                NovoResult = []  # Lista para armazenar os itens convertidos
+                for item in results:
+    
+                    if item == None:
+                        item="N/A"
+                    if item == '':
+                        item="N/A"    
+                    #try:
+                    if isinstance(item, date):    
+                            # Formatando a data para "DD/MM/AAAA"
+                            data_formatada = item.strftime("%d/%m/%Y") # Convertendo para datetime
+
+                            #print(data_formatada)  # Saída
+                            item = data_formatada
+                    #except Exception:
+                    #    pass
+
+                    novoitemlistagem = (item)
+                    NovoResult.append(novoitemlistagem)
+
+                return NovoResult
+            else:
+                return None
+
+    finally:
+        connection.close()
 
 
 def Novosdados_ParaContrato(idmei):
