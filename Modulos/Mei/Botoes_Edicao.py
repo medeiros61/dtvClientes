@@ -458,7 +458,7 @@ def limparbotões():
     entry_RG.delete(0, 'end')
     entry_RGOrgao.delete(0, 'end')
     entry_RGData.delete(0, 'end')
-    MODELO_CONTRATO_var.set("CONTRATO PADRÃO - VERSÃO DATAVIX CONTÁBIL DIGITAL EIRELI")
+    MODELO_CONTRATO_var.set("Contrato Padrão - Versão Datavix Contábil Digital Eireli")
     entry_DATA_INICIAL_PARCEIRA.delete(0, 'end')
     entry_DATA_DISTRATO_PARCEIRA.delete(0, 'end')
     entry_CNAE.delete(0, 'end')
@@ -705,8 +705,15 @@ def preparo_para_enviar_contrato():
     ConsultaBD +='estado,'
     ConsultaBD +='numero_rg,'
     ConsultaBD +='orgao_rg,'
-    ConsultaBD +='data_expedicao_rg'
-    
+    ConsultaBD +='data_expedicao_rg,'
+    ConsultaBD +='dias_abertura,'
+    ConsultaBD +='hora_seg,'
+    ConsultaBD +='hora_ter,'
+    ConsultaBD +='hora_qua,'
+    ConsultaBD +='hora_qui,'
+    ConsultaBD +='hora_sex,'
+    ConsultaBD +='hora_sab,'
+    ConsultaBD +='hora_dom'
     DadosContratante = dbm.Pegar_dados_para_Contrato(idMaster,ConsultaBD)
 
 
@@ -718,7 +725,7 @@ def preparo_para_enviar_contrato():
     Profissional_Parceiro += f"{entry_CPF.get()}¬¬"
     Profissional_Parceiro += f"{entry_NomePF.get()}¬¬"
     Profissional_Parceiro += f"{entry_SobrenomePF.get()}¬¬"
-    Profissional_Parceiro += f"{DataEnviadaParaOBD(entry_dtNascimento.get())}¬¬"
+    Profissional_Parceiro += f"{entry_dtNascimento.get()}¬¬"
     Profissional_Parceiro += f"{entry_E_mail.get()}¬¬"
     Profissional_Parceiro += f"{entry_Celular.get()}¬¬"
     Profissional_Parceiro += f"{entry_Mae.get()}¬¬"
@@ -733,7 +740,7 @@ def preparo_para_enviar_contrato():
     Profissional_Parceiro += f"{entry_Estado.get()}¬¬"
     Profissional_Parceiro += f"{entry_RG.get()}¬¬"
     Profissional_Parceiro += f"{entry_RGOrgao.get()}¬¬"
-    Profissional_Parceiro += f"{DataEnviadaParaOBD(entry_RGData.get())}¬¬"
+    Profissional_Parceiro += f"{entry_RGData.get()}¬¬"
        
 
     #CNPJ - PROFISSIONAL PARCEIRO
@@ -749,7 +756,7 @@ def preparo_para_enviar_contrato():
 
     #GESTÃO DE OUTRAS INFORMAÇÕES
     OutrasInformacoes=""
-    OutrasInformacoes += f"{DataEnviadaParaOBD(entry_DATA_INICIAL_PARCEIRA.get())}¬¬"
+    OutrasInformacoes += f"{entry_DATA_INICIAL_PARCEIRA.get()}¬¬"
     OutrasInformacoes += f"{RESPONSAVEL_RECOLHIMENTO_var.get()}¬¬"
 
 
@@ -761,56 +768,6 @@ def preparo_para_enviar_contrato():
         Servicos.append([Linha[0], Linha[1], Linha[2], Linha[3]])
    
 
-    DiasAbertos = ''        
-    #dias_abertura VARCHAR(255)
-    DiasMarcados =verificar_dias_marcados()
-    nomes_dias = [dia for dia in DiasMarcados]
-    nomes_dias = list(nomes_dias)
-    dias_abertura_str = ','.join(nomes_dias)
-    DiasAbertos += f"{dias_abertura_str}¬¬"
-
-    Horarios = ''
-    #hora_seg VARCHAR(255)
-    Dia = 'SEG'
-    HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
-    HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
-    Horarios += f"{HorarioABRIR}-{HorarioFECHAR}¬¬"
-
-    #hora_ter VARCHAR(255)
-    Dia = 'TER'
-    HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
-    HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
-    Horarios += f"{HorarioABRIR}-{HorarioFECHAR}¬¬"
-
-    #hora_qua VARCHAR(255)
-    Dia = 'QUA'
-    HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
-    HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
-    Horarios += f"{HorarioABRIR}-{HorarioFECHAR}¬¬"
-
-    #hora_qui VARCHAR(255)
-    Dia = 'QUI'
-    HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
-    HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
-    Horarios += f"{HorarioABRIR}-{HorarioFECHAR}¬¬"
-
-    #hora_sex VARCHAR(255)
-    Dia = 'SEX'
-    HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
-    HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
-    Horarios += f"{HorarioABRIR}-{HorarioFECHAR}¬¬"
-
-    #hora_sab VARCHAR(255)
-    Dia = 'SAB'
-    HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
-    HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
-    Horarios += f"{HorarioABRIR}-{HorarioFECHAR}¬¬"
-
-    #hora_dom VARCHAR(255)
-    Dia = 'DOM'
-    HorarioABRIR = f'{eval(f"Hora_Abertura_{Dia}").get()}-{eval(f"Min_Abertura_{Dia}").get()}'
-    HorarioFECHAR = f'{eval(f"Hora_Fechamento_{Dia}").get()}-{eval(f"Min_Fechamento_{Dia}").get()}'
-    Horarios += f"{HorarioABRIR}-{HorarioFECHAR}¬¬"
 
     #Periodicidade do repasse:
     OutrasInformacoes += f"{PERIODO_REPASSE_var.get()}¬¬"
@@ -825,20 +782,18 @@ def preparo_para_enviar_contrato():
 
     Profissional_Parceiro = Profissional_Parceiro.split('¬¬')  
     Profissional_Parceiro_CNPJ = Profissional_Parceiro_CNPJ.split('¬¬')    
-    Contabilidade_Profissional_Parceiro = Contabilidade_Profissional_Parceiro.split('¬¬')    
+    Contabilidade_Profissional_Parceiro = Contabilidade_Profissional_Parceiro.split('¬¬')   
+    OutrasInformacoes += f"{MODELO_CONTRATO_var.get()}¬¬" 
+    
     OutrasInformacoes = OutrasInformacoes.split('¬¬')    
-    DiasAbertos = DiasAbertos.split('¬¬')
-    Horarios = Horarios.split('¬¬')
-
+    
 
     Profissional_Parceiro.pop()
     Profissional_Parceiro_CNPJ.pop()
     Contabilidade_Profissional_Parceiro.pop()
     OutrasInformacoes.pop()
-    DiasAbertos.pop()
-    Horarios.pop()
-
-    return DadosContratante,Profissional_Parceiro,Profissional_Parceiro_CNPJ,Contabilidade_Profissional_Parceiro,OutrasInformacoes,Servicos,DiasAbertos,Horarios
+ 
+    return DadosContratante,Profissional_Parceiro,Profissional_Parceiro_CNPJ,Contabilidade_Profissional_Parceiro,OutrasInformacoes,Servicos,
  
 def envio_dados_contrato():
     Dados = preparo_para_enviar_contrato()
@@ -1658,13 +1613,15 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     label_MODELO_CONTRATO = ctk.CTkLabel(FrameDadosContratoParceira, text="Modelo de contrato")
     label_MODELO_CONTRATO.grid(row=3, column=0, padx=10, pady=5, sticky="w")
 
-    MODELO_CONTRATO_var = ctk.StringVar(value="CONTRATO PADRÃO - VERSÃO DATAVIX CONTÁBIL DIGITAL EIRELI")
-    Menu_MODELO_CONTRATO = ctk.CTkOptionMenu(FrameDadosContratoParceira,values=['CONTRATO DE PARCERIA (VERSÃO 1.0) - NORMA COLETIVA (46473.003589/2017-99)','CONTRATO DE PARCERIA - MPT - 2013 (46736.002113/2014-50)','CONTRATO PADRÃO - VERSÃO 1.02 (46473.003589/2017-99)','CONTRATO PADRÃO - VERSÃO DATAVIX CONTÁBIL DIGITAL EIRELI'],
+    MODELO_CONTRATO_var = ctk.StringVar(value="Contrato Padrão - Versão Datavix Contábil Digital Eireli")
+    Menu_MODELO_CONTRATO = ctk.CTkOptionMenu(FrameDadosContratoParceira,values=['Contrato de Parceria (Versão 1.0) - Norma Coletiva (46473.003589/2017-99)','Contrato de Parceria - MPT - 2013 (46736.002113/2014-50)','Contrato Padrão - Versão 1.02 (46473.003589/2017-99)','Contrato Padrão - Versão Datavix Contábil Digital Eireli'],
                                             command=SelecaoMenu,
                                             variable=MODELO_CONTRATO_var)
     Menu_MODELO_CONTRATO.grid(row=3, column=1, columnspan=7, padx=10, pady=5, sticky="new")
     
 
+                                        
+                                        
     
     
 
@@ -1777,8 +1734,11 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     label_GESTAO_VALORES = ctk.CTkLabel(FrameoutrosDados_maiores, text="Os valores recebidos pelo cliente final serão geridos e administrados por")
     label_GESTAO_VALORES.grid(row=8, column=0, padx=10, pady=5, sticky="w")
 
+
+    ## Falta  'Empresa Admininstradora ou Gestora de Caixa' , no site precisa inserir mais dados , verificar a programação para depois incluir este item 
+
     GESTAO_VALORES_var = ctk.StringVar(value="Salão Parceiro")
-    Menu_GESTAO_VALORES = ctk.CTkOptionMenu(FrameoutrosDados_maiores,values=['Salão Parceiro', 'Empresa Admininstradora ou Gestora de Caixa', 'Profissional Parceiro'],
+    Menu_GESTAO_VALORES = ctk.CTkOptionMenu(FrameoutrosDados_maiores,values=['Salão Parceiro', 'Profissional Parceiro'],
                                             command=SelecaoMenu,
                                             variable=GESTAO_VALORES_var)
     Menu_GESTAO_VALORES.grid(row=9, column=0, padx=10, pady=5, sticky="new")
