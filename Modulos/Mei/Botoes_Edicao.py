@@ -6,7 +6,8 @@ import Modulos.Mei.Func_mei as Func_Mei
 from tkinter import messagebox
 from datetime import datetime
 import Modulos.Database.Logs as log
-import Modulos.ContratoParceria.EnvioContrato as Selenium
+import threading as td
+import Modulos.Mei.PainelContratos as Pnel_Cont
 
 def preencher_tipo(tipo_Cont_ou_Parc,contratante):
     if tipo_Cont_ou_Parc == "Criar_Contratante":
@@ -402,6 +403,7 @@ def pegar_dados_para_envio(tipo):
     log.RegistrarEventosdeLOG('Registrou um MEI  novo',f'Novo cliente : {nomeclienteparalog}') 
 
 def limparbotões():
+    global Limpartreeview
     def Limpartreeview(TreeV):
         try:
             for item in TreeV.get_children():
@@ -495,7 +497,7 @@ def Importardados(idcliente,Dadosparateladeedição):
     def importar_dados_treeview(TreeV,dados,):
         for result in dados:
             TreeV.insert("", 'end', values=result)
-    
+            
     limparbotões()
 
     tela_Mae = Dadosparateladeedição
@@ -794,11 +796,37 @@ def preparo_para_enviar_contrato():
     OutrasInformacoes.pop()
  
     return DadosContratante,Profissional_Parceiro,Profissional_Parceiro_CNPJ,Contabilidade_Profissional_Parceiro,OutrasInformacoes,Servicos,
- 
+
+listaContratos_Digitação = []
+digitaçao = td.Thread(target=Pnel_Cont.digitação_contrato)
+
+
 def envio_dados_contrato():
-    Dados = preparo_para_enviar_contrato()
-    Selenium.enviarcontrato(Dados)
     
+    Dados = preparo_para_enviar_contrato()
+    listaContratos_Digitação.append(Dados)
+    lc = locals()
+
+    emp = Dados[2]  
+    nome = emp[1]
+    infos = [f'{nome}','Digitando']
+    Pnel_Cont.incluir_dados_viewDG(infos)
+    
+    # Verificar se a thread digitação está ativa
+    if 'digitaçao' in locals() or digitaçao.is_alive():
+        print("A thread digitação está ativa.")
+    else:
+        print("A thread digitação não está ativa.")
+        digitaçao.start()
+        print("Ativando...")
+    
+def pegar_dados_Contrato():
+    return listaContratos_Digitação
+
+def Deletar_Primeiro_Contrato():
+    listaContratos_Digitação.pop(0)
+        
+        
 def DataEnviadaParaOBD(datainformada):                      
     try:
         data = datetime.strptime(datainformada, "%d/%m/%Y")
@@ -916,9 +944,9 @@ def Addcontabildiades():
 
 def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho_Logo_Rem):
     global frame_dados_mei,entry_Nome,entry_Situao,entry_Identificao,entry_CNPJ,entry_Tributao,entry_Data_abertura_,entry_Prefeitura,entry_Login,entry_Senha,entry_Pendncia_de_Recolhimentos,entry_Entrega_de_DAS_Mensal,entry_E_mail,entry_Pendncias,entry_Observaes,entry_CPF,entry_Cdigo_de_Acesso,entry_Senha_GOV,entry_Nvel_GOV,entry_Endereo,entry_Inscrio_Estadual,entry_Inscrio_Municipal,entry_Certificado_Digital,entry_Modelo_Datavix,entry_Homologado___Sindicato,entry_Vencimento_,entry_Faturamento,TreeViewParceiras,scrollbarParceiras,bt_Editar_MEI_Parceiras,TabViewGlobal,TreeviewDas,entry_Ano_dasn,entry_Faturamento,entry_Observaes_dasn,FrameDas,Framelistaparceiras,FrameDadosContratoParceira,Se_For_Contratante,Se_For_Parciera,entry_Fantasia,entry_RAZÃO_SOCIAL,entry_Celular,entry_cep,entry_rua,entry_numero,entry_complemento,entry_bairro,entry_cidade,entry_Estado,entry_Senha_Certificado_Digital,entry_NF_LIBERADA,entry_NomePF,entry_SobrenomePF,entry_Mae,ESTADO_CIVIL_var,GENERO_var,entry_dtNascimento,entry_RG,entry_RGOrgao,entry_RGData,MODELO_CONTRATO_var,entry_DATA_INICIAL_PARCEIRA,entry_DATA_DISTRATO_PARCEIRA,entry_CNAE,RESPONSAVEL_RECOLHIMENTO_var,GESTAO_VALORES_var,PERIODO_REPASSE_var,Sw_KIT_PADRAO,ASSESSORIA_CONTABIL_var,CONTABILIDADE_ASSESORA_var,verificar_dias_marcados,TreeViewServicos,entry_REPASSE_PROFISSIONAL,entry_REPASSE_SALAO,entry_NOME_SERVICO,TP_REPASSE_var,Menu_TP_REPASSE,Menu_CONTABILIDADE_ASSESORA,ativardia,siglas_estados
-
-    TabViewGlobal = Viewer
     
+    TabViewGlobal = Viewer
+       
     def dadosparceira(*args):
         
         TeladadosParceiras = ctk.CTkToplevel(Viewer.tab("Contrato de Parceria"))
@@ -1608,7 +1636,7 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     
     #TIPO DO CONTRATO---------------------------------------------------------------
     bt_digitar_contrato = ctk.CTkButton(FrameDadosContratoParceira,text="Digitar Contrato", command=envio_dados_contrato)
-    bt_digitar_contrato.grid(row=2, column=0, padx=10, columnspan=8, pady=5, sticky="e")
+    bt_digitar_contrato.grid(row=1, column=0, padx=10, columnspan=8, pady=5, sticky="e")
 
     label_MODELO_CONTRATO = ctk.CTkLabel(FrameDadosContratoParceira, text="Modelo de contrato")
     label_MODELO_CONTRATO.grid(row=3, column=0, padx=10, pady=5, sticky="w")
@@ -1762,10 +1790,10 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     
     #UTILIZAR KIT PADRÃO DE MÓVEIS E UTENSÍLIOS-----------------------------------------------------
     label_BENS_MATERIAIS = ctk.CTkLabel(Frame_REPASSE, text="BENS MATERIAIS")
-    label_BENS_MATERIAIS.grid(row=7, column=1, padx=10, pady=5, columnspan=3, sticky="w")
+    #label_BENS_MATERIAIS.grid(row=7, column=1, padx=10, pady=5, columnspan=3, sticky="w")
 
     Sw_KIT_PADRAO = ctk.CTkSwitch(Frame_REPASSE, text="UTILIZAR KIT PADRÃO DE MÓVEIS E UTENSÍLIOS")
-    Sw_KIT_PADRAO.grid(row=8, column=1, padx=10, pady=5, columnspan=3, sticky="w")
+    #Sw_KIT_PADRAO.grid(row=8, column=1, padx=10, pady=5, columnspan=3, sticky="w")
 
 
     #--------------------------------------------------------------------------------------------  

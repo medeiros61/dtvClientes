@@ -520,24 +520,26 @@ def enviarcontrato(Dados):
 
        
         i += 1
-        div_opcoes = driver.find_element(By.XPATH, "//div[label[contains(text(), 'Os valores recebidos pelo cliente final')]]")
-        label = div_opcoes.find_element(By.XPATH, f"//label[text()='{OutrasInformacoes[i]}']")
 
-        # Encontra o elemento de entrada associado ao label e clica nele
-        input_valor = label.find_element(By.XPATH, ".//preceding-sibling::input")
-        driver.execute_script("arguments[0].click();", input_valor)
+        
+        input_teste = driver.find_element(By.XPATH, f"//div[label[text()='{OutrasInformacoes[i]}']]/input[@name='gestao_caixa']")
+        driver.execute_script("arguments[0].scrollIntoView();", input_teste)
 
+
+        driver.execute_script("arguments[0].click();", input_teste)
+
+  
         botao_adicionar = driver.find_element(By.XPATH, "//button[contains(text(), 'Adicionar Bem Material')]")
 
         i += 1
         # Verifica se o botão está desabilitado
         if botao_adicionar.is_enabled():
-            if OutrasInformacoes[i] == '0':
-                bt = wait.until(EC.presence_of_element_located((By.ID, 'utilizar_kit_padrao')))
+            if OutrasInformacoes[i] == '1':
+                bt = wait.until(EC.presence_of_element_located((By.NAME, 'utilizar_kit_padrao')))
                 driver.execute_script("arguments[0].click();", bt)
         else:
             if OutrasInformacoes[i] == '1':
-                bt = wait.until(EC.presence_of_element_located((By.ID, 'utilizar_kit_padrao')))
+                bt = wait.until(EC.presence_of_element_located((By.NAME, 'utilizar_kit_padrao')))
                 driver.execute_script("arguments[0].click();", bt)
 
         DiasAbertos = DadosContratante[22].split(',')
@@ -641,146 +643,11 @@ def enviarcontrato(Dados):
           
 
         clicckcontinuar()
-        
+        site = driver.current_url
+
         
     finally:
         # Fecha o navegador
         driver.quit()
+        return site
 
-
-
-##Salão parceiro
-id="cnpj_salao_parceiro"
-id="razao_social_salao_parceiro" 
-id="nome_fantasia_salao_parceiro"
-id="telefone_salao_parceiro"
-id="email_salao_parceiro"
-id="cep_salao_parceiro"
-id="rua_salao_parceiro"
-id="numero_salao_parceiro" 
-id="complemento_salao_parceiro"
-id="bairro_salao_parceiro"
-id="cidade_salao_parceiro" 
-id="estado_salao_parceiro"
-
-## Representante legal - Salão parceiro
-id="cpf_representante_legal"
-id="nome_representante_legal"
-id="sobrenome_representante_legal"
-id="data_nascimento_representante_legal"
-id="email_representante_legal"
-id="celular_representante_legal"
-id="nome_mae_representante_legal"
-id="estado_civil_representante_legal"
-#class="form-control"><option value="">Selecione o estado civil</option>
-id="genero_representante_legal"
-id="cep_representante_legal"
-id="rua_representante_legal"
-id="numero_representante_legal"
-id="complemento_representante_legal"
-id="bairro_representante_legal"
-id="cidade_representante_legal"
-id="estado_representante_legal"
-id="rg_representante_legal"
-id="orgao_expedidor_representante_legal"
-id="data_expedicao_representante_legal"
-
-##profissional parceiro
-id="cpf_profissional_parceiro" 
-id="nome_profissional_parceiro"
-id="sobrenome_profissional_parceiro"
-id="data_nascimento_profissional_parceiro"
-id="email_profissional_parceiro"
-id="celular_profissional_parceiro"
-id="nome_mae_profissional_parceiro"
-id="estado_civil_profissional_parceiro" 
-#class="form-control"><option value="">Selecione o estado civil</option>
-id="genero_profissional_parceiro" 
-#class="form-control" required=""><option value="">Selecione o gênero</option>
-id="cep_profissional_parceiro"
-id="rua_profissional_parceiro"
-id="numero_profissional_parceiro"
-id="complemento_profissional_parceiro"
-id="bairro_profissional_parceiro"
-id="cidade_profissional_parceiro"
-id="estado_profissional_parceiro"
-id="rg_profissional_parceiro"
-id="orgao_expedidor_profissional_parceiro"
-id="data_expedicao_profissional_parceiro"
-
-#CNPJ - PROFISSIONAL PARCEIRO
-## Comnando para clic no ##utilizar_cpf
-id="cnpj_profissional_parceiro"
-id="razao_social_profissional_parceiro"
-id="cnaes-selectized"
-
-#TPC - TABELA DE PREÇO CONVENCIONADA
-#Tipo Repasse ID tipo_repasse_v ou ID tipo_repasse_P
-##Clicar no botão com texto "Adicionar Serviço"
-name="servico[1]"
-name= "valor_salao[1]"
-name="comissao_profissional[1]"
-#Se for add mais servicos os campos vao aumentando [1] > [2] > [3]
-#Depois clica aqui <a href="#" class="btn btn-outline-success btn-sm confirm1 me-1" onclick="confirmaServicoTabelaRepasse(1)"><i class="fa-solid fa-check fa-fw"></i></a>
-
-#CONTABILIDADE - PROFISSIONAL PARCEIRO
-id="possui_contabilidade_1" # Sim
-#Ou
-id="possui_contabilidade_0" #Não
-##Se Sim
-id="cpf_cnpj_contabilidade"
-id="razao_social_contabilidade"
-id="telefone_contabilidade"
-
-#GESTÃO DE OUTRAS INFORMAÇÕES
-id="data_inicio_parceria"
-#Responsável pelo recolhimento/retenção e pagamento das obrigações do PROFISSIONAL PARCEIRO:
-
-#Clicar na div que tem o nome informado <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="responsavel_taxa_mensal" id="responsavel_taxa_mensal_sp" value="SP" required=""><label class="form-check-label" for="responsavel_taxa_mensal_sp">Salão Parceiro</label></div>
-
-
-#segunda
-id = "dia_1"
-id = "entrada_1"
-id="saida_1"
-
-#terca
-id = "dia_2"
-id = "entrada_2"
-id="saida_2"
-
-#Quarta
-id = "dia_3"
-id = "entrada_3"
-id="saida_3"
-
-#quinta
-id = "dia_4"
-id = "entrada_4"
-id="saida_4"
-
-#sexta
-id = "dia_5"
-id = "entrada_5"
-id="saida_5"
-
-#sabado
-id = "dia_6"
-id = "entrada_6"
-id="saida_6"
-
-#domingo
-id = "dia_0"
-id = "entrada_0"
-id="saida_0"
-
-#Periodicidade do repasse:
-##Selecioanr com percentual <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="periodicidade_repasse" id="periodicidade_repasse_17" value="15"><label class="form-check-label" for="periodicidade_repasse_17">Quinzenal</label></div>
-
-#Os valores recebidos pelo cliente final serão geridos e administrados por:
-#<div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gestao_caixa" id="gestao_caixa_sp" value="SP" onchange="changeGestaoCaixaNovoContrato(this.value)"><label class="form-check-label" for="gestao_caixa_sp">Salão Parceiro</label></div>
-
-id="utilizar_kit_padrao"
-
-#clicar neste botão dps 
-#<a href="https://homologa.probeleza.org.br/storage/35213857000174.24052024143244/contrato-de-parceria-profissional.f2580ebc.pdf" target="_blank" class="btn btn-purple btn-sm">                        <i class="fa-solid fa-file-contract"></i>Visualizar Contrato</a>

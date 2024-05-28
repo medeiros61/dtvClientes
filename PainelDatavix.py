@@ -8,6 +8,7 @@ import threading
 import Modulos.Database.Logs as log
 import warnings
 import time
+import Modulos.Mei.PainelContratos as Pnel_Cont
 # Desativar todos os warnings
 warnings.simplefilter("ignore")
 
@@ -30,6 +31,9 @@ obs_AtivarUsuarios = ""
 
 obs_Sair = ""
 Evento_Sair= 'Usuario Deslogou do sistema'
+
+
+
 
 def DataVix(DadosUsuario,janela):
     log.dadosusuario(DadosUsuario)
@@ -101,7 +105,7 @@ def DataVix(DadosUsuario,janela):
     #center_window(screen_datavix,1150,615) caso queria que aparece no centro
     screen_datavix.iconbitmap(default='logodatavix.ico')
     
-    screen_datavix.title("Master")
+    screen_datavix.title("Datavix")
     #screen_datavix.resizable(False,False)
     #username_entry = ctk.CTkEntry(master=screen_datavix, placeholder_text="TESTE", width=300, font=("Roboto",14))
     #username_entry.pack(side=RIGHT)
@@ -122,6 +126,7 @@ def DataVix(DadosUsuario,janela):
     #------------------------------------------------------------------------
 
     #aba
+    global options_frame
     options_frame = ctk.CTkFrame(master=screen_datavix, width=200, height=580, fg_color=("#808080"))
     options_frame.pack(side=LEFT, fill = Y) 
     #options_frame.grid(row=0, column=0, padx=20, pady=(20, 10), sticky="nsew")
@@ -164,8 +169,12 @@ def DataVix(DadosUsuario,janela):
     warnings.simplefilter("default")
 
     log.RegistrarEventosdeLOG(Evento_PainelDtv,obs_PainelDtv)
-
+    
+    Pnel_Cont.criarinterface()
     screen_datavix.mainloop()
+
+def option_frm():
+    return options_frame
 
 #---------------------------------------------------------------------------------#
 
