@@ -799,17 +799,17 @@ def preparo_para_enviar_contrato():
 
 listaContratos_Digitação = []
 digitaçao = td.Thread(target=Pnel_Cont.digitação_contrato)
-
+id_contrato = 0
 
 def envio_dados_contrato():
-    
+    global id_contrato
+    id_contrato += 1
     Dados = preparo_para_enviar_contrato()
-    listaContratos_Digitação.append(Dados)
+    listaContratos_Digitação.append([Dados,id_contrato])
     lc = locals()
-
     emp = Dados[2]  
     nome = emp[1]
-    infos = [f'{nome}','Digitando']
+    infos = [f'{nome}(ID:{id_contrato})','Digitando']
     Pnel_Cont.incluir_dados_viewDG(infos)
     
     # Verificar se a thread digitação está ativa

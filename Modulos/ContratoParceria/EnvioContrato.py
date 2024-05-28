@@ -9,6 +9,38 @@ import time
 import re
 
 
+def abrircontrato(link):
+    driver = webdriver.Chrome()
+
+    # Abre uma página web
+    driver.get('https://homologa.probeleza.org.br/login')
+    
+    try:
+        #tempo de espera para encontrar item ou pagina carregar
+        wait = WebDriverWait(driver, 120)
+
+        
+        Input_cpf = wait.until(EC.presence_of_element_located((By.ID, 'cpf')))
+        Input_cpf.send_keys('22549210883')
+
+        Input_senha = wait.until(EC.presence_of_element_located((By.ID, 'password')))
+        Input_senha.send_keys('Datavix@159')
+
+        form = wait.until(EC.presence_of_element_located((By.ID, 'home-tab-pane')))
+        # Envia o formulário
+        form.submit()
+
+
+        Agente_credenciado = wait.until(EC.presence_of_element_located((By.XPATH, '//a[.//b[contains(text(), "Agente Credenciado")]]')))
+        Agente_credenciado.click()
+        bt_documentos = wait.until(EC.presence_of_element_located((By.XPATH, '//a[@href="https://homologa.probeleza.org.br/documentos"]')))
+        
+        driver.get(f'{link}')
+    finally:
+        time.sleep(999999) 
+        # Fecha o navegador
+        driver.quit()
+
 
 
 def enviarcontrato(Dados):
@@ -45,8 +77,16 @@ def enviarcontrato(Dados):
 
         return numeros_concatenados
     
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-gpu")  # Desativa a GPU
+    chrome_options.add_argument("--no-sandbox")  # Necessário para alguns ambientes CI/CD
+    chrome_options.add_argument("--disable-dev-shm-usage")  # Necessário para contêineres Docker
+    chrome_options.add_argument("--window-size=1920x1080")  # Define o tamanho da janela
+    chrome_options.add_argument("--log-level=3")  # Define o nível de log para 3 (WARNING)
 
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(chrome_options)
+
     # Abre uma página web
     driver.get('https://homologa.probeleza.org.br/login')
     
@@ -649,5 +689,8 @@ def enviarcontrato(Dados):
     finally:
         # Fecha o navegador
         driver.quit()
+        
         return site
+       
+            
 
