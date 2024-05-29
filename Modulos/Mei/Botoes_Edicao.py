@@ -1054,10 +1054,15 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
             return False
 
     def Somentenumeroevigula(P):
-        if str.isdigit(P) or P == "" or len(P) <=2:
-          
-            return True
-      
+        if str.isdigit(P) or P == "" :
+            tamanho = len(P)
+            if TP_REPASSE_var.get() == "Percentual":    
+                if tamanho <=2:
+                    return True
+            
+                return False
+            else:
+                return True
         else:
             return False
         

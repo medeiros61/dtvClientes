@@ -1,4 +1,4 @@
-Versão = '1.1'
+Versão = '1.0'
 
 import customtkinter as ctk
 from tkinter import *
