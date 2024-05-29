@@ -476,7 +476,7 @@ def limparbotões():
     listboxCnae.delete(0, tk.END)
     bt_Excluir_cnae.configure(state='disabled')
     dias_da_semana = ["SEG", "TER", "QUA", "QUI", "SEX", "SAB", "DOM"]
-    
+    TP_REPASSE_var = ctk.StringVar(value="Percentual")
     if len(dias_da_semana)>0:
         for dia in dias_da_semana:
             if dia !='N/A' and dia !='':
