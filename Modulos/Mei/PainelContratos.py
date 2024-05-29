@@ -6,16 +6,20 @@ import Modulos.Mei.Botoes_Edicao as Bt_edit
 import PainelDatavix as pd
 import threading
 
-
+execuçao = 0
 def incluir_dados_viewDG(itens):
+    global execuçao
     TreeViewDG_Contrato.insert("", 'end', values=itens)
-    
+    if execuçao == 0:
+        FrameContratos.grid(row=9, column=0, padx=2, pady=(20, 10), sticky="nsew") 
+        execuçao += 1 
+         
 def criarinterface():
-    global TreeViewDG_Contrato
+    global TreeViewDG_Contrato,FrameContratos
     OptionFrame = pd.option_frm()
 
     FrameContratos = ctk.CTkFrame(OptionFrame)
-    FrameContratos.grid(row=9, column=0, padx=2, pady=(20, 10), sticky="nsew")
+    
 
     NomeLB = ctk.CTkLabel(FrameContratos,text='Contratos')
     NomeLB.grid(row=1, column=0,columnspan=5, sticky="new", padx=(0,0), pady=(2,2))
@@ -63,7 +67,9 @@ def atualizar_treeview(treeview, id, link):
 
 
 def digitação_contrato():
-
+    
+ 
+    erroscont = 0    
     Itens = Bt_edit.pegar_dados_Contrato()
     while len(Itens)>0:
             contrato,id = Itens[0] 
@@ -74,7 +80,11 @@ def digitação_contrato():
                 Link = Selenium.enviarcontrato(contrato)
                 Bt_edit.Deletar_Primeiro_Contrato()
                 atualizar_treeview(TreeViewDG_Contrato, id, Link)
+                erroscont = 0
             except Exception:
+                if erroscont > 4:
+                    break
+                erroscont += 1
                 print("Erro ao enviar contrato")
                 pass
             

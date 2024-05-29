@@ -2,7 +2,7 @@ pyinstaller --onefile --add-data="logodatavix.ico;." --icon=logodatavix.ico --ve
 
 pyinstaller --onefile --add-data="logodatavix.ico;." --icon=logodatavix.ico --version-file=version.txt --noconsole DatavixAPP_Update.py
 
- pyinstaller --onefile --uac-admin --add-data="logodatavix.ico;." --icon=logodatavix.ico --version-file=version.txt --noconsole Datavix.py
+pyinstaller --onefile --uac-admin --add-data="logodatavix.ico;." --icon=logodatavix.ico --version-file=version.txt --noconsole Datavix.py
 
 
 

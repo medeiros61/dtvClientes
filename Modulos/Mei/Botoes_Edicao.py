@@ -1,6 +1,7 @@
 import customtkinter as ctk
 import Modulos.Database.Meis as dbm
 from tkinter import *
+import tkinter as tk
 from tkinter import ttk
 import Modulos.Mei.Func_mei as Func_Mei
 from tkinter import messagebox
@@ -262,7 +263,9 @@ def pegar_dados_para_envio(tipo):
     CamposBD +='data_distrato,'
 
     #cnae VARCHAR(255)
-    ItensParaBD += f"'{entry_CNAE.get()}'¬¬"
+    
+    ItensParaBD += f"'{obter_itens_Cnae()}'¬¬"
+    
     CamposBD +='cnae,'
     
     #responsavel_recolhimento VARCHAR(255)
@@ -470,8 +473,8 @@ def limparbotões():
     #Sw_KIT_PADRAO.set(1)
     ASSESSORIA_CONTABIL_var.set("Sim")
     CONTABILIDADE_ASSESORA_var.set("")
-    
-
+    listboxCnae.delete(0, tk.END)
+    bt_Excluir_cnae.configure(state='disabled')
     dias_da_semana = ["SEG", "TER", "QUA", "QUI", "SEX", "SAB", "DOM"]
     
     if len(dias_da_semana)>0:
@@ -610,7 +613,14 @@ def Importardados(idcliente,Dadosparateladeedição):
     MODELO_CONTRATO_var.set(DadosComplemtares[21])
     entry_DATA_INICIAL_PARCEIRA.insert(0,DadosComplemtares[22])
     entry_DATA_DISTRATO_PARCEIRA.insert(0,DadosComplemtares[23])
-    entry_CNAE.insert(0,DadosComplemtares[24])
+    #entry_CNAE.insert(0,DadosComplemtares[24])
+    List_Cnaes = DadosComplemtares[24].split(',')
+    
+    for cnae in List_Cnaes: 
+        if cnae != 'N/A':
+            listboxCnae.insert(tk.END, cnae)
+   
+        
     RESPONSAVEL_RECOLHIMENTO_var.set(DadosComplemtares[25])
     GESTAO_VALORES_var.set(DadosComplemtares[26])
     PERIODO_REPASSE_var.set(DadosComplemtares[27])
@@ -749,7 +759,7 @@ def preparo_para_enviar_contrato():
     Profissional_Parceiro_CNPJ =""
     Profissional_Parceiro_CNPJ += f"{entry_CNPJ.get()}¬¬"
     Profissional_Parceiro_CNPJ += f"{entry_RAZÃO_SOCIAL.get()}¬¬"
-    Profissional_Parceiro_CNPJ += f"{entry_CNAE.get()}¬¬"
+    Profissional_Parceiro_CNPJ += f"{obter_itens_Cnae()}¬¬"
 
     #CONTABILIDADE - PROFISSIONAL PARCEIRO
     Contabilidade_Profissional_Parceiro = ""
@@ -942,11 +952,13 @@ def Addcontabildiades():
             TopLevel_CONTABILIDADE.destroy()
             
 
+
+
 def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho_Logo_Rem):
-    global frame_dados_mei,entry_Nome,entry_Situao,entry_Identificao,entry_CNPJ,entry_Tributao,entry_Data_abertura_,entry_Prefeitura,entry_Login,entry_Senha,entry_Pendncia_de_Recolhimentos,entry_Entrega_de_DAS_Mensal,entry_E_mail,entry_Pendncias,entry_Observaes,entry_CPF,entry_Cdigo_de_Acesso,entry_Senha_GOV,entry_Nvel_GOV,entry_Endereo,entry_Inscrio_Estadual,entry_Inscrio_Municipal,entry_Certificado_Digital,entry_Modelo_Datavix,entry_Homologado___Sindicato,entry_Vencimento_,entry_Faturamento,TreeViewParceiras,scrollbarParceiras,bt_Editar_MEI_Parceiras,TabViewGlobal,TreeviewDas,entry_Ano_dasn,entry_Faturamento,entry_Observaes_dasn,FrameDas,Framelistaparceiras,FrameDadosContratoParceira,Se_For_Contratante,Se_For_Parciera,entry_Fantasia,entry_RAZÃO_SOCIAL,entry_Celular,entry_cep,entry_rua,entry_numero,entry_complemento,entry_bairro,entry_cidade,entry_Estado,entry_Senha_Certificado_Digital,entry_NF_LIBERADA,entry_NomePF,entry_SobrenomePF,entry_Mae,ESTADO_CIVIL_var,GENERO_var,entry_dtNascimento,entry_RG,entry_RGOrgao,entry_RGData,MODELO_CONTRATO_var,entry_DATA_INICIAL_PARCEIRA,entry_DATA_DISTRATO_PARCEIRA,entry_CNAE,RESPONSAVEL_RECOLHIMENTO_var,GESTAO_VALORES_var,PERIODO_REPASSE_var,Sw_KIT_PADRAO,ASSESSORIA_CONTABIL_var,CONTABILIDADE_ASSESORA_var,verificar_dias_marcados,TreeViewServicos,entry_REPASSE_PROFISSIONAL,entry_REPASSE_SALAO,entry_NOME_SERVICO,TP_REPASSE_var,Menu_TP_REPASSE,Menu_CONTABILIDADE_ASSESORA,ativardia,siglas_estados
-    
+    global frame_dados_mei,entry_Nome,entry_Situao,entry_Identificao,entry_CNPJ,entry_Tributao,entry_Data_abertura_,entry_Prefeitura,entry_Login,entry_Senha,entry_Pendncia_de_Recolhimentos,entry_Entrega_de_DAS_Mensal,entry_E_mail,entry_Pendncias,entry_Observaes,entry_CPF,entry_Cdigo_de_Acesso,entry_Senha_GOV,entry_Nvel_GOV,entry_Endereo,entry_Inscrio_Estadual,entry_Inscrio_Municipal,entry_Certificado_Digital,entry_Modelo_Datavix,entry_Homologado___Sindicato,entry_Vencimento_,entry_Faturamento,TreeViewParceiras,scrollbarParceiras,bt_Editar_MEI_Parceiras,TabViewGlobal,TreeviewDas,entry_Ano_dasn,entry_Faturamento,entry_Observaes_dasn,FrameDas,Framelistaparceiras,FrameDadosContratoParceira,Se_For_Contratante,Se_For_Parciera,entry_Fantasia,entry_RAZÃO_SOCIAL,entry_Celular,entry_cep,entry_rua,entry_numero,entry_complemento,entry_bairro,entry_cidade,entry_Estado,entry_Senha_Certificado_Digital,entry_NF_LIBERADA,entry_NomePF,entry_SobrenomePF,entry_Mae,ESTADO_CIVIL_var,GENERO_var,entry_dtNascimento,entry_RG,entry_RGOrgao,entry_RGData,MODELO_CONTRATO_var,entry_DATA_INICIAL_PARCEIRA,entry_DATA_DISTRATO_PARCEIRA,entry_CNAE,RESPONSAVEL_RECOLHIMENTO_var,GESTAO_VALORES_var,PERIODO_REPASSE_var,Sw_KIT_PADRAO,ASSESSORIA_CONTABIL_var,CONTABILIDADE_ASSESORA_var,verificar_dias_marcados,TreeViewServicos,entry_REPASSE_PROFISSIONAL,entry_REPASSE_SALAO,entry_NOME_SERVICO,TP_REPASSE_var,Menu_TP_REPASSE,Menu_CONTABILIDADE_ASSESORA,ativardia,siglas_estados,listboxCnae,obter_itens_Cnae,bt_Excluir_cnae
     TabViewGlobal = Viewer
-       
+    logo_add = PhotoImage(file=Caminho_Logo_Add).subsample(25, 25)   
+    logo_excluir = PhotoImage(file=Caminho_Logo_Rem).subsample(25, 25)
     def dadosparceira(*args):
         
         TeladadosParceiras = ctk.CTkToplevel(Viewer.tab("Contrato de Parceria"))
@@ -1041,6 +1053,14 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
         else:
             return False
 
+    def Somentenumeroevigula(P):
+        if str.isdigit(P) or P == "" or len(P) <=2:
+          
+            return True
+      
+        else:
+            return False
+        
     def Somentenumeroevigulaeponto(P):
         if all(char.isdigit() or char in ",." for char in P) or P == "":
             return True
@@ -1094,7 +1114,7 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
         label_TEL_CONT_MEIS.grid(row=13, column=0, padx=10, pady=5, sticky="w")
         entry_TEL_CONT_MEIS.grid(row=13, column=1, padx=10, pady=5, sticky="nsew") 
 
-        logo_add = PhotoImage(file=Caminho_Logo_Add).subsample(25, 25)
+        
         bt_add = ctk.CTkButton(TopLevel_CONTABILIDADE,image=logo_add,text="",command=Addcontabildiades,width =20)
         bt_add.grid(row=11,rowspan=3, column=2, padx=10, pady=5, sticky="nsew")
 
@@ -1146,6 +1166,65 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
         #    print("Terça-feira não está marcada.")
         return dias_com_horarios
     
+    
+    def adicionarcnae():
+        cnae = entry_CNAE.get()
+        if len(cnae)==7:
+            listboxCnae.insert(tk.END, cnae)
+            entry_CNAE.delete(0, 'end')
+            
+            
+    def excluircnae():
+        #listboxCnae.delete(0, tk.END)
+        # Obtém o índice do item selecionado
+        indice_selecionado = listboxCnae.curselection()
+
+        # Deleta o item selecionado da listboxCnae
+        if indice_selecionado:
+            listboxCnae.delete(indice_selecionado)   
+         
+            
+    def obter_itens_Cnae():
+        # Obtém o número total de itens na listboxCnae
+        numero_itens = listboxCnae.size()
+
+        # Lista para armazenar os itens da listboxCnae
+        itens = ''
+      
+        # Itera sobre os índices da listboxCnae e obtém os itens
+        for i in range(numero_itens):
+            itens += f'{listboxCnae.get(i)}'
+            if i < numero_itens-1:
+                itens += ','
+                
+
+        
+        return itens
+    
+    
+    def AtivarBTExcluir_Cnae(event):
+
+        if listboxCnae.size() > 0:
+     
+            bt_Excluir_cnae.configure(state=tk.NORMAL)
+        else:
+       
+            bt_Excluir_cnae.configure(state=tk.DISABLED)
+    
+     
+    def VerificarSomaPercentual():
+        if TP_REPASSE_var.get() == "Percentual":    
+            salão = entry_REPASSE_SALAO.get()
+            parceiro = entry_REPASSE_PROFISSIONAL.get()
+            
+            soma = float(parceiro) + float(salão)
+            if soma == 100:
+                Envio_dados_servico('ADD')
+            else:
+                messagebox.showerror("Erro", "A soma dos percentuais deve ser igual a 100%")
+        else:
+            Envio_dados_servico('ADD')
+                    
     frame_dados_mei=frameprincipal
     yes_or_not = [
         "SIM","NÃO"
@@ -1514,11 +1593,10 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     label_Observaes_dasn.grid(row=0, column=2, padx=10, pady=5, sticky="w")
     entry_Observaes_dasn.grid(row=1, column=2, padx=10, pady=5, sticky="nsew")
 
-    logo_add = PhotoImage(file=Caminho_Logo_Add).subsample(25, 25)
     bt_add = ctk.CTkButton(FrameDas,image=logo_add, text="Adicionar",command=lambda:adicição_dados_DASN('ADD'))
     bt_add.grid(row=0, column=3, padx=5, pady=5, sticky="new")
 
-    logo_excluir = PhotoImage(file=Caminho_Logo_Rem).subsample(25, 25)
+    
     bt_Excluir = ctk.CTkButton(FrameDas,image=logo_excluir, text="Excluir",command=lambda:adicição_dados_DASN('DEL'))
     bt_Excluir.grid(row=1, column=3, padx=5, pady=5, sticky="new")
     bt_Excluir.configure(state='disabled')
@@ -1667,18 +1745,30 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     #Inicio da parcceria 
     label_DATA_DISTRATO_PARCEIRA = ctk.CTkLabel(FrameContrato, text="Data do Distrato")
     entry_DATA_DISTRATO_PARCEIRA = ctk.CTkEntry(FrameContrato)
-    label_DATA_DISTRATO_PARCEIRA.grid(row=4, column=2, padx=10, pady=5, sticky="w")
-    entry_DATA_DISTRATO_PARCEIRA.grid(row=4, column=3, padx=10, pady=5, sticky="nsew") 
+    label_DATA_DISTRATO_PARCEIRA.grid(row=5, column=0, padx=10, pady=5, sticky="w")
+    entry_DATA_DISTRATO_PARCEIRA.grid(row=5, column=1, padx=10, pady=5, sticky="nsew") 
     entry_DATA_DISTRATO_PARCEIRA.bind('<FocusOut>', lambda event: verificar_entrada_data(event, entry_DATA_DISTRATO_PARCEIRA))
 
     Validaçao = (FrameContrato.register(validar_entrada_Numero_7Caracter), '%P')
     #Cnae profissional parceiro ####-#/##  
     label_CNAE = ctk.CTkLabel(FrameContrato, text="CNAE (Ativdade da parceira)")
     entry_CNAE = ctk.CTkEntry(FrameContrato,validate='key', validatecommand=Validaçao)
-    label_CNAE.grid(row=4, column=4, padx=10, pady=5, sticky="w")
-    entry_CNAE.grid(row=4, column=5, padx=10, pady=5, sticky="nsew")
+    label_CNAE.grid(row=4, column=2, padx=10, pady=5, sticky="w")
+    entry_CNAE.grid(row=4, column=3, padx=10, pady=5, sticky="nsew")
     
+    bt_add = ctk.CTkButton(FrameContrato,image=logo_add, text="Adicionar",command=adicionarcnae)
+    bt_add.grid(row=5, column=2, padx=10, pady=5, sticky="nsew")
+    
+    bt_Excluir_cnae = ctk.CTkButton(FrameContrato,image=logo_excluir, text="Excluir",command=excluircnae)
+    bt_Excluir_cnae.grid(row=5, column=3, padx=10, pady=5, sticky="nsew")
+    bt_Excluir_cnae.configure(state='disabled')
 
+        
+    listboxCnae = tk.Listbox(FrameContrato,height=3)
+    listboxCnae.grid(row=4, column=5,rowspan=2, padx=10, pady=5, sticky="nsew")
+    listboxCnae.bind('<<ListboxSelect>>',AtivarBTExcluir_Cnae)
+    
+    
 
     ## Servicos Frame
     FrameServicos = ctk.CTkFrame(FrameDadosContratoParceira, border_width=largura_borda, border_color=cor_de_borda)
@@ -1700,21 +1790,20 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     entry_NOME_SERVICO = ctk.CTkEntry(FrameServicos)
     label_NOME_SERVICO.grid(row=7, column=0, padx=10, sticky="w")
     entry_NOME_SERVICO.grid(row=8, column=0, padx=10, pady=5, sticky="new") 
-    
+    ValidarapenasNumeroeponto = FrameServicos.register(Somentenumeroevigula)
     ##PERCENTUAL REPASSE SALAO ------------------------------------------
     label_REPASSE_SALAO = ctk.CTkLabel(FrameServicos, text="Percentual Salão")
-    entry_REPASSE_SALAO = ctk.CTkEntry(FrameServicos)
+    entry_REPASSE_SALAO = ctk.CTkEntry(FrameServicos, validate="key", validatecommand=(ValidarapenasNumeroeponto, "%P"))
     label_REPASSE_SALAO.grid(row=9, column=0, padx=10, sticky="w")
     entry_REPASSE_SALAO.grid(row=10, column=0, padx=10, pady=5, sticky="new") 
     
     ##PERCENTUAL REPASSE PROFISSIONAL ------------------------------------------
     label_REPASSE_PROFISSIONAL = ctk.CTkLabel(FrameServicos, text="Percentual Profissional")
-    entry_REPASSE_PROFISSIONAL = ctk.CTkEntry(FrameServicos)
+    entry_REPASSE_PROFISSIONAL = ctk.CTkEntry(FrameServicos, validate="key", validatecommand=(ValidarapenasNumeroeponto, "%P"))
     label_REPASSE_PROFISSIONAL.grid(row=11, column=0, padx=10, sticky="w")
     entry_REPASSE_PROFISSIONAL.grid(row=12, column=0, padx=10, pady=5, sticky="new") 
     
-    logo_add = PhotoImage(file=Caminho_Logo_Add).subsample(25, 25)
-    bt_add = ctk.CTkButton(FrameServicos,image=logo_add, text="Adicionar",command=lambda:Envio_dados_servico('ADD'))
+    bt_add = ctk.CTkButton(FrameServicos,image=logo_add, text="Adicionar",command=VerificarSomaPercentual)
     bt_add.grid(row=13, column=0, padx=10, pady=5, sticky="new")
 
   
@@ -1739,7 +1828,7 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     TreeViewServicos.configure(yscrollcommand=scrollbarParceiras.set)   
     
     #BOTAO EXCLUIR SERVICOS ----------------------------------------------------------------
-    logo_excluir = PhotoImage(file=Caminho_Logo_Rem).subsample(25, 25)
+    
     bt_EXCLUIR_REPASSE = ctk.CTkButton(FrameServicos,image=logo_excluir, text="Excluir",command=lambda:Envio_dados_servico('DEL'))
     bt_EXCLUIR_REPASSE.grid(row=5, column=5, columnspan=2, padx=10, pady=5, sticky="new")
     bt_EXCLUIR_REPASSE.configure(state='disabled')
@@ -1800,7 +1889,7 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     ## Frame-------------------------------------------------------------------------------------
     FrameoutrosDados_maiores2 = ctk.CTkFrame(FrameDadosContratoParceira, border_width=largura_borda, border_color=cor_de_borda)
     FrameoutrosDados_maiores2.grid(row=9, column=0, columnspan=8, padx=10, pady=5, sticky="nsew")
-
+   
     #ASSESSORIA CONTABIL---------------------------------------------------------------
     label_ASSESSORIA_CONTABIL = ctk.CTkLabel(FrameoutrosDados_maiores2, text="O Profissional Parceiro possui a assessoria de uma contabilidade?")
     label_ASSESSORIA_CONTABIL.grid(row=9, column=0, columnspan=2, padx=10, pady=5, sticky="w")
@@ -1819,7 +1908,6 @@ def criarbotoes(Viewer,frameprincipal,Caminho_Logo_Edit,Caminho_Logo_Add,Caminho
     Menu_CONTABILIDADE_ASSESORA = ctk.CTkOptionMenu(FrameoutrosDados_maiores2,values=CONTABILIDADES_assesoras,                                           variable=CONTABILIDADE_ASSESORA_var)
     Menu_CONTABILIDADE_ASSESORA.grid(row=10, column=1, columnspan=3, padx=10, pady=5, sticky="nsew")
 
-    logo_add = PhotoImage(file=Caminho_Logo_Add).subsample(25, 25)
     bt_add = ctk.CTkButton(FrameoutrosDados_maiores2,image=logo_add,text="",command=TopLevel_CadastraCont)
     bt_add.grid(row=9, column=3, padx=10, pady=5, sticky="new")
 

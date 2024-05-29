@@ -37,7 +37,12 @@ def abrircontrato(link):
         
         driver.get(f'{link}')
     finally:
-        time.sleep(999999) 
+        wait = WebDriverWait(driver, 999999)
+        try:
+            Esperar = wait.until(EC.presence_of_element_located((By.ID, 'espera ate fechar navegador')))
+        except Exception:
+            pass
+        
         # Fecha o navegador
         driver.quit()
 
@@ -454,12 +459,16 @@ def enviarcontrato(Dados):
         i += 1
         input_valor = wait.until(EC.presence_of_element_located((By.ID, 'cnaes-selectized')))
 
-        number_str = str(Profissional_Parceiro_CNPJ[i])
-        # Formate o número
-        formatted_number = f"{number_str[:4]}-{number_str[4]}/{number_str[5:]}"
+        cnaes = Profissional_Parceiro_CNPJ[i].split(',')
+        for cnae in cnaes:
+                
+            number_str = str(cnae)
+            # Formate o número
+            formatted_number = f"{number_str[:4]}-{number_str[4]}/{number_str[5:]}"
 
-        input_valor.send_keys(f'{formatted_number}')
-        input_valor.send_keys(Keys.TAB)
+            input_valor.send_keys(f'{formatted_number}')
+            input_valor.send_keys(Keys.TAB)
+            
         clicckcontinuar()
 
         for item in Servicos:
