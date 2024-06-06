@@ -95,7 +95,7 @@ if len(sys.argv) >= 2:
     window = ctk.CTk()
     window.title("Atualização")
     window.geometry("400x150")
-    window.iconbitmap(default='logodatavix.ico')
+    #window.iconbitmap(default='logodatavix.ico')
     # Cria a barra de progresso
     progress_bar = ttk.Progressbar(window, mode="determinate", length=350)
     progress_bar.pack(pady=20)
