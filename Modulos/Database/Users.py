@@ -1,4 +1,5 @@
 import pymysql
+from datetime import datetime
 def connect_to_da():
     global connection
     connection = pymysql.connect(
@@ -29,11 +30,11 @@ def VerificaçãoEmail_existe(Email):
 def Alterasenha(Email,novasenha):
    
     Email = Email.lower()
-
+    agora = datetime.now()
     connect_to_da()
     try:
         with connection.cursor() as cursor:
-            ConsultaSQL = f"UPDATE `pyusers` SET password = '{novasenha}' WHERE `email` = '{Email}'"
+            ConsultaSQL = f"UPDATE `pyusers` SET password = '{novasenha}', updated_at = '{agora}' WHERE `email` = '{Email}'"
             cursor.execute(ConsultaSQL)
             connection.commit()       
 
@@ -108,3 +109,34 @@ def listarusuariosporemail(nome,tipo,email):
                 return None
     finally:
         connection.close()           
+
+
+def AlterarNomeEmail(Nome,EmailNovo,EmailAtual,role):
+   
+    EmailNovo = EmailNovo.lower()
+    EmailAtual = EmailAtual.lower()
+    agora = datetime.now()
+    connect_to_da()
+    try:
+        with connection.cursor() as cursor:
+            ConsultaSQL = f"UPDATE `pyusers` SET name = '{Nome}' , email = '{EmailNovo}', role='{role}', updated_at = '{agora}' WHERE `email` = '{EmailAtual}'"
+            cursor.execute(ConsultaSQL)
+            connection.commit()       
+
+    finally:
+        connection.close()       
+
+def Criar_Usuario(Email,Nome,role):
+   
+    Email = Email.lower()
+    agora = datetime.now()
+
+    connect_to_da()
+    try:
+        with connection.cursor() as cursor:
+            ConsultaSQL = f"INSERT INTO `users` (name, email, password, role, updated_at, created_at) VALUES ('{Nome}','{Email}','','{role}','{agora}','{agora}')"
+            cursor.execute(ConsultaSQL)
+            connection.commit()       
+
+    finally:
+        connection.close()  

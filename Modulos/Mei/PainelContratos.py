@@ -5,6 +5,7 @@ import Modulos.ContratoParceria.EnvioContrato as Selenium
 import Modulos.Mei.Botoes_Edicao as Bt_edit
 import PainelDatavix as pd
 import threading
+from tkinter import messagebox
 
 execuçao = 0
 def incluir_dados_viewDG(itens):
@@ -65,10 +66,31 @@ def atualizar_treeview(treeview, id, link):
             print(f"concluido - {novo_nome}")
             break
 
+def atualizar_treeview_erro(treeview, id,status2):
+    for item in treeview.get_children():
+        item_values = treeview.item(item, 'values')
+        empresa = item_values[0]
+        status = item_values[1]
+
+        if f"ID:{id}" in empresa:
+            novo_nome = f"{empresa}"
+            novo_status = f"{status2}"
+            treeview.item(item, values=(novo_nome, novo_status))
+            print(f"tentando novamente - {novo_nome}")
+            break
+
+def Retirar_erro(treeview, id):
+    for item in treeview.get_children():
+        item_values = treeview.item(item, 'values')
+        empresa = item_values[0]
+        status = item_values[1]
+
+        if f"ID:{id}" in empresa:
+            treeview.delete(item)
 
 def digitação_contrato():
     
- 
+    thread = Bt_edit.retornarTread()
     erroscont = 0    
     Itens = Bt_edit.pegar_dados_Contrato()
     while len(Itens)>0:
@@ -83,9 +105,16 @@ def digitação_contrato():
                 erroscont = 0
             except Exception:
                 if erroscont > 4:
-                    break
-                erroscont += 1
-                print("Erro ao enviar contrato")
-                pass
+                 
+                    messagebox.showerror("Erro", f"Não Digitado Contrato:{nome}, verifique os campos e tente novamente")
+                    Retirar_erro(TreeViewDG_Contrato, id)
+                    Bt_edit.Deletar_Primeiro_Contrato()
+                    erroscont = 0
+                else:    
+                    erroscont += 1
+                    status = f'Erro Digitação({erroscont})'
+                    atualizar_treeview_erro(TreeViewDG_Contrato, id, status)
+                    print("Erro ao enviar contrato")
+                    pass
             
             Itens = Bt_edit.pegar_dados_Contrato()

@@ -416,7 +416,12 @@ def pegar_dados_para_envio(tipo):
 
     dbc.Query_Save_Data(QuerydeExecução)
     
-    log.RegistrarEventosdeLOG('Registrou um cliente novo',f'Novo cliente : {nomeclienteparalog}') 
+    if tipo =="Edição":
+        log.RegistrarEventosdeLOG(f'Edição de cliente Salvo - cliente : {nomeclienteparalog}',f'') 
+    else:
+        log.RegistrarEventosdeLOG('Registrou um cliente novo',f'Novo cliente : {nomeclienteparalog}')      
+
+    
 
 def limparcampos():
     

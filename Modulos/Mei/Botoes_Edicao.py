@@ -10,6 +10,7 @@ import Modulos.Database.Logs as log
 import threading as td
 import Modulos.Mei.PainelContratos as Pnel_Cont
 
+
 def preencher_tipo(tipo_Cont_ou_Parc,contratante):
     if tipo_Cont_ou_Parc == "Criar_Contratante":
         frame_dados_mei[0].configure(text=f"")
@@ -44,7 +45,7 @@ def id_empresa_Contratante(idmei):
     Id_Contratante = idmei
 
 def pegar_dados_para_envio(tipo):
-
+    
     nomeclienteparalog = entry_Nome.get()
 
     ##Definições da Query
@@ -401,9 +402,14 @@ def pegar_dados_para_envio(tipo):
         queryCriação += f")"
 
         QuerydeExecução = queryCriação 
+        
 
     dbm.Query_Save_Data(QuerydeExecução)
-    log.RegistrarEventosdeLOG('Registrou um MEI  novo',f'Novo cliente : {nomeclienteparalog}') 
+    if tipo =="Edição":
+        log.RegistrarEventosdeLOG(f'Edição de MEI Salvo - cliente : {nomeclienteparalog}',f'') 
+    else:
+        log.RegistrarEventosdeLOG('Registrou um MEI  novo',f'Novo cliente : {nomeclienteparalog}')     
+
 
 def limparbotões():
     global Limpartreeview
@@ -476,7 +482,7 @@ def limparbotões():
     listboxCnae.delete(0, tk.END)
     bt_Excluir_cnae.configure(state='disabled')
     dias_da_semana = ["SEG", "TER", "QUA", "QUI", "SEX", "SAB", "DOM"]
-    TP_REPASSE_var = ctk.StringVar(value="Percentual")
+   
     if len(dias_da_semana)>0:
         for dia in dias_da_semana:
             if dia !='N/A' and dia !='':
@@ -682,6 +688,14 @@ def Importardados(idcliente,Dadosparateladeedição):
 
         TreeViewParceiras.insert("", 'end', values=Lista)
     
+    if len(Lista_Servicos)>0:
+        item = Lista_Servicos[0]
+        tipo = item[0]
+        TP_REPASSE_var.set(f"{tipo}")
+    else:
+
+        TP_REPASSE_var.set("Percentual")
+    
     importar_dados_treeview(TreeViewServicos,Lista_Servicos)
     importar_dados_treeview(TreeviewDas,Lista_de_DAS)
     if verificar_se_tem_valores_na_treeview(TreeViewServicos)==False:
@@ -808,11 +822,16 @@ def preparo_para_enviar_contrato():
     return DadosContratante,Profissional_Parceiro,Profissional_Parceiro_CNPJ,Contabilidade_Profissional_Parceiro,OutrasInformacoes,Servicos,
 
 listaContratos_Digitação = []
-digitaçao = td.Thread(target=Pnel_Cont.digitação_contrato)
+
 id_contrato = 0
 
+def retornarTread():
+    return td.Thread(target=Pnel_Cont.digitação_contrato) 
+
+digitaçao = retornarTread()
+
 def envio_dados_contrato():
-    global id_contrato
+    global id_contrato,digitaçao 
     id_contrato += 1
     Dados = preparo_para_enviar_contrato()
     listaContratos_Digitação.append([Dados,id_contrato])
@@ -824,9 +843,14 @@ def envio_dados_contrato():
     
     # Verificar se a thread digitação está ativa
     if 'digitaçao' in locals() or digitaçao.is_alive():
+        
         print("A thread digitação está ativa.")
     else:
         print("A thread digitação não está ativa.")
+        # Create a new thread each time this function is called
+        digitaçao = retornarTread()
+        
+        # Start the new thread
         digitaçao.start()
         print("Ativando...")
     

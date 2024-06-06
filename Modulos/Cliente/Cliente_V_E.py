@@ -4,7 +4,8 @@ import Modulos.imagens.ImagensClientes as Imagens_DataBase
 import Modulos.Cliente.Botoes_Edicao as bts
 import Modulos.Database.Logs as log
 from tkinter import messagebox
-
+import threading
+import PainelDatavix as pd
 Evento_TelaVoltar = f'Usuario saiu da Edição de de clientes'
 obs_TelaVoltar=""
 def definiçãotipodeentrada(tipo):
@@ -23,9 +24,29 @@ def RemovertelaEdit_clientes():
 def SalvarDados(*args):
     resposta = messagebox.askquestion("Confirmação", "Deseja realmente salvar os dados?")
     if resposta == 'yes':
-        bts.pegar_dados_para_envio(tpEntrada)
-        RemovertelaEdit_clientes()
-        
+        def enviodados(): 
+
+            botões = pd.PegarBotõesPainel()
+            for bt in botões:
+                bt.configure(state='disabled')
+
+            frameprincipal.pack_forget()
+
+            framepai.configure(cursor="watch")
+
+            bts.pegar_dados_para_envio(tpEntrada)
+
+            for bt in botões:
+                bt.configure(state='normal') 
+
+            RemovertelaEdit_clientes()
+
+            framepai.configure(cursor="")
+            
+
+        EnvioDados = threading.Thread(target=enviodados)
+        EnvioDados.start()
+
 
 def parametrosinicias(frame,Frame_atual):
     global framepai, frameprincipal

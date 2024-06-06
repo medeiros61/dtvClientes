@@ -100,7 +100,7 @@ def RegistrarEventosdeLOG(evento,obs):
     #Obter a data e hora atual
     agora = datetime.now().strftime("%Y-%m-%d  %H:%M:%S")
 
-    dadosdeLog.append([f'{usuario[3]}({usuario[0]})', usuario[2], evento, segurança,agora])
+    dadosdeLog.append([f'{usuario[3]}({usuario[0]})', usuario[2], evento, segurança,agora,obs])
    
 
 
@@ -121,7 +121,7 @@ def AtivarRegistrodeLog():
                     connect_to_da()
                     try:
                         with connection.cursor() as cursor:
-                            ConsultaSQL = f"CALL InsertPyLog('{DadosparaRegistro[0]}', '{DadosparaRegistro[1]}', '{DadosparaRegistro[4]}', '{DadosparaRegistro[2]}', '{DadosparaRegistro[3]}')"
+                            ConsultaSQL = f"CALL PyLogs_OBS_IN('{DadosparaRegistro[0]}', '{DadosparaRegistro[1]}', '{DadosparaRegistro[4]}', '{DadosparaRegistro[2]}', '{DadosparaRegistro[3]}', '{DadosparaRegistro[5]}')"
                             
                             cursor.execute(ConsultaSQL)
                             connection.commit() 

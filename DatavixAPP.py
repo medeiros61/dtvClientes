@@ -1,4 +1,4 @@
-Versão = '1.0'
+Versão = '1.2'
 
 import customtkinter as ctk
 from tkinter import *
@@ -35,14 +35,24 @@ def fazer_atalho():
                             os.makedirs(imagens_path)
                     return imagens_path
     
+
+    
+
     imagens_path = pegarcaminhodaappdata()
     caminho_exe = os.path.join(imagens_path, "DatavixAPP.exe")
     # Definir o caminho do executável e do ícone
     caminho_exe = rf"{caminho_exe}"
             
     atalho_path = os.path.join(appdata_roaming, r"\Roaming\Microsoft\Windows\Start Menu\Programs\Datavix App.lnk")
-    
-    icone = caminho_completo_imagem = os.path.join(imagens_path, "logodatavix.ico")
+
+    appdataimagens = Imagens_DataBase.pegarcaminhodaappdata()
+    caminho_completo_imagem = os.path.join(appdataimagens, "logodatavix.ico")
+
+    if not os.path.exists(caminho_completo_imagem):
+        Imagens_DataBase.baixarimagemLogoDTVIcon()
+
+    global icone
+    icone = caminho_completo_imagem
     pyshortcuts.make_shortcut(caminho_exe, atalho_path, icone)
 
 fazer_atalho()
@@ -140,7 +150,7 @@ def TelaLogin():
 
     def tela():
         janela.geometry(f"{700}x{400}+{0}+{0}") 
-        janela.iconbitmap(default='logodatavix.ico')
+        janela.iconbitmap(default=f'{icone}')
         #center_window(janela, 700, 400) caso queria que aparece no centro
 
         janela.title("Sistema de Datavix")

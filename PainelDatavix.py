@@ -7,7 +7,7 @@ import Modulos.imagens.ImagensClientes as Imagens_DataBase
 import threading
 import Modulos.Database.Logs as log
 import warnings
-import time
+import time,os
 import Modulos.Mei.PainelContratos as Pnel_Cont
 # Desativar todos os warnings
 warnings.simplefilter("ignore")
@@ -32,10 +32,23 @@ obs_AtivarUsuarios = ""
 obs_Sair = ""
 Evento_Sair= 'Usuario Deslogou do sistema'
 
+def InfoUser():
+    return Dados_Ultilizador
 
+def PegarBotõesPainel():
+    lista = []
+    lista.append(botao_clientes)
+    lista.append(botao_usuarios)
+    lista.append(botao_sair)
+    lista.append(botao_dashboard)
+    lista.append(botao_MEI)
 
+    return lista
 
 def DataVix(DadosUsuario,janela):
+    global Dados_Ultilizador
+    Dados_Ultilizador = DadosUsuario
+
     log.dadosusuario(DadosUsuario)
     log.activites("Entrar")
     log.AtivarRegistrodeLog()
@@ -98,12 +111,20 @@ def DataVix(DadosUsuario,janela):
     UserRole = DadosUsuario
     caminho = Imagens_DataBase.baixarimagemLogoDTV()
     
+    appdataimagens = Imagens_DataBase.pegarcaminhodaappdata()
+    caminho_completo_imagem = os.path.join(appdataimagens, "logodatavix.ico")
+
+    if not os.path.exists(caminho_completo_imagem):
+        Imagens_DataBase.baixarimagemLogoDTVIcon()
+
+    global icone
+    icone = caminho_completo_imagem
 
     screen_datavix = ctk.CTk()
     screen_datavix.protocol("WM_DELETE_WINDOW", on_close)
     screen_datavix.geometry(f"{1150}x{615}+{0}+{0}") 
     #center_window(screen_datavix,1150,615) caso queria que aparece no centro
-    screen_datavix.iconbitmap(default='logodatavix.ico')
+    screen_datavix.iconbitmap(default=f'{icone}')
     
     screen_datavix.title("Datavix")
     #screen_datavix.resizable(False,False)
@@ -126,9 +147,10 @@ def DataVix(DadosUsuario,janela):
     #------------------------------------------------------------------------
 
     #aba
-    global options_frame
+    global options_frame,botao_clientes,botao_usuarios,botao_sair,botao_dashboard,botao_MEI
     options_frame = ctk.CTkFrame(master=screen_datavix, width=200, height=580, fg_color=("#808080"))
     options_frame.pack(side=LEFT, fill = Y) 
+    
     #options_frame.grid(row=0, column=0, padx=20, pady=(20, 10), sticky="nsew")
     #options_frame.pack_propagate(False)
     #logo datavix
@@ -143,6 +165,7 @@ def DataVix(DadosUsuario,janela):
     #buttons
     botao_dashboard = ctk.CTkButton(master=options_frame, text="DASHBOARD")
     botao_dashboard.grid(row=4, column=0, padx=20, pady=(20, 10), sticky="nsew")
+
 
     botao_clientes = ctk.CTkButton(master=options_frame, text="CLIENTES",command=ativarclientes)
     botao_clientes.grid(row=5, column=0, padx=20, pady=(20, 10), sticky="nsew")

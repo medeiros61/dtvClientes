@@ -4,6 +4,8 @@ import Modulos.imagens.ImagensClientes as Imagens_DataBase
 import Modulos.Mei.Botoes_Edicao as bts
 import Modulos.Database.Logs as log
 from tkinter import messagebox
+import threading
+import PainelDatavix as pd
 
 Evento_TelaVoltar = f'Usuario saiu da Edição de de MEIS'
 obs_TelaVoltar=""
@@ -24,8 +26,28 @@ def RemovertelaEdit_MEI():
 def SalvarDados(*args):
     resposta = messagebox.askquestion("Confirmação", "Deseja realmente salvar os dados?")
     if resposta == 'yes':
-        bts.pegar_dados_para_envio(tpEntrada)
-        RemovertelaEdit_MEI()
+        def enviodados(): 
+
+            botões = pd.PegarBotõesPainel()
+            for bt in botões:
+                bt.configure(state='disabled')
+
+            frameprincipal.pack_forget()
+
+            framepai.configure(cursor="watch")
+
+            bts.pegar_dados_para_envio(tpEntrada)
+
+            for bt in botões:
+                bt.configure(state='normal') 
+
+            RemovertelaEdit_MEI()
+
+            framepai.configure(cursor="")
+            
+
+        EnvioDados = threading.Thread(target=enviodados)
+        EnvioDados.start()
 
 def parametrosinicias(frame,Frame_atual):
     global framepai, frameprincipal
@@ -35,7 +57,7 @@ def parametrosinicias(frame,Frame_atual):
     master_frame = ctk.CTkFrame(master=frameprincipal, width=1040, height=580, fg_color=("#808080"))
     master_frame.pack(side=TOP, fill = X)
     
-
+  
     #criar botão açoes
     Frametitulo = ctk.CTkFrame(master_frame)
     Frametitulo.pack(side=TOP, fill = X)
