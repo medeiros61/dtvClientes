@@ -30,8 +30,10 @@ def instalarapp():
 
 
         imagens_path = pegarcaminhodaappdata()
-        adicionar_excecao_windows_defender(imagens_path)
-
+        try:
+                adicionar_excecao_windows_defender(imagens_path)
+        except Exception:
+                pass
 
 
         caminho_completo_imagem = os.path.join(imagens_path, "logodatavix.ico")

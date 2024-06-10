@@ -43,7 +43,7 @@ def fazer_atalho():
     # Definir o caminho do executável e do ícone
     caminho_exe = rf"{caminho_exe}"
             
-    atalho_path = os.path.join(appdata_roaming, r"\Roaming\Microsoft\Windows\Start Menu\Programs\Datavix App.lnk")
+    atalho_path = os.path.join(appdata_roaming, r"\Roaming\Microsoft\Windows\Start Menu\Programs\Datavix App")
 
     appdataimagens = Imagens_DataBase.pegarcaminhodaappdata()
     caminho_completo_imagem = os.path.join(appdataimagens, "logodatavix.ico")
@@ -53,7 +53,15 @@ def fazer_atalho():
 
     global icone
     icone = caminho_completo_imagem
-    pyshortcuts.make_shortcut(caminho_exe, atalho_path, icone)
+    pyshortcuts.make_shortcut(
+        caminho_exe,
+        name='Datavix APP', 
+        icon=caminho_completo_imagem,
+        executable=caminho_exe,
+        working_dir=imagens_path,
+        desktop=True,
+        startmenu=True)
+
 
 fazer_atalho()
 

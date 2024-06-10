@@ -315,7 +315,7 @@ def parametrosinicias(frame):
     
     
     FrametreewView = ctk.CTkFrame(list_clients_frame, fg_color=("#808080"))
-    FrametreewView.grid(row=1, column=0,columnspan=2, sticky="nsew")
+    FrametreewView.grid(row=1, column=0,columnspan=2, sticky="n")
 
     ###Comentarios (Ativado no switch)
    
