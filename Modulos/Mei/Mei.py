@@ -198,7 +198,7 @@ def parametrosinicias(frame):
 
 
 
-    TreeviewMEI = ttk.Treeview(list_MEI_frame, columns=("#","Nome","Identificação","Status"), show='headings')
+    TreeviewMEI = ttk.Treeview(list_MEI_frame, columns=("#","Nome","Identificação","Status"), show='headings',height=22)
     TreeviewMEI.grid(row=1, column=0, sticky="nsew")
     TreeviewMEI.bind('<<TreeviewSelect>>', verificarseleção)
     TreeviewMEI.bind('<Double-1>',editarcliente)

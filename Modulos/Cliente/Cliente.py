@@ -376,7 +376,7 @@ def parametrosinicias(frame):
 
 
 
-    TreeviewClientes = ttk.Treeview(FrametreewView, columns=("#","Nome","UF","Município","Status"), show='headings')
+    TreeviewClientes = ttk.Treeview(FrametreewView, columns=("#","Nome","UF","Município","Status"), show='headings',height=23)
     TreeviewClientes.grid(row=1, column=0, sticky="nsew")
     TreeviewClientes.bind('<<TreeviewSelect>>', verificarseleção)
     TreeviewClientes.bind('<Double-1>',editarcliete)

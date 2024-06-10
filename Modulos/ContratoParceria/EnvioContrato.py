@@ -5,9 +5,11 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
+import Modulos.Database.Parametros as bdp
 import time
 import re
-
+login = bdp.pegar_parametro('usuario_site_contratos') 
+senha = bdp.pegar_parametro('senha_site_contratos') 
 
 def abrircontrato(link):
     driver = webdriver.Chrome()
@@ -21,10 +23,10 @@ def abrircontrato(link):
 
         
         Input_cpf = wait.until(EC.presence_of_element_located((By.ID, 'cpf')))
-        Input_cpf.send_keys('22549210883')
+        Input_cpf.send_keys(f'{login}')
 
         Input_senha = wait.until(EC.presence_of_element_located((By.ID, 'password')))
-        Input_senha.send_keys('Datavix@159')
+        Input_senha.send_keys(f'{senha}')
 
         form = wait.until(EC.presence_of_element_located((By.ID, 'home-tab-pane')))
         # Envia o formulário

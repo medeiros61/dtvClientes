@@ -1,5 +1,6 @@
 Versão = '1.3'
 
+
 import customtkinter as ctk
 from tkinter import *
 import Modulos.Database.Users as dbu
@@ -15,6 +16,8 @@ import warnings
 import os
 
 import pyshortcuts
+
+
 janela = ctk.CTk()
 
 warnings.simplefilter("ignore")

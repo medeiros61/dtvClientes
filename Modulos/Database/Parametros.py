@@ -1,24 +1,15 @@
 import pymysql
 from datetime import date,datetime
-
-def connect_to_db():
-    global connection
-    connection = pymysql.connect(
-            host='mysql02-farm10.kinghost.net',
-            user='datavixsolucao',
-            password='R4QePW2ze9Hpa6F',
-            database='datavixsolucao'
-        )
-
+import Modulos.Database.Conexao as Conectar
    
 def pegar_parametro(parametro):
     # Conecta ao banco de dados
     
-    connect_to_db()
+    conexao = Conectar.BancoDados_Dtv()
     
     try:	
 
-        with connection.cursor() as cursor:
+        with conexao.cursor() as cursor:
             ConsultaSQL = f"SELECT `valor` FROM `pyparameter` WHERE `parametro`= '{parametro}'"
             cursor.execute(ConsultaSQL)
             results = cursor.fetchone()
@@ -27,4 +18,4 @@ def pegar_parametro(parametro):
  
 
     finally:
-        connection.close()
+        conexao.close()
